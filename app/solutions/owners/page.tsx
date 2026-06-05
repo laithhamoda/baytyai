@@ -7,8 +7,20 @@ export const metadata: Metadata = {
     "Bayty gives project owners and developers full control over project creation, team assembly, approvals, and portfolio analytics.",
 };
 
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.baytyai.com" },
+    { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.baytyai.com/solutions" },
+    { "@type": "ListItem", position: 3, name: "Owners & Developers", item: "https://www.baytyai.com/solutions/owners" },
+  ],
+};
+
 export default function OwnersPage() {
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
     <RoleDetail
       overline="For Owners & Developers"
       title="Complete authority over every development"
@@ -22,5 +34,6 @@ export default function OwnersPage() {
         { name: "Marketplace Access", body: "Source verified professionals and properties within the same authorised workspace." },
       ]}
     />
+    </>
   );
 }

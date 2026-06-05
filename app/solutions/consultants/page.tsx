@@ -2,13 +2,26 @@ import type { Metadata } from "next";
 import RoleDetail from "@/components/sections/role-detail";
 
 export const metadata: Metadata = {
-  title: "For Consultants & Engineers — Bayty",
+  title: { absolute: "For Consultants & Engineers — Bayty Platform UAE" },
   description:
     "Bayty gives consultants and engineers contract execution, supervision, design revision management, and technical scope tools on one platform.",
+  alternates: { canonical: "https://www.baytyai.com/solutions/consultants" },
+};
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.baytyai.com" },
+    { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.baytyai.com/solutions" },
+    { "@type": "ListItem", position: 3, name: "Consultants & Engineers", item: "https://www.baytyai.com/solutions/consultants" },
+  ],
 };
 
 export default function ConsultantsPage() {
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
     <RoleDetail
       overline="For Consultants & Engineers"
       title="Execute, supervise, and manage revisions"
@@ -22,5 +35,6 @@ export default function ConsultantsPage() {
         { name: "Team Directory", body: "Connect with verified counterparties across every active project." },
       ]}
     />
+    </>
   );
 }

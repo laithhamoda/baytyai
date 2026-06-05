@@ -7,8 +7,20 @@ export const metadata: Metadata = {
     "Bayty gives contractors and subcontractors structured installation briefs, supply management, and verified access to project documents.",
 };
 
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://www.baytyai.com" },
+    { "@type": "ListItem", position: 2, name: "Solutions", item: "https://www.baytyai.com/solutions" },
+    { "@type": "ListItem", position: 3, name: "Contractors", item: "https://www.baytyai.com/solutions/contractors" },
+  ],
+};
+
 export default function ContractorsPage() {
   return (
+    <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
     <RoleDetail
       overline="For Contractors"
       title="Structured scope, on a verified platform"
@@ -22,5 +34,6 @@ export default function ContractorsPage() {
         { name: "Approval Tracking", body: "See the real-time status of every sign-off your work depends on." },
       ]}
     />
+    </>
   );
 }

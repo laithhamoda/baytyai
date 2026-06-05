@@ -5,40 +5,34 @@ import Link from "next/link";
 
 const ROLES = [
   {
-    name: "General Manager / Owner",
+    name: "Client / Owner",
     description:
-      "Full project creation, team assembly, approval authority, and analytics across every active development.",
+      "Create projects, assemble verified teams, hold final approval authority, and monitor an entire portfolio.",
     href: "/solutions/owners",
   },
   {
-    name: "Design Engineer",
+    name: "Consultant / Engineer",
     description:
-      "Assigned to projects, receives drawing briefs, manages design revisions and document versioning.",
+      "Contract execution, supervision, design and MEP scope, and revision sign-off with a full audit trail.",
     href: "/solutions/consultants",
   },
   {
-    name: "Space / MEP / HVAC Engineer",
+    name: "Contractor",
     description:
-      "Receives technical scope, manages mechanical, electrical, and fit-out specifications end to end.",
-    href: "/solutions/consultants",
-  },
-  {
-    name: "Consultant",
-    description:
-      "Contract execution, supervision oversight, installation scope management, and revision sign-off.",
-    href: "/solutions/consultants",
+      "Structured installation briefs, supply management, and verified access to the documents your scope requires.",
+    href: "/solutions/contractors",
   },
   {
     name: "Subcontractor",
     description:
-      "Installation briefs, supply editing, and structured access to project documents and approvals.",
-    href: "/solutions/contractors",
+      "Clear scope packages, supply editing, and milestone-based escrow payments — no more chasing invoices.",
+    href: "/solutions/subcontractors",
   },
   {
-    name: "Freelance Professional",
+    name: "Supplier",
     description:
-      "Verified freelancer directory, searchable by specialism and GCC region for rapid engagement.",
-    href: "/solutions/contractors",
+      "List your catalogue, receive itemised material requests, quote, and supply verified GCC projects with confidence.",
+    href: "/solutions/suppliers",
   },
 ];
 

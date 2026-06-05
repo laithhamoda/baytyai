@@ -6,7 +6,8 @@ const PLATFORM_LINKS = [
   { label: "Product", href: "/product" },
   { label: "Solutions", href: "/solutions" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Demo", href: "/demo" },
+  { label: "FAQ", href: "/faq" },
+  { label: "About", href: "/about" },
 ];
 
 const LEGAL_LINKS = [
