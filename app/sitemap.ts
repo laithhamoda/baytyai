@@ -1,11 +1,28 @@
 import type { MetadataRoute } from "next";
+import { POSTS } from "@/content/posts";
 
 const BASE_URL = "https://www.baytyai.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();
 
+  const blogEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...POSTS.map((p) => ({
+      url: `${BASE_URL}/blog/${p.slug}`,
+      lastModified: new Date(p.date).toISOString(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
   return [
+    ...blogEntries,
     {
       url: `${BASE_URL}/`,
       lastModified: now,
