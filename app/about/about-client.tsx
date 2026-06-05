@@ -3,321 +3,249 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const STATS = [
-  { value: "$1.3T", label: "Active GCC projects" },
-  { value: "6", label: "Target markets" },
-  { value: "9-stage", label: "Project lifecycle" },
-];
-
 const VALUES = [
   {
-    title: "Verification First",
-    body: "We verify every professional before they touch a live project.",
+    label: "Verified",
+    title: "Identity before access",
+    body: "Every professional is checked against government-linked credentials before they touch a live project. Trust is established, not assumed.",
   },
   {
-    title: "Total Transparency",
-    body: "Every approval, every revision, every communication — on record.",
+    label: "Precise",
+    title: "A record for every decision",
+    body: "Every approval, revision, and sign-off is timestamped and named. Nothing lives in a personal inbox or a lost message thread.",
   },
   {
+    label: "Trusted",
     title: "Built for the Gulf",
-    body: "Designed for GCC compliance, Arabic-first culture, and regional regulations.",
+    body: "Designed around GCC compliance, regional regulation, and the way the region actually builds. Not a Western tool retrofitted for the market.",
   },
 ];
 
-function fadeUp(delay: number) {
+function fadeUp(delay = 0) {
   return {
-    initial: { opacity: 0, y: 24 },
+    initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.65, delay, ease: "easeOut" },
+    transition: { duration: 0.6, delay, ease: "easeOut" },
   };
 }
 
+const sans = "var(--font-body, 'DM Sans', system-ui, sans-serif)";
+const serif = "var(--font-display, 'Cormorant Garamond', Georgia, serif)";
+const mono: React.CSSProperties = {
+  fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+  letterSpacing: "0.2em",
+  textTransform: "uppercase",
+};
+
 export default function AboutClient() {
   return (
-    <div style={{ backgroundColor: "#0A1628", minHeight: "100vh" }}>
-
-      {/* ── 1. Mission Hero ── */}
-      <section style={{ padding: "160px 48px 120px", maxWidth: "1200px", margin: "0 auto" }}>
-        <motion.p
+    <div style={{ backgroundColor: "#0A1628" }}>
+      {/* 1. Hero */}
+      <section style={{ maxWidth: "900px", margin: "0 auto", padding: "180px 24px 120px", textAlign: "center" }}>
+        <motion.div
           {...fadeUp(0)}
-          style={{
-            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: "11px",
-            letterSpacing: "0.25em",
-            color: "#C9A84C",
-            textTransform: "uppercase",
-            marginBottom: "28px",
-          }}
-        >
-          Our Mission
-        </motion.p>
-
+          style={{ width: "60px", height: "0.5px", backgroundColor: "#C9A84C", margin: "0 auto 48px", opacity: 0.6 }}
+        />
         <motion.h1
           {...fadeUp(0.08)}
           style={{
-            fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
+            fontFamily: serif,
             fontWeight: 300,
-            fontSize: "72px",
-            lineHeight: 1.05,
+            fontSize: "clamp(34px, 5.5vw, 60px)",
+            lineHeight: 1.18,
             color: "#F8F6F1",
-            maxWidth: "780px",
-            marginBottom: "72px",
           }}
         >
-          The Gulf deserves a better way to build
+          The Gulf builds the world&rsquo;s most extraordinary buildings. They deserve a platform
+          worthy of the ambition behind them.
         </motion.h1>
-
-        {/* Two-column: mission text + stats */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "64px",
-            alignItems: "start",
-          }}
-          className="flex-col-mobile"
-        >
-          {/* Left: mission statement */}
-          <motion.p
-            {...fadeUp(0.16)}
-            style={{
-              fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-              fontWeight: 300,
-              fontSize: "18px",
-              lineHeight: 1.8,
-              color: "rgba(248,246,241,0.6)",
-            }}
-          >
-            The GCC construction sector manages some of the most complex and
-            capital-intensive projects on earth. Yet the infrastructure that
-            connects owners, engineers, consultants, and contractors remains
-            fragmented, unverified, and opaque. Bayty exists to change that —
-            bringing trust, transparency, and structure to every stage of the
-            GCC project lifecycle.
-          </motion.p>
-
-          {/* Right: stat cards */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            {STATS.map((stat, i) => (
-              <motion.div
-                key={stat.value}
-                {...fadeUp(0.2 + i * 0.08)}
-                style={{
-                  backgroundColor: "#0A1628",
-                  border: "0.5px solid rgba(201,168,76,0.3)",
-                  padding: "24px 28px",
-                  display: "flex",
-                  alignItems: "baseline",
-                  gap: "16px",
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-                    fontWeight: 300,
-                    fontSize: "36px",
-                    color: "#C9A84C",
-                    lineHeight: 1,
-                  }}
-                >
-                  {stat.value}
-                </span>
-                <span
-                  style={{
-                    fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                    fontWeight: 300,
-                    fontSize: "14px",
-                    color: "rgba(248,246,241,0.55)",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  {stat.label}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 2. Values ── */}
-      <section
-        style={{
-          borderTop: "0.5px solid rgba(201,168,76,0.15)",
-          borderBottom: "0.5px solid rgba(201,168,76,0.15)",
-          padding: "120px 48px",
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <motion.h2
-            {...fadeUp(0)}
-            style={{
-              fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-              fontWeight: 300,
-              fontSize: "48px",
-              lineHeight: 1.1,
-              color: "#F8F6F1",
-              marginBottom: "64px",
-            }}
-          >
-            What we stand for
-          </motion.h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-              gap: "0",
-            }}
-          >
-            {VALUES.map((v, i) => (
-              <motion.div
-                key={v.title}
-                {...fadeUp(0.08 + i * 0.1)}
-                style={{
-                  padding: "40px 36px",
-                  borderLeft: i === 0 ? "none" : "0.5px solid rgba(201,168,76,0.15)",
-                }}
-              >
-                <div
-                  style={{
-                    width: "24px",
-                    height: "0.5px",
-                    backgroundColor: "#C9A84C",
-                    marginBottom: "24px",
-                  }}
-                />
-                <h3
-                  style={{
-                    fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                    fontWeight: 500,
-                    fontSize: "16px",
-                    color: "#F8F6F1",
-                    letterSpacing: "0.04em",
-                    marginBottom: "14px",
-                  }}
-                >
-                  {v.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                    fontWeight: 300,
-                    fontSize: "14px",
-                    lineHeight: 1.75,
-                    color: "rgba(248,246,241,0.55)",
-                  }}
-                >
-                  {v.body}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 3. Founding Story ── */}
-      <section style={{ padding: "120px 48px" }}>
-        <motion.blockquote
-          {...fadeUp(0)}
-          style={{
-            maxWidth: "720px",
-            margin: "0 auto",
-            textAlign: "center",
-            fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-            fontStyle: "italic",
-            fontWeight: 300,
-            fontSize: "24px",
-            lineHeight: 1.7,
-            color: "#F8F6F1",
-            borderLeft: "none",
-            padding: 0,
-          }}
-        >
-          "Bayty was founded on a single observation: that the GCC construction
-          industry — responsible for the most ambitious built environment on
-          earth — was still being managed through WhatsApp groups and scattered
-          email chains. We built the platform we wished existed."
-        </motion.blockquote>
-      </section>
-
-      {/* ── 4. Team CTA ── */}
-      <section
-        style={{
-          backgroundColor: "#F8F6F1",
-          padding: "100px 48px",
-        }}
-      >
         <motion.div
-          {...fadeUp(0)}
+          {...fadeUp(0.16)}
+          style={{ width: "60px", height: "0.5px", backgroundColor: "#C9A84C", margin: "48px auto 0", opacity: 0.6 }}
+        />
+      </section>
+
+      {/* 2. Mission */}
+      <section style={{ borderTop: "0.5px solid rgba(201,168,76,0.15)", padding: "120px 24px" }}>
+        <div style={{ maxWidth: "780px", margin: "0 auto" }}>
+          <motion.p {...fadeUp(0)} style={{ ...mono, fontSize: "11px", color: "#C9A84C", marginBottom: "32px" }}>
+            Our Mission
+          </motion.p>
+          <motion.p
+            {...fadeUp(0.08)}
+            style={{
+              fontFamily: serif,
+              fontWeight: 300,
+              fontSize: "clamp(22px, 3vw, 30px)",
+              lineHeight: 1.55,
+              color: "#F8F6F1",
+            }}
+          >
+            Our mission is to make the GCC construction supply chain verifiable, transparent, and
+            trusted. Not because it should be — but because every building that fails, every project
+            that overruns, and every worker who goes unpaid is the direct consequence of a system
+            that runs on informal agreements and unverified identity.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* 3. Values */}
+      <section style={{ borderTop: "0.5px solid rgba(201,168,76,0.15)", padding: "120px 24px" }}>
+        <div
           style={{
             maxWidth: "1200px",
             margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "48px",
-            flexWrap: "wrap",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: "24px",
           }}
         >
-          <div style={{ maxWidth: "520px" }}>
-            <h2
-              style={{
-                fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-                fontWeight: 600,
-                fontSize: "40px",
-                lineHeight: 1.15,
-                color: "#0A1628",
-                marginBottom: "16px",
-              }}
+          {VALUES.map((v, i) => (
+            <motion.div
+              key={v.label}
+              {...fadeUp(0.08 * i)}
+              style={{ border: "0.5px solid rgba(201,168,76,0.2)", padding: "40px 32px", backgroundColor: "#0F1E35" }}
             >
-              We are building the team
-            </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                fontWeight: 300,
-                fontSize: "16px",
-                lineHeight: 1.75,
-                color: "rgba(10,22,40,0.65)",
-              }}
-            >
-              If you are exceptional in construction technology, enterprise
-              sales, or GCC real estate, we would like to speak with you.
-            </p>
-          </div>
+              <p style={{ ...mono, fontSize: "11px", color: "#C9A84C", marginBottom: "20px" }}>{v.label}</p>
+              <h3 style={{ fontFamily: serif, fontWeight: 600, fontSize: "22px", color: "#F8F6F1", marginBottom: "14px" }}>
+                {v.title}
+              </h3>
+              <p style={{ fontFamily: sans, fontWeight: 300, fontSize: "14px", lineHeight: 1.7, color: "rgba(248,246,241,0.6)" }}>
+                {v.body}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
+      {/* 4. Founding story */}
+      <section style={{ borderTop: "0.5px solid rgba(201,168,76,0.15)", padding: "120px 24px" }}>
+        <motion.div
+          {...fadeUp(0)}
+          style={{
+            maxWidth: "820px",
+            margin: "0 auto",
+            backgroundColor: "#0F1E35",
+            borderLeft: "2px solid #C9A84C",
+            padding: "48px 44px",
+          }}
+        >
+          <p
+            style={{
+              fontFamily: serif,
+              fontStyle: "italic",
+              fontWeight: 300,
+              fontSize: "clamp(20px, 2.6vw, 26px)",
+              lineHeight: 1.6,
+              color: "#F8F6F1",
+            }}
+          >
+            Bayty was founded on a single observation: that the GCC construction industry —
+            responsible for the most ambitious built environment on earth — was still being managed
+            through WhatsApp groups and scattered email chains. We built the platform we wished
+            existed.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* 5. Team */}
+      <section style={{ borderTop: "0.5px solid rgba(201,168,76,0.15)", padding: "120px 24px" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <motion.p {...fadeUp(0)} style={{ ...mono, fontSize: "11px", color: "#C9A84C", marginBottom: "40px" }}>
+            The Team
+          </motion.p>
+          <motion.div
+            {...fadeUp(0.08)}
+            style={{
+              maxWidth: "420px",
+              border: "0.5px solid rgba(201,168,76,0.2)",
+              padding: "36px 32px",
+              backgroundColor: "#0F1E35",
+            }}
+          >
+            <div
+              style={{
+                width: "56px",
+                height: "56px",
+                border: "0.5px solid #C9A84C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontFamily: serif,
+                fontSize: "24px",
+                color: "#C9A84C",
+                marginBottom: "24px",
+              }}
+            >
+              B
+            </div>
+            <h3 style={{ fontFamily: serif, fontWeight: 600, fontSize: "22px", color: "#F8F6F1", marginBottom: "4px" }}>
+              [Founder Name]
+            </h3>
+            <p style={{ ...mono, fontSize: "10px", color: "#C9A84C", marginBottom: "16px" }}>Founder &amp; CEO</p>
+            <p style={{ fontFamily: sans, fontWeight: 300, fontSize: "14px", lineHeight: 1.7, color: "rgba(248,246,241,0.6)", marginBottom: "20px" }}>
+              [Founder bio placeholder — a sentence on background in GCC construction and technology.
+              A sentence on the insight that led to Bayty. A sentence on the vision for the
+              region&rsquo;s built environment.]
+            </p>
+            <a
+              href="https://linkedin.com/in/bayty"
+              style={{ ...mono, fontSize: "10px", color: "#C9A84C", borderBottom: "0.5px solid rgba(201,168,76,0.4)", paddingBottom: "2px" }}
+            >
+              LinkedIn ↗
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 6. CTAs */}
+      <section style={{ borderTop: "0.5px solid rgba(201,168,76,0.15)", padding: "100px 24px 120px" }}>
+        <motion.div
+          {...fadeUp(0)}
+          style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "center" }}
+        >
           <Link
-            href="mailto:info@baytyai.com"
+            href="/request-access"
             style={{
               display: "inline-flex",
               alignItems: "center",
               height: "56px",
               padding: "0 36px",
-              backgroundColor: "#0A1628",
-              color: "#F8F6F1",
-              fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+              backgroundColor: "#C9A84C",
+              color: "#0A1628",
+              fontFamily: sans,
+              fontWeight: 500,
+              fontSize: "13px",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              borderRadius: 0,
+            }}
+          >
+            Request Private Access →
+          </Link>
+          <a
+            href="mailto:investor@baytyai.com"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              height: "56px",
+              padding: "0 36px",
+              backgroundColor: "transparent",
+              color: "#C9A84C",
+              border: "0.5px solid #C9A84C",
+              fontFamily: sans,
               fontWeight: 400,
               fontSize: "13px",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
               borderRadius: 0,
-              flexShrink: 0,
-              whiteSpace: "nowrap",
-              transition: "background-color 0.25s ease",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#2C3E50";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "#0A1628";
             }}
           >
-            Send an introduction
-          </Link>
+            investor@baytyai.com
+          </a>
         </motion.div>
       </section>
-
     </div>
   );
 }

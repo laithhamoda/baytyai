@@ -14,12 +14,12 @@ export default function ContractorsPage() {
       title="Structured scope, on a verified platform"
       intro="Contractors and subcontractors receive clear installation briefs, manage supply and editing, and access exactly the project documents their scope requires — nothing more."
       capabilities={[
+        { name: "Verified Profile", body: "Build your verified professional profile — government-linked credential check in 24 hours." },
+        { name: "Get Discovered", body: "Get discovered in every project search that matches your specialism and GCC location." },
+        { name: "Escrow Payments", body: "Receive milestone-based payments through Stripe escrow — no more chasing invoices." },
         { name: "Installation Briefs", body: "Receive precise, structured scope documents for every assignment you take on." },
-        { name: "Supply Management", body: "Edit and submit supply lists with version control and approval tracking." },
         { name: "Document Access", body: "Access the drawings, specifications, and contracts relevant to your scope." },
-        { name: "Verified Profile", body: "Build a verified credential profile that owners and consultants can trust." },
         { name: "Approval Tracking", body: "See the real-time status of every sign-off your work depends on." },
-        { name: "Direct Communication", body: "Keep every project conversation on record, in one authorised place." },
       ]}
     />
   );

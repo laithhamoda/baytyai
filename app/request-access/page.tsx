@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import DemoClient from "../demo/demo-client";
 
 export const metadata: Metadata = {
-  title: "Request Private Access — Bayty",
+  title: "Request Access — Bayty Construction Platform | UAE & GCC",
   description:
-    "Request a private introduction to the Bayty platform. Available to verified construction professionals and developers across the GCC.",
+    "Request access to the Bayty platform. Available to verified construction professionals and developers across the UAE and GCC. Every account individually reviewed.",
 };
 
 export default function RequestAccessPage() {

@@ -36,6 +36,43 @@ export const metadata: Metadata = {
     "Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.",
 };
 
+const softwareSchema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Bayty AI",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: "https://www.baytyai.com",
+  description:
+    "The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.",
+  offers: {
+    "@type": "AggregateOffer",
+    lowPrice: "159",
+    highPrice: "1999",
+    priceCurrency: "AED",
+    offerCount: "3",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Bayty Technologies",
+  url: "https://www.baytyai.com",
+  logo: "https://www.baytyai.com/logo.png",
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "info@baytyai.com",
+    contactType: "customer service",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Dubai",
+    addressCountry: "AE",
+  },
+  sameAs: ["https://linkedin.com/company/bayty"],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -47,6 +84,14 @@ export default function RootLayout({
       className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <Navigation />
         <main>{children}</main>
         <Footer />

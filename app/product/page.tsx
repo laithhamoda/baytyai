@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
-import Features from "@/components/sections/features";
+import ProductClient from "./product-client";
 
 export const metadata: Metadata = {
-  title: "Product — The Bayty Platform",
+  title: "Construction Project Management Platform | Approval Workflows & Document Hub — Bayty",
   description:
-    "Explore the Bayty platform — verification, structured approvals, document management, and a trusted marketplace for GCC construction.",
+    "See the Bayty platform in action — verified stakeholders, approval workflows, document management, and professional marketplace for GCC construction.",
 };
 
 export default function ProductPage() {
-  return (
-    <div style={{ paddingTop: "72px" }}>
-      <Features />
-    </div>
-  );
+  return <ProductClient />;
 }

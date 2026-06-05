@@ -14,9 +14,9 @@ export default function OwnersPage() {
       title="Complete authority over every development"
       intro="From a single dashboard, project owners and general managers create projects, assemble verified teams, hold final approval authority, and monitor performance across an entire portfolio."
       capabilities={[
-        { name: "Project Creation", body: "Launch new developments with structured stages, scopes, and assigned stakeholders from day one." },
-        { name: "Team Assembly", body: "Invite and verify engineers, consultants, and contractors before they gain project access." },
-        { name: "Approval Authority", body: "Hold final sign-off on every revision, contract, and milestone with a complete audit trail." },
+        { name: "Unlimited Projects", body: "Create and manage unlimited projects with a 9-stage lifecycle tracker." },
+        { name: "Verified Team Assembly", body: "Assemble your verified team — invite, check credentials, assign roles in one step." },
+        { name: "Decisions From Anywhere", body: "Approve, reject, and escalate decisions from any device with a full audit trail." },
         { name: "Portfolio Analytics", body: "Track progress, spend, and bottlenecks across all active projects in real time." },
         { name: "Document Oversight", body: "Maintain a single source of truth for drawings, contracts, and site records." },
         { name: "Marketplace Access", body: "Source verified professionals and properties within the same authorised workspace." },

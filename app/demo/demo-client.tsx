@@ -21,6 +21,7 @@ const COUNTRIES = [
 ];
 
 const COMPANY_SIZES = [
+  "I am a freelance professional",
   "1–10 employees",
   "11–50 employees",
   "51–200 employees",
@@ -32,7 +33,10 @@ const PRIMARY_INTERESTS = [
   "Project Management",
   "Marketplace",
   "Both",
+  "Join as a verified professional",
 ];
+
+type Persona = "manage" | "professional";
 
 interface FormValues {
   fullName: string;
@@ -77,11 +81,23 @@ const fieldBase: React.CSSProperties = {
 export default function DemoClient() {
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [persona, setPersona] = useState<Persona>("manage");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+
+  function selectPersona(p: Persona) {
+    setPersona(p);
+    if (p === "professional") {
+      setValues((prev) => ({
+        ...prev,
+        companySize: "I am a freelance professional",
+        primaryInterest: "Join as a verified professional",
+      }));
+    }
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -286,6 +302,29 @@ export default function DemoClient() {
                     margin: "0 auto",
                   }}
                 />
+                {persona === "manage" && (
+                  <Link
+                    href="/demo"
+                    style={{
+                      marginTop: "8px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      height: "48px",
+                      padding: "0 28px",
+                      backgroundColor: "#0A1628",
+                      color: "#C9A84C",
+                      fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+                      fontWeight: 400,
+                      fontSize: "12px",
+                      letterSpacing: "0.12em",
+                      textTransform: "uppercase",
+                      border: "0.5px solid #C9A84C",
+                      borderRadius: 0,
+                    }}
+                  >
+                    Book an onboarding call →
+                  </Link>
+                )}
               </motion.div>
             ) : (
               /* ── Form ── */
@@ -309,6 +348,39 @@ export default function DemoClient() {
                   Your details
                 </h2>
 
+                {/* Persona toggle */}
+                <div style={{ display: "flex", gap: "12px", marginBottom: "36px", flexWrap: "wrap" }}>
+                  {([
+                    { key: "manage", label: "I manage projects" },
+                    { key: "professional", label: "I am a construction professional" },
+                  ] as { key: Persona; label: string }[]).map((opt) => {
+                    const active = persona === opt.key;
+                    return (
+                      <button
+                        key={opt.key}
+                        type="button"
+                        onClick={() => selectPersona(opt.key)}
+                        style={{
+                          flex: "1 1 auto",
+                          padding: "12px 16px",
+                          fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+                          fontWeight: 400,
+                          fontSize: "12px",
+                          letterSpacing: "0.04em",
+                          color: active ? "#0A1628" : "rgba(10,22,40,0.6)",
+                          backgroundColor: active ? "#C9A84C" : "transparent",
+                          border: "0.5px solid #C9A84C",
+                          borderRadius: 0,
+                          cursor: "pointer",
+                          transition: "background-color 0.2s ease, color 0.2s ease",
+                        }}
+                      >
+                        {opt.label}
+                      </button>
+                    );
+                  })}
+                </div>
+
                 {/* Two-column row: Full Name + Company */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "28px" }}>
                   <Field
@@ -325,7 +397,8 @@ export default function DemoClient() {
                     type="text"
                     value={values.companyName}
                     onChange={handleChange}
-                    placeholder="Al Wasl Development"
+                    placeholder="(optional for freelancers)"
+                    required={false}
                   />
                 </div>
 
@@ -459,10 +532,11 @@ interface FieldProps {
   type: string;
   value: string;
   placeholder?: string;
+  required?: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Field({ label, name, type, value, placeholder, onChange }: FieldProps) {
+function Field({ label, name, type, value, placeholder, required = true, onChange }: FieldProps) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
       <label
@@ -481,7 +555,7 @@ function Field({ label, name, type, value, placeholder, onChange }: FieldProps) 
         id={name}
         name={name}
         type={type}
-        required
+        required={required}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

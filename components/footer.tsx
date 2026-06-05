@@ -71,7 +71,7 @@ export default function Footer() {
           maxWidth: "1200px",
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
+          gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
           gap: "48px",
         }}
         className="footer-grid"
@@ -136,6 +136,25 @@ export default function Footer() {
             LinkedIn <span style={{ fontFamily: "monospace", fontSize: "11px" }}>↗</span>
           </FooterLink>
           <p style={{ ...muted, marginTop: "4px" }}>Dubai, UAE</p>
+        </div>
+
+        {/* Col 5 — Investors */}
+        <div>
+          <p style={colHead}>Investors</p>
+          <FooterLink href="mailto:investor@baytyai.com">Investor Relations</FooterLink>
+          <FooterLink href="mailto:press@baytyai.com">Press Enquiries</FooterLink>
+          <p
+            style={{
+              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+              fontSize: "10px",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "rgba(201,168,76,0.55)",
+              marginTop: "4px",
+            }}
+          >
+            Seed Round 2026
+          </p>
         </div>
       </div>
 
