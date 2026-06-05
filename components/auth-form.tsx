@@ -1,43 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-
-const fieldBase: React.CSSProperties = {
-  width: "100%",
-  height: "52px",
-  backgroundColor: "transparent",
-  border: "none",
-  borderBottom: "0.5px solid rgba(201,168,76,0.5)",
-  borderRadius: 0,
-  color: "#F8F6F1",
-  fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-  fontWeight: 300,
-  fontSize: "14px",
-  padding: "0 0 0 2px",
-  outline: "none",
-};
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-  fontSize: "10px",
-  letterSpacing: "0.16em",
-  textTransform: "uppercase",
-  color: "rgba(248,246,241,0.5)",
-  marginBottom: "6px",
-  display: "block",
-};
+import { signInLinkedIn } from "@/app/actions/auth";
 
 export default function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
   const isSignUp = mode === "sign-up";
-  const [error, setError] = useState("");
-
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // Backend not yet connected — see Bayty auth setup notes.
-    setError("Authentication is not yet enabled. Please request private access.");
-  }
 
   return (
     <div
@@ -79,43 +47,16 @@ export default function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
             color: "rgba(248,246,241,0.5)",
             textAlign: "center",
             marginBottom: "48px",
+            lineHeight: 1.6,
           }}
         >
           {isSignUp
-            ? "For verified construction professionals across the GCC."
-            : "Welcome back. Enter your credentials to continue."}
+            ? "Join Bayty using your verified LinkedIn profile."
+            : "Continue with your LinkedIn account to access Bayty."}
         </p>
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-          {isSignUp && (
-            <div>
-              <label htmlFor="name" style={labelStyle}>Full Name</label>
-              <input id="name" name="name" type="text" required style={fieldBase} placeholder="Khalid Al Rashid" />
-            </div>
-          )}
-          <div>
-            <label htmlFor="email" style={labelStyle}>Work Email</label>
-            <input id="email" name="email" type="email" required style={fieldBase} placeholder="khalid@company.ae" />
-          </div>
-          <div>
-            <label htmlFor="password" style={labelStyle}>Password</label>
-            <input id="password" name="password" type="password" required style={fieldBase} placeholder="••••••••" />
-          </div>
-
-          {error && (
-            <p
-              style={{
-                fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                fontWeight: 300,
-                fontSize: "13px",
-                color: "#C9A84C",
-                lineHeight: 1.5,
-              }}
-            >
-              {error}
-            </p>
-          )}
-
+        {/* LinkedIn sign-in (server action) */}
+        <form action={signInLinkedIn}>
           <button
             type="submit"
             style={{
@@ -128,15 +69,69 @@ export default function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
               fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
               fontWeight: 500,
               fontSize: "13px",
-              letterSpacing: "0.14em",
+              letterSpacing: "0.1em",
               textTransform: "uppercase",
               cursor: "pointer",
-              marginTop: "8px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "12px",
+              transition: "background-color 0.25s ease",
             }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#C9A84C"; }}
           >
-            {isSignUp ? "Create Account" : "Sign In"}
+            <span
+              aria-hidden
+              style={{
+                fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+                fontWeight: 700,
+                fontSize: "15px",
+                lineHeight: 1,
+              }}
+            >
+              in
+            </span>
+            Continue with LinkedIn
           </button>
         </form>
+
+        <p
+          style={{
+            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+            fontSize: "10px",
+            letterSpacing: "0.08em",
+            color: "rgba(248,246,241,0.35)",
+            textAlign: "center",
+            marginTop: "20px",
+            lineHeight: 1.7,
+          }}
+        >
+          Access is granted to verified construction professionals across the GCC.
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "16px",
+            margin: "40px 0",
+          }}
+        >
+          <div style={{ flex: 1, height: "0.5px", backgroundColor: "rgba(201,168,76,0.2)" }} />
+          <span
+            style={{
+              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+              fontSize: "10px",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "rgba(248,246,241,0.35)",
+            }}
+          >
+            or
+          </span>
+          <div style={{ flex: 1, height: "0.5px", backgroundColor: "rgba(201,168,76,0.2)" }} />
+        </div>
 
         <p
           style={{
@@ -145,15 +140,14 @@ export default function AuthForm({ mode }: { mode: "sign-in" | "sign-up" }) {
             fontSize: "13px",
             color: "rgba(248,246,241,0.5)",
             textAlign: "center",
-            marginTop: "32px",
           }}
         >
-          {isSignUp ? "Already have an account? " : "Don't have an account? "}
+          {isSignUp ? "Prefer a manual introduction? " : "Not a member yet? "}
           <Link
-            href={isSignUp ? "/sign-in" : "/request-access"}
+            href="/request-access"
             style={{ color: "#C9A84C", borderBottom: "0.5px solid rgba(201,168,76,0.4)", paddingBottom: "1px" }}
           >
-            {isSignUp ? "Sign in" : "Request access"}
+            Request private access
           </Link>
         </p>
       </motion.div>
