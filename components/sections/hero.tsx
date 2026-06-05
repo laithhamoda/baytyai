@@ -103,7 +103,7 @@ export default function Hero() {
         <Link href="/request-access" style={primaryBtn}>
           Request Private Access
         </Link>
-        <Link href="/platform" style={secondaryBtn}>
+        <Link href="/product" style={secondaryBtn}>
           View Platform
         </Link>
       </motion.div>
