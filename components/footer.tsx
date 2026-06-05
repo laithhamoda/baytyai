@@ -131,7 +131,7 @@ export default function Footer() {
         {/* Col 4 — Contact */}
         <div>
           <p style={colHead}>Contact</p>
-          <FooterLink href="mailto:team@bayty.com">team@bayty.com</FooterLink>
+          <FooterLink href="mailto:info@baytyai.com">info@baytyai.com</FooterLink>
           <FooterLink href="https://linkedin.com/company/bayty">
             LinkedIn <span style={{ fontFamily: "monospace", fontSize: "11px" }}>↗</span>
           </FooterLink>

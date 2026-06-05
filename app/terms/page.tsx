@@ -149,7 +149,7 @@ export default function TermsPage() {
           <p style={body}>
             For questions about these Terms, contact us at{" "}
             <a
-              href="mailto:legal@bayty.com"
+              href="mailto:info@baytyai.com"
               style={{
                 color: "#0A1628",
                 textDecoration: "underline",
@@ -157,7 +157,7 @@ export default function TermsPage() {
                 textUnderlineOffset: "3px",
               }}
             >
-              legal@bayty.com
+              info@baytyai.com
             </a>
             .
           </p>

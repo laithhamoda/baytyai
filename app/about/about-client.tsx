@@ -288,7 +288,7 @@ export default function AboutClient() {
           </div>
 
           <Link
-            href="mailto:team@bayty.com"
+            href="mailto:info@baytyai.com"
             style={{
               display: "inline-flex",
               alignItems: "center",

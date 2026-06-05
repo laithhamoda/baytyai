@@ -257,7 +257,7 @@ export default function PrivacyPage() {
 
           <p style={body}>
             To exercise any of these rights, please contact us at{" "}
-            <a href="mailto:privacy@bayty.com" style={link}>privacy@bayty.com</a>. We will respond
+            <a href="mailto:info@baytyai.com" style={link}>info@baytyai.com</a>. We will respond
             to verified requests within the timeframes prescribed by the UAE PDPL. We may need to
             verify your identity before processing a rights request.
           </p>
@@ -388,7 +388,7 @@ export default function PrivacyPage() {
           </p>
           <p style={{ ...body, marginTop: "16px" }}>
             <strong style={{ fontWeight: 500 }}>Email:</strong>{" "}
-            <a href="mailto:privacy@bayty.com" style={link}>privacy@bayty.com</a>
+            <a href="mailto:info@baytyai.com" style={link}>info@baytyai.com</a>
             <br />
             <strong style={{ fontWeight: 500 }}>Platform:</strong>{" "}
             <a href="https://bayty.com" style={link}>bayty.com</a>

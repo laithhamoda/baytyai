@@ -142,8 +142,8 @@ export default function ContactClient() {
             }}
           >
             Or email us directly:{" "}
-            <a href="mailto:team@bayty.com" style={{ color: "#C9A84C", textDecoration: "underline" }}>
-              team@bayty.com
+            <a href="mailto:info@baytyai.com" style={{ color: "#C9A84C", textDecoration: "underline" }}>
+              info@baytyai.com
             </a>
           </motion.p>
         </div>

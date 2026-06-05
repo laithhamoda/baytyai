@@ -125,7 +125,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="mailto:support@bayty.com"
+            href="mailto:info@baytyai.com"
             style={{
               fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
               fontWeight: 400,

@@ -118,7 +118,7 @@ export default function CookiePolicyPage() {
           <p style={body}>
             For questions about our use of cookies, contact us at{" "}
             <a
-              href="mailto:privacy@bayty.com"
+              href="mailto:info@baytyai.com"
               style={{
                 color: "#0A1628",
                 textDecoration: "underline",
@@ -126,7 +126,7 @@ export default function CookiePolicyPage() {
                 textUnderlineOffset: "3px",
               }}
             >
-              privacy@bayty.com
+              info@baytyai.com
             </a>
             .
           </p>
