@@ -45,7 +45,7 @@ export default function PrivacyPage() {
         <Section title="1. Introduction">
           <p style={body}>
             Bayty Technologies ("Bayty", "we", "us", or "our") operates the platform accessible at{" "}
-            <a href="https://bayty.com" style={link}>bayty.com</a> (the "Platform"). We are a
+            <a href="https://www.baytyai.com" style={link}>baytyai.com</a> (the "Platform"). We are a
             technology company incorporated under the laws of the United Arab Emirates, providing a
             verified construction project management and marketplace platform for professionals and
             organisations operating across the GCC region.
@@ -391,7 +391,7 @@ export default function PrivacyPage() {
             <a href="mailto:info@baytyai.com" style={link}>info@baytyai.com</a>
             <br />
             <strong style={{ fontWeight: 500 }}>Platform:</strong>{" "}
-            <a href="https://bayty.com" style={link}>bayty.com</a>
+            <a href="https://www.baytyai.com" style={link}>baytyai.com</a>
             <br />
             <strong style={{ fontWeight: 500 }}>Jurisdiction:</strong> United Arab Emirates
           </p>

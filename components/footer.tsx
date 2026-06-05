@@ -171,7 +171,7 @@ export default function Footer() {
             color: "rgba(248,246,241,0.2)",
           }}
         >
-          bayty.com
+          baytyai.com
         </p>
       </div>
     </footer>

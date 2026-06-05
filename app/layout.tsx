@@ -27,7 +27,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bayty.com"),
+  metadataBase: new URL("https://www.baytyai.com"),
   title: {
     template: "%s | Bayty",
     default: "Bayty",

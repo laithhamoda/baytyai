@@ -9,11 +9,10 @@ export const metadata: Metadata = {
   description:
     "The verified, end-to-end construction management platform connecting project owners, engineers, consultants and contractors across the UAE and GCC.",
   alternates: {
-    canonical: "https://bayty.com",
+    canonical: "https://www.baytyai.com",
   },
   openGraph: {
-    url: "https://bayty.com",
-    images: [{ url: "/og-home.jpg" }],
+    url: "https://www.baytyai.com",
   },
 };
 
@@ -23,7 +22,7 @@ const jsonLd = {
   name: "Bayty",
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
-  url: "https://bayty.com",
+  url: "https://www.baytyai.com",
   description:
     "The verified, end-to-end construction management platform connecting project owners, engineers, consultants and contractors across the UAE and GCC.",
   offers: {
