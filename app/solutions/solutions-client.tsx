@@ -8,37 +8,37 @@ const ROLES = [
     name: "General Manager / Owner",
     description:
       "Full project creation, team assembly, approval authority, and analytics across every active development.",
-    href: "/solutions/owner",
+    href: "/solutions/owners",
   },
   {
     name: "Design Engineer",
     description:
       "Assigned to projects, receives drawing briefs, manages design revisions and document versioning.",
-    href: "/solutions/design-engineer",
+    href: "/solutions/consultants",
   },
   {
     name: "Space / MEP / HVAC Engineer",
     description:
       "Receives technical scope, manages mechanical, electrical, and fit-out specifications end to end.",
-    href: "/solutions/mep-engineer",
+    href: "/solutions/consultants",
   },
   {
     name: "Consultant",
     description:
       "Contract execution, supervision oversight, installation scope management, and revision sign-off.",
-    href: "/solutions/consultant",
+    href: "/solutions/consultants",
   },
   {
     name: "Subcontractor",
     description:
       "Installation briefs, supply editing, and structured access to project documents and approvals.",
-    href: "/solutions/subcontractor",
+    href: "/solutions/contractors",
   },
   {
     name: "Freelance Professional",
     description:
       "Verified freelancer directory, searchable by specialism and GCC region for rapid engagement.",
-    href: "/solutions/freelancer",
+    href: "/solutions/contractors",
   },
 ];
 
