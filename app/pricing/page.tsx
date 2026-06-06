@@ -6,7 +6,7 @@ import PricingFAQ from "@/components/sections/pricing-faq";
 import { FAQ_ITEMS } from "@/components/sections/faq-data";
 
 export const metadata: Metadata = {
-  title: { absolute: "Construction Software Pricing UAE — From AED 159/mo, Bayty" },
+  title: { absolute: "Construction Management Software Pricing UAE | From AED 159/mo — Bayty" },
   description:
     "Transparent membership pricing for UAE and GCC construction firms. Starter from AED 159/month. No setup fees. No hidden charges. Cancel anytime.",
 };

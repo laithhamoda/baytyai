@@ -5,7 +5,8 @@ import Link from "next/link";
 
 const CONSENT_KEY = "bayty_consent";
 const CONSENT_TS_KEY = "bayty_consent_ts";
-const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
+
+type Consent = "all" | "essential";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -15,21 +16,24 @@ export default function CookieBanner() {
 
   useEffect(() => {
     try {
-      const choice = localStorage.getItem(CONSENT_KEY);
-      const ts = Number(localStorage.getItem(CONSENT_TS_KEY) || "0");
-      const fresh = ts > 0 && Date.now() - ts < ONE_YEAR_MS;
-      if (!choice || !fresh) setVisible(true);
+      if (!localStorage.getItem(CONSENT_KEY)) setVisible(true);
     } catch {
       setVisible(true);
     }
   }, []);
 
-  function persist(value: string) {
+  function persist(value: Consent) {
     try {
       localStorage.setItem(CONSENT_KEY, value);
-      localStorage.setItem(CONSENT_TS_KEY, String(Date.now()));
+      localStorage.setItem(CONSENT_TS_KEY, new Date().toISOString());
     } catch {
       /* storage unavailable — ignore */
+    }
+    // Notify the Analytics component so GA loads/unloads without a reload.
+    try {
+      window.dispatchEvent(new Event("bayty-consent-changed"));
+    } catch {
+      /* ignore */
     }
     setVisible(false);
     setShowPrefs(false);
@@ -41,66 +45,38 @@ export default function CookieBanner() {
     <>
       {/* Banner */}
       <div
-        style={{
-          position: "fixed",
-          insetInline: 0,
-          bottom: 0,
-          zIndex: 50,
-          backgroundColor: "#0A1628",
-          borderTop: "0.5px solid rgba(201,168,76,0.3)",
-          padding: "20px 24px",
-        }}
+        className="fixed inset-x-0 bottom-0 z-50 bg-navy px-6 py-5 text-offwhite"
+        style={{ borderTop: "0.5px solid rgba(201,168,76,0.3)" }}
       >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "24px",
-            flexWrap: "wrap",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-              fontWeight: 300,
-              fontSize: "13px",
-              lineHeight: 1.6,
-              color: "rgba(248,246,241,0.65)",
-              maxWidth: "560px",
-            }}
-          >
-            We use cookies to improve your experience. Essential cookies are always active.
-            Analytics cookies help us improve the platform.{" "}
-            <Link href="/cookies" style={{ color: "#C9A84C", textDecoration: "underline" }}>
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-5 md:flex-row md:items-center">
+          <p className="max-w-xl font-body text-[13px] font-light leading-relaxed text-offwhite/65">
+            We use cookies on Bayty. Essential cookies keep the platform working.
+            Analytics cookies help us improve your experience.{" "}
+            <Link href="/cookies" className="text-gold underline">
               Cookie Policy
             </Link>
           </p>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
-            <button onClick={() => persist("all")} style={btnPrimary}>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              onClick={() => persist("all")}
+              className="bg-gold px-5 py-3 font-body text-[12px] font-medium uppercase tracking-[0.1em] text-navy"
+              style={{ borderRadius: 0 }}
+            >
               Accept all
             </button>
-            <button onClick={() => persist("essential")} style={btnGhost}>
+            <button
+              onClick={() => persist("essential")}
+              className="bg-transparent px-5 py-3 font-body text-[12px] font-normal uppercase tracking-[0.1em] text-gold"
+              style={{ border: "0.5px solid #C9A84C", borderRadius: 0 }}
+            >
               Decline non-essential
             </button>
             <button
               onClick={() => setShowPrefs(true)}
-              style={{
-                fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                fontWeight: 400,
-                fontSize: "12px",
-                letterSpacing: "0.06em",
-                color: "rgba(248,246,241,0.6)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
+              className="font-body text-[12px] font-normal tracking-[0.06em] text-offwhite/60 underline"
             >
-              Manage preferences
+              Manage preferences ↗
             </button>
           </div>
         </div>
@@ -111,68 +87,45 @@ export default function CookieBanner() {
         <div
           role="dialog"
           aria-modal="true"
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 60,
-            backgroundColor: "rgba(10,22,40,0.8)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "24px",
-          }}
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy/80 px-6"
           onClick={() => setShowPrefs(false)}
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundColor: "#0F1E35",
-              border: "0.5px solid rgba(201,168,76,0.3)",
-              maxWidth: "440px",
-              width: "100%",
-              padding: "40px 32px",
-            }}
+            className="w-full max-w-md p-10"
+            style={{ backgroundColor: "#0F1E35", border: "0.5px solid rgba(201,168,76,0.3)", borderRadius: 0 }}
           >
-            <h2
-              style={{
-                fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-                fontWeight: 600,
-                fontSize: "24px",
-                color: "#F8F6F1",
-                marginBottom: "24px",
-              }}
-            >
+            <h2 className="mb-6 font-display text-2xl font-semibold text-offwhite">
               Cookie preferences
             </h2>
 
             <ToggleRow
-              label="Essential"
+              label="Essential cookies"
               description="Required for the platform to function. Always active."
               checked
               disabled
               onChange={() => {}}
             />
             <ToggleRow
-              label="Analytics"
-              description="Helps us understand how the platform is used."
+              label="Analytics cookies"
+              description="Help us understand which features are most useful."
               checked={analytics}
               onChange={() => setAnalytics((v) => !v)}
             />
             <ToggleRow
-              label="Marketing"
-              description="Used to measure campaign performance."
+              label="Marketing cookies"
+              description="Not currently used by Bayty."
               checked={marketing}
               onChange={() => setMarketing((v) => !v)}
             />
 
-            <div style={{ display: "flex", gap: "12px", marginTop: "28px" }}>
-              <button
-                onClick={() => persist(analytics || marketing ? "all" : "essential")}
-                style={{ ...btnPrimary, flex: 1 }}
-              >
-                Save preferences
-              </button>
-            </div>
+            <button
+              onClick={() => persist(analytics || marketing ? "all" : "essential")}
+              className="mt-7 w-full bg-gold py-3 font-body text-[12px] font-medium uppercase tracking-[0.12em] text-navy"
+              style={{ borderRadius: 0 }}
+            >
+              Save preferences
+            </button>
           </div>
         </div>
       )}
@@ -195,38 +148,12 @@ function ToggleRow({
 }) {
   return (
     <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        gap: "16px",
-        padding: "16px 0",
-        borderBottom: "0.5px solid rgba(201,168,76,0.15)",
-      }}
+      className="flex items-start justify-between gap-4 py-4"
+      style={{ borderBottom: "0.5px solid rgba(201,168,76,0.15)" }}
     >
       <div>
-        <p
-          style={{
-            fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-            fontWeight: 500,
-            fontSize: "14px",
-            color: "#F8F6F1",
-            marginBottom: "4px",
-          }}
-        >
-          {label}
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-            fontWeight: 300,
-            fontSize: "12px",
-            lineHeight: 1.5,
-            color: "rgba(248,246,241,0.5)",
-          }}
-        >
-          {description}
-        </p>
+        <p className="mb-1 font-body text-sm font-medium text-offwhite">{label}</p>
+        <p className="font-body text-xs font-light leading-snug text-offwhite/50">{description}</p>
       </div>
       <button
         type="button"
@@ -235,60 +162,24 @@ function ToggleRow({
         aria-label={label}
         disabled={disabled}
         onClick={onChange}
+        className="relative h-6 w-11 flex-shrink-0 transition-colors"
         style={{
-          flexShrink: 0,
-          width: "44px",
-          height: "24px",
           borderRadius: "999px",
           border: "0.5px solid rgba(201,168,76,0.4)",
           backgroundColor: checked ? "#C9A84C" : "transparent",
-          position: "relative",
           cursor: disabled ? "not-allowed" : "pointer",
           opacity: disabled ? 0.5 : 1,
-          transition: "background-color 0.2s ease",
         }}
       >
         <span
+          className="absolute top-[2px] h-[18px] w-[18px] transition-all"
           style={{
-            position: "absolute",
-            top: "2px",
             left: checked ? "22px" : "2px",
-            width: "18px",
-            height: "18px",
             borderRadius: "999px",
             backgroundColor: checked ? "#0A1628" : "#C9A84C",
-            transition: "left 0.2s ease",
           }}
         />
       </button>
     </div>
   );
 }
-
-const btnPrimary: React.CSSProperties = {
-  fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-  fontWeight: 500,
-  fontSize: "12px",
-  letterSpacing: "0.1em",
-  textTransform: "uppercase",
-  color: "#0A1628",
-  backgroundColor: "#C9A84C",
-  border: "0.5px solid #C9A84C",
-  borderRadius: 0,
-  padding: "12px 22px",
-  cursor: "pointer",
-};
-
-const btnGhost: React.CSSProperties = {
-  fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-  fontWeight: 400,
-  fontSize: "12px",
-  letterSpacing: "0.1em",
-  textTransform: "uppercase",
-  color: "#C9A84C",
-  backgroundColor: "transparent",
-  border: "0.5px solid #C9A84C",
-  borderRadius: 0,
-  padding: "12px 22px",
-  cursor: "pointer",
-};

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 interface FormValues {
   fullName: string;
@@ -57,6 +58,8 @@ const labelStyle: React.CSSProperties = {
 export default function ContactClient() {
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -64,9 +67,24 @@ export default function ContactClient() {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, formType: "contact" }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      trackEvent("contact_submit", { enquiryType: values.enquiryType });
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again, or email info@baytyai.com.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -270,8 +288,16 @@ export default function ContactClient() {
                   />
                 </div>
 
+                {error && (
+                  <p role="alert" style={{ fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)", fontSize: "13px", color: "#9B2C2C", marginTop: "-8px" }}>
+                    {error}
+                  </p>
+                )}
+
                 <button
                   type="submit"
+                  disabled={submitting}
+                  aria-busy={submitting}
                   style={{
                     width: "100%",
                     height: "60px",
@@ -284,13 +310,14 @@ export default function ContactClient() {
                     fontSize: "14px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    cursor: "pointer",
+                    cursor: submitting ? "wait" : "pointer",
+                    opacity: submitting ? 0.7 : 1,
                     transition: "background-color 0.25s ease",
                   }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f"; }}
+                  onMouseEnter={(e) => { if (!submitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f"; }}
                   onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#C9A84C"; }}
                 >
-                  Send Enquiry →
+                  {submitting ? "Sending…" : "Send Enquiry →"}
                 </button>
               </motion.form>
             )}

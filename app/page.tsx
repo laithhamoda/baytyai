@@ -9,7 +9,7 @@ import MarketplaceJoin from "@/components/sections/marketplace-join";
 import PricingCards from "@/components/sections/pricing-cards";
 
 export const metadata: Metadata = {
-  title: { absolute: "Construction Management Software UAE & GCC — Bayty AI" },
+  title: { absolute: "Bayty AI — Construction Management Software UAE & GCC | Verified Platform" },
   description:
     "The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.",
   alternates: {

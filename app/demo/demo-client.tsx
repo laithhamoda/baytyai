@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { trackEvent } from "@/lib/analytics";
 
 const TRUST_POINTS = [
   "Account activated within 24 hours of verification",
@@ -81,6 +82,8 @@ const fieldBase: React.CSSProperties = {
 export default function DemoClient() {
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [persona, setPersona] = useState<Persona>("manage");
 
   function handleChange(
@@ -100,9 +103,24 @@ export default function DemoClient() {
     }
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...values, persona, formType: "request-access" }),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      trackEvent("request_access_submit", { persona, interest: values.primaryInterest });
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again, or email info@baytyai.com.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -459,9 +477,28 @@ export default function DemoClient() {
                   />
                 </div>
 
+                {/* Error message */}
+                {error && (
+                  <p
+                    role="alert"
+                    style={{
+                      fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+                      fontWeight: 400,
+                      fontSize: "13px",
+                      lineHeight: 1.5,
+                      color: "#9B2C2C",
+                      marginBottom: "16px",
+                    }}
+                  >
+                    {error}
+                  </p>
+                )}
+
                 {/* Submit */}
                 <button
                   type="submit"
+                  disabled={submitting}
+                  aria-busy={submitting}
                   style={{
                     width: "100%",
                     height: "60px",
@@ -474,17 +511,18 @@ export default function DemoClient() {
                     fontSize: "14px",
                     letterSpacing: "0.14em",
                     textTransform: "uppercase",
-                    cursor: "pointer",
+                    cursor: submitting ? "wait" : "pointer",
+                    opacity: submitting ? 0.7 : 1,
                     transition: "background-color 0.25s ease",
                   }}
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f";
+                    if (!submitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#C9A84C";
                   }}
                 >
-                  Request Access →
+                  {submitting ? "Sending…" : "Request Access →"}
                 </button>
 
                 {/* Legal */}

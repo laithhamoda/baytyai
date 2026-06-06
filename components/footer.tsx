@@ -44,7 +44,8 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
         fontWeight: 300,
         fontSize: "13px",
         color: "rgba(248,246,241,0.6)",
-        marginBottom: "12px",
+        padding: "8px 0",
+        marginBottom: "4px",
         transition: "color 0.2s ease",
       }}
       onMouseEnter={(e) => {

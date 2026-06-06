@@ -21,6 +21,22 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
+  {
+    // Report-only first to avoid breaking Vercel/Google Fonts/GA; promote to
+    // "Content-Security-Policy" (enforcing) after a clean reporting period.
+    key: "Content-Security-Policy-Report-Only",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "font-src 'self' https://fonts.gstatic.com",
+      "img-src 'self' data: https:",
+      "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.supabase.co",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; "),
+  },
 ];
 
 const nextConfig = {
