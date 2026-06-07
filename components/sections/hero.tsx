@@ -17,7 +17,17 @@ function fadeUp(delay: number) {
   };
 }
 
-export default function Hero() {
+interface HeroProps {
+  overline?: string;
+  headline?: string;
+  subhead?: string;
+}
+
+export default function Hero({
+  overline = "GCC Construction Management",
+  headline = "Where Every Project Decision Lives",
+  subhead = "Bayty unifies your entire construction project lifecycle — verified stakeholders, structured approvals, and a trusted marketplace — on one authorised platform.",
+}: HeroProps = {}) {
   return (
     <section
       style={{ backgroundColor: "#0A1628" }}
@@ -35,7 +45,7 @@ export default function Hero() {
           marginBottom: "32px",
         }}
       >
-        GCC Construction Management
+        {overline}
       </motion.p>
 
       {/* Top gold rule */}
@@ -62,7 +72,7 @@ export default function Hero() {
         }}
         className="text-[44px] md:text-[72px]"
       >
-        Where Every Project Decision Lives
+        {headline}
       </motion.h1>
 
       {/* Sub-headline */}
@@ -78,9 +88,7 @@ export default function Hero() {
           lineHeight: 1.75,
         }}
       >
-        Bayty unifies your entire construction project lifecycle — verified
-        stakeholders, structured approvals, and a trusted marketplace — on one
-        authorised platform.
+        {subhead}
       </motion.p>
 
       {/* Bottom gold rule */}

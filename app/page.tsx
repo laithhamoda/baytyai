@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getContent } from "@/lib/cms";
 import Hero from "@/components/sections/hero";
 import Problem from "@/components/sections/problem";
 import BeforeAfter from "@/components/sections/before-after";
@@ -26,10 +27,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const [overline, headline, subhead] = await Promise.all([
+    getContent("hero.overline"),
+    getContent("hero.headline"),
+    getContent("hero.subhead"),
+  ]);
+
   return (
     <>
-      <Hero />
+      <Hero overline={overline} headline={headline} subhead={subhead} />
       <Problem />
       <BeforeAfter />
       <HowItWorks />
