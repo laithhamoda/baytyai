@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import AuthForm from "@/components/auth-form";
+import AuthForm from '@/components/auth-form';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Create Account — Bayty",
+  title: 'Create Account — Bayty',
 };
 
 export default function SignUpPage() {

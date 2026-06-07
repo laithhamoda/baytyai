@@ -1,54 +1,59 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Bayty",
+  title: 'Privacy Policy — Bayty',
 };
 
-const LAST_UPDATED = "1 June 2025";
+const LAST_UPDATED = '1 June 2025';
 
 export default function PrivacyPage() {
   return (
-    <div style={{ backgroundColor: "#F8F6F1", minHeight: "100vh", padding: "120px 24px" }}>
-      <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-
+    <div style={{ backgroundColor: '#F8F6F1', minHeight: '100vh', padding: '120px 24px' }}>
+      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
         {/* Legal review notice */}
-        <p style={{
-          fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-          fontSize: "10px",
-          letterSpacing: "0.12em",
-          textTransform: "uppercase",
-          color: "rgba(10,22,40,0.35)",
-          marginBottom: "40px",
-          padding: "12px 16px",
-          border: "0.5px solid rgba(10,22,40,0.15)",
-        }}>
+        <p
+          style={{
+            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+            fontSize: '10px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(10,22,40,0.35)',
+            marginBottom: '40px',
+            padding: '12px 16px',
+            border: '0.5px solid rgba(10,22,40,0.15)',
+          }}
+        >
           Requires legal review before launch — this is a substantive draft for internal use only.
         </p>
 
         {/* Headline */}
-        <h1 style={{
-          fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-          fontWeight: 300,
-          fontSize: "48px",
-          lineHeight: 1.08,
-          color: "#0A1628",
-          marginBottom: "12px",
-        }}>
+        <h1
+          style={{
+            fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
+            fontWeight: 300,
+            fontSize: '48px',
+            lineHeight: 1.08,
+            color: '#0A1628',
+            marginBottom: '12px',
+          }}
+        >
           Privacy Policy
         </h1>
 
-        <p style={{ ...body, color: "rgba(10,22,40,0.45)", marginBottom: "64px" }}>
+        <p style={{ ...body, color: 'rgba(10,22,40,0.45)', marginBottom: '64px' }}>
           Last updated: {LAST_UPDATED}
         </p>
 
         {/* ── 1. Introduction ── */}
         <Section title="1. Introduction">
           <p style={body}>
-            Bayty Technologies ("Bayty", "we", "us", or "our") operates the platform accessible at{" "}
-            <a href="https://www.baytyai.com" style={link}>baytyai.com</a> (the "Platform"). We are a
-            technology company incorporated under the laws of the United Arab Emirates, providing a
-            verified construction project management and marketplace platform for professionals and
-            organisations operating across the GCC region.
+            Bayty Technologies ("Bayty", "we", "us", or "our") operates the platform accessible at{' '}
+            <a href="https://www.baytyai.com" style={link}>
+              baytyai.com
+            </a>{' '}
+            (the "Platform"). We are a technology company incorporated under the laws of the United
+            Arab Emirates, providing a verified construction project management and marketplace
+            platform for professionals and organisations operating across the GCC region.
           </p>
           <p style={body}>
             This Privacy Policy explains how we collect, use, store, disclose, and protect personal
@@ -69,7 +74,8 @@ export default function PrivacyPage() {
         {/* ── 2. Information We Collect ── */}
         <Section title="2. Information We Collect">
           <p style={body}>
-            We collect information in several categories depending on how you interact with the Platform:
+            We collect information in several categories depending on how you interact with the
+            Platform:
           </p>
 
           <SubHeading>Account and Registration Data</SubHeading>
@@ -84,10 +90,10 @@ export default function PrivacyPage() {
           <p style={body}>
             To maintain the integrity of the Platform, Bayty requires certain users — including
             engineers, consultants, contractors, and other licensed professionals — to submit
-            verification documents. These may include government-issued identity documents, professional
-            licences, trade licences, and certificates of registration issued by GCC regulatory bodies.
-            These documents are processed solely for identity and credential verification purposes and
-            are handled with heightened security measures.
+            verification documents. These may include government-issued identity documents,
+            professional licences, trade licences, and certificates of registration issued by GCC
+            regulatory bodies. These documents are processed solely for identity and credential
+            verification purposes and are handled with heightened security measures.
           </p>
 
           <SubHeading>Project and Transactional Data</SubHeading>
@@ -103,8 +109,8 @@ export default function PrivacyPage() {
           <p style={body}>
             We automatically collect technical information when you use the Platform, including your
             IP address, browser type and version, device type, operating system, referring URLs,
-            pages visited, session duration, and feature interactions. This data is used for platform
-            security, performance monitoring, and aggregate analytics.
+            pages visited, session duration, and feature interactions. This data is used for
+            platform security, performance monitoring, and aggregate analytics.
           </p>
 
           <SubHeading>Cookies and Tracking Technologies</SubHeading>
@@ -125,7 +131,8 @@ export default function PrivacyPage() {
             We use your account data and project data to provide the core functionality of the
             Platform — including project creation and management, document storage and version
             control, approval workflow processing, team directory management, and marketplace
-            participation. This processing is necessary for the performance of our contract with you.
+            participation. This processing is necessary for the performance of our contract with
+            you.
           </p>
 
           <SubHeading>Professional Verification</SubHeading>
@@ -141,8 +148,8 @@ export default function PrivacyPage() {
             We use your contact information to send transactional communications including account
             activation confirmations, password resets, approval notifications, and platform
             announcements. Where you have provided consent, we may also send product updates and
-            relevant industry communications. You may withdraw consent to marketing communications at
-            any time by using the unsubscribe mechanism in any such communication.
+            relevant industry communications. You may withdraw consent to marketing communications
+            at any time by using the unsubscribe mechanism in any such communication.
           </p>
 
           <SubHeading>Analytics and Platform Improvement</SubHeading>
@@ -164,12 +171,12 @@ export default function PrivacyPage() {
         {/* ── 4. Data Storage and Security ── */}
         <Section title="4. Data Storage and Security">
           <p style={body}>
-            Platform data, including account information, project documents, and verification records,
-            is stored using Supabase infrastructure, which provides enterprise-grade encrypted
-            database and storage services. Data at rest is encrypted using AES-256 encryption.
-            Data in transit is protected using TLS 1.2 or higher. Supabase maintains SOC 2 Type II
-            certification, providing independent assurance over the security, availability, and
-            confidentiality of stored data.
+            Platform data, including account information, project documents, and verification
+            records, is stored using Supabase infrastructure, which provides enterprise-grade
+            encrypted database and storage services. Data at rest is encrypted using AES-256
+            encryption. Data in transit is protected using TLS 1.2 or higher. Supabase maintains SOC
+            2 Type II certification, providing independent assurance over the security,
+            availability, and confidentiality of stored data.
           </p>
           <p style={body}>
             We configure our Supabase deployment to use data centres located within the UAE or
@@ -179,10 +186,10 @@ export default function PrivacyPage() {
             adequacy determinations as applicable.
           </p>
           <p style={body}>
-            Access to personal data within Bayty is restricted to personnel who require it to perform
-            their job functions. All staff with access to personal data are subject to confidentiality
-            obligations. We conduct periodic access reviews and maintain audit logs of data access
-            events.
+            Access to personal data within Bayty is restricted to personnel who require it to
+            perform their job functions. All staff with access to personal data are subject to
+            confidentiality obligations. We conduct periodic access reviews and maintain audit logs
+            of data access events.
           </p>
           <p style={body}>
             In the event of a personal data breach that is likely to result in a risk to your rights
@@ -256,10 +263,12 @@ export default function PrivacyPage() {
           </p>
 
           <p style={body}>
-            To exercise any of these rights, please contact us at{" "}
-            <a href="mailto:info@baytyai.com" style={link}>info@baytyai.com</a>. We will respond
-            to verified requests within the timeframes prescribed by the UAE PDPL. We may need to
-            verify your identity before processing a rights request.
+            To exercise any of these rights, please contact us at{' '}
+            <a href="mailto:info@baytyai.com" style={link}>
+              info@baytyai.com
+            </a>
+            . We will respond to verified requests within the timeframes prescribed by the UAE PDPL.
+            We may need to verify your identity before processing a rights request.
           </p>
         </Section>
 
@@ -285,8 +294,8 @@ export default function PrivacyPage() {
           <p style={body}>
             <strong style={{ fontWeight: 500 }}>Right to Withdraw Consent:</strong> Where processing
             is based on your consent, you have the right to withdraw that consent at any time.
-            Withdrawal of consent does not affect the lawfulness of processing that took place before
-            the withdrawal.
+            Withdrawal of consent does not affect the lawfulness of processing that took place
+            before the withdrawal.
           </p>
           <p style={body}>
             <strong style={{ fontWeight: 500 }}>Right to Lodge a Complaint:</strong> You have the
@@ -295,8 +304,8 @@ export default function PrivacyPage() {
             lodge a complaint with the Information Commissioner&apos;s Office (ICO).
           </p>
           <p style={body}>
-            For transfers of personal data from the EEA or UK to our infrastructure providers,
-            we rely on the European Commission&apos;s standard contractual clauses or the UK
+            For transfers of personal data from the EEA or UK to our infrastructure providers, we
+            rely on the European Commission&apos;s standard contractual clauses or the UK
             International Data Transfer Agreement as appropriate.
           </p>
         </Section>
@@ -339,8 +348,8 @@ export default function PrivacyPage() {
         {/* ── 9. Third-Party Services ── */}
         <Section title="9. Third-Party Services">
           <p style={body}>
-            We work with a small number of trusted third-party service providers who may process your
-            personal data on our behalf as data processors. Each provider is subject to a data
+            We work with a small number of trusted third-party service providers who may process
+            your personal data on our behalf as data processors. Each provider is subject to a data
             processing agreement that restricts their use of your data to the specific services they
             provide to us.
           </p>
@@ -349,58 +358,70 @@ export default function PrivacyPage() {
           <p style={body}>
             Supabase provides our database, file storage, and authentication infrastructure.
             Personal data including account information, project documents, and verification records
-            are stored on Supabase servers. Supabase is SOC 2 Type II certified.{" "}
-            <a href="https://supabase.com/privacy" style={link}>Supabase Privacy Policy →</a>
+            are stored on Supabase servers. Supabase is SOC 2 Type II certified.{' '}
+            <a href="https://supabase.com/privacy" style={link}>
+              Supabase Privacy Policy →
+            </a>
           </p>
 
           <SubHeading>Stripe</SubHeading>
           <p style={body}>
             Stripe processes payment transactions on the Platform. When you subscribe to a paid
             membership tier, your payment card data is transmitted directly to Stripe and is not
-            stored on Bayty&apos;s servers. Stripe is PCI DSS Level 1 certified.{" "}
-            <a href="https://stripe.com/privacy" style={link}>Stripe Privacy Policy →</a>
+            stored on Bayty&apos;s servers. Stripe is PCI DSS Level 1 certified.{' '}
+            <a href="https://stripe.com/privacy" style={link}>
+              Stripe Privacy Policy →
+            </a>
           </p>
 
           <SubHeading>HubSpot</SubHeading>
           <p style={body}>
             HubSpot is used for customer relationship management and marketing communications.
             Contact information for users who have requested access or engaged with our enterprise
-            sales process may be stored in HubSpot in accordance with your consent preferences.{" "}
-            <a href="https://legal.hubspot.com/privacy-policy" style={link}>HubSpot Privacy Policy →</a>
+            sales process may be stored in HubSpot in accordance with your consent preferences.{' '}
+            <a href="https://legal.hubspot.com/privacy-policy" style={link}>
+              HubSpot Privacy Policy →
+            </a>
           </p>
 
           <SubHeading>Resend</SubHeading>
           <p style={body}>
             Resend is our transactional email delivery provider. Your email address and the content
             of transactional messages (such as account activation and approval notifications) are
-            processed by Resend for the purpose of message delivery.{" "}
-            <a href="https://resend.com/legal/privacy-policy" style={link}>Resend Privacy Policy →</a>
+            processed by Resend for the purpose of message delivery.{' '}
+            <a href="https://resend.com/legal/privacy-policy" style={link}>
+              Resend Privacy Policy →
+            </a>
           </p>
         </Section>
 
         {/* ── 10. Contact ── */}
         <Section title="10. Contact and Data Controller">
           <p style={body}>
-            Bayty Technologies is the Data Controller responsible for personal data processed through
-            the Platform. If you have any questions about this Privacy Policy, wish to exercise your
-            data protection rights, or wish to raise a concern about our data practices, please
-            contact our Data Protection team:
+            Bayty Technologies is the Data Controller responsible for personal data processed
+            through the Platform. If you have any questions about this Privacy Policy, wish to
+            exercise your data protection rights, or wish to raise a concern about our data
+            practices, please contact our Data Protection team:
           </p>
-          <p style={{ ...body, marginTop: "16px" }}>
-            <strong style={{ fontWeight: 500 }}>Email:</strong>{" "}
-            <a href="mailto:info@baytyai.com" style={link}>info@baytyai.com</a>
+          <p style={{ ...body, marginTop: '16px' }}>
+            <strong style={{ fontWeight: 500 }}>Email:</strong>{' '}
+            <a href="mailto:info@baytyai.com" style={link}>
+              info@baytyai.com
+            </a>
             <br />
-            <strong style={{ fontWeight: 500 }}>Platform:</strong>{" "}
-            <a href="https://www.baytyai.com" style={link}>baytyai.com</a>
+            <strong style={{ fontWeight: 500 }}>Platform:</strong>{' '}
+            <a href="https://www.baytyai.com" style={link}>
+              baytyai.com
+            </a>
             <br />
             <strong style={{ fontWeight: 500 }}>Jurisdiction:</strong> United Arab Emirates
           </p>
-          <p style={{ ...body, marginTop: "24px" }}>
+          <p style={{ ...body, marginTop: '24px' }}>
             We aim to respond to all substantive data protection enquiries within 10 business days.
             Where a formal rights request requires identity verification or internal review, we will
             notify you of any extension to this timeframe and the reasons for it.
           </p>
-          <p style={{ ...body, marginTop: "24px" }}>
+          <p style={{ ...body, marginTop: '24px' }}>
             We may update this Privacy Policy from time to time to reflect changes in our data
             practices or applicable law. Where changes are material, we will notify registered users
             by email and update the "Last updated" date at the top of this page. Continued use of
@@ -408,7 +429,6 @@ export default function PrivacyPage() {
             revised Policy.
           </p>
         </Section>
-
       </div>
     </div>
   );
@@ -418,17 +438,19 @@ export default function PrivacyPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: "56px" }}>
-      <h2 style={{
-        fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-        fontWeight: 600,
-        fontSize: "24px",
-        lineHeight: 1.2,
-        color: "#0A1628",
-        marginBottom: "20px",
-        paddingBottom: "12px",
-        borderBottom: "0.5px solid rgba(10,22,40,0.12)",
-      }}>
+    <section style={{ marginBottom: '56px' }}>
+      <h2
+        style={{
+          fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
+          fontWeight: 600,
+          fontSize: '24px',
+          lineHeight: 1.2,
+          color: '#0A1628',
+          marginBottom: '20px',
+          paddingBottom: '12px',
+          borderBottom: '0.5px solid rgba(10,22,40,0.12)',
+        }}
+      >
         {title}
       </h2>
       {children}
@@ -438,15 +460,17 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function SubHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 style={{
-      fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-      fontWeight: 500,
-      fontSize: "14px",
-      color: "#0A1628",
-      letterSpacing: "0.04em",
-      marginTop: "24px",
-      marginBottom: "8px",
-    }}>
+    <h3
+      style={{
+        fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
+        fontWeight: 500,
+        fontSize: '14px',
+        color: '#0A1628',
+        letterSpacing: '0.04em',
+        marginTop: '24px',
+        marginBottom: '8px',
+      }}
+    >
       {children}
     </h3>
   );
@@ -457,15 +481,15 @@ function SubHeading({ children }: { children: React.ReactNode }) {
 const body: React.CSSProperties = {
   fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
   fontWeight: 300,
-  fontSize: "14px",
+  fontSize: '14px',
   lineHeight: 1.8,
-  color: "rgba(10,22,40,0.8)",
-  marginBottom: "16px",
+  color: 'rgba(10,22,40,0.8)',
+  marginBottom: '16px',
 };
 
 const link: React.CSSProperties = {
-  color: "#0A1628",
-  textDecoration: "underline",
-  textDecorationColor: "rgba(201,168,76,0.5)",
-  textUnderlineOffset: "3px",
+  color: '#0A1628',
+  textDecoration: 'underline',
+  textDecorationColor: 'rgba(201,168,76,0.5)',
+  textUnderlineOffset: '3px',
 };

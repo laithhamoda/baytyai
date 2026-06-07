@@ -1,89 +1,84 @@
-import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Sans, DM_Mono } from "next/font/google";
-import "./globals.css";
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
-import CookieBanner from "@/components/cookie-banner";
-import Analytics from "@/components/analytics";
+import { Cormorant_Garamond, DM_Sans, DM_Mono } from 'next/font/google';
+
+import './globals.css';
+import Analytics from '@/components/analytics';
+import CookieBanner from '@/components/cookie-banner';
+import Footer from '@/components/footer';
+import Navigation from '@/components/navigation';
+
+import type { Metadata } from 'next';
 
 const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "600"],
-  variable: "--font-display",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],
+  variable: '--font-display',
+  display: 'swap',
 });
 
 const dmSans = DM_Sans({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  variable: "--font-body",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['300', '400'],
+  variable: '--font-body',
+  display: 'swap',
 });
 
 const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-mono",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.baytyai.com"),
+  metadataBase: new URL('https://www.baytyai.com'),
   title: {
-    template: "%s | Bayty",
-    default: "Bayty",
+    template: '%s | Bayty',
+    default: 'Bayty',
   },
   description:
-    "Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.",
+    'Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.',
 };
 
 const softwareSchema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  name: "Bayty AI",
-  applicationCategory: "BusinessApplication",
-  operatingSystem: "Web",
-  url: "https://www.baytyai.com",
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Bayty AI',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: 'https://www.baytyai.com',
   description:
-    "The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.",
+    'The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.',
   offers: {
-    "@type": "AggregateOffer",
-    lowPrice: "159",
-    highPrice: "1999",
-    priceCurrency: "AED",
-    offerCount: "3",
+    '@type': 'AggregateOffer',
+    lowPrice: '159',
+    highPrice: '1999',
+    priceCurrency: 'AED',
+    offerCount: '3',
   },
 };
 
 const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Bayty Technologies",
-  url: "https://www.baytyai.com",
-  logo: "https://www.baytyai.com/logo.png",
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Bayty Technologies',
+  url: 'https://www.baytyai.com',
+  logo: 'https://www.baytyai.com/logo.png',
   contactPoint: {
-    "@type": "ContactPoint",
-    email: "info@baytyai.com",
-    contactType: "customer service",
+    '@type': 'ContactPoint',
+    email: 'info@baytyai.com',
+    contactType: 'customer service',
   },
   address: {
-    "@type": "PostalAddress",
-    addressLocality: "Dubai",
-    addressCountry: "AE",
+    '@type': 'PostalAddress',
+    addressLocality: 'Dubai',
+    addressCountry: 'AE',
   },
-  sameAs: ["https://linkedin.com/company/bayty"],
+  sameAs: ['https://linkedin.com/company/bayty'],
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
-    >
+    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}>
       <body>
         <script
           type="application/ld+json"

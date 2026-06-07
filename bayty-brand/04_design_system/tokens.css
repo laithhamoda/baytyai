@@ -8,15 +8,15 @@
 :root {
   /* ---- Reference scale (raw, theme-agnostic) ---- */
   --bty-ref-navy-900: #060e1c;
-  --bty-ref-navy-800: #0a1628;   /* primary navy */
-  --bty-ref-navy-700: #0f1e35;   /* raised surface on dark */
+  --bty-ref-navy-800: #0a1628; /* primary navy */
+  --bty-ref-navy-700: #0f1e35; /* raised surface on dark */
   --bty-ref-navy-600: #16294a;
-  --bty-ref-slate-700: #2c3e50;  /* secondary text on light */
+  --bty-ref-slate-700: #2c3e50; /* secondary text on light */
   --bty-ref-slate-500: #4a5b6b;
-  --bty-ref-gold-500: #c9a84c;   /* primary gold */
-  --bty-ref-gold-600: #b8963f;   /* gold pressed */
+  --bty-ref-gold-500: #c9a84c; /* primary gold */
+  --bty-ref-gold-600: #b8963f; /* gold pressed */
   --bty-ref-gold-300: #e0c987;
-  --bty-ref-offwhite: #f8f6f1;   /* primary off-white */
+  --bty-ref-offwhite: #f8f6f1; /* primary off-white */
   --bty-ref-white: #ffffff;
   --bty-ref-ink-900: #0a1628;
   --bty-ref-emerald-800: #0c2a24; /* sovereign depth */
@@ -37,22 +37,22 @@
   --bty-ref-viz-6: #5b8a9c;
 
   /* ---- Non-colour tokens (shared across themes) ---- */
-  --bty-radius: 2px;            /* sharp by default; 2px subtle only */
+  --bty-radius: 2px; /* sharp by default; 2px subtle only */
   --bty-radius-none: 0px;
   --bty-border-hairline: 0.5px;
   --bty-space-section: 120px;
   --bty-space-component: 64px;
   --bty-maxw-content: 1200px;
-  --bty-font-display: var(--font-display, "Cormorant Garamond", Georgia, serif);
-  --bty-font-body: var(--font-body, "DM Sans", system-ui, sans-serif);
-  --bty-font-mono: var(--font-mono, "DM Mono", ui-monospace, monospace);
+  --bty-font-display: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  --bty-font-body: var(--font-body, 'DM Sans', system-ui, sans-serif);
+  --bty-font-mono: var(--font-mono, 'DM Mono', ui-monospace, monospace);
   --bty-ease: cubic-bezier(0.22, 1, 0.36, 1); /* signature ease-out */
   --bty-dur-fast: 200ms;
   --bty-dur: 600ms;
 }
 
 /* ============================ LIGHT ============================ */
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --bty-bg: var(--bty-ref-offwhite);
   --bty-surface: var(--bty-ref-white);
   --bty-surface-raised: #ffffff;
@@ -73,7 +73,7 @@
 }
 
 /* ============================ DARK ============================ */
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --bty-bg: var(--bty-ref-navy-800);
   --bty-surface: var(--bty-ref-navy-700);
   --bty-surface-raised: var(--bty-ref-navy-600);
@@ -96,7 +96,7 @@
 /* ========================== SOVEREIGN ==========================
    The register for government / sovereign contexts: deeper ground,
    more restraint, gold reserved for meaning only. Reads as institution. */
-:root[data-theme="sovereign"] {
+:root[data-theme='sovereign'] {
   --bty-bg: var(--bty-ref-navy-900);
   --bty-surface: var(--bty-ref-emerald-800);
   --bty-surface-raised: var(--bty-ref-emerald-700);

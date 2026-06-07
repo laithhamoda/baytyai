@@ -1,9 +1,9 @@
-import { createClient } from "./server";
+import { createClient } from './server';
 
 export interface SessionUser {
   id: string;
   email: string | null;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
 }
 
 /**
@@ -20,19 +20,19 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   if (!user) return null;
 
   const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
     .single();
 
   return {
     id: user.id,
     email: user.email ?? null,
-    role: profile?.role === "admin" ? "admin" : "user",
+    role: profile?.role === 'admin' ? 'admin' : 'user',
   };
 }
 
 export async function isAdmin(): Promise<boolean> {
   const user = await getSessionUser();
-  return user?.role === "admin";
+  return user?.role === 'admin';
 }

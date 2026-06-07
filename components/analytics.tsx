@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import Script from "next/script";
-import { useEffect, useState } from "react";
-import { GA_ID, CONSENT_EVENT, hasAnalyticsConsent } from "@/lib/analytics";
+import Script from 'next/script';
+import { useEffect, useState } from 'react';
+
+import { GA_ID, CONSENT_EVENT, hasAnalyticsConsent } from '@/lib/analytics';
 
 /**
  * Loads Google Analytics 4 only after the user grants "all" cookie consent

@@ -1,6 +1,6 @@
-import { auth } from "@/auth";
-import { NextRequest, NextResponse } from "next/server";
-import { createServerClient } from "@supabase/ssr";
+import { auth } from '@/auth';
+import { NextRequest, NextResponse } from 'next/server';
+import { createServerClient } from '@supabase/ssr';
 
 /**
  * Combined middleware:
@@ -12,12 +12,12 @@ export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   // Let NextAuth callback routes pass through untouched.
-  if (pathname.startsWith("/api/auth")) {
+  if (pathname.startsWith('/api/auth')) {
     return NextResponse.next();
   }
 
   // ---- Supabase-gated areas: /admin and /account ----
-  if (pathname.startsWith("/admin") || pathname.startsWith("/account")) {
+  if (pathname.startsWith('/admin') || pathname.startsWith('/account')) {
     let response = NextResponse.next({ request });
     const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -34,7 +34,7 @@ export async function middleware(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
+            response.cookies.set(name, value, options),
           );
         },
       },
@@ -45,18 +45,18 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      const loginUrl = new URL("/login", request.url);
-      loginUrl.searchParams.set("next", pathname);
+      const loginUrl = new URL('/login', request.url);
+      loginUrl.searchParams.set('next', pathname);
       return NextResponse.redirect(loginUrl);
     }
     return response;
   }
 
   // ---- NextAuth (LinkedIn) auth pages ----
-  if (pathname === "/sign-in" || pathname === "/sign-up") {
+  if (pathname === '/sign-in' || pathname === '/sign-up') {
     const session = await auth();
     if (session) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
   }
 
@@ -64,11 +64,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/account/:path*",
-    "/sign-in",
-    "/sign-up",
-    "/api/auth/:path*",
-  ],
+  matcher: ['/admin/:path*', '/account/:path*', '/sign-in', '/sign-up', '/api/auth/:path*'],
 };

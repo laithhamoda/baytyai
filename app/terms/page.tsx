@@ -1,33 +1,33 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Bayty",
+  title: 'Terms of Service — Bayty',
 };
 
-const LAST_UPDATED = "1 June 2025";
+const LAST_UPDATED = '1 June 2025';
 
 const body: React.CSSProperties = {
   fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
   fontWeight: 300,
-  fontSize: "14px",
+  fontSize: '14px',
   lineHeight: 1.8,
-  color: "rgba(10,22,40,0.8)",
-  marginBottom: "16px",
+  color: 'rgba(10,22,40,0.8)',
+  marginBottom: '16px',
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: "56px" }}>
+    <section style={{ marginBottom: '56px' }}>
       <h2
         style={{
           fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
           fontWeight: 600,
-          fontSize: "24px",
+          fontSize: '24px',
           lineHeight: 1.2,
-          color: "#0A1628",
-          marginBottom: "20px",
-          paddingBottom: "12px",
-          borderBottom: "0.5px solid rgba(10,22,40,0.12)",
+          color: '#0A1628',
+          marginBottom: '20px',
+          paddingBottom: '12px',
+          borderBottom: '0.5px solid rgba(10,22,40,0.12)',
         }}
       >
         {title}
@@ -39,18 +39,18 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function TermsPage() {
   return (
-    <div style={{ backgroundColor: "#F8F6F1", minHeight: "100vh", padding: "120px 24px" }}>
-      <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+    <div style={{ backgroundColor: '#F8F6F1', minHeight: '100vh', padding: '120px 24px' }}>
+      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
         <p
           style={{
             fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: "10px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "rgba(10,22,40,0.35)",
-            marginBottom: "40px",
-            padding: "12px 16px",
-            border: "0.5px solid rgba(10,22,40,0.15)",
+            fontSize: '10px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(10,22,40,0.35)',
+            marginBottom: '40px',
+            padding: '12px 16px',
+            border: '0.5px solid rgba(10,22,40,0.15)',
           }}
         >
           Requires legal review before launch — this is a substantive draft for internal use only.
@@ -60,15 +60,15 @@ export default function TermsPage() {
           style={{
             fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
             fontWeight: 300,
-            fontSize: "48px",
+            fontSize: '48px',
             lineHeight: 1.08,
-            color: "#0A1628",
-            marginBottom: "12px",
+            color: '#0A1628',
+            marginBottom: '12px',
           }}
         >
           Terms of Service
         </h1>
-        <p style={{ ...body, color: "rgba(10,22,40,0.45)", marginBottom: "64px" }}>
+        <p style={{ ...body, color: 'rgba(10,22,40,0.45)', marginBottom: '64px' }}>
           Last updated: {LAST_UPDATED}
         </p>
 
@@ -113,9 +113,8 @@ export default function TermsPage() {
         <Section title="5. Subscriptions and Payment">
           <p style={body}>
             Paid memberships are billed in advance on a monthly or annual basis through our payment
-            processor, Stripe. Fees are non-refundable except where required by applicable law.
-            We may change pricing with reasonable notice; changes apply to subsequent billing
-            periods.
+            processor, Stripe. Fees are non-refundable except where required by applicable law. We
+            may change pricing with reasonable notice; changes apply to subsequent billing periods.
           </p>
         </Section>
 
@@ -132,8 +131,8 @@ export default function TermsPage() {
           <p style={body}>
             The platform is provided &ldquo;as is&rdquo; without warranties of any kind. To the
             maximum extent permitted by law, Bayty shall not be liable for indirect, incidental, or
-            consequential damages arising from your use of the platform. Bayty does not guarantee the
-            conduct or credentials of any third-party user beyond the scope of its verification
+            consequential damages arising from your use of the platform. Bayty does not guarantee
+            the conduct or credentials of any third-party user beyond the scope of its verification
             process.
           </p>
         </Section>
@@ -147,14 +146,14 @@ export default function TermsPage() {
 
         <Section title="9. Contact">
           <p style={body}>
-            For questions about these Terms, contact us at{" "}
+            For questions about these Terms, contact us at{' '}
             <a
               href="mailto:info@baytyai.com"
               style={{
-                color: "#0A1628",
-                textDecoration: "underline",
-                textDecorationColor: "rgba(201,168,76,0.5)",
-                textUnderlineOffset: "3px",
+                color: '#0A1628',
+                textDecoration: 'underline',
+                textDecorationColor: 'rgba(201,168,76,0.5)',
+                textUnderlineOffset: '3px',
               }}
             >
               info@baytyai.com

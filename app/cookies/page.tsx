@@ -1,33 +1,33 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Cookie Policy — Bayty",
+  title: 'Cookie Policy — Bayty',
 };
 
-const LAST_UPDATED = "1 June 2025";
+const LAST_UPDATED = '1 June 2025';
 
 const body: React.CSSProperties = {
   fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
   fontWeight: 300,
-  fontSize: "14px",
+  fontSize: '14px',
   lineHeight: 1.8,
-  color: "rgba(10,22,40,0.8)",
-  marginBottom: "16px",
+  color: 'rgba(10,22,40,0.8)',
+  marginBottom: '16px',
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <section style={{ marginBottom: "56px" }}>
+    <section style={{ marginBottom: '56px' }}>
       <h2
         style={{
           fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
           fontWeight: 600,
-          fontSize: "24px",
+          fontSize: '24px',
           lineHeight: 1.2,
-          color: "#0A1628",
-          marginBottom: "20px",
-          paddingBottom: "12px",
-          borderBottom: "0.5px solid rgba(10,22,40,0.12)",
+          color: '#0A1628',
+          marginBottom: '20px',
+          paddingBottom: '12px',
+          borderBottom: '0.5px solid rgba(10,22,40,0.12)',
         }}
       >
         {title}
@@ -39,18 +39,18 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 export default function CookiePolicyPage() {
   return (
-    <div style={{ backgroundColor: "#F8F6F1", minHeight: "100vh", padding: "120px 24px" }}>
-      <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+    <div style={{ backgroundColor: '#F8F6F1', minHeight: '100vh', padding: '120px 24px' }}>
+      <div style={{ maxWidth: '720px', margin: '0 auto' }}>
         <p
           style={{
             fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: "10px",
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "rgba(10,22,40,0.35)",
-            marginBottom: "40px",
-            padding: "12px 16px",
-            border: "0.5px solid rgba(10,22,40,0.15)",
+            fontSize: '10px',
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: 'rgba(10,22,40,0.35)',
+            marginBottom: '40px',
+            padding: '12px 16px',
+            border: '0.5px solid rgba(10,22,40,0.15)',
           }}
         >
           Requires legal review before launch — this is a substantive draft for internal use only.
@@ -60,15 +60,15 @@ export default function CookiePolicyPage() {
           style={{
             fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
             fontWeight: 300,
-            fontSize: "48px",
+            fontSize: '48px',
             lineHeight: 1.08,
-            color: "#0A1628",
-            marginBottom: "12px",
+            color: '#0A1628',
+            marginBottom: '12px',
           }}
         >
           Cookie Policy
         </h1>
-        <p style={{ ...body, color: "rgba(10,22,40,0.45)", marginBottom: "64px" }}>
+        <p style={{ ...body, color: 'rgba(10,22,40,0.45)', marginBottom: '64px' }}>
           Last updated: {LAST_UPDATED}
         </p>
 
@@ -93,8 +93,8 @@ export default function CookiePolicyPage() {
           <p style={body}>
             With your consent, we use analytics cookies to collect aggregated information about how
             users interact with the platform. This helps us understand feature usage and improve the
-            experience. Analytics cookies are only set after you accept non-essential cookies via our
-            consent banner.
+            experience. Analytics cookies are only set after you accept non-essential cookies via
+            our consent banner.
           </p>
         </Section>
 
@@ -116,14 +116,14 @@ export default function CookiePolicyPage() {
 
         <Section title="6. Contact">
           <p style={body}>
-            For questions about our use of cookies, contact us at{" "}
+            For questions about our use of cookies, contact us at{' '}
             <a
               href="mailto:info@baytyai.com"
               style={{
-                color: "#0A1628",
-                textDecoration: "underline",
-                textDecorationColor: "rgba(201,168,76,0.5)",
-                textUnderlineOffset: "3px",
+                color: '#0A1628',
+                textDecoration: 'underline',
+                textDecorationColor: 'rgba(201,168,76,0.5)',
+                textUnderlineOffset: '3px',
               }}
             >
               info@baytyai.com

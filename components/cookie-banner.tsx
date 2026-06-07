@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-const CONSENT_KEY = "bayty_consent";
-const CONSENT_TS_KEY = "bayty_consent_ts";
+const CONSENT_KEY = 'bayty_consent';
+const CONSENT_TS_KEY = 'bayty_consent_ts';
 
-type Consent = "all" | "essential";
+type Consent = 'all' | 'essential';
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -22,6 +22,15 @@ export default function CookieBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!showPrefs) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setShowPrefs(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showPrefs]);
+
   function persist(value: Consent) {
     try {
       localStorage.setItem(CONSENT_KEY, value);
@@ -31,7 +40,7 @@ export default function CookieBanner() {
     }
     // Notify the Analytics component so GA loads/unloads without a reload.
     try {
-      window.dispatchEvent(new Event("bayty-consent-changed"));
+      window.dispatchEvent(new Event('bayty-consent-changed'));
     } catch {
       /* ignore */
     }
@@ -46,12 +55,12 @@ export default function CookieBanner() {
       {/* Banner */}
       <div
         className="fixed inset-x-0 bottom-0 z-50 bg-navy px-6 py-5 text-offwhite"
-        style={{ borderTop: "0.5px solid rgba(201,168,76,0.3)" }}
+        style={{ borderTop: '0.5px solid rgba(201,168,76,0.3)' }}
       >
         <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-5 md:flex-row md:items-center">
           <p className="max-w-xl font-body text-[13px] font-light leading-relaxed text-offwhite/65">
-            We use cookies on Bayty. Essential cookies keep the platform working.
-            Analytics cookies help us improve your experience.{" "}
+            We use cookies on Bayty. Essential cookies keep the platform working. Analytics cookies
+            help us improve your experience.{' '}
             <Link href="/cookies" className="text-gold underline">
               Cookie Policy
             </Link>
@@ -59,16 +68,16 @@ export default function CookieBanner() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button
-              onClick={() => persist("all")}
-              className="bg-gold px-5 py-3 font-body text-[12px] font-medium uppercase tracking-[0.1em] text-navy"
+              onClick={() => persist('all')}
+              className="bg-gold px-5 py-3 font-body text-[12px] font-medium uppercase tracking-widest text-navy"
               style={{ borderRadius: 0 }}
             >
               Accept all
             </button>
             <button
-              onClick={() => persist("essential")}
-              className="bg-transparent px-5 py-3 font-body text-[12px] font-normal uppercase tracking-[0.1em] text-gold"
-              style={{ border: "0.5px solid #C9A84C", borderRadius: 0 }}
+              onClick={() => persist('essential')}
+              className="bg-transparent px-5 py-3 font-body text-[12px] font-normal uppercase tracking-widest text-gold"
+              style={{ border: '0.5px solid #C9A84C', borderRadius: 0 }}
             >
               Decline non-essential
             </button>
@@ -84,16 +93,24 @@ export default function CookieBanner() {
 
       {/* Preferences modal */}
       {showPrefs && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-navy/80 px-6"
-          onClick={() => setShowPrefs(false)}
-        >
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-6">
+          {/* Backdrop: a real button so it's keyboard-accessible (Enter/Space close) */}
+          <button
+            type="button"
+            aria-label="Close cookie preferences"
+            onClick={() => setShowPrefs(false)}
+            className="absolute inset-0 bg-navy/80"
+          />
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md p-10"
-            style={{ backgroundColor: "#0F1E35", border: "0.5px solid rgba(201,168,76,0.3)", borderRadius: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Cookie preferences"
+            className="relative w-full max-w-md p-10"
+            style={{
+              backgroundColor: '#0F1E35',
+              border: '0.5px solid rgba(201,168,76,0.3)',
+              borderRadius: 0,
+            }}
           >
             <h2 className="mb-6 font-display text-2xl font-semibold text-offwhite">
               Cookie preferences
@@ -120,7 +137,7 @@ export default function CookieBanner() {
             />
 
             <button
-              onClick={() => persist(analytics || marketing ? "all" : "essential")}
+              onClick={() => persist(analytics || marketing ? 'all' : 'essential')}
               className="mt-7 w-full bg-gold py-3 font-body text-[12px] font-medium uppercase tracking-[0.12em] text-navy"
               style={{ borderRadius: 0 }}
             >
@@ -149,7 +166,7 @@ function ToggleRow({
   return (
     <div
       className="flex items-start justify-between gap-4 py-4"
-      style={{ borderBottom: "0.5px solid rgba(201,168,76,0.15)" }}
+      style={{ borderBottom: '0.5px solid rgba(201,168,76,0.15)' }}
     >
       <div>
         <p className="mb-1 font-body text-sm font-medium text-offwhite">{label}</p>
@@ -164,19 +181,19 @@ function ToggleRow({
         onClick={onChange}
         className="relative h-6 w-11 flex-shrink-0 transition-colors"
         style={{
-          borderRadius: "999px",
-          border: "0.5px solid rgba(201,168,76,0.4)",
-          backgroundColor: checked ? "#C9A84C" : "transparent",
-          cursor: disabled ? "not-allowed" : "pointer",
+          borderRadius: '999px',
+          border: '0.5px solid rgba(201,168,76,0.4)',
+          backgroundColor: checked ? '#C9A84C' : 'transparent',
+          cursor: disabled ? 'not-allowed' : 'pointer',
           opacity: disabled ? 0.5 : 1,
         }}
       >
         <span
           className="absolute top-[2px] h-[18px] w-[18px] transition-all"
           style={{
-            left: checked ? "22px" : "2px",
-            borderRadius: "999px",
-            backgroundColor: checked ? "#0A1628" : "#C9A84C",
+            left: checked ? '22px' : '2px',
+            borderRadius: '999px',
+            backgroundColor: checked ? '#0A1628' : '#C9A84C',
           }}
         />
       </button>

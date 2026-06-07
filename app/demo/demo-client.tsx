@@ -1,43 +1,36 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { trackEvent } from "@/lib/analytics";
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { useState } from 'react';
+
+import { trackEvent } from '@/lib/analytics';
 
 const TRUST_POINTS = [
-  "Account activated within 24 hours of verification",
-  "Dedicated onboarding session for Enterprise accounts",
-  "Full platform access from day one — no feature gating",
+  'Account activated within 24 hours of verification',
+  'Dedicated onboarding session for Enterprise accounts',
+  'Full platform access from day one — no feature gating',
 ];
 
-const COUNTRIES = [
-  "UAE",
-  "Saudi Arabia",
-  "Qatar",
-  "Kuwait",
-  "Bahrain",
-  "Oman",
-  "Other",
-];
+const COUNTRIES = ['UAE', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Other'];
 
 const COMPANY_SIZES = [
-  "I am a freelance professional",
-  "1–10 employees",
-  "11–50 employees",
-  "51–200 employees",
-  "201–1,000 employees",
-  "1,000+ employees",
+  'I am a freelance professional',
+  '1–10 employees',
+  '11–50 employees',
+  '51–200 employees',
+  '201–1,000 employees',
+  '1,000+ employees',
 ];
 
 const PRIMARY_INTERESTS = [
-  "Project Management",
-  "Marketplace",
-  "Both",
-  "Join as a verified professional",
+  'Project Management',
+  'Marketplace',
+  'Both',
+  'Join as a verified professional',
 ];
 
-type Persona = "manage" | "professional";
+type Persona = 'manage' | 'professional';
 
 interface FormValues {
   fullName: string;
@@ -51,73 +44,71 @@ interface FormValues {
 }
 
 const EMPTY: FormValues = {
-  fullName: "",
-  companyName: "",
-  jobTitle: "",
-  workEmail: "",
-  mobileNumber: "",
-  country: "",
-  companySize: "",
-  primaryInterest: "",
+  fullName: '',
+  companyName: '',
+  jobTitle: '',
+  workEmail: '',
+  mobileNumber: '',
+  country: '',
+  companySize: '',
+  primaryInterest: '',
 };
 
 /* ── shared field styles ── */
 const fieldBase: React.CSSProperties = {
-  width: "100%",
-  height: "52px",
-  backgroundColor: "transparent",
-  border: "none",
-  borderBottom: "0.5px solid #C9A84C",
+  width: '100%',
+  height: '52px',
+  backgroundColor: 'transparent',
+  border: 'none',
+  borderBottom: '0.5px solid #C9A84C',
   borderRadius: 0,
-  color: "#0A1628",
+  color: '#0A1628',
   fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
   fontWeight: 300,
-  fontSize: "14px",
-  padding: "0 0 0 2px",
-  outline: "none",
-  appearance: "none",
-  WebkitAppearance: "none",
+  fontSize: '14px',
+  padding: '0 0 0 2px',
+  outline: 'none',
+  appearance: 'none',
+  WebkitAppearance: 'none',
 };
 
 export default function DemoClient() {
   const [values, setValues] = useState<FormValues>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
-  const [persona, setPersona] = useState<Persona>("manage");
+  const [error, setError] = useState('');
+  const [persona, setPersona] = useState<Persona>('manage');
 
-  function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setValues((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
   function selectPersona(p: Persona) {
     setPersona(p);
-    if (p === "professional") {
+    if (p === 'professional') {
       setValues((prev) => ({
         ...prev,
-        companySize: "I am a freelance professional",
-        primaryInterest: "Join as a verified professional",
+        companySize: 'I am a freelance professional',
+        primaryInterest: 'Join as a verified professional',
       }));
     }
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError("");
+    setError('');
     setSubmitting(true);
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, persona, formType: "request-access" }),
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...values, persona, formType: 'request-access' }),
       });
-      if (!res.ok) throw new Error("Request failed");
-      trackEvent("request_access_submit", { persona, interest: values.primaryInterest });
+      if (!res.ok) throw new Error('Request failed');
+      trackEvent('request_access_submit', { persona, interest: values.primaryInterest });
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again, or email info@baytyai.com.");
+      setError('Something went wrong. Please try again, or email info@baytyai.com.');
     } finally {
       setSubmitting(false);
     }
@@ -126,35 +117,35 @@ export default function DemoClient() {
   return (
     <div
       style={{
-        backgroundColor: "#0A1628",
-        minHeight: "100vh",
-        padding: "120px 48px",
+        backgroundColor: '#0A1628',
+        minHeight: '100vh',
+        padding: '120px 48px',
       }}
     >
       <div
         style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "2fr 3fr",
-          gap: "80px",
-          alignItems: "start",
+          maxWidth: '1200px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: '2fr 3fr',
+          gap: '80px',
+          alignItems: 'start',
         }}
       >
         {/* ── LEFT COLUMN ── */}
-        <div style={{ paddingTop: "48px" }}>
+        <div style={{ paddingTop: '48px' }}>
           {/* Overline */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: "easeOut" }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
             style={{
               fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-              fontSize: "11px",
-              letterSpacing: "0.25em",
-              color: "#C9A84C",
-              textTransform: "uppercase",
-              marginBottom: "24px",
+              fontSize: '11px',
+              letterSpacing: '0.25em',
+              color: '#C9A84C',
+              textTransform: 'uppercase',
+              marginBottom: '24px',
             }}
           >
             Private Access
@@ -164,14 +155,14 @@ export default function DemoClient() {
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.07, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.07, ease: 'easeOut' }}
             style={{
               fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
               fontWeight: 300,
-              fontSize: "48px",
+              fontSize: '48px',
               lineHeight: 1.08,
-              color: "#F8F6F1",
-              marginBottom: "24px",
+              color: '#F8F6F1',
+              marginBottom: '24px',
             }}
           >
             Reserve your place on the platform
@@ -181,57 +172,53 @@ export default function DemoClient() {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.14, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.14, ease: 'easeOut' }}
             style={{
               fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
               fontWeight: 300,
-              fontSize: "15px",
+              fontSize: '15px',
               lineHeight: 1.8,
-              color: "rgba(248,246,241,0.55)",
-              marginBottom: "40px",
+              color: 'rgba(248,246,241,0.55)',
+              marginBottom: '40px',
             }}
           >
-            Bayty is currently onboarding select construction professionals and
-            developers across the UAE and GCC. Every account is individually
-            reviewed before activation.
+            Bayty is currently onboarding select construction professionals and developers across
+            the UAE and GCC. Every account is individually reviewed before activation.
           </motion.p>
 
           {/* Trust points */}
           <motion.ul
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
             style={{
-              listStyle: "none",
+              listStyle: 'none',
               padding: 0,
-              margin: "0 0 64px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "20px",
+              margin: '0 0 64px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
             }}
           >
             {TRUST_POINTS.map((point) => (
-              <li
-                key={point}
-                style={{ display: "flex", alignItems: "flex-start", gap: "16px" }}
-              >
+              <li key={point} style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
                 <span
                   style={{
-                    display: "block",
-                    width: "20px",
-                    height: "0.5px",
-                    backgroundColor: "#C9A84C",
+                    display: 'block',
+                    width: '20px',
+                    height: '0.5px',
+                    backgroundColor: '#C9A84C',
                     flexShrink: 0,
-                    marginTop: "9px",
+                    marginTop: '9px',
                   }}
                 />
                 <span
                   style={{
                     fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                     fontWeight: 300,
-                    fontSize: "14px",
+                    fontSize: '14px',
                     lineHeight: 1.65,
-                    color: "rgba(248,246,241,0.65)",
+                    color: 'rgba(248,246,241,0.65)',
                   }}
                 >
                   {point}
@@ -244,13 +231,13 @@ export default function DemoClient() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.32, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.32, ease: 'easeOut' }}
             style={{
               fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-              fontSize: "10px",
-              letterSpacing: "0.14em",
-              color: "rgba(201,168,76,0.45)",
-              textTransform: "uppercase",
+              fontSize: '10px',
+              letterSpacing: '0.14em',
+              color: 'rgba(201,168,76,0.45)',
+              textTransform: 'uppercase',
               lineHeight: 1.9,
             }}
           >
@@ -262,10 +249,10 @@ export default function DemoClient() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.65, delay: 0.1, ease: "easeOut" }}
+          transition={{ duration: 0.65, delay: 0.1, ease: 'easeOut' }}
           style={{
-            backgroundColor: "#F8F6F1",
-            padding: "48px",
+            backgroundColor: '#F8F6F1',
+            padding: '48px',
             borderRadius: 0,
           }}
         >
@@ -277,66 +264,65 @@ export default function DemoClient() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
                 style={{
-                  minHeight: "520px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                  gap: "24px",
-                  textAlign: "center",
+                  minHeight: '520px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  gap: '24px',
+                  textAlign: 'center',
                 }}
               >
                 <span
                   style={{
-                    display: "block",
-                    width: "40px",
-                    height: "0.5px",
-                    backgroundColor: "#C9A84C",
-                    margin: "0 auto",
+                    display: 'block',
+                    width: '40px',
+                    height: '0.5px',
+                    backgroundColor: '#C9A84C',
+                    margin: '0 auto',
                   }}
                 />
                 <p
                   style={{
                     fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-                    fontStyle: "italic",
+                    fontStyle: 'italic',
                     fontWeight: 300,
-                    fontSize: "22px",
+                    fontSize: '22px',
                     lineHeight: 1.6,
-                    color: "#C9A84C",
-                    maxWidth: "380px",
+                    color: '#C9A84C',
+                    maxWidth: '380px',
                   }}
                 >
-                  Your request has been received. Our team will contact you
-                  within 24 hours.
+                  Your request has been received. Our team will contact you within 24 hours.
                 </p>
                 <span
                   style={{
-                    display: "block",
-                    width: "40px",
-                    height: "0.5px",
-                    backgroundColor: "#C9A84C",
-                    margin: "0 auto",
+                    display: 'block',
+                    width: '40px',
+                    height: '0.5px',
+                    backgroundColor: '#C9A84C',
+                    margin: '0 auto',
                   }}
                 />
-                {persona === "manage" && (
+                {persona === 'manage' && (
                   <Link
                     href="/demo"
                     style={{
-                      marginTop: "8px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      height: "48px",
-                      padding: "0 28px",
-                      backgroundColor: "#0A1628",
-                      color: "#C9A84C",
+                      marginTop: '8px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      height: '48px',
+                      padding: '0 28px',
+                      backgroundColor: '#0A1628',
+                      color: '#C9A84C',
                       fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                       fontWeight: 400,
-                      fontSize: "12px",
-                      letterSpacing: "0.12em",
-                      textTransform: "uppercase",
-                      border: "0.5px solid #C9A84C",
+                      fontSize: '12px',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      border: '0.5px solid #C9A84C',
                       borderRadius: 0,
                     }}
                   >
@@ -351,27 +337,31 @@ export default function DemoClient() {
                 onSubmit={handleSubmit}
                 initial={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{ display: "flex", flexDirection: "column", gap: "0" }}
+                style={{ display: 'flex', flexDirection: 'column', gap: '0' }}
               >
                 <h2
                   style={{
                     fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
                     fontWeight: 600,
-                    fontSize: "28px",
-                    color: "#0A1628",
-                    marginBottom: "36px",
-                    letterSpacing: "0.01em",
+                    fontSize: '28px',
+                    color: '#0A1628',
+                    marginBottom: '36px',
+                    letterSpacing: '0.01em',
                   }}
                 >
                   Your details
                 </h2>
 
                 {/* Persona toggle */}
-                <div style={{ display: "flex", gap: "12px", marginBottom: "36px", flexWrap: "wrap" }}>
-                  {([
-                    { key: "manage", label: "I manage projects" },
-                    { key: "professional", label: "I am a construction professional" },
-                  ] as { key: Persona; label: string }[]).map((opt) => {
+                <div
+                  style={{ display: 'flex', gap: '12px', marginBottom: '36px', flexWrap: 'wrap' }}
+                >
+                  {(
+                    [
+                      { key: 'manage', label: 'I manage projects' },
+                      { key: 'professional', label: 'I am a construction professional' },
+                    ] as { key: Persona; label: string }[]
+                  ).map((opt) => {
                     const active = persona === opt.key;
                     return (
                       <button
@@ -379,18 +369,18 @@ export default function DemoClient() {
                         type="button"
                         onClick={() => selectPersona(opt.key)}
                         style={{
-                          flex: "1 1 auto",
-                          padding: "12px 16px",
+                          flex: '1 1 auto',
+                          padding: '12px 16px',
                           fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                           fontWeight: 400,
-                          fontSize: "12px",
-                          letterSpacing: "0.04em",
-                          color: active ? "#0A1628" : "rgba(10,22,40,0.6)",
-                          backgroundColor: active ? "#C9A84C" : "transparent",
-                          border: "0.5px solid #C9A84C",
+                          fontSize: '12px',
+                          letterSpacing: '0.04em',
+                          color: active ? '#0A1628' : 'rgba(10,22,40,0.6)',
+                          backgroundColor: active ? '#C9A84C' : 'transparent',
+                          border: '0.5px solid #C9A84C',
                           borderRadius: 0,
-                          cursor: "pointer",
-                          transition: "background-color 0.2s ease, color 0.2s ease",
+                          cursor: 'pointer',
+                          transition: 'background-color 0.2s ease, color 0.2s ease',
                         }}
                       >
                         {opt.label}
@@ -400,7 +390,14 @@ export default function DemoClient() {
                 </div>
 
                 {/* Two-column row: Full Name + Company */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "28px" }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '24px',
+                    marginBottom: '28px',
+                  }}
+                >
                   <Field
                     label="Full Name"
                     name="fullName"
@@ -421,7 +418,14 @@ export default function DemoClient() {
                 </div>
 
                 {/* Two-column row: Job Title + Work Email */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "28px" }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '24px',
+                    marginBottom: '28px',
+                  }}
+                >
                   <Field
                     label="Job Title"
                     name="jobTitle"
@@ -441,7 +445,14 @@ export default function DemoClient() {
                 </div>
 
                 {/* Two-column row: Mobile + Country */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "28px" }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '24px',
+                    marginBottom: '28px',
+                  }}
+                >
                   <Field
                     label="Mobile Number"
                     name="mobileNumber"
@@ -460,7 +471,14 @@ export default function DemoClient() {
                 </div>
 
                 {/* Two-column row: Company Size + Primary Interest */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", marginBottom: "40px" }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '24px',
+                    marginBottom: '40px',
+                  }}
+                >
                   <SelectField
                     label="Company Size"
                     name="companySize"
@@ -484,10 +502,10 @@ export default function DemoClient() {
                     style={{
                       fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                       fontWeight: 400,
-                      fontSize: "13px",
+                      fontSize: '13px',
                       lineHeight: 1.5,
-                      color: "#9B2C2C",
-                      marginBottom: "16px",
+                      color: '#9B2C2C',
+                      marginBottom: '16px',
                     }}
                   >
                     {error}
@@ -500,54 +518,55 @@ export default function DemoClient() {
                   disabled={submitting}
                   aria-busy={submitting}
                   style={{
-                    width: "100%",
-                    height: "60px",
-                    backgroundColor: "#C9A84C",
-                    color: "#0A1628",
-                    border: "none",
+                    width: '100%',
+                    height: '60px',
+                    backgroundColor: '#C9A84C',
+                    color: '#0A1628',
+                    border: 'none',
                     borderRadius: 0,
                     fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
                     fontWeight: 500,
-                    fontSize: "14px",
-                    letterSpacing: "0.14em",
-                    textTransform: "uppercase",
-                    cursor: submitting ? "wait" : "pointer",
+                    fontSize: '14px',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    cursor: submitting ? 'wait' : 'pointer',
                     opacity: submitting ? 0.7 : 1,
-                    transition: "background-color 0.25s ease",
+                    transition: 'background-color 0.25s ease',
                   }}
                   onMouseEnter={(e) => {
-                    if (!submitting) (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#b8963f";
+                    if (!submitting)
+                      (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#b8963f';
                   }}
                   onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = "#C9A84C";
+                    (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#C9A84C';
                   }}
                 >
-                  {submitting ? "Sending…" : "Request Access →"}
+                  {submitting ? 'Sending…' : 'Request Access →'}
                 </button>
 
                 {/* Legal */}
                 <p
                   style={{
                     fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-                    fontSize: "10px",
-                    letterSpacing: "0.08em",
-                    color: "rgba(10,22,40,0.4)",
-                    textAlign: "center",
-                    marginTop: "20px",
+                    fontSize: '10px',
+                    letterSpacing: '0.08em',
+                    color: 'rgba(10,22,40,0.4)',
+                    textAlign: 'center',
+                    marginTop: '20px',
                     lineHeight: 1.7,
                   }}
                 >
-                  By submitting, you agree to Bayty&apos;s{" "}
+                  By submitting, you agree to Bayty&apos;s{' '}
                   <Link
                     href="/terms"
-                    style={{ color: "rgba(10,22,40,0.55)", textDecoration: "underline" }}
+                    style={{ color: 'rgba(10,22,40,0.55)', textDecoration: 'underline' }}
                   >
                     Terms of Service
-                  </Link>{" "}
-                  and{" "}
+                  </Link>{' '}
+                  and{' '}
                   <Link
                     href="/privacy"
-                    style={{ color: "rgba(10,22,40,0.55)", textDecoration: "underline" }}
+                    style={{ color: 'rgba(10,22,40,0.55)', textDecoration: 'underline' }}
                   >
                     Privacy Policy
                   </Link>
@@ -576,15 +595,15 @@ interface FieldProps {
 
 function Field({ label, name, type, value, placeholder, required = true, onChange }: FieldProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <label
         htmlFor={name}
         style={{
           fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-          fontSize: "10px",
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          color: "rgba(10,22,40,0.5)",
+          fontSize: '10px',
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+          color: 'rgba(10,22,40,0.5)',
         }}
       >
         {label}
@@ -599,7 +618,7 @@ function Field({ label, name, type, value, placeholder, required = true, onChang
         placeholder={placeholder}
         style={{
           ...fieldBase,
-          color: "#0A1628",
+          color: '#0A1628',
         }}
       />
     </div>
@@ -616,15 +635,15 @@ interface SelectFieldProps {
 
 function SelectField({ label, name, value, options, onChange }: SelectFieldProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       <label
         htmlFor={name}
         style={{
           fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-          fontSize: "10px",
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          color: "rgba(10,22,40,0.5)",
+          fontSize: '10px',
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+          color: 'rgba(10,22,40,0.5)',
         }}
       >
         {label}
@@ -637,20 +656,20 @@ function SelectField({ label, name, value, options, onChange }: SelectFieldProps
         onChange={onChange}
         style={{
           ...fieldBase,
-          color: value === "" ? "rgba(10,22,40,0.4)" : "#0A1628",
-          cursor: "pointer",
+          color: value === '' ? 'rgba(10,22,40,0.4)' : '#0A1628',
+          cursor: 'pointer',
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23C9A84C' stroke-width='0.75'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right 4px center",
-          paddingRight: "24px",
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right 4px center',
+          paddingRight: '24px',
         }}
       >
         <option value="" disabled>
           Select
         </option>
         {options.map((opt) => (
-          <option key={opt} value={opt} style={{ color: "#0A1628", backgroundColor: "#F8F6F1" }}>
+          <option key={opt} value={opt} style={{ color: '#0A1628', backgroundColor: '#F8F6F1' }}>
             {opt}
           </option>
         ))}
