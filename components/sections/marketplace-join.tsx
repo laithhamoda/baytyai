@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Shield, Clock, CreditCard, type LucideIcon } from 'lucide-react';
-import Link from 'next/link';
+
+import { useLeadCapture } from '@/components/forms/lead-capture-provider';
 
 interface Step {
   Icon: LucideIcon;
@@ -28,6 +29,7 @@ function fadeUpViewport(delay: number) {
 }
 
 export default function MarketplaceJoin() {
+  const { open } = useLeadCapture();
   return (
     <section
       style={{
@@ -113,8 +115,9 @@ export default function MarketplaceJoin() {
         </div>
 
         <motion.div {...fadeUpViewport(0.3)}>
-          <Link
-            href="/request-access?path=professional"
+          <button
+            type="button"
+            onClick={() => open('verified_professional')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -128,10 +131,12 @@ export default function MarketplaceJoin() {
               letterSpacing: '0.12em',
               textTransform: 'uppercase',
               borderRadius: 0,
+              border: 'none',
+              cursor: 'pointer',
             }}
           >
             Join as a verified professional →
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import './globals.css';
 import Analytics from '@/components/analytics';
 import CookieBanner from '@/components/cookie-banner';
 import Footer from '@/components/footer';
+import LeadCaptureProvider from '@/components/forms/lead-capture-provider';
 import Navigation from '@/components/navigation';
 
 import type { Metadata } from 'next';
@@ -88,9 +89,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
+        <LeadCaptureProvider>
+          <Navigation />
+          <main>{children}</main>
+          <Footer />
+        </LeadCaptureProvider>
         <CookieBanner />
         <Analytics />
       </body>

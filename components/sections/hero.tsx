@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+
+import { useLeadCapture } from '@/components/forms/lead-capture-provider';
 
 const TRUST_ITEMS = [
   'Verified Stakeholders Only',
@@ -28,6 +29,7 @@ export default function Hero({
   headline = 'Where Every Project Decision Lives',
   subhead = 'Bayty unifies your entire construction project lifecycle — verified stakeholders, structured approvals, and a trusted marketplace — on one authorised platform.',
 }: HeroProps = {}) {
+  const { open } = useLeadCapture();
   return (
     <section
       style={{ backgroundColor: '#0A1628' }}
@@ -105,12 +107,12 @@ export default function Hero({
 
       {/* CTAs */}
       <motion.div {...fadeUp(0.6)} className="mt-10 flex flex-col items-center gap-4 sm:flex-row">
-        <Link href="/request-access" style={primaryBtn}>
+        <button type="button" onClick={() => open('private_access')} style={primaryBtn}>
           Request Private Access
-        </Link>
-        <Link href="/product" style={secondaryBtn}>
+        </button>
+        <button type="button" onClick={() => open('platform_demo')} style={secondaryBtn}>
           View Platform
-        </Link>
+        </button>
       </motion.div>
 
       {/* Trust strip */}

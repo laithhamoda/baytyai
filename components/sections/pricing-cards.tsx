@@ -1,8 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { useState } from 'react';
+
+import { useLeadCapture } from '@/components/forms/lead-capture-provider';
+
+import type { InquiryType } from '@/app/actions/lead-schema';
 
 type Billing = 'annual' | 'monthly';
 
@@ -75,6 +78,7 @@ function fadeUpViewport(delay: number) {
 
 export default function PricingCards() {
   const [billing, setBilling] = useState<Billing>('annual');
+  const { open } = useLeadCapture();
 
   return (
     <section style={{ backgroundColor: '#0A1628', padding: '120px 0' }}>
@@ -324,8 +328,9 @@ export default function PricingCards() {
               </ul>
 
               {/* CTA */}
-              <Link
-                href={tier.ctaHref}
+              <button
+                type="button"
+                onClick={() => open(tier.name.toLowerCase() as InquiryType)}
                 style={{
                   marginTop: '36px',
                   display: 'flex',
@@ -344,7 +349,7 @@ export default function PricingCards() {
                   borderRadius: 0,
                 }}
                 onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
+                  const el = e.currentTarget as HTMLButtonElement;
                   if (!tier.enterprise) {
                     el.style.backgroundColor = '#C9A84C';
                     el.style.color = '#0A1628';
@@ -353,7 +358,7 @@ export default function PricingCards() {
                   }
                 }}
                 onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
+                  const el = e.currentTarget as HTMLButtonElement;
                   if (!tier.enterprise) {
                     el.style.backgroundColor = 'transparent';
                     el.style.color = '#C9A84C';
@@ -363,7 +368,7 @@ export default function PricingCards() {
                 }}
               >
                 {tier.cta}
-              </Link>
+              </button>
             </motion.div>
           ))}
         </div>
@@ -408,8 +413,9 @@ export default function PricingCards() {
             </p>
           </div>
 
-          <Link
-            href="/contact?type=enterprise"
+          <button
+            type="button"
+            onClick={() => open('consultation')}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -429,14 +435,14 @@ export default function PricingCards() {
               flexShrink: 0,
             }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#2C3E50';
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#2C3E50';
             }}
             onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#0A1628';
+              (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0A1628';
             }}
           >
             Arrange a Consultation
-          </Link>
+          </button>
         </motion.div>
       </div>
     </section>
