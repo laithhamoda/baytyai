@@ -59,7 +59,7 @@ export default function LoginClient() {
       setError(error.message);
       return;
     }
-    setNotice(`We sent a 6-digit code to ${email}.`);
+    setNotice(`We sent a sign-in code to ${email}.`);
     setStep('code');
   }
 
@@ -169,13 +169,13 @@ export default function LoginClient() {
           >
             <div>
               <label htmlFor="code" style={labelStyle}>
-                6-digit code
+                Sign-in code
               </label>
               <input
                 id="code"
                 inputMode="numeric"
                 pattern="[0-9]*"
-                maxLength={6}
+                maxLength={10}
                 required
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
