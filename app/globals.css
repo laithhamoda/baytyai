@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Brand CSS variables (used by existing marketing pages) ─── */
 :root {
   --navy: #0a1628;
   --gold: #c9a84c;
@@ -10,6 +11,43 @@
   --gold-border: rgba(201, 168, 76, 0.3);
 }
 
+/* ─── shadcn/ui CSS variables — BaytyAI sovereign-register theme ─── */
+/* HSL values: navy=216°60%10%, gold=44°54%54%, offwhite=43°34%96%, slate=210°29%24% */
+@layer base {
+  :root {
+    --background:        216 60% 10%;   /* #0A1628 navy */
+    --foreground:        43  34% 96%;   /* #F8F6F1 offwhite */
+
+    --card:              216 55% 13%;   /* slightly lighter navy for cards */
+    --card-foreground:   43  34% 96%;
+
+    --popover:           216 55% 13%;
+    --popover-foreground: 43 34% 96%;
+
+    --primary:           44  54% 54%;   /* #C9A84C gold */
+    --primary-foreground: 216 60% 10%; /* navy text on gold */
+
+    --secondary:         210 29% 24%;   /* #2C3E50 slate */
+    --secondary-foreground: 43 34% 96%;
+
+    --muted:             216 45% 17%;   /* dark muted surface */
+    --muted-foreground:  43  20% 65%;   /* dimmed offwhite */
+
+    --accent:            44  54% 54%;   /* gold accent */
+    --accent-foreground: 216 60% 10%;
+
+    --destructive:       0   72% 51%;
+    --destructive-foreground: 43 34% 96%;
+
+    --border:            216 40% 22%;
+    --input:             216 45% 17%;
+    --ring:              44  54% 54%;   /* gold focus ring */
+
+    --radius: 0.125rem;                 /* 2px — matches brand borderRadius */
+  }
+}
+
+/* ─── Base resets ─── */
 *,
 *::before,
 *::after {
