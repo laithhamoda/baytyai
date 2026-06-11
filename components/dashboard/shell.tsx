@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   FolderPlus,
   FileText,
+  Settings,
   LogOut,
   Menu,
   X,
@@ -16,9 +17,10 @@ import {
 } from 'lucide-react';
 
 const NAV = [
-  { href: '/dashboard', label: 'Overview', icon: LayoutDashboard, exact: true },
+  { href: '/dashboard',              label: 'Overview',    icon: LayoutDashboard, exact: true },
   { href: '/dashboard/projects/new', label: 'New Project', icon: FolderPlus },
-  { href: '/dashboard/projects', label: 'My Projects', icon: FileText },
+  { href: '/dashboard/projects',     label: 'My Projects', icon: FileText },
+  { href: '/dashboard/settings',     label: 'Settings',    icon: Settings },
 ];
 
 function NavItem({

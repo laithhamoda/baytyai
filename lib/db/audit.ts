@@ -6,12 +6,15 @@ type AuditAction =
   | 'project.document_uploaded'
   | 'project.document_deleted'
   | 'project.submitted'
-  | 'project.status_changed';
+  | 'project.status_changed'
+  | 'org.created'
+  | 'member.invited'
+  | 'member.accepted';
 
 interface AuditParams {
   userId: string;
   action: AuditAction;
-  entityType: 'project' | 'organization' | 'document';
+  entityType: 'project' | 'organization' | 'document' | 'invitation' | 'membership';
   entityId: string;
   metadata?: Record<string, unknown>;
 }

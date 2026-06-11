@@ -1,6 +1,8 @@
 import { auth } from '@/auth';
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { checkRouteRbac } from '@/lib/auth/rbac';
+import type { OrgRole } from '@/lib/types/tenancy';
 
 /**
  * Combined middleware:
@@ -56,29 +58,41 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // ---- KYC gate: only applies to /dashboard routes ----
+    // ---- Dashboard gates ----
     if (pathname.startsWith('/dashboard')) {
-      // Always allow access to the verification flow itself.
       const isVerificationRoute =
         pathname === '/dashboard/verify-identity' ||
         pathname.startsWith('/dashboard/verify-identity/');
+      const isSetupRoute =
+        pathname === '/dashboard/setup-org' ||
+        pathname.startsWith('/dashboard/setup-org/');
 
-      if (!isVerificationRoute) {
-        // Check identity verification status.
+      if (!isVerificationRoute && !isSetupRoute) {
+        // KYC gate
         const { data: verification } = await supabase
           .from('identity_verifications')
           .select('status')
           .eq('user_id', user.id)
           .single();
 
-        const isApproved = verification?.status === 'approved';
-
-        if (!isApproved) {
-          // Redirect to KYC flow with the intended destination preserved.
+        if (verification?.status !== 'approved') {
           const verifyUrl = new URL('/dashboard/verify-identity', request.url);
           verifyUrl.searchParams.set('next', pathname);
           return NextResponse.redirect(verifyUrl);
         }
+
+        // Org-setup gate — user must belong to an org
+        const meta = user.app_metadata as Record<string, string | undefined>;
+        const orgId = meta.org_id ?? null;
+        if (!orgId) {
+          return NextResponse.redirect(new URL('/dashboard/setup-org', request.url));
+        }
+
+        // RBAC gate — route-level role check
+        const orgRole = (meta.org_role ?? null) as OrgRole | null;
+        const isSystemAdmin = false; // extend when profiles.role check is needed
+        const rbacRedirect = checkRouteRbac(request, orgRole, isSystemAdmin);
+        if (rbacRedirect) return rbacRedirect;
       }
     }
 
