@@ -1,8 +1,8 @@
-import { auth } from '@/auth';
-import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
+import { NextRequest, NextResponse } from 'next/server';
+
+import { auth } from '@/auth';
 import { checkRouteRbac } from '@/lib/auth/rbac';
-import type { OrgRole } from '@/lib/types/tenancy';
 
 /**
  * Combined middleware:
@@ -58,41 +58,46 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // ---- Dashboard gates ----
+    // ---- KYC gate: only applies to /dashboard routes ----
     if (pathname.startsWith('/dashboard')) {
+      // Always allow access to the verification flow itself.
       const isVerificationRoute =
         pathname === '/dashboard/verify-identity' ||
         pathname.startsWith('/dashboard/verify-identity/');
-      const isSetupRoute =
-        pathname === '/dashboard/setup-org' ||
-        pathname.startsWith('/dashboard/setup-org/');
 
-      if (!isVerificationRoute && !isSetupRoute) {
-        // KYC gate
+      if (!isVerificationRoute) {
+        // Check identity verification status.
         const { data: verification } = await supabase
           .from('identity_verifications')
           .select('status')
           .eq('user_id', user.id)
           .single();
 
-        if (verification?.status !== 'approved') {
+        const isApproved = verification?.status === 'approved';
+
+        if (!isApproved) {
+          // Redirect to KYC flow with the intended destination preserved.
           const verifyUrl = new URL('/dashboard/verify-identity', request.url);
           verifyUrl.searchParams.set('next', pathname);
           return NextResponse.redirect(verifyUrl);
         }
 
-        // Org-setup gate — user must belong to an org
-        const meta = user.app_metadata as Record<string, string | undefined>;
-        const orgId = meta.org_id ?? null;
-        if (!orgId) {
-          return NextResponse.redirect(new URL('/dashboard/setup-org', request.url));
-        }
+        // ---- Org gate: ensure user has an organization ----
+        const isSetupRoute =
+          pathname === '/dashboard/setup-org' || pathname.startsWith('/dashboard/setup-org/');
+        if (!isSetupRoute) {
+          const orgId = (user.app_metadata as Record<string, string | undefined>).org_id ?? null;
+          if (!orgId) {
+            return NextResponse.redirect(new URL('/dashboard/setup-org', request.url));
+          }
 
-        // RBAC gate — route-level role check
-        const orgRole = (meta.org_role ?? null) as OrgRole | null;
-        const isSystemAdmin = false; // extend when profiles.role check is needed
-        const rbacRedirect = checkRouteRbac(request, orgRole, isSystemAdmin);
-        if (rbacRedirect) return rbacRedirect;
+          // ---- RBAC gate ----
+          const orgRole =
+            (user.app_metadata as Record<string, string | undefined>).org_role ?? null;
+          const isSystemAdmin = (user.user_metadata as Record<string, unknown>)?.role === 'admin';
+          const rbacRedirect = checkRouteRbac(request, orgRole, isSystemAdmin);
+          if (rbacRedirect) return rbacRedirect;
+        }
       }
     }
 

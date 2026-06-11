@@ -1,12 +1,14 @@
 import { z } from 'zod';
+
+import { writeAuditLog } from '@/lib/db/audit';
 import {
   createOrganization,
   createMembership,
   createInvitation,
   getMembers,
 } from '@/lib/repositories/organizations';
-import { writeAuditLog } from '@/lib/db/audit';
-import type { OrgRole, Organization } from '@/lib/types/tenancy';
+
+import type { OrgRole } from '@/lib/types/tenancy';
 
 const createOrgSchema = z.object({
   name: z.string().min(2).max(80),
@@ -14,16 +16,12 @@ const createOrgSchema = z.object({
     .string()
     .min(2)
     .max(40)
-    .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, and hyphens only'),
+    .regex(/^[a-z0-9-]+$/, 'Lowercase letters, numbers, hyphens only'),
 });
 
-export async function createOrgWithOwner(
-  input: { name: string; slug: string },
-  userId: string,
-): Promise<Organization> {
+export async function createOrgWithOwner(input: { name: string; slug: string }, userId: string) {
   const parsed = createOrgSchema.safeParse(input);
   if (!parsed.success) throw new Error(parsed.error.issues[0].message);
-
   const org = await createOrganization(parsed.data.name, parsed.data.slug, userId);
   await createMembership(org.id, userId, 'owner');
   await writeAuditLog({
@@ -36,17 +34,12 @@ export async function createOrgWithOwner(
   return org;
 }
 
-export async function inviteMember(
-  orgId: string,
-  email: string,
-  role: OrgRole,
-  invitedBy: string,
-) {
+export async function inviteMember(orgId: string, email: string, role: OrgRole, invitedBy: string) {
   const inv = await createInvitation(orgId, email, role, invitedBy);
   await writeAuditLog({
     userId: invitedBy,
     action: 'member.invited',
-    entityType: 'invitation',
+    entityType: 'organization',
     entityId: inv.id,
     metadata: { email, role, orgId },
   });

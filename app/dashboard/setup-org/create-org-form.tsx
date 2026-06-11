@@ -1,27 +1,36 @@
 'use client';
-
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
+
+import { createOrg } from '@/app/actions/tenancy/create-org';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { createOrg } from '@/app/actions/tenancy/create-org';
 
 export default function CreateOrgForm() {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [slug, setSlug] = useState('');
 
-  function deriveSlug(name: string) {
-    setSlug(name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''));
+  function handleNameChange(name: string) {
+    setSlug(
+      name
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, ''),
+    );
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setBusy(true);
-    const result = await createOrg(new FormData(e.currentTarget));
+    const fd = new FormData(e.currentTarget);
+    const result = await createOrg(fd);
     setBusy(false);
-    if (!result.success) { toast.error(result.error); return; }
+    if (!result.success) {
+      toast.error(result.error);
+      return;
+    }
     toast.success('Organization created');
     router.push('/dashboard');
     router.refresh();
@@ -40,7 +49,7 @@ export default function CreateOrgForm() {
           minLength={2}
           maxLength={80}
           placeholder="Al Nakheel Development"
-          onChange={(e) => deriveSlug(e.target.value)}
+          onChange={(e) => handleNameChange(e.target.value)}
         />
       </div>
       <div>

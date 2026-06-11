@@ -8,13 +8,12 @@ type AuditAction =
   | 'project.submitted'
   | 'project.status_changed'
   | 'org.created'
-  | 'member.invited'
-  | 'member.accepted';
+  | 'member.invited';
 
 interface AuditParams {
   userId: string;
   action: AuditAction;
-  entityType: 'project' | 'organization' | 'document' | 'invitation' | 'membership';
+  entityType: 'project' | 'organization' | 'document';
   entityId: string;
   metadata?: Record<string, unknown>;
 }

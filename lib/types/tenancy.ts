@@ -1,6 +1,7 @@
 export type OrgRole = 'owner' | 'admin' | 'manager' | 'member' | 'viewer';
 export type OrgTier = 'free' | 'pro' | 'business' | 'enterprise';
 export type MembershipStatus = 'active' | 'suspended';
+export type InvitationStatus = 'pending' | 'accepted' | 'expired';
 
 export interface Organization {
   id: string;

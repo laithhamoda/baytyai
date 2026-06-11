@@ -1,27 +1,21 @@
 'use server';
-
-import { createClient } from '@/lib/supabase/server';
 import { createOrgWithOwner } from '@/lib/services/tenancy';
+import { createClient } from '@/lib/supabase/server';
 
-export async function createOrg(
-  formData: FormData,
-): Promise<{ success: true; data: { id: string; name: string; slug: string } } | { success: false; error: string }> {
+export async function createOrg(formData: FormData) {
   const supabase = await createClient();
-  if (!supabase) return { success: false, error: 'Service unavailable' };
-
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return { success: false, error: 'Unauthenticated' };
-
+  if (!supabase) return { success: false, error: 'Service unavailable' as const };
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return { success: false, error: 'Unauthenticated' as const };
   try {
     const org = await createOrgWithOwner(
-      {
-        name: (formData.get('name') as string ?? '').trim(),
-        slug: (formData.get('slug') as string ?? '').trim(),
-      },
+      { name: formData.get('name') as string, slug: formData.get('slug') as string },
       user.id,
     );
-    return { success: true, data: { id: org.id, name: org.name, slug: org.slug } };
+    return { success: true as const, data: org };
   } catch (e) {
-    return { success: false, error: (e as Error).message };
+    return { success: false as const, error: (e as Error).message };
   }
 }

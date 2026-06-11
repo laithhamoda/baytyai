@@ -1,14 +1,11 @@
 import { createClient } from '@/lib/supabase/server';
-import type { Organization, Membership, Invitation, OrgRole, Profile } from '@/lib/types/tenancy';
+
+import type { Organization, Membership, Invitation, OrgRole } from '@/lib/types/tenancy';
 
 export async function getOrganization(orgId: string): Promise<Organization | null> {
   const supabase = await createClient();
   if (!supabase) return null;
-  const { data } = await supabase
-    .from('organizations')
-    .select('*')
-    .eq('id', orgId)
-    .single();
+  const { data } = await supabase.from('organizations').select('*').eq('id', orgId).single();
   return data ?? null;
 }
 
@@ -24,15 +21,13 @@ export async function createOrganization(
     .insert({ name, slug, created_by: userId })
     .select()
     .single();
-  if (error) throw new Error(error.message);
-  return data as Organization;
+  if (error) throw error;
+  return data;
 }
 
-export type MemberWithProfile = Membership & {
-  profile: Pick<Profile, 'full_name' | 'avatar_url'>;
-};
-
-export async function getMembers(orgId: string): Promise<MemberWithProfile[]> {
+export async function getMembers(
+  orgId: string,
+): Promise<(Membership & { profile: { full_name: string; avatar_url: string | null } })[]> {
   const supabase = await createClient();
   if (!supabase) return [];
   const { data } = await supabase
@@ -41,7 +36,9 @@ export async function getMembers(orgId: string): Promise<MemberWithProfile[]> {
     .eq('organization_id', orgId)
     .eq('status', 'active')
     .order('created_at');
-  return (data ?? []) as MemberWithProfile[];
+  return (data ?? []) as (Membership & {
+    profile: { full_name: string; avatar_url: string | null };
+  })[];
 }
 
 export async function createMembership(
@@ -54,11 +51,11 @@ export async function createMembership(
   if (!supabase) throw new Error('Database unavailable');
   const { data, error } = await supabase
     .from('memberships')
-    .insert({ organization_id: orgId, user_id: userId, role, invited_by: invitedBy ?? null })
+    .insert({ organization_id: orgId, user_id: userId, role, invited_by: invitedBy })
     .select()
     .single();
-  if (error) throw new Error(error.message);
-  return data as Membership;
+  if (error) throw error;
+  return data;
 }
 
 export async function createInvitation(
@@ -73,30 +70,26 @@ export async function createInvitation(
     .from('invitations')
     .upsert(
       { organization_id: orgId, email, role, invited_by: invitedBy },
-      { onConflict: 'organization_id,email' },
+      { onConflict: 'organization_id,email', ignoreDuplicates: false },
     )
     .select()
     .single();
-  if (error) throw new Error(error.message);
-  return data as Invitation;
+  if (error) throw error;
+  return data;
 }
 
 export async function acceptInvitation(token: string, userId: string): Promise<void> {
   const supabase = await createClient();
   if (!supabase) throw new Error('Database unavailable');
-
-  const { data: inv, error } = await supabase
+  const { data: inv, error: fetchErr } = await supabase
     .from('invitations')
     .select('*')
     .eq('token', token)
     .is('accepted_at', null)
     .gt('expires_at', new Date().toISOString())
     .single();
-
-  if (error || !inv) throw new Error('Invitation not found or expired');
-
+  if (fetchErr || !inv) throw new Error('Invitation not found or expired');
   await createMembership(inv.organization_id, userId, inv.role as OrgRole, inv.invited_by);
-
   await supabase
     .from('invitations')
     .update({ accepted_at: new Date().toISOString() })
