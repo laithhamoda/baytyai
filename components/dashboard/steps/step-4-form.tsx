@@ -106,7 +106,7 @@ export default function Step4Form({ projectId, onSaved, onBack }: Props) {
         {/* Type selector + drop zone */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="mb-1.5 block text-sm font-medium text-foreground">
+            <label htmlFor="doc-type-select" className="mb-1.5 block text-sm font-medium text-foreground">
               Document Type
             </label>
             <Select
@@ -137,10 +137,14 @@ export default function Step4Form({ projectId, onSaved, onBack }: Props) {
 
         {/* Drag-and-drop zone */}
         <div
+          role="button"
+          tabIndex={0}
+          aria-label="Upload document — drag and drop or click to browse"
           onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
           onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
           onClick={() => inputRef.current?.click()}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') inputRef.current?.click(); }}
           className={cn(
             'mt-4 flex cursor-pointer flex-col items-center justify-center rounded-sm border-2 border-dashed py-10 text-center transition-colors',
             dragging

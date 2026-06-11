@@ -113,8 +113,12 @@ export default function DashboardShell({
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Close sidebar"
             className="absolute inset-0 bg-black/60"
             onClick={() => setSidebarOpen(false)}
+            onKeyDown={(e) => { if (e.key === 'Escape' || e.key === 'Enter') setSidebarOpen(false); }}
           />
           <div className="absolute inset-y-0 start-0 w-60 z-50">{sidebar}</div>
         </div>
