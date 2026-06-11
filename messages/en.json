@@ -1,0 +1,191 @@
+{
+  "nav": {
+    "overview": "Overview",
+    "newProject": "New Project",
+    "myProjects": "My Projects",
+    "signOut": "Sign out"
+  },
+  "dashboard": {
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Manage your project intake requests",
+      "newProject": "New Project",
+      "emptyTitle": "No projects yet",
+      "emptySubtitle": "Submit your first project intake request to get started.",
+      "startNew": "Start a new project",
+      "columns": {
+        "project": "Project",
+        "reference": "Reference",
+        "status": "Status",
+        "step": "Step",
+        "updated": "Updated"
+      },
+      "unnamed": "Unnamed draft",
+      "continue": "Continue",
+      "stepProgress": "{step} / 5"
+    },
+    "status": {
+      "draft": "Draft",
+      "submitted": "Submitted",
+      "under_review": "Under Review",
+      "information_requested": "Info Requested",
+      "approved": "Approved",
+      "active": "Active",
+      "archived": "Archived"
+    }
+  },
+  "wizard": {
+    "title": "New Project Intake",
+    "subtitle": "Complete all five steps. Your progress is saved automatically.",
+    "steps": {
+      "1": "Organization",
+      "2": "Project Profile",
+      "3": "Scope",
+      "4": "Documents",
+      "5": "Review"
+    },
+    "saveAndContinue": "Save & Continue",
+    "saving": "Saving…",
+    "back": "Back",
+    "submit": "Submit Project",
+    "submitting": "Submitting…"
+  },
+  "step1": {
+    "sectionIdentity": "Organization — Legal Identity",
+    "nameEn": "Legal Name (English)",
+    "nameAr": "Legal Name (Arabic)",
+    "cr": "Commercial Registration No.",
+    "vat": "VAT / TRN Number",
+    "vatOptional": "(optional)",
+    "country": "Country",
+    "city": "City",
+    "entityType": "Entity Type",
+    "sectionPoc": "Primary Point of Contact",
+    "pocName": "Full Name",
+    "pocRole": "Role / Title",
+    "pocEmail": "Corporate Email",
+    "pocPhone": "Phone (with country code)",
+    "sectionSignatory": "Authorized Signatory",
+    "signatoryName": "Full Name",
+    "signatoryRole": "Role / Title",
+    "signatoryEmail": "Corporate Email",
+    "entityTypes": {
+      "government": "Government",
+      "semi_government": "Semi-Government",
+      "pif_portfolio": "PIF Portfolio",
+      "private_sector": "Private Sector",
+      "fm_operator": "FM Operator",
+      "tier1_contractor": "Tier 1 Contractor",
+      "tier2_contractor": "Tier 2 Contractor",
+      "consultant": "Consultant",
+      "other": "Other"
+    }
+  },
+  "step2": {
+    "sectionName": "Project Name",
+    "nameEn": "Project Name (English)",
+    "nameAr": "Project Name (Arabic)",
+    "sectionClassification": "Classification",
+    "projectType": "Project Type",
+    "assetClass": "Asset Class",
+    "projectPhase": "Current Phase",
+    "sectionLocation": "Location",
+    "country": "Country",
+    "city": "City",
+    "gps": "GPS Coordinates",
+    "masterplanZone": "Masterplan Zone",
+    "sectionScale": "Size & Scale",
+    "gfa": "GFA (m²)",
+    "siteArea": "Site Area (m²)",
+    "numBuildings": "No. of Buildings",
+    "capexBand": "CAPEX Band",
+    "sectionTimeline": "Timeline & Funding",
+    "estStart": "Est. Start Date",
+    "estCompletion": "Est. Completion Date",
+    "fundingSource": "Funding Source",
+    "primaryRegulator": "Primary Regulator",
+    "optional": "(optional)"
+  },
+  "step3": {
+    "sectionModules": "Service Modules Required",
+    "modulesHint": "Select all modules your project needs.",
+    "sectionScale": "Scale & Volumes",
+    "expectedUsers": "Expected Platform Users",
+    "expectedDocs": "Expected Monthly Documents",
+    "expectedDocsHint": "Estimate for document control sizing.",
+    "sectionIntegrations": "Existing Systems / Integrations",
+    "sectionPreferences": "Platform Preferences",
+    "dataResidency": "Data Residency",
+    "languageSupport": "Language Support",
+    "targetGoLive": "Target Go-Live Date",
+    "specialRequirements": "Special Requirements",
+    "optional": "(optional)"
+  },
+  "step4": {
+    "sectionTitle": "Supporting Documents",
+    "hint": "Upload relevant project documents. PDF, JPG, PNG, WEBP — max 25 MB per file.",
+    "documentType": "Document Type",
+    "chooseFile": "Choose File",
+    "uploading": "Uploading…",
+    "dropHint": "Drag & drop a file here, or",
+    "dropBrowse": "click to browse",
+    "willUploadAs": "Will be uploaded as:",
+    "uploaded": "Uploaded ({count})"
+  },
+  "step5": {
+    "sectionReadiness": "Submission Readiness",
+    "sectionSummary": "Project Summary",
+    "sectionNotes": "Message to Bayty Team",
+    "notesOptional": "(optional)",
+    "sectionDeclarations": "Declarations & Consent",
+    "confirmAccuracy": "I confirm that all information provided in this submission is accurate and complete to the best of my knowledge.",
+    "confirmAuthority": "I am authorized by my organization to submit this project intake request on their behalf.",
+    "consentProcessing": "I consent to Bayty Technologies processing the submitted data for the purpose of evaluating and delivering the requested services.",
+    "consentPdpl": "I acknowledge that this submission is subject to the Saudi Personal Data Protection Law (PDPL) and UAE Federal Decree-Law No. 45 of 2021, and that my organization accepts the applicable data protection obligations.",
+    "incompleteWarning": "Please complete all required steps before submitting.",
+    "incompleteStep": "Incomplete — go back",
+    "readinessItems": {
+      "org": "Organization & Contracting Entity",
+      "project": "Project Profile",
+      "scope": "Engagement Scope",
+      "docs": "Documents (optional)"
+    },
+    "summaryLabels": {
+      "project": "Project Name",
+      "location": "Location",
+      "type": "Type",
+      "phase": "Phase",
+      "capex": "CAPEX Band",
+      "funding": "Funding"
+    }
+  },
+  "kyc": {
+    "title": "Identity Verification",
+    "subtitle": "Required before accessing the project dashboard. Your documents are stored securely and used only for verification.",
+    "sectionPersonal": "Personal Information",
+    "fullName": "Full Legal Name",
+    "fullNameHint": "As shown on your Emirates ID",
+    "nationality": "Nationality",
+    "email": "Email Address",
+    "phone": "Phone (with country code)",
+    "sectionDocuments": "Identity Documents",
+    "docsHint": "Upload clear photos. JPG, PNG, WEBP, or HEIC — max 10 MB each.",
+    "idFront": "Emirates ID — Front",
+    "idFrontHint": "Clear photo of the front of your Emirates ID",
+    "idBack": "Emirates ID — Back",
+    "idBackHint": "Clear photo of the back of your Emirates ID",
+    "selfie": "Selfie Holding ID",
+    "selfieHint": "A clear photo of your face while holding your Emirates ID",
+    "uploaded": "Uploaded",
+    "consentText": "I consent to Bayty Technologies collecting and processing the above personal data and identity documents for the purpose of identity verification, in accordance with the UAE Federal Decree-Law No. 45 of 2021 on Personal Data Protection and Saudi PDPL.",
+    "submit": "Submit for Verification",
+    "submitting": "Submitting…",
+    "continueToDashboard": "Continue to Dashboard",
+    "status": {
+      "pending_review": "Your documents are under review. We will notify you once the verification is complete.",
+      "approved": "Your identity has been verified. You have full access to the dashboard.",
+      "rejected": "Your verification was not approved. Please re-submit with clear, valid documents.",
+      "resubmit_requested": "Additional information is required. Please re-submit your documents."
+    }
+  }
+}

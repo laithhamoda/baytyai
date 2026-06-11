@@ -7,6 +7,7 @@ import { projectSubmitRatelimit } from '@/lib/rate-limit';
 import { ok, err } from '@/lib/actions/types';
 import type { ActionResult } from '@/lib/actions/types';
 import { masterProjectSchema } from '@/lib/validations/project/master-schema';
+import { sendProjectSubmittedEmails } from '@/lib/email/send-project-submitted';
 
 export async function submitProject(
   projectId: string,
@@ -59,6 +60,11 @@ export async function submitProject(
 
   const referenceNumber = (updatedProject as { reference_number: string }).reference_number;
 
+  const now = new Date().toISOString();
+  const s1 = parsed.data.step1;
+  const s2 = parsed.data.step2;
+  const s3 = parsed.data.step3;
+
   await Promise.all([
     writeAuditLog({
       userId: user.id,
@@ -70,7 +76,24 @@ export async function submitProject(
     supabase.from('project_submissions').insert({
       project_id: projectId,
       user_id: user.id,
-      submitted_at: new Date().toISOString(),
+      submitted_at: now,
+    }),
+    sendProjectSubmittedEmails({
+      recipientName: s1.poc_name,
+      recipientEmail: s1.poc_email,
+      referenceNumber,
+      projectNameEn: s2.name_en,
+      organizationName: s1.name_en,
+      organizationCountry: s1.country,
+      projectType: s2.project_type,
+      projectPhase: s2.project_phase,
+      capexBand: s2.capex_band,
+      fundingSource: s2.funding_source,
+      pocName: s1.poc_name,
+      pocEmail: s1.poc_email,
+      pocPhone: s1.poc_phone,
+      serviceModules: s3.service_modules as string[],
+      submittedAt: now,
     }),
   ]);
 
