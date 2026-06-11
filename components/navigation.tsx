@@ -95,7 +95,7 @@ export default function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden items-center gap-7 md:flex">
             <Link
-              href="/sign-in"
+              href="/login"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '13px',
@@ -202,7 +202,7 @@ export default function Navigation() {
               className="mt-4 flex flex-col items-center gap-6"
             >
               <Link
-                href="/sign-in"
+                href="/login"
                 style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: '13px',
