@@ -45,11 +45,30 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    return [
+      // Redirect non-www to www (permanent 301 — canonical enforcement)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'baytyai.com' }],
+        destination: 'https://www.baytyai.com/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
         source: '/:path*',
-        headers: securityHeaders,
+        headers: [
+          ...securityHeaders,
+          // Block search engines from indexing *.vercel.app preview deployments.
+          // On baytyai.com this header is overridden per-page by Next.js robots metadata.
+          {
+            key: 'X-Robots-Tag',
+            value: process.env.VERCEL_ENV === 'production' ? 'index, follow' : 'noindex, nofollow',
+          },
+        ],
       },
     ];
   },
