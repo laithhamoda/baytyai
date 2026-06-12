@@ -75,7 +75,7 @@ export default function LoginClient() {
     const { error } = await supabase.auth.verifyOtp({
       email,
       token: code,
-      type: 'email',
+      type: 'magiclink',
     });
     setBusy(false);
     if (error) {
