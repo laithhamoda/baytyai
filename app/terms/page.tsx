@@ -41,21 +41,6 @@ export default function TermsPage() {
   return (
     <div style={{ backgroundColor: '#F8F6F1', minHeight: '100vh', padding: '120px 24px' }}>
       <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-        <p
-          style={{
-            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: '10px',
-            letterSpacing: '0.12em',
-            textTransform: 'uppercase',
-            color: 'rgba(10,22,40,0.35)',
-            marginBottom: '40px',
-            padding: '12px 16px',
-            border: '0.5px solid rgba(10,22,40,0.15)',
-          }}
-        >
-          Requires legal review before launch — this is a substantive draft for internal use only.
-        </p>
-
         <h1
           style={{
             fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
