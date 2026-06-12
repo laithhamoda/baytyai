@@ -68,6 +68,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─── Keyboard focus visibility (WCAG 2.4.7) ─── */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+/* Don't show the ring for mouse/touch users who don't need it */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Skip-to-content link (WCAG 2.4.1) ─── */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: hsl(var(--ring));
+  color: var(--navy);
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius);
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 ::selection {
   background-color: rgba(201, 168, 76, 0.2);
   color: var(--offwhite);
