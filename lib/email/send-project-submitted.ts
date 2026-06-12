@@ -3,7 +3,7 @@ import { render } from '@react-email/components';
 import ProjectSubmittedEmail from '@/emails/project-submitted';
 import InternalNotificationEmail from '@/emails/internal-notification';
 
-const FROM = process.env.DASHBOARD_FROM_EMAIL ?? 'Bayty Projects <projects@baytyai.com>';
+const FROM = process.env.DASHBOARD_FROM_EMAIL ?? 'Bayty <info@baytyai.com>';
 const OPS_TO = process.env.DASHBOARD_OPS_EMAIL ?? 'ops@baytyai.com';
 
 export interface ProjectEmailPayload {

@@ -5,7 +5,7 @@ import { leadSchema, type LeadInput, type LeadResult } from './lead-schema';
 const TO_EMAIL =
   process.env.NOTIFICATION_EMAIL_TO || process.env.LEAD_TO_EMAIL || 'info@baytyai.com';
 const FROM_EMAIL =
-  process.env.NOTIFICATION_EMAIL_FROM || process.env.LEAD_FROM_EMAIL || 'onboarding@resend.dev';
+  process.env.NOTIFICATION_EMAIL_FROM || process.env.LEAD_FROM_EMAIL || 'Bayty <info@baytyai.com>';
 
 export async function submitLead(input: LeadInput): Promise<LeadResult> {
   const parsed = leadSchema.safeParse(input);
