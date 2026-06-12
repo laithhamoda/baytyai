@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { track, getSessionId } from '@/lib/analytics';
 import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
@@ -96,6 +97,7 @@ export default function Navigation() {
           <div className="hidden items-center gap-7 md:flex">
             <Link
               href="/login"
+              data-testid="nav-signin"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '13px',
@@ -228,6 +230,9 @@ function RequestAccessButton() {
   return (
     <Link
       href="/request-access"
+      data-testid="nav-request-access"
+      onClick={() => track({ name: 'signup_click',
+        props: { source: 'header', sessionId: getSessionId(), page: '/', elementId: 'nav-request-access' } })}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

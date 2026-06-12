@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { track, getSessionId } from '@/lib/analytics';
 
 import {
   INQUIRY_HEADINGS,
@@ -83,8 +84,13 @@ export default function LeadCaptureForm({
     setSubmitting(true);
     const result = await submitLead(parsed.data);
     setSubmitting(false);
-    if (result.ok) setDone(true);
-    else setError(result.error);
+    if (result.ok) {
+      track({ name: 'signup_success',
+        props: { userId: '', sessionId: getSessionId(), page: '/request-access', elementId: 'ra-submit' } });
+      setDone(true);
+    } else {
+      setError(result.error);
+    }
   }
 
   if (done) {
@@ -126,11 +132,11 @@ export default function LeadCaptureForm({
 
       <div>
         <label htmlFor="lc-name" style={labelStyle}>Full name</label>
-        <input id="lc-name" required value={values.fullName} onChange={(e) => set('fullName', e.target.value)} style={fieldBase} placeholder="Khalid Al Rashid" />
+        <input id="lc-name" data-testid="ra-name" required value={values.fullName} onChange={(e) => set('fullName', e.target.value)} style={fieldBase} placeholder="Khalid Al Rashid" />
       </div>
       <div>
         <label htmlFor="lc-email" style={labelStyle}>Work email</label>
-        <input id="lc-email" type="email" required value={values.workEmail} onChange={(e) => set('workEmail', e.target.value)} style={fieldBase} placeholder="khalid@company.ae" />
+        <input id="lc-email" data-testid="ra-email" type="email" required value={values.workEmail} onChange={(e) => set('workEmail', e.target.value)} style={fieldBase} placeholder="khalid@company.ae" />
       </div>
       <div>
         <label htmlFor="lc-org" style={labelStyle}>Organization</label>
@@ -172,6 +178,7 @@ export default function LeadCaptureForm({
       <button
         type="submit"
         disabled={submitting}
+        data-testid="ra-submit"
         style={{
           width: '100%',
           height: '56px',
