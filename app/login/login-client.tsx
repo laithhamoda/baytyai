@@ -72,18 +72,38 @@ export default function LoginClient() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.verifyOtp({
-      email: email.trim().toLowerCase(),
-      token: code.trim(),
-      type: 'email',
-    });
-    setBusy(false);
-    if (error) {
-      setError(`${error.message} [${error.status ?? '?'}/${error.code ?? '?'}]`);
-      return;
+
+    const cleanEmail = email.trim().toLowerCase();
+    const cleanToken = code.trim();
+
+    // Try each OTP type — depending on whether the user is new (signup) or
+    // returning (email/magiclink), Supabase accepts different verify types.
+    const types = ['email', 'signup', 'magiclink'] as const;
+    let lastError: { message: string; status?: number; code?: string } | null = null;
+
+    for (const type of types) {
+      const { error } = await supabase.auth.verifyOtp({
+        email: cleanEmail,
+        token: cleanToken,
+        type,
+      });
+      if (!error) {
+        setBusy(false);
+        router.push(next);
+        router.refresh();
+        return;
+      }
+      lastError = error;
+      // A genuinely expired/consumed token won't be fixed by another type.
+      if (error.code === 'otp_expired' || error.status === 429) break;
     }
-    router.push(next);
-    router.refresh();
+
+    setBusy(false);
+    setError(
+      lastError
+        ? `${lastError.message} [${lastError.status ?? '?'}/${lastError.code ?? '?'}]`
+        : 'That code is invalid or expired. Request a new one.',
+    );
   }
 
   return (
