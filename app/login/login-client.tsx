@@ -73,13 +73,13 @@ export default function LoginClient() {
     }
     setBusy(true);
     const { error } = await supabase.auth.verifyOtp({
-      email,
-      token: code,
-      type: 'magiclink',
+      email: email.trim().toLowerCase(),
+      token: code.trim(),
+      type: 'email',
     });
     setBusy(false);
     if (error) {
-      setError('That code is invalid or expired. Request a new one.');
+      setError(`${error.message} [${error.status ?? '?'}/${error.code ?? '?'}]`);
       return;
     }
     router.push(next);
