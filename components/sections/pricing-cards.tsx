@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 import { useLeadCapture } from '@/components/forms/lead-capture-provider';
+import { track, getSessionId } from '@/lib/analytics';
 
 import type { InquiryType } from '@/app/actions/lead-schema';
 
@@ -208,10 +209,11 @@ export default function PricingCards() {
               )}
 
               {/* Tier name */}
-              <p
+              <h3
                 style={{
                   fontFamily: "var(--font-mono, 'DM Mono', monospace)",
                   fontSize: '11px',
+                  fontWeight: 400,
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
                   color: tier.enterprise ? '#0A1628' : '#C9A84C',
@@ -219,7 +221,7 @@ export default function PricingCards() {
                 }}
               >
                 {tier.name}
-              </p>
+              </h3>
 
               {/* Price */}
               <div
@@ -330,7 +332,19 @@ export default function PricingCards() {
               {/* CTA */}
               <button
                 type="button"
-                onClick={() => open(tier.name.toLowerCase() as InquiryType)}
+                data-testid={`pricing-${tier.name.toLowerCase()}`}
+                onClick={() => {
+                  track({
+                    name: 'signup_click',
+                    props: {
+                      source: 'pricing',
+                      sessionId: getSessionId(),
+                      page: '/pricing',
+                      elementId: `pricing-${tier.name.toLowerCase()}`,
+                    },
+                  });
+                  open(tier.name.toLowerCase() as InquiryType);
+                }}
                 style={{
                   marginTop: '36px',
                   display: 'flex',
@@ -415,6 +429,7 @@ export default function PricingCards() {
 
           <button
             type="button"
+            data-testid="pricing-consultation"
             onClick={() => open('consultation')}
             style={{
               display: 'inline-flex',
