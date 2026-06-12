@@ -30,14 +30,31 @@ const dmMono = DM_Mono({
   display: 'swap',
 });
 
+const SITE_TITLE = 'Bayty — Verified Construction Management for the GCC';
+const SITE_DESCRIPTION =
+  'The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.baytyai.com'),
   title: {
     template: '%s | Bayty',
-    default: 'Bayty',
+    default: SITE_TITLE,
   },
-  description:
-    'Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.',
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    type: 'website',
+    siteName: 'Bayty',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    url: 'https://www.baytyai.com',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ['/opengraph-image'],
+  },
 };
 
 const softwareSchema = {
@@ -91,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <LeadCaptureProvider>
           <Navigation />
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
           <Footer />
         </LeadCaptureProvider>
         <CookieBanner />

@@ -54,6 +54,7 @@ export default function CookieBanner() {
     <>
       {/* Banner */}
       <div
+        data-testid="cookie-banner"
         className="fixed inset-x-0 bottom-0 z-50 bg-navy px-6 py-5 text-offwhite"
         style={{ borderTop: '0.5px solid rgba(201,168,76,0.3)' }}
       >
@@ -68,6 +69,7 @@ export default function CookieBanner() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button
+              data-testid="cookie-accept"
               onClick={() => persist('all')}
               className="bg-gold px-5 py-3 font-body text-[12px] font-medium uppercase tracking-widest text-navy"
               style={{ borderRadius: 0 }}
@@ -75,6 +77,7 @@ export default function CookieBanner() {
               Accept all
             </button>
             <button
+              data-testid="cookie-reject"
               onClick={() => persist('essential')}
               className="bg-transparent px-5 py-3 font-body text-[12px] font-normal uppercase tracking-widest text-gold"
               style={{ border: '0.5px solid #C9A84C', borderRadius: 0 }}
@@ -82,6 +85,7 @@ export default function CookieBanner() {
               Decline non-essential
             </button>
             <button
+              data-testid="cookie-manage"
               onClick={() => setShowPrefs(true)}
               className="font-body text-[12px] font-normal tracking-[0.06em] text-offwhite/60 underline"
             >
