@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import DashboardShell from '@/components/dashboard/shell';
+import ImpersonationSwitcher from '@/components/dev/impersonation-switcher';
 
 export const metadata = {
   title: { template: '%s | Bayty Dashboard', default: 'Dashboard | Bayty' },
@@ -20,5 +21,10 @@ export default async function DashboardLayout({
 
   if (!user) redirect('/sign-in');
 
-  return <DashboardShell user={user}>{children}</DashboardShell>;
+  return (
+    <DashboardShell user={user}>
+      {children}
+      <ImpersonationSwitcher />
+    </DashboardShell>
+  );
 }
