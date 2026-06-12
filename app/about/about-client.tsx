@@ -225,7 +225,7 @@ export default function AboutClient() {
                 marginBottom: '24px',
               }}
             >
-              B
+              L
             </div>
             <h3
               style={{
@@ -236,7 +236,7 @@ export default function AboutClient() {
                 marginBottom: '4px',
               }}
             >
-              [Founder Name]
+              Laith Hamoda
             </h3>
             <p style={{ ...mono, fontSize: '10px', color: '#C9A84C', marginBottom: '16px' }}>
               Founder &amp; CEO
@@ -256,7 +256,9 @@ export default function AboutClient() {
               the region&rsquo;s built environment.]
             </p>
             <a
-              href="https://linkedin.com/in/bayty"
+              href="https://linkedin.com/in/laithHamoda"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 ...mono,
                 fontSize: '10px',
@@ -265,7 +267,7 @@ export default function AboutClient() {
                 paddingBottom: '2px',
               }}
             >
-              LinkedIn ↗
+              LinkedIn ↗<span style={{ position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0,0,0,0)', whiteSpace: 'nowrap', border: 0 }}> (opens in a new tab)</span>
             </a>
           </motion.div>
         </div>
