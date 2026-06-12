@@ -142,9 +142,10 @@ export default function LoginClient() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@company.ae"
                 style={field}
+                data-testid="login-email"
               />
             </div>
-            <button type="submit" disabled={busy} style={btn(busy)}>
+            <button type="submit" disabled={busy} style={btn(busy)} data-testid="login-submit">
               {busy ? 'Sending…' : 'Send sign-in link'}
             </button>
           </form>

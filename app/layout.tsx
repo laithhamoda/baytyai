@@ -38,6 +38,20 @@ export const metadata: Metadata = {
   },
   description:
     'Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Bayty',
+    url: 'https://www.baytyai.com',
+    title: 'Bayty — Verified Construction Management for the GCC',
+    description:
+      'Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bayty — Verified Construction Management for the GCC',
+    description:
+      'Luxury construction management platform purpose-built for the GCC market. Streamline projects, procurement, and teams with precision.',
+  },
 };
 
 const softwareSchema = {
