@@ -35,9 +35,11 @@ const colHead: React.CSSProperties = {
 };
 
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
+  const isExternal = /^https?:\/\//.test(href);
   return (
     <Link
       href={href}
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       style={{
         display: 'block',
         fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
@@ -56,6 +58,24 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
       }}
     >
       {children}
+      {isExternal && (
+        <span
+          style={{
+            position: 'absolute',
+            width: '1px',
+            height: '1px',
+            padding: 0,
+            margin: '-1px',
+            overflow: 'hidden',
+            clip: 'rect(0,0,0,0)',
+            whiteSpace: 'nowrap',
+            border: 0,
+          }}
+        >
+          {' '}
+          (opens in a new tab)
+        </span>
+      )}
     </Link>
   );
 }
