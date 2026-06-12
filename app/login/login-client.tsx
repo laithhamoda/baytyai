@@ -1,12 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import { createClient } from '@/lib/supabase/client';
 
-type Step = 'email' | 'code';
+type Step = 'email' | 'sent';
 
 const NAVY = '#0A1628';
 const GOLD = '#C9A84C';
@@ -30,18 +30,18 @@ const field: React.CSSProperties = {
 };
 
 export default function LoginClient() {
-  const router = useRouter();
   const params = useSearchParams();
-  const next = params.get('next') || '/account';
+  const next = params.get('next') || '/dashboard';
 
   const [step, setStep] = useState<Step>('email');
   const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
 
-  async function sendCode(e: React.FormEvent) {
+  // Surface auth_failed error from callback redirect
+  const callbackError = params.get('error');
+
+  async function sendLink(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     const supabase = createClient();
@@ -50,60 +50,21 @@ export default function LoginClient() {
       return;
     }
     setBusy(true);
+    const redirectTo =
+      `${window.location.origin}/auth/callback?next=${encodeURIComponent(next)}`;
     const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { shouldCreateUser: true },
+      email: email.trim().toLowerCase(),
+      options: {
+        shouldCreateUser: true,
+        emailRedirectTo: redirectTo,
+      },
     });
     setBusy(false);
     if (error) {
       setError(error.message);
       return;
     }
-    setNotice(`We sent a sign-in code to ${email}.`);
-    setStep('code');
-  }
-
-  async function verifyCode(e: React.FormEvent) {
-    e.preventDefault();
-    setError('');
-    const supabase = createClient();
-    if (!supabase) {
-      setError('Sign-in is not yet enabled. Please try again later.');
-      return;
-    }
-    setBusy(true);
-
-    const cleanEmail = email.trim().toLowerCase();
-    const cleanToken = code.trim();
-
-    // Try each OTP type — depending on whether the user is new (signup) or
-    // returning (email/magiclink), Supabase accepts different verify types.
-    const types = ['email', 'signup', 'magiclink'] as const;
-    let lastError: { message: string; status?: number; code?: string } | null = null;
-
-    for (const type of types) {
-      const { error } = await supabase.auth.verifyOtp({
-        email: cleanEmail,
-        token: cleanToken,
-        type,
-      });
-      if (!error) {
-        setBusy(false);
-        router.push(next);
-        router.refresh();
-        return;
-      }
-      lastError = error;
-      // A genuinely expired/consumed token won't be fixed by another type.
-      if (error.code === 'otp_expired' || error.status === 429) break;
-    }
-
-    setBusy(false);
-    setError(
-      lastError
-        ? `${lastError.message} [${lastError.status ?? '?'}/${lastError.code ?? '?'}]`
-        : 'That code is invalid or expired. Request a new one.',
-    );
+    setStep('sent');
   }
 
   return (
@@ -137,7 +98,7 @@ export default function LoginClient() {
             marginBottom: '12px',
           }}
         >
-          {step === 'email' ? 'Sign in to Bayty' : 'Enter your code'}
+          {step === 'email' ? 'Sign in to Bayty' : 'Check your email'}
         </h1>
         <p
           style={{
@@ -150,12 +111,22 @@ export default function LoginClient() {
             lineHeight: 1.6,
           }}
         >
-          {step === 'email' ? "Enter your email and we'll send a one-time code." : notice}
+          {step === 'email'
+            ? "Enter your email and we'll send you a sign-in link."
+            : `We sent a sign-in link to ${email}. Click it to continue — it expires in 10 minutes.`}
         </p>
+
+        {(callbackError || error) && (
+          <p role="alert" style={{ ...errStyle, marginBottom: '24px', textAlign: 'center' }}>
+            {callbackError === 'auth_failed'
+              ? 'That link has expired or already been used. Request a new one below.'
+              : error}
+          </p>
+        )}
 
         {step === 'email' ? (
           <form
-            onSubmit={sendCode}
+            onSubmit={sendLink}
             style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}
           >
             <div>
@@ -173,64 +144,31 @@ export default function LoginClient() {
                 style={field}
               />
             </div>
-            {error && (
-              <p role="alert" style={errStyle}>
-                {error}
-              </p>
-            )}
             <button type="submit" disabled={busy} style={btn(busy)}>
-              {busy ? 'Sending…' : 'Send code'}
+              {busy ? 'Sending…' : 'Send sign-in link'}
             </button>
           </form>
         ) : (
-          <form
-            onSubmit={verifyCode}
-            style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}
-          >
-            <div>
-              <label htmlFor="code" style={labelStyle}>
-                Sign-in code
-              </label>
-              <input
-                id="code"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={10}
-                required
-                value={code}
-                onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
-                placeholder="000000"
-                style={{ ...field, letterSpacing: '0.4em', fontSize: '22px' }}
-              />
-            </div>
-            {error && (
-              <p role="alert" style={errStyle}>
-                {error}
-              </p>
-            )}
-            <button type="submit" disabled={busy} style={btn(busy)}>
-              {busy ? 'Verifying…' : 'Verify and continue'}
-            </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <p style={{ fontFamily: sans, fontSize: '13px', color: 'rgba(248,246,241,0.4)' }}>
+              Didn&apos;t receive it? Check your spam folder, or
+            </p>
             <button
               type="button"
-              onClick={() => {
-                setStep('email');
-                setCode('');
-                setError('');
-              }}
+              onClick={() => { setStep('email'); setError(''); }}
               style={{
                 background: 'none',
                 border: 'none',
-                color: 'rgba(248,246,241,0.5)',
+                color: GOLD,
                 fontFamily: sans,
                 fontSize: '13px',
                 cursor: 'pointer',
                 textDecoration: 'underline',
               }}
             >
-              Use a different email
+              send a new link
             </button>
-          </form>
+          </div>
         )}
       </motion.div>
     </div>
