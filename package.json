@@ -15,7 +15,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed:impersonation": "node --env-file=.env.local node_modules/.bin/tsx scripts/seed-impersonation-users.ts",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "teardown:impersonation": "node --env-file=.env.local node_modules/.bin/tsx scripts/teardown-impersonation-users.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
