@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 WORKDIR /app
 EXPOSE 8080
+RUN mkdir -p /app/data
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
@@ -14,9 +15,10 @@ RUN dotnet restore "src/BaytyAI.API/BaytyAI.API.csproj"
 
 COPY . .
 
-RUN dotnet publish "src/BaytyAI.API/BaytyAI.API.csproj" -c Release -o /app/publish --no-restore
+RUN dotnet publish "src/BaytyAI.API/BaytyAI.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
+VOLUME ["/app/data"]
 ENTRYPOINT ["dotnet", "BaytyAI.API.dll"]
