@@ -1,35 +1,39 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.db
+*.db-shm
+*.db-wal
+appsettings.Development.json
 
-# testing
-/coverage
+# Secrets — never commit
+appsettings.local.json
+*.pfx
+*.p12
+secrets.json
 
-# next.js
-/.next/
-/out/
+# EF Core migration snapshots are committed, but ignore the design-time cache
+*.designer.cs
 
-# production
-/build
+# Angular
+baytyai-angular/node_modules/
+baytyai-angular/dist/
+baytyai-angular/.angular/
 
-# misc
+# OS
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# Logs
+*.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# local env files
-.env*.local
+# IDE
+.vscode/
+.idea/
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Claude Code
 .claude/worktrees/

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BaytyAI.API/BaytyAI.API.csproj" />
+    <Project Path="src/BaytyAI.Application/BaytyAI.Application.csproj" />
+    <Project Path="src/BaytyAI.Domain/BaytyAI.Domain.csproj" />
+    <Project Path="src/BaytyAI.Infrastructure/BaytyAI.Infrastructure.csproj" />
+  </Folder>
+</Solution>

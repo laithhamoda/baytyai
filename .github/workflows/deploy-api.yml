@@ -1,0 +1,33 @@
+name: Deploy API
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.github/workflows/deploy-api.yml'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore
+        run: dotnet restore BaytyAI.slnx
+
+      - name: Build
+        run: dotnet build BaytyAI.slnx --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish src/BaytyAI.API/BaytyAI.API.csproj -c Release -o ./publish
+
+      - name: Deploy to Railway
+        # After connecting Railway to this repo, it auto-deploys on push.
+        # This step is a placeholder — Railway detects the push automatically.
+        run: echo "Railway auto-deploys from this repo on push to main"
