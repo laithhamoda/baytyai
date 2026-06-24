@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, DM_Sans, DM_Mono } from 'next/font/google';
+import { Inter_Tight, JetBrains_Mono, IBM_Plex_Sans_Arabic } from 'next/font/google';
 
 import './globals.css';
 import Analytics from '@/components/analytics';
@@ -9,41 +9,41 @@ import Navigation from '@/components/navigation';
 
 import type { Metadata } from 'next';
 
-const cormorant = Cormorant_Garamond({
+const interTight = Inter_Tight({
   subsets: ['latin'],
-  weight: ['300', '400', '600'],
-  variable: '--font-display',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['300', '400'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-const dmMono = DM_Mono({
-  subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['500'],
   variable: '--font-mono',
   display: 'swap',
 });
 
-const SITE_TITLE = 'Bayty — Verified Construction Management for the GCC';
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  subsets: ['arabic'],
+  weight: ['400', '600'],
+  variable: '--font-arabic',
+  display: 'swap',
+});
+
+const SITE_TITLE = 'BaytyAI — AI-Native Operations Infrastructure for GCC FM & Construction';
 const SITE_DESCRIPTION =
-  'The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.';
+  'Operator-grade AI prompt libraries and workflows that protect contract margin, accelerate mobilization, and harden SLA performance on contracts above $5M.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.baytyai.com'),
   title: {
-    template: '%s | Bayty',
+    template: '%s | BaytyAI',
     default: SITE_TITLE,
   },
   description: SITE_DESCRIPTION,
   openGraph: {
     type: 'website',
-    siteName: 'Bayty',
+    siteName: 'BaytyAI',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     url: 'https://www.baytyai.com',
@@ -57,50 +57,48 @@ export const metadata: Metadata = {
   },
 };
 
-const softwareSchema = {
+const serviceSchema = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Bayty AI',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
+  '@type': 'Service',
+  name: 'BaytyAI',
+  serviceType: 'AI Operations Infrastructure',
   url: 'https://www.baytyai.com',
-  description:
-    'The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.',
-  offers: {
-    '@type': 'AggregateOffer',
-    lowPrice: '159',
-    highPrice: '1999',
-    priceCurrency: 'AED',
-    offerCount: '3',
+  description: SITE_DESCRIPTION,
+  areaServed: {
+    '@type': 'Place',
+    name: 'Gulf Cooperation Council (GCC)',
+  },
+  provider: {
+    '@type': 'Person',
+    name: 'Laith Hamoda',
+    jobTitle: 'Senior AI Prompt Engineer for Mega Projects',
+    url: 'https://www.linkedin.com/in/laithhamoda',
   },
 };
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Bayty Technologies',
+  name: 'BaytyAI',
   url: 'https://www.baytyai.com',
-  logo: 'https://www.baytyai.com/logo.png',
   contactPoint: {
     '@type': 'ContactPoint',
-    email: 'info@baytyai.com',
-    contactType: 'customer service',
+    email: 'founder@baytyai.com',
+    contactType: 'sales',
   },
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Dubai',
-    addressCountry: 'AE',
-  },
-  sameAs: ['https://linkedin.com/company/bayty'],
+  sameAs: ['https://www.linkedin.com/in/laithhamoda'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}>
+    <html
+      lang="en"
+      className={`${interTight.variable} ${jetbrainsMono.variable} ${ibmPlexSansArabic.variable}`}
+    >
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
         />
         <script
           type="application/ld+json"
