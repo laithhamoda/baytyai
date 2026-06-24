@@ -19,13 +19,13 @@ export default function FinalCta() {
 
         <div className="flex flex-col gap-16">
           {/* Cal.com embed */}
-          <CalEmbed className="min-h-[600px]" />
+          <CalEmbed />
 
           {/* Divider */}
           <div className="flex items-center gap-6">
             <div className="h-px flex-1 bg-ink-700" />
             <span className="font-mono text-[11px] uppercase tracking-widest text-ink-500">
-              or send a message
+              Prefer email? Send a brief instead.
             </span>
             <div className="h-px flex-1 bg-ink-700" />
           </div>

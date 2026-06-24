@@ -1,64 +1,46 @@
 'use client';
 
-import { useEffect } from 'react';
+import Cal, { getCalApi } from '@calcom/embed-react';
+import { useEffect, useState } from 'react';
 
 import { siteConfig } from '@/lib/siteConfig';
 
 interface CalEmbedProps {
   calLink?: string;
-  className?: string;
 }
 
-export default function CalEmbed({
-  calLink = siteConfig.calBookingUrl ?? '',
-  className = '',
-}: CalEmbedProps) {
+export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: CalEmbedProps) {
+  const [ready, setReady] = useState(false);
+
   useEffect(() => {
     if (!calLink) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://app.cal.com/embed/embed.js';
-    script.async = true;
-    script.onload = () => {
-      if (typeof window !== 'undefined' && (window as unknown as Record<string, unknown>).Cal) {
-        const Cal = (window as unknown as Record<string, unknown>).Cal as (
-          action: string,
-          ...args: unknown[]
-        ) => void;
-        Cal('init', { origin: 'https://app.cal.com' });
-        Cal('inline', {
-          elementOrSelector: '#cal-booking-embed',
-          calLink,
-        });
-        Cal('ui', {
-          styles: { branding: { brandColor: '#C9A84C' } },
-          hideEventTypeDetails: false,
-        });
-      }
-    };
-    document.head.appendChild(script);
-    return () => {
-      document.head.removeChild(script);
-    };
+    getCalApi().then((cal) => {
+      cal('ui', {
+        theme: 'dark',
+        styles: { branding: { brandColor: '#C5A572' } },
+        hideEventTypeDetails: false,
+      });
+      setReady(true);
+    });
   }, [calLink]);
 
   if (!calLink) {
     return (
-      <div
-        className={`flex items-center justify-center rounded border border-gold/30 bg-navy/60 p-8 text-center text-sm text-gold/60 ${className}`}
-      >
-        Cal.com booking URL not configured.
-        <br />
-        Set <code>NEXT_PUBLIC_CAL_BOOKING_URL</code> in your environment.
+      <div className="flex min-h-[720px] items-center justify-center border border-[#21262d] bg-[#0e1116] p-8 text-center text-sm text-[#6e7681]">
+        Booking not configured. Set{' '}
+        <code className="mx-1 font-mono text-[#c5a572]">NEXT_PUBLIC_CAL_BOOKING_URL</code>.
       </div>
     );
   }
 
   return (
-    <div
-      id="cal-booking-embed"
-      className={`min-h-[600px] w-full ${className}`}
-      style={{ colorScheme: 'dark' }}
-    />
+    <div className="relative min-h-[720px] w-full">
+      {!ready && <div className="absolute inset-0 animate-pulse bg-[#0e1116]" aria-hidden="true" />}
+      <Cal
+        calLink={calLink}
+        style={{ width: '100%', height: '720px', overflow: 'scroll' }}
+        config={{ layout: 'month_view' }}
+      />
+    </div>
   );
 }
