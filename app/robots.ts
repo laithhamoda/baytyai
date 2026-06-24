@@ -5,9 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/'],
+      disallow: ['/api/', '/dashboard/', '/account/', '/admin/'],
     },
-    sitemap: 'https://www.baytyai.com/sitemap.xml',
-    host: 'https://www.baytyai.com',
+    sitemap: 'https://baytyai.com/sitemap.xml',
   };
 }
