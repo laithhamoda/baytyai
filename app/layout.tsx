@@ -1,3 +1,5 @@
+import { siteConfig } from '@/lib/siteConfig';
+
 import { Inter_Tight, JetBrains_Mono, IBM_Plex_Sans_Arabic } from 'next/font/google';
 
 import './globals.css';
@@ -6,6 +8,7 @@ import CookieBanner from '@/components/cookie-banner';
 import Footer from '@/components/footer';
 import LeadCaptureProvider from '@/components/forms/lead-capture-provider';
 import Navigation from '@/components/navigation';
+import JsonLd from '@/components/seo/JsonLd';
 
 import type { Metadata } from 'next';
 
@@ -30,24 +33,50 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   display: 'swap',
 });
 
-const SITE_TITLE = 'BaytyAI — AI-Native Operations Infrastructure for GCC FM & Construction';
+// title.default: 49 chars  ✓ (<60)
+// description:  142 chars  ✓ (<155)
+const SITE_TITLE = 'BaytyAI — AI for Facilities Management in the GCC';
 const SITE_DESCRIPTION =
-  'Operator-grade AI prompt libraries and workflows that protect contract margin, accelerate mobilization, and harden SLA performance on contracts above $5M.';
+  'AI-native operations for GCC FM and Construction mega-projects. Protect margin, accelerate mobilization, defend SLAs on contracts above $5M.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.baytyai.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl),
   title: {
     template: '%s | BaytyAI',
     default: SITE_TITLE,
   },
   description: SITE_DESCRIPTION,
+  authors: [{ name: 'Laith Hamoda', url: siteConfig.founder.linkedin }],
+  keywords: [
+    'AI for facilities management GCC',
+    'construction mega project AI',
+    'FM contract margin',
+    'GCC FM software',
+    'AI prompt engineer construction',
+    'facilities management Saudi Arabia',
+    'facilities management UAE',
+  ],
+  alternates: {
+    canonical: '/',
+    languages: { en: '/', ar: '/ar' },
+  },
+  robots: { index: true, follow: true },
   openGraph: {
     type: 'website',
     siteName: 'BaytyAI',
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    url: 'https://www.baytyai.com',
-    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
+    url: siteConfig.siteUrl,
+    locale: 'en_US',
+    alternateLocale: ['ar_AE'],
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'BaytyAI — AI for GCC Facilities Management and Construction',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -57,38 +86,6 @@ export const metadata: Metadata = {
   },
 };
 
-const serviceSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Service',
-  name: 'BaytyAI',
-  serviceType: 'AI Operations Infrastructure',
-  url: 'https://www.baytyai.com',
-  description: SITE_DESCRIPTION,
-  areaServed: {
-    '@type': 'Place',
-    name: 'Gulf Cooperation Council (GCC)',
-  },
-  provider: {
-    '@type': 'Person',
-    name: 'Laith Hamoda',
-    jobTitle: 'Senior AI Prompt Engineer for Mega Projects',
-    url: 'https://www.linkedin.com/in/laithhamoda',
-  },
-};
-
-const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'BaytyAI',
-  url: 'https://www.baytyai.com',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'founder@baytyai.com',
-    contactType: 'sales',
-  },
-  sameAs: ['https://www.linkedin.com/in/laithhamoda'],
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -96,14 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${interTight.variable} ${jetbrainsMono.variable} ${ibmPlexSansArabic.variable}`}
     >
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
+        <JsonLd />
         <LeadCaptureProvider>
           <Navigation />
           <main id="main-content">{children}</main>
