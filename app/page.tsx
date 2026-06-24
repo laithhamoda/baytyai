@@ -1,50 +1,46 @@
-import AICapabilities from '@/components/sections/ai-capabilities';
-import BeforeAfter from '@/components/sections/before-after';
-import FeatureTiles from '@/components/sections/feature-tiles';
-import Hero from '@/components/sections/hero';
-import HowItWorks from '@/components/sections/how-it-works';
-import MarketplaceJoin from '@/components/sections/marketplace-join';
-import PricingCards from '@/components/sections/pricing-cards';
-import Problem from '@/components/sections/problem';
-import { getContent } from '@/lib/cms';
+import Faq from '@/components/sections/lp-faq';
+import FinalCta from '@/components/sections/lp-final-cta';
+import LpFooter from '@/components/sections/lp-footer';
+import Founder from '@/components/sections/lp-founder';
+import Hero from '@/components/sections/lp-hero';
+import Pricing from '@/components/sections/lp-pricing';
+import Problem from '@/components/sections/lp-problem';
+import Process from '@/components/sections/lp-process';
+import Proof from '@/components/sections/lp-proof';
+import System from '@/components/sections/lp-system';
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Bayty AI — Construction Management Software UAE & GCC | Verified Platform' },
+  title: {
+    absolute:
+      'BaytyAI — AI-Native Operations Infrastructure for GCC FM & Construction | Strategy Consultation',
+  },
   description:
-    'The verified construction management platform for UAE and GCC developers. Verified stakeholders, structured approvals, document hub, and a trusted professional marketplace.',
+    'Operator-grade AI prompt libraries and workflows that protect contract margin, accelerate mobilization, and harden SLA performance on FM and Construction contracts above $5M in the GCC.',
   alternates: {
     canonical: 'https://www.baytyai.com',
     languages: {
       en: 'https://www.baytyai.com',
       ar: 'https://www.baytyai.com/ar',
-      'ar-AE': 'https://www.baytyai.com/ar',
       'x-default': 'https://www.baytyai.com',
     },
   },
-  openGraph: {
-    url: 'https://www.baytyai.com',
-  },
 };
 
-export default async function Home() {
-  const [overline, headline, subhead] = await Promise.all([
-    getContent('hero.overline'),
-    getContent('hero.headline'),
-    getContent('hero.subhead'),
-  ]);
-
+export default function Home() {
   return (
     <>
-      <Hero overline={overline} headline={headline} subhead={subhead} />
+      <Hero />
       <Problem />
-      <BeforeAfter />
-      <HowItWorks />
-      <FeatureTiles />
-      <AICapabilities />
-      <MarketplaceJoin />
-      <PricingCards />
+      <System />
+      <Proof />
+      <Founder />
+      <Process />
+      <Pricing />
+      <Faq />
+      <FinalCta />
+      <LpFooter />
     </>
   );
 }
