@@ -31,6 +31,7 @@ export default function Process() {
       <Container>
         <SectionHeading
           eyebrow="HOW AN ENGAGEMENT WORKS"
+          id="process-heading"
           h2="Four steps. No retainer roulette."
           className="mb-16"
         />

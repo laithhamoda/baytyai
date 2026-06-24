@@ -36,6 +36,7 @@ export default function Pricing() {
       <Container>
         <SectionHeading
           eyebrow="PRICING"
+          id="pricing-heading"
           h2="Transparent pricing. Anchored to recoverable margin."
           sub="Every engagement begins with a paid Strategy Consultation. The full diagnostic and embedded tiers are scoped against the contract value at stake."
           className="mb-16"

@@ -30,6 +30,7 @@ export default function Founder() {
           <div className="flex flex-col gap-8">
             <SectionHeading
               eyebrow="THE OPERATOR BEHIND BAYTYAI"
+              id="founder-heading"
               h2="Laith Hamoda — Senior AI Prompt Engineer for Mega Projects."
             />
 

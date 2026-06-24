@@ -1,7 +1,7 @@
 'use client';
 
 import Cal, { getCalApi } from '@calcom/embed-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { siteConfig } from '@/lib/siteConfig';
 
@@ -10,10 +10,28 @@ interface CalEmbedProps {
 }
 
 export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: CalEmbedProps) {
+  const [inView, setInView] = useState(false);
   const [ready, setReady] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!calLink) return;
+    const el = sentinelRef.current;
+    if (!el || !calLink) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [calLink]);
+
+  useEffect(() => {
+    if (!inView || !calLink) return;
     getCalApi().then((cal) => {
       cal('ui', {
         theme: 'dark',
@@ -22,7 +40,7 @@ export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: C
       });
       setReady(true);
     });
-  }, [calLink]);
+  }, [inView, calLink]);
 
   if (!calLink) {
     return (
@@ -34,13 +52,15 @@ export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: C
   }
 
   return (
-    <div className="relative min-h-[720px] w-full">
+    <div ref={sentinelRef} className="relative min-h-[720px] w-full">
       {!ready && <div className="absolute inset-0 animate-pulse bg-[#0e1116]" aria-hidden="true" />}
-      <Cal
-        calLink={calLink}
-        style={{ width: '100%', height: '720px', overflow: 'scroll' }}
-        config={{ layout: 'month_view' }}
-      />
+      {inView && (
+        <Cal
+          calLink={calLink}
+          style={{ width: '100%', height: '720px', overflow: 'scroll' }}
+          config={{ layout: 'month_view' }}
+        />
+      )}
     </div>
   );
 }

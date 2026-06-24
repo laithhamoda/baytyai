@@ -36,6 +36,7 @@ export default function System() {
       <Container>
         <SectionHeading
           eyebrow="THE BAYTYAI SYSTEM"
+          id="system-heading"
           h2="Three operator-grade AI modules. Built for the contracts that matter."
           sub="BaytyAI is an AI-native operations layer — a library of production prompts, workflows, and decision frameworks deployed against the specific failure modes of GCC FM and Construction delivery."
           className="mb-16"

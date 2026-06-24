@@ -43,6 +43,7 @@ export default function Faq() {
       <Container>
         <SectionHeading
           eyebrow="FAQ"
+          id="faq-heading"
           h2="What GCC operators ask before they book."
           className="mb-16"
         />

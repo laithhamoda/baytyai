@@ -31,6 +31,7 @@ export default function Problem() {
       <Container>
         <SectionHeading
           eyebrow="THE OPERATOR PROBLEM"
+          id="problem-heading"
           h2="Three failure modes are quietly eroding every multi-year FM and Construction contract in the GCC."
           className="mb-16"
         />

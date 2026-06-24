@@ -1,5 +1,3 @@
-'use client';
-
 import CalEmbed from '@/components/booking/CalEmbed';
 import ContactForm from '@/components/booking/ContactForm';
 import Container from '@/components/ds/Container';
@@ -11,6 +9,7 @@ export default function FinalCta() {
       <Container>
         <SectionHeading
           eyebrow="BOOK"
+          id="book-heading"
           h2="Bring one live contract to a 90-minute Strategy Consultation."
           sub="We will map it against the three failure modes and identify the single highest-leverage AI intervention before the call ends. The $750 fee is credited toward any Diagnostic Engagement booked within 30 days."
           align="center"

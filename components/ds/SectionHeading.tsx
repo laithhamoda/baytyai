@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils';
 interface SectionHeadingProps {
   eyebrow?: string;
   h2: string;
+  id?: string;
   sub?: string;
   align?: 'left' | 'center';
   className?: string;
@@ -11,6 +12,7 @@ interface SectionHeadingProps {
 export default function SectionHeading({
   eyebrow,
   h2,
+  id,
   sub,
   align = 'left',
   className,
@@ -28,7 +30,10 @@ export default function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="font-sans text-display-lg font-semibold text-ink-100 [text-wrap:balance]">
+      <h2
+        id={id}
+        className="font-sans text-display-lg font-semibold text-ink-100 [text-wrap:balance]"
+      >
         {h2}
       </h2>
       {sub && (

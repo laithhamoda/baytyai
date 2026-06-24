@@ -15,6 +15,7 @@ export default function Proof() {
       <Container>
         <SectionHeading
           eyebrow="PROOF, IN PUBLIC"
+          id="proof-heading"
           h2="The GCC FM Prompt Series — operator-grade prompts published live on LinkedIn."
           sub="BaytyAI publishes one operator-grade prompt at a time on LinkedIn. Each prompt is one layer of the Contract Margin X-Ray, the 90-Day Mobilization Schedule, or the SLA Defense Architecture — used in production engagements."
           className="mb-16"
