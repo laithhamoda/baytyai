@@ -9,8 +9,13 @@ export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const post = getPost(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) return { title: { absolute: 'Article Not Found — Bayty' } };
   return {
     title: { absolute: `${post.title} — Bayty` },
@@ -94,8 +99,9 @@ function renderBlock(block: Block, i: number) {
   );
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = getPost(slug);
   if (!post) notFound();
 
   const articleSchema = {
