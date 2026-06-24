@@ -6,16 +6,26 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const schema = z.object({
-  name: z.string().min(2, 'Name is required'),
+  name: z.string().min(2, 'Full name is required'),
   email: z.string().email('Valid work email required'),
   company: z.string().min(2, 'Company name is required'),
-  contractValue: z.string().min(1, 'Contract value range is required'),
-  message: z.string().optional(),
+  role: z.enum(['CEO', 'COO', 'Operations Director', 'Commercial Director', 'Other'], {
+    error: 'Role is required',
+  }),
+  contractSize: z.enum(['< $5M', '$5–25M', '$25–100M', '> $100M'], {
+    error: 'Contract size is required',
+  }),
+  message: z.string().min(1, 'Message is required'),
 });
 
 type FormValues = z.infer<typeof schema>;
 
-const CONTRACT_RANGES = ['$5M – $20M', '$20M – $100M', '$100M – $500M', '$500M+'];
+const ROLES = ['CEO', 'COO', 'Operations Director', 'Commercial Director', 'Other'] as const;
+const CONTRACT_SIZES = ['< $5M', '$5–25M', '$25–100M', '> $100M'] as const;
+
+const inputCls =
+  'w-full border border-[#21262d] bg-[#0e1116] px-4 py-3 text-sm text-[#e6e9ee] placeholder:text-[#6e7681] focus:border-[#c5a572]/60 focus:outline-none';
+const errorCls = 'mt-1 text-xs text-red-400';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -43,10 +53,6 @@ export default function ContactForm() {
     }
   }
 
-  const inputCls =
-    'w-full border border-gold/20 bg-navy/60 px-4 py-3 text-sm text-offwhite placeholder:text-offwhite/30 focus:border-gold/60 focus:outline-none';
-  const errorCls = 'mt-1 text-xs text-red-400';
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" noValidate>
       <div>
@@ -62,38 +68,52 @@ export default function ContactForm() {
         {errors.company && <p className={errorCls}>{errors.company.message}</p>}
       </div>
       <div>
-        <select {...register('contractValue')} className={inputCls} defaultValue="">
+        <select {...register('role')} className={inputCls} defaultValue="">
           <option value="" disabled>
-            Contract value range
+            Your role
           </option>
-          {CONTRACT_RANGES.map((r) => (
+          {ROLES.map((r) => (
             <option key={r} value={r}>
               {r}
             </option>
           ))}
         </select>
-        {errors.contractValue && <p className={errorCls}>{errors.contractValue.message}</p>}
+        {errors.role && <p className={errorCls}>{errors.role.message}</p>}
+      </div>
+      <div>
+        <select {...register('contractSize')} className={inputCls} defaultValue="">
+          <option value="" disabled>
+            Contract size band
+          </option>
+          {CONTRACT_SIZES.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+        {errors.contractSize && <p className={errorCls}>{errors.contractSize.message}</p>}
       </div>
       <div>
         <textarea
           {...register('message')}
-          placeholder="What's the contract and the pain? (optional)"
+          placeholder="What's the contract and the pain?"
           rows={4}
           className={inputCls}
         />
+        {errors.message && <p className={errorCls}>{errors.message.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-2 border border-gold bg-gold px-8 py-4 text-sm font-medium uppercase tracking-widest text-navy transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="mt-2 border border-[#c5a572] bg-[#c5a572] px-8 py-4 text-sm font-medium uppercase tracking-widest text-[#07090c] transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'loading' ? 'Sending…' : 'Request Strategy Call'}
       </button>
 
       {status === 'success' && (
-        <p className="text-center text-sm text-gold">
-          Request received. Laith will reply within 24 hours.
+        <p className="text-center text-sm text-[#c5a572]">
+          Received. Laith will reply within one business day from Amman.
         </p>
       )}
       {status === 'error' && (
