@@ -56,19 +56,42 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4" noValidate>
       <div>
-        <input {...register('name')} placeholder="Full name" className={inputCls} />
+        <label htmlFor="cf-name" className="sr-only">
+          Full name
+        </label>
+        <input id="cf-name" {...register('name')} placeholder="Full name" className={inputCls} />
         {errors.name && <p className={errorCls}>{errors.name.message}</p>}
       </div>
       <div>
-        <input {...register('email')} type="email" placeholder="Work email" className={inputCls} />
+        <label htmlFor="cf-email" className="sr-only">
+          Work email
+        </label>
+        <input
+          id="cf-email"
+          {...register('email')}
+          type="email"
+          placeholder="Work email"
+          className={inputCls}
+        />
         {errors.email && <p className={errorCls}>{errors.email.message}</p>}
       </div>
       <div>
-        <input {...register('company')} placeholder="Company" className={inputCls} />
+        <label htmlFor="cf-company" className="sr-only">
+          Company
+        </label>
+        <input
+          id="cf-company"
+          {...register('company')}
+          placeholder="Company"
+          className={inputCls}
+        />
         {errors.company && <p className={errorCls}>{errors.company.message}</p>}
       </div>
       <div>
-        <select {...register('role')} className={inputCls} defaultValue="">
+        <label htmlFor="cf-role" className="sr-only">
+          Your role
+        </label>
+        <select id="cf-role" {...register('role')} className={inputCls} defaultValue="">
           <option value="" disabled>
             Your role
           </option>
@@ -81,7 +104,15 @@ export default function ContactForm() {
         {errors.role && <p className={errorCls}>{errors.role.message}</p>}
       </div>
       <div>
-        <select {...register('contractSize')} className={inputCls} defaultValue="">
+        <label htmlFor="cf-contractSize" className="sr-only">
+          Contract size band
+        </label>
+        <select
+          id="cf-contractSize"
+          {...register('contractSize')}
+          className={inputCls}
+          defaultValue=""
+        >
           <option value="" disabled>
             Contract size band
           </option>
@@ -94,7 +125,11 @@ export default function ContactForm() {
         {errors.contractSize && <p className={errorCls}>{errors.contractSize.message}</p>}
       </div>
       <div>
+        <label htmlFor="cf-message" className="sr-only">
+          Message
+        </label>
         <textarea
+          id="cf-message"
           {...register('message')}
           placeholder="What's the contract and the pain?"
           rows={4}
