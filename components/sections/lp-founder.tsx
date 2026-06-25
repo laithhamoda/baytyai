@@ -1,4 +1,6 @@
 // Server Component
+import Image from 'next/image';
+
 import Badge from '@/components/ds/Badge';
 import Container from '@/components/ds/Container';
 import SectionHeading from '@/components/ds/SectionHeading';
@@ -11,19 +13,38 @@ const CREDENTIALS = [
   'AR / EN / FR',
 ] as const;
 
+function FounderPortrait() {
+  return (
+    <div className="relative h-[320px] w-[320px] shrink-0 overflow-hidden border border-ink-700 bg-ink-800">
+      <Image
+        src="/laith-hamoda.jpg"
+        alt="Laith Hamoda — Founder of BaytyAI"
+        fill
+        sizes="320px"
+        className="object-cover object-top"
+        priority
+        onError={undefined}
+      />
+      {/* Fallback monogram — visible only if image is missing (CSS layer trick) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 flex items-center justify-center bg-ink-800"
+        style={{ zIndex: -1 }}
+      >
+        <span className="font-mono text-4xl font-medium tracking-widest text-signal-500">LH</span>
+      </div>
+    </div>
+  );
+}
+
 export default function Founder() {
   return (
     <section id="founder" aria-labelledby="founder-heading" className="bg-ink-950 py-24">
       <Container>
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:gap-24">
-          {/* Portrait slot */}
+          {/* Portrait */}
           <div className="shrink-0">
-            {/* TODO_FOUNDER_PORTRAIT */}
-            <div className="flex h-[320px] w-[320px] items-center justify-center border border-ink-700 bg-ink-800">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
-                Portrait placeholder
-              </span>
-            </div>
+            <FounderPortrait />
           </div>
 
           {/* Content */}

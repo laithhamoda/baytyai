@@ -4,9 +4,27 @@ import SectionHeading from '@/components/ds/SectionHeading';
 import { siteConfig } from '@/lib/siteConfig';
 
 const PROMPTS = [
-  { n: '01', title: 'Prompt 01', comment: 'TODO_PROOF_EXCERPT_01' },
-  { n: '02', title: 'Prompt 02', comment: 'TODO_PROOF_EXCERPT_02' },
-  { n: '03', title: 'Prompt 03', comment: 'TODO_PROOF_EXCERPT_03' },
+  {
+    n: '01',
+    title: 'Contract Margin X-Ray',
+    module: 'Margin Recovery',
+    excerpt:
+      'Most FM contracts bleed 2–4% in the first 90 days. Not through fraud — through scope ambiguity, reactive maintenance loops, and SLA clauses that were never operationalised. This prompt maps every clause to a measurable cost driver before the first invoice is raised.',
+  },
+  {
+    n: '02',
+    title: '90-Day Mobilisation Schedule',
+    module: 'Mobilisation',
+    excerpt:
+      'The mobilisation window is where GCC mega-projects are won or lost. A missed KPI in week three compounds for 36 months. This prompt generates a day-by-day mobilisation decision tree against your specific contract scope, staffing plan, and CAFM onboarding sequence.',
+  },
+  {
+    n: '03',
+    title: 'SLA Defense Architecture',
+    module: 'SLA Performance',
+    excerpt:
+      'Reactive SLA defence is a penalty waiting to happen. This prompt builds a forward-looking response matrix — by asset class, criticality tier, and seasonal load — so your team intercepts breaches before they are logged, not after the client escalation.',
+  },
 ] as const;
 
 export default function Proof() {
@@ -24,14 +42,14 @@ export default function Proof() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {PROMPTS.map((p) => (
             <div key={p.n} className="flex flex-col gap-4 border border-ink-700 bg-ink-800 p-8">
-              <span className="font-mono text-[10px] text-ink-500">PROMPT {p.n}</span>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-ink-500">PROMPT {p.n}</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-signal-500">
+                  {p.module}
+                </span>
+              </div>
               <h3 className="font-sans text-base font-semibold text-ink-100">{p.title}</h3>
-              {/* TODO_PROOF_EXCERPT_01 */}
-              {/* TODO_PROOF_EXCERPT_02 */}
-              {/* TODO_PROOF_EXCERPT_03 */}
-              <p className="font-sans text-sm italic leading-relaxed text-ink-500">
-                [LinkedIn post excerpt — to be added before deploy]
-              </p>
+              <p className="font-sans text-sm leading-relaxed text-ink-300">{p.excerpt}</p>
             </div>
           ))}
         </div>
