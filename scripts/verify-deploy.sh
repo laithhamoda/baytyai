@@ -50,7 +50,10 @@ check "robots.txt references sitemap" grep -qi 'sitemap' <<<"$robots"
 # 3. sitemap.xml reachable and well-formed-ish
 sitemap="$(curl -sS -L --max-time 20 "$BASE_URL/sitemap.xml")"
 check "sitemap.xml is XML" grep -q '<urlset' <<<"$sitemap"
-check "sitemap lists homepage" grep -q "<loc>$BASE_URL/</loc>" <<<"$sitemap"
+# The sitemap always emits canonical production URLs (no trailing slash),
+# independent of the host being tested — so assert on structure, not BASE_URL.
+check "sitemap lists at least one URL" grep -q '<loc>https\?://[^<]*</loc>' <<<"$sitemap"
+check "sitemap includes the /ar locale" grep -q '/ar</loc>' <<<"$sitemap"
 
 # 4. OG image renders as PNG
 octype="$(curl -sS -o /dev/null -w '%{content_type}' -L --max-time 30 "$BASE_URL/opengraph-image")"

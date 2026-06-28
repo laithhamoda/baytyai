@@ -51,7 +51,7 @@ Validators:
 ## Google Search Console
 
 1. Add domain property for `baytyai.com`
-2. Submit sitemap: `https://baytyai.com/sitemap.xml`
+2. Submit sitemap: `https://www.baytyai.com/sitemap.xml`
 3. Request indexing for homepage
 
 ## Manual TODO Items (Laith)
