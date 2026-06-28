@@ -117,7 +117,7 @@ export default function LoginClient() {
             marginBottom: '12px',
           }}
         >
-          {step === 'email' ? 'Sign in to Bayty' : 'Enter your code'}
+          {step === 'email' ? 'Sign in to BaytyAI' : 'Enter your code'}
         </h1>
         <p
           style={{
