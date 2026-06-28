@@ -8,20 +8,20 @@ export const metadata: Metadata = {
   title: { absolute: 'Bayty Insights — GCC Construction Technology & Compliance' },
   description:
     'Guides and analysis on construction management, contractor verification, approval workflows, and compliance across the UAE and GCC.',
-  alternates: { canonical: 'https://www.baytyai.com/blog' },
+  alternates: { canonical: 'https://baytyai.com/blog' },
 };
 
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
   name: 'Bayty Insights',
-  url: 'https://www.baytyai.com/blog',
+  url: 'https://baytyai.com/blog',
   blogPost: POSTS.map((p) => ({
     '@type': 'BlogPosting',
     headline: p.title,
     description: p.description,
     datePublished: p.date,
-    url: `https://www.baytyai.com/blog/${p.slug}`,
+    url: `https://baytyai.com/blog/${p.slug}`,
   })),
 };
 

@@ -6,25 +6,25 @@ export const metadata: Metadata = {
   title: { absolute: 'For Suppliers — Bayty Construction Marketplace UAE' },
   description:
     'Bayty connects verified material and equipment suppliers to active GCC construction projects, with structured requests, quoting, and protected payments.',
-  alternates: { canonical: 'https://www.baytyai.com/solutions/suppliers' },
+  alternates: { canonical: 'https://baytyai.com/solutions/suppliers' },
 };
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.baytyai.com' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://baytyai.com' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Solutions',
-      item: 'https://www.baytyai.com/solutions',
+      item: 'https://baytyai.com/solutions',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Suppliers',
-      item: 'https://www.baytyai.com/solutions/suppliers',
+      item: 'https://baytyai.com/solutions/suppliers',
     },
   ],
 };

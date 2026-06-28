@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: 'About — BaytyAI',
   description:
     'BaytyAI builds AI-native operations infrastructure for Facilities Management and Construction mega-projects across the GCC. Founded by Laith Hamoda, Senior AI Prompt Engineer.',
-  alternates: { canonical: 'https://www.baytyai.com/about' },
+  alternates: { canonical: 'https://baytyai.com/about' },
 };
 
 const VALUES = [

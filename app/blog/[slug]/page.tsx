@@ -20,12 +20,12 @@ export async function generateMetadata({
   return {
     title: { absolute: `${post.title} — Bayty` },
     description: post.description,
-    alternates: { canonical: `https://www.baytyai.com/blog/${post.slug}` },
+    alternates: { canonical: `https://baytyai.com/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
       type: 'article',
-      url: `https://www.baytyai.com/blog/${post.slug}`,
+      url: `https://baytyai.com/blog/${post.slug}`,
     },
   };
 }
@@ -115,9 +115,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     publisher: {
       '@type': 'Organization',
       name: 'Bayty Technologies',
-      logo: { '@type': 'ImageObject', url: 'https://www.baytyai.com/logo.png' },
+      logo: { '@type': 'ImageObject', url: 'https://baytyai.com/logo.png' },
     },
-    mainEntityOfPage: `https://www.baytyai.com/blog/${post.slug}`,
+    mainEntityOfPage: `https://baytyai.com/blog/${post.slug}`,
     keywords: post.keyword,
   };
 

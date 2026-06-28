@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/dashboard/', '/account/', '/admin/'],
     },
-    sitemap: 'https://www.baytyai.com/sitemap.xml',
+    sitemap: 'https://baytyai.com/sitemap.xml',
   };
 }

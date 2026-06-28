@@ -12,18 +12,18 @@ const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.baytyai.com' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://baytyai.com' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Solutions',
-      item: 'https://www.baytyai.com/solutions',
+      item: 'https://baytyai.com/solutions',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Contractors',
-      item: 'https://www.baytyai.com/solutions/contractors',
+      item: 'https://baytyai.com/solutions/contractors',
     },
   ],
 };

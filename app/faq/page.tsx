@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Bayty FAQ — Construction Management Platform UAE & GCC',
   description:
     'Answers about Bayty: what it is, who uses it, how verification works, pricing, security, and the verified professional marketplace for GCC construction.',
-  alternates: { canonical: 'https://www.baytyai.com/faq' },
+  alternates: { canonical: 'https://baytyai.com/faq' },
 };
 
 const faqSchema = {

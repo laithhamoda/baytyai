@@ -32,7 +32,7 @@ export default function PrivacyPage() {
         <Section title="1. Introduction">
           <p style={body}>
             Bayty Technologies ("Bayty", "we", "us", or "our") operates the platform accessible at{' '}
-            <a href="https://www.baytyai.com" style={link}>
+            <a href="https://baytyai.com" style={link}>
               baytyai.com
             </a>{' '}
             (the "Platform"). We are a technology company incorporated under the laws of the United
@@ -394,7 +394,7 @@ export default function PrivacyPage() {
             </a>
             <br />
             <strong style={{ fontWeight: 500 }}>Platform:</strong>{' '}
-            <a href="https://www.baytyai.com" style={link}>
+            <a href="https://baytyai.com" style={link}>
               baytyai.com
             </a>
             <br />
