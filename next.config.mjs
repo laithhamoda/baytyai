@@ -55,6 +55,18 @@ const nextConfig = {
         destination: 'https://www.baytyai.com/:path*',
         permanent: true,
       },
+      // Retired old-product marketing routes → the single-page landing.
+      // Temporary (307) so they can be reinstated as real pages later.
+      { source: '/product', destination: '/', permanent: false },
+      { source: '/solutions', destination: '/', permanent: false },
+      { source: '/solutions/:path*', destination: '/', permanent: false },
+      { source: '/pricing', destination: '/', permanent: false },
+      { source: '/faq', destination: '/', permanent: false },
+      { source: '/demo', destination: '/', permanent: false },
+      { source: '/contact', destination: '/', permanent: false },
+      { source: '/request-access', destination: '/', permanent: false },
+      { source: '/blog', destination: '/', permanent: false },
+      { source: '/blog/:path*', destination: '/', permanent: false },
     ];
   },
   async headers() {
