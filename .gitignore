@@ -1,39 +1,40 @@
-# .NET
-bin/
-obj/
-*.user
-*.suo
-.vs/
-*.db
-*.db-shm
-*.db-wal
-appsettings.Development.json
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
 
-# Secrets — never commit
-appsettings.local.json
-*.pfx
-*.p12
-secrets.json
+# testing
+/coverage
 
-# EF Core migration snapshots are committed, but ignore the design-time cache
-*.designer.cs
+# next.js
+/.next/
+/out/
 
-# Angular
-baytyai-angular/node_modules/
-baytyai-angular/dist/
-baytyai-angular/.angular/
+# production
+/build
 
-# OS
+# misc
 .DS_Store
-Thumbs.db
+*.pem
 
-# Logs
-*.log
+# debug
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# IDE
-.vscode/
-.idea/
+# local env files
+.env*.local
 
-# Claude Code
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
 .claude/worktrees/
+
+# Playwright auth state & artifacts
+.auth/
+test-results/
+playwright-report/

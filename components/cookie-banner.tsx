@@ -1,0 +1,206 @@
+'use client';
+
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+
+const CONSENT_KEY = 'bayty_consent';
+const CONSENT_TS_KEY = 'bayty_consent_ts';
+
+type Consent = 'all' | 'essential';
+
+export default function CookieBanner() {
+  const [visible, setVisible] = useState(false);
+  const [showPrefs, setShowPrefs] = useState(false);
+  const [analytics, setAnalytics] = useState(false);
+  const [marketing, setMarketing] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(CONSENT_KEY)) setVisible(true);
+    } catch {
+      setVisible(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!showPrefs) return;
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setShowPrefs(false);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [showPrefs]);
+
+  function persist(value: Consent) {
+    try {
+      localStorage.setItem(CONSENT_KEY, value);
+      localStorage.setItem(CONSENT_TS_KEY, new Date().toISOString());
+    } catch {
+      /* storage unavailable — ignore */
+    }
+    // Notify the Analytics component so GA loads/unloads without a reload.
+    try {
+      window.dispatchEvent(new Event('bayty-consent-changed'));
+    } catch {
+      /* ignore */
+    }
+    setVisible(false);
+    setShowPrefs(false);
+  }
+
+  if (!visible) return null;
+
+  return (
+    <>
+      {/* Banner */}
+      <div
+        data-testid="cookie-banner"
+        className="bg-navy text-offwhite fixed inset-x-0 bottom-0 z-50 px-6 py-5"
+        style={{ borderTop: '0.5px solid rgba(201,168,76,0.3)' }}
+      >
+        <div className="mx-auto flex max-w-container flex-col items-start justify-between gap-5 md:flex-row md:items-center">
+          <p className="font-body text-offwhite/65 max-w-xl text-[13px] font-light leading-relaxed">
+            We use cookies on Bayty. Essential cookies keep the platform working. Analytics cookies
+            help us improve your experience.{' '}
+            <Link href="/cookies" className="text-gold underline">
+              Cookie Policy
+            </Link>
+          </p>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              data-testid="cookie-accept"
+              onClick={() => persist('all')}
+              className="bg-gold font-body text-navy px-5 py-3 text-[12px] font-medium uppercase tracking-widest"
+              style={{ borderRadius: 0 }}
+            >
+              Accept all
+            </button>
+            <button
+              data-testid="cookie-reject"
+              onClick={() => persist('essential')}
+              className="font-body text-gold bg-transparent px-5 py-3 text-[12px] font-normal uppercase tracking-widest"
+              style={{ border: '0.5px solid #C9A84C', borderRadius: 0 }}
+            >
+              Decline non-essential
+            </button>
+            <button
+              data-testid="cookie-manage"
+              onClick={() => setShowPrefs(true)}
+              className="font-body text-offwhite/60 text-[12px] font-normal tracking-[0.06em] underline"
+            >
+              Manage preferences ↗
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Preferences modal */}
+      {showPrefs && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-6">
+          {/* Backdrop: a real button so it's keyboard-accessible (Enter/Space close) */}
+          <button
+            type="button"
+            aria-label="Close cookie preferences"
+            onClick={() => setShowPrefs(false)}
+            className="bg-navy/80 absolute inset-0"
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Cookie preferences"
+            className="relative w-full max-w-md p-10"
+            style={{
+              backgroundColor: '#0F1E35',
+              border: '0.5px solid rgba(201,168,76,0.3)',
+              borderRadius: 0,
+            }}
+          >
+            <h2 className="font-display text-offwhite mb-6 text-2xl font-semibold">
+              Cookie preferences
+            </h2>
+
+            <ToggleRow
+              label="Essential cookies"
+              description="Required for the platform to function. Always active."
+              checked
+              disabled
+              onChange={() => {}}
+            />
+            <ToggleRow
+              label="Analytics cookies"
+              description="Help us understand which features are most useful."
+              checked={analytics}
+              onChange={() => setAnalytics((v) => !v)}
+            />
+            <ToggleRow
+              label="Marketing cookies"
+              description="Not currently used by Bayty."
+              checked={marketing}
+              onChange={() => setMarketing((v) => !v)}
+            />
+
+            <button
+              onClick={() => persist(analytics || marketing ? 'all' : 'essential')}
+              className="bg-gold font-body text-navy mt-7 w-full py-3 text-[12px] font-medium uppercase tracking-[0.12em]"
+              style={{ borderRadius: 0 }}
+            >
+              Save preferences
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+function ToggleRow({
+  label,
+  description,
+  checked,
+  disabled,
+  onChange,
+}: {
+  label: string;
+  description: string;
+  checked: boolean;
+  disabled?: boolean;
+  onChange: () => void;
+}) {
+  return (
+    <div
+      className="flex items-start justify-between gap-4 py-4"
+      style={{ borderBottom: '0.5px solid rgba(201,168,76,0.15)' }}
+    >
+      <div>
+        <p className="font-body text-offwhite mb-1 text-sm font-medium">{label}</p>
+        <p className="font-body text-offwhite/50 text-xs font-light leading-snug">{description}</p>
+      </div>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={label}
+        disabled={disabled}
+        onClick={onChange}
+        className="relative h-6 w-11 flex-shrink-0 transition-colors"
+        style={{
+          borderRadius: '999px',
+          border: '0.5px solid rgba(201,168,76,0.4)',
+          backgroundColor: checked ? '#C9A84C' : 'transparent',
+          cursor: disabled ? 'not-allowed' : 'pointer',
+          opacity: disabled ? 0.5 : 1,
+        }}
+      >
+        <span
+          className="absolute top-[2px] h-[18px] w-[18px] transition-all"
+          style={{
+            left: checked ? '22px' : '2px',
+            borderRadius: '999px',
+            backgroundColor: checked ? '#0A1628' : '#C9A84C',
+          }}
+        />
+      </button>
+    </div>
+  );
+}
