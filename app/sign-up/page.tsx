@@ -1,11 +1,7 @@
-import AuthForm from '@/components/auth-form';
+import { redirect } from 'next/navigation';
 
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'Create Account — Bayty',
-};
-
+// Canonical auth is the Supabase email one-time-code flow at /login.
+// /sign-up is kept as a stable URL and redirects there.
 export default function SignUpPage() {
-  return <AuthForm mode="sign-up" />;
+  redirect('/login');
 }
