@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   description:
     'بنية تشغيلية مدعومة بالذكاء الاصطناعي لمشغّلي إدارة المرافق ومشاريع البناء الكبرى في الخليج. نحمي هوامش العقود، ونسرّع التعبئة، ونعزز أداء اتفاقيات مستوى الخدمة على العقود التي تتجاوز 5 ملايين دولار.',
   alternates: {
-    canonical: 'https://www.baytyai.com/ar',
+    canonical: 'https://baytyai.com/ar',
     languages: {
-      en: 'https://www.baytyai.com',
-      ar: 'https://www.baytyai.com/ar',
-      'ar-AE': 'https://www.baytyai.com/ar',
-      'x-default': 'https://www.baytyai.com',
+      en: 'https://baytyai.com',
+      ar: 'https://baytyai.com/ar',
+      'ar-AE': 'https://baytyai.com/ar',
+      'x-default': 'https://baytyai.com',
     },
   },
 };

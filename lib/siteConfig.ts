@@ -1,5 +1,5 @@
 export const siteConfig = {
-  siteUrl: 'https://www.baytyai.com',
+  siteUrl: 'https://baytyai.com',
   siteName: 'BaytyAI',
   tagline:
     'AI-Native Operations Infrastructure for GCC Facilities Management & Construction Mega Projects',

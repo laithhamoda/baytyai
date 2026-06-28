@@ -6,25 +6,25 @@ export const metadata: Metadata = {
   title: { absolute: 'For Subcontractors — Bayty Construction Platform UAE' },
   description:
     'Bayty gives subcontractors structured installation briefs, supply editing, document access, and milestone-based escrow payments across GCC construction projects.',
-  alternates: { canonical: 'https://www.baytyai.com/solutions/subcontractors' },
+  alternates: { canonical: 'https://baytyai.com/solutions/subcontractors' },
 };
 
 const breadcrumb = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.baytyai.com' },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://baytyai.com' },
     {
       '@type': 'ListItem',
       position: 2,
       name: 'Solutions',
-      item: 'https://www.baytyai.com/solutions',
+      item: 'https://baytyai.com/solutions',
     },
     {
       '@type': 'ListItem',
       position: 3,
       name: 'Subcontractors',
-      item: 'https://www.baytyai.com/solutions/subcontractors',
+      item: 'https://baytyai.com/solutions/subcontractors',
     },
   ],
 };

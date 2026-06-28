@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   description:
     'Operator-grade AI prompt libraries and workflows that protect contract margin, accelerate mobilization, and harden SLA performance on FM and Construction contracts above $5M in the GCC.',
   alternates: {
-    canonical: 'https://www.baytyai.com',
+    canonical: 'https://baytyai.com',
     languages: {
-      en: 'https://www.baytyai.com',
-      ar: 'https://www.baytyai.com/ar',
-      'x-default': 'https://www.baytyai.com',
+      en: 'https://baytyai.com',
+      ar: 'https://baytyai.com/ar',
+      'x-default': 'https://baytyai.com',
     },
   },
 };
