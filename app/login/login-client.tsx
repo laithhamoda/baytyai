@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
@@ -8,26 +7,11 @@ import { createClient } from '@/lib/supabase/client';
 
 type Step = 'email' | 'code';
 
-const NAVY = '#0A1628';
-const GOLD = '#C9A84C';
-const sans = "var(--font-body, 'DM Sans', system-ui, sans-serif)";
-const serif = "var(--font-display, 'Cormorant Garamond', Georgia, serif)";
-
-const field: React.CSSProperties = {
-  width: '100%',
-  height: '52px',
-  backgroundColor: 'transparent',
-  border: 'none',
-  borderBottom: '0.5px solid rgba(201,168,76,0.5)',
-  borderRadius: 0,
-  color: '#F8F6F1',
-  fontFamily: sans,
-  fontWeight: 300,
-  fontSize: '16px',
-  padding: '0 0 0 2px',
-  outline: 'none',
-  letterSpacing: '0.02em',
-};
+const fieldCls =
+  'w-full border-b border-signal-500/40 bg-transparent px-1 py-3 text-base text-ink-100 placeholder:text-ink-500 focus:border-signal-500 focus:outline-none';
+const labelCls = 'mb-1.5 block font-mono text-[10px] uppercase tracking-[0.16em] text-ink-500';
+const btnCls =
+  'h-14 w-full bg-signal-500 font-sans text-sm font-medium uppercase tracking-[0.14em] text-ink-950 transition-colors hover:bg-signal-600 disabled:cursor-wait disabled:opacity-70';
 
 export default function LoginClient() {
   const router = useRouter();
@@ -72,11 +56,7 @@ export default function LoginClient() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.verifyOtp({
-      email,
-      token: code,
-      type: 'email',
-    });
+    const { error } = await supabase.auth.verifyOtp({ email, token: code, type: 'email' });
     setBusy(false);
     if (error) {
       setError('That code is invalid or expired. Request a new one.');
@@ -87,59 +67,26 @@ export default function LoginClient() {
   }
 
   return (
-    <div
-      style={{
-        backgroundColor: NAVY,
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '120px 24px 64px',
-      }}
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        style={{ width: '100%', maxWidth: '420px' }}
-      >
-        <div
-          style={{ width: '40px', height: '0.5px', backgroundColor: GOLD, margin: '0 auto 32px' }}
-        />
-        <h1
-          style={{
-            fontFamily: serif,
-            fontWeight: 300,
-            fontSize: '40px',
-            lineHeight: 1.1,
-            color: '#F8F6F1',
-            textAlign: 'center',
-            marginBottom: '12px',
-          }}
-        >
-          {step === 'email' ? 'Sign in to BaytyAI' : 'Enter your code'}
+    <div className="flex min-h-screen items-center justify-center bg-ink-950 px-6 pb-16 pt-32">
+      <div className="w-full max-w-[420px]">
+        <div className="mx-auto mb-8 h-px w-10 bg-signal-500" />
+        <h1 className="mb-3 text-center font-sans text-3xl font-semibold text-ink-100">
+          {step === 'email' ? (
+            <>
+              Sign in to Bayty<span className="text-signal-500">AI</span>
+            </>
+          ) : (
+            'Enter your code'
+          )}
         </h1>
-        <p
-          style={{
-            fontFamily: sans,
-            fontWeight: 300,
-            fontSize: '14px',
-            color: 'rgba(248,246,241,0.5)',
-            textAlign: 'center',
-            marginBottom: '48px',
-            lineHeight: 1.6,
-          }}
-        >
+        <p className="mb-12 text-center font-sans text-sm leading-relaxed text-ink-300">
           {step === 'email' ? "Enter your email and we'll send a one-time code." : notice}
         </p>
 
         {step === 'email' ? (
-          <form
-            onSubmit={sendCode}
-            style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}
-          >
+          <form onSubmit={sendCode} className="flex flex-col gap-7">
             <div>
-              <label htmlFor="email" style={labelStyle}>
+              <label htmlFor="email" className={labelCls}>
                 Email
               </label>
               <input
@@ -150,25 +97,22 @@ export default function LoginClient() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@company.ae"
-                style={field}
+                className={fieldCls}
               />
             </div>
             {error && (
-              <p role="alert" style={errStyle}>
+              <p role="alert" className="font-sans text-sm leading-snug text-alert-500">
                 {error}
               </p>
             )}
-            <button type="submit" disabled={busy} style={btn(busy)}>
+            <button type="submit" disabled={busy} className={btnCls}>
               {busy ? 'Sending…' : 'Send code'}
             </button>
           </form>
         ) : (
-          <form
-            onSubmit={verifyCode}
-            style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}
-          >
+          <form onSubmit={verifyCode} className="flex flex-col gap-7">
             <div>
-              <label htmlFor="code" style={labelStyle}>
+              <label htmlFor="code" className={labelCls}>
                 Sign-in code
               </label>
               <input
@@ -180,15 +124,15 @@ export default function LoginClient() {
                 value={code}
                 onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
                 placeholder="000000"
-                style={{ ...field, letterSpacing: '0.4em', fontSize: '22px' }}
+                className={`${fieldCls} text-[22px] tracking-[0.4em]`}
               />
             </div>
             {error && (
-              <p role="alert" style={errStyle}>
+              <p role="alert" className="font-sans text-sm leading-snug text-alert-500">
                 {error}
               </p>
             )}
-            <button type="submit" disabled={busy} style={btn(busy)}>
+            <button type="submit" disabled={busy} className={btnCls}>
               {busy ? 'Verifying…' : 'Verify and continue'}
             </button>
             <button
@@ -198,56 +142,13 @@ export default function LoginClient() {
                 setCode('');
                 setError('');
               }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'rgba(248,246,241,0.5)',
-                fontFamily: sans,
-                fontSize: '13px',
-                cursor: 'pointer',
-                textDecoration: 'underline',
-              }}
+              className="font-sans text-sm text-ink-300 underline transition-colors hover:text-signal-500"
             >
               Use a different email
             </button>
           </form>
         )}
-      </motion.div>
+      </div>
     </div>
   );
-}
-
-const labelStyle: React.CSSProperties = {
-  fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-  fontSize: '10px',
-  letterSpacing: '0.16em',
-  textTransform: 'uppercase',
-  color: 'rgba(248,246,241,0.5)',
-  marginBottom: '6px',
-  display: 'block',
-};
-
-const errStyle: React.CSSProperties = {
-  fontFamily: sans,
-  fontSize: '13px',
-  color: '#C87878',
-  lineHeight: 1.5,
-};
-
-function btn(busy: boolean): React.CSSProperties {
-  return {
-    width: '100%',
-    height: '56px',
-    backgroundColor: GOLD,
-    color: NAVY,
-    border: 'none',
-    borderRadius: 0,
-    fontFamily: sans,
-    fontWeight: 500,
-    fontSize: '13px',
-    letterSpacing: '0.14em',
-    textTransform: 'uppercase',
-    cursor: busy ? 'wait' : 'pointer',
-    opacity: busy ? 0.7 : 1,
-  };
 }

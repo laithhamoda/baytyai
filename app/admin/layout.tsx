@@ -8,7 +8,7 @@ import { signOutUser } from './actions';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Admin — Bayty' },
+  title: { absolute: 'Admin — BaytyAI' },
   robots: { index: false, follow: false },
 };
 
@@ -21,50 +21,17 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   // Signed in but not an admin → explicit refusal, not a redirect loop.
   if (user.role !== 'admin') {
     return (
-      <div
-        style={{
-          backgroundColor: '#0A1628',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '24px',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: '420px' }}>
-          <h1
-            style={{
-              fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-              fontWeight: 300,
-              fontSize: '36px',
-              color: '#F8F6F1',
-              marginBottom: '16px',
-            }}
-          >
-            Not authorised
-          </h1>
-          <p
-            style={{
-              fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-              fontWeight: 300,
-              fontSize: '15px',
-              color: 'rgba(248,246,241,0.6)',
-              marginBottom: '28px',
-            }}
-          >
+      <div className="flex min-h-screen items-center justify-center bg-ink-950 px-6 text-center">
+        <div className="max-w-[420px]">
+          <h1 className="mb-4 font-sans text-3xl font-semibold text-ink-100">Not authorised</h1>
+          <p className="mb-7 font-sans text-sm leading-relaxed text-ink-300">
             Your account ({user.email}) does not have admin access.
           </p>
           <Link
             href="/"
-            style={{
-              color: '#C9A84C',
-              fontSize: '13px',
-              borderBottom: '0.5px solid rgba(201,168,76,0.4)',
-              paddingBottom: '2px',
-            }}
+            className="font-sans text-sm text-signal-500 transition-colors hover:text-ink-100"
           >
-            Return to site
+            Return to site →
           </Link>
         </div>
       </div>
@@ -72,79 +39,40 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div style={{ backgroundColor: '#0A1628', minHeight: '100vh', color: '#F8F6F1' }}>
-      <header
-        style={{
-          borderBottom: '0.5px solid rgba(201,168,76,0.25)',
-          padding: '20px 32px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <Link
-            href="/admin"
-            style={{
-              fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-              fontWeight: 600,
-              fontSize: '18px',
-              letterSpacing: '0.2em',
-              color: '#C9A84C',
-              textTransform: 'uppercase',
-            }}
-          >
-            Bayty Admin
-          </Link>
-          <span
-            style={{
-              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-              fontSize: '10px',
-              letterSpacing: '0.15em',
-              color: 'rgba(248,246,241,0.4)',
-              textTransform: 'uppercase',
-            }}
-          >
-            Content
-          </span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <span
-            style={{
-              fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-              fontSize: '13px',
-              color: 'rgba(248,246,241,0.5)',
-            }}
-          >
-            {user.email}
-          </span>
-          <Link href="/" style={{ fontSize: '12px', color: 'rgba(248,246,241,0.6)' }}>
-            View site ↗
-          </Link>
-          <form action={signOutUser}>
-            <button
-              type="submit"
-              style={{
-                fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-                fontSize: '12px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: '#C9A84C',
-                background: 'none',
-                border: '0.5px solid #C9A84C',
-                borderRadius: 0,
-                padding: '8px 16px',
-                cursor: 'pointer',
-              }}
+    <div className="min-h-screen bg-ink-950 text-ink-100">
+      <header className="border-b border-ink-700 px-6 py-5 md:px-8">
+        <div className="mx-auto flex max-w-container items-center justify-between">
+          <div className="flex items-center gap-5">
+            <Link
+              href="/admin"
+              className="font-sans text-lg font-semibold tracking-tight text-ink-100"
             >
-              Sign out
-            </button>
-          </form>
+              Bayty<span className="text-signal-500">AI</span> Admin
+            </Link>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500">
+              Content
+            </span>
+          </div>
+          <div className="flex items-center gap-5">
+            <span className="hidden font-sans text-sm text-ink-300 sm:inline">{user.email}</span>
+            <Link
+              href="/"
+              className="font-sans text-xs text-ink-500 transition-colors hover:text-signal-500"
+            >
+              View site ↗
+            </Link>
+            <form action={signOutUser}>
+              <button
+                type="submit"
+                className="border border-signal-500 px-4 py-2 font-sans text-xs uppercase tracking-[0.08em] text-signal-500 transition-colors hover:bg-signal-500 hover:text-ink-950"
+              >
+                Sign out
+              </button>
+            </form>
+          </div>
         </div>
       </header>
-      <main style={{ maxWidth: '900px', margin: '0 auto', padding: '48px 32px 120px' }}>
-        {children}
-      </main>
+      <main className="mx-auto max-w-[900px] px-6 pb-32 pt-12 md:px-8">{children}</main>
     </div>
   );
 }
