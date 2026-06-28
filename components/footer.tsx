@@ -1,220 +1,101 @@
 'use client';
 
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-const PLATFORM_LINKS = [
-  { label: 'Product', href: '/product' },
-  { label: 'Solutions', href: '/solutions' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Insights', href: '/blog' },
-  { label: 'FAQ', href: '/faq' },
+import { siteConfig } from '@/lib/siteConfig';
+
+type NavLink = { label: string; href: string; external?: boolean };
+
+const NAV_LINKS: NavLink[] = [
+  { label: 'System', href: '/#system' },
+  { label: 'Pricing', href: '/#pricing' },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'GCC FM Prompt Series', href: siteConfig.founder.linkedin, external: true },
   { label: 'About', href: '/about' },
 ];
 
-const LEGAL_LINKS = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'Cookie Policy', href: '/cookies' },
-];
-
-const muted: React.CSSProperties = {
-  fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-  fontWeight: 300,
-  fontSize: '13px',
-  color: 'rgba(248,246,241,0.6)',
-  lineHeight: 1.6,
-};
-
-const colHead: React.CSSProperties = {
-  fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-  fontSize: '10px',
-  letterSpacing: '0.2em',
-  textTransform: 'uppercase',
-  color: 'rgba(248,246,241,0.35)',
-  marginBottom: '20px',
-};
-
-function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
-  const isExternal = /^https?:\/\//.test(href);
-  return (
-    <Link
-      href={href}
-      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-      style={{
-        display: 'block',
-        fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-        fontWeight: 300,
-        fontSize: '13px',
-        color: 'rgba(248,246,241,0.6)',
-        padding: '8px 0',
-        marginBottom: '4px',
-        transition: 'color 0.2s ease',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.color = '#C9A84C';
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(248,246,241,0.6)';
-      }}
-    >
-      {children}
-      {isExternal && (
-        <span
-          style={{
-            position: 'absolute',
-            width: '1px',
-            height: '1px',
-            padding: 0,
-            margin: '-1px',
-            overflow: 'hidden',
-            clip: 'rect(0,0,0,0)',
-            whiteSpace: 'nowrap',
-            border: 0,
-          }}
-        >
-          {' '}
-          (opens in a new tab)
-        </span>
-      )}
-    </Link>
-  );
-}
+// Routes with their own chrome — no marketing footer.
+const HIDDEN_PREFIXES = ['/dashboard', '/admin', '/account', '/login', '/sign-in', '/sign-up'];
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
+
+  const year = new Date().getFullYear();
+
   return (
-    <footer
-      style={{
-        backgroundColor: '#0A1628',
-        borderTop: '0.5px solid rgba(201,168,76,0.25)',
-        padding: '72px 48px 48px',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
-          gap: '48px',
-        }}
-        className="footer-grid"
-      >
-        {/* Col 1 — Brand */}
-        <div>
-          <Link
-            href="/"
-            style={{
-              fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-              fontWeight: 600,
-              fontSize: '1.25rem',
-              letterSpacing: '0.2em',
-              color: '#C9A84C',
-              textTransform: 'uppercase',
-              display: 'inline-block',
-              marginBottom: '16px',
-            }}
-          >
-            Bayty
-          </Link>
-          <p style={{ ...muted, maxWidth: '220px', marginBottom: '24px' }}>
-            The verified construction platform for the Gulf.
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-              fontSize: '10px',
-              letterSpacing: '0.1em',
-              color: 'rgba(248,246,241,0.25)',
-            }}
-          >
-            © {new Date().getFullYear()} Bayty Technologies
-          </p>
+    <footer className="border-t border-ink-700 bg-ink-950 py-16">
+      <div className="mx-auto w-full max-w-container px-6 md:px-12">
+        <div className="flex flex-col gap-12 md:flex-row md:gap-24">
+          {/* Brand */}
+          <div className="flex flex-col gap-4 md:max-w-[240px]">
+            <p className="font-sans text-lg font-semibold text-ink-100">
+              Bayty<span className="text-signal-500">AI</span>
+            </p>
+            <p className="font-sans text-sm leading-relaxed text-ink-500">{siteConfig.tagline}</p>
+          </div>
+
+          {/* Nav */}
+          <nav aria-label="Footer navigation">
+            <ul className="flex flex-col gap-3">
+              {NAV_LINKS.map((l) => (
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="font-sans text-sm text-ink-300 transition-colors hover:text-signal-500"
+                  >
+                    {l.label}
+                    {l.external && <span className="sr-only"> (opens in a new tab)</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Locale toggle */}
+          <div className="flex items-start gap-3 md:ml-auto">
+            <span
+              aria-current="true"
+              className="font-mono text-[11px] uppercase tracking-widest text-signal-500"
+            >
+              EN
+            </span>
+            <span className="font-mono text-[11px] text-ink-700">|</span>
+            <a
+              href="/ar"
+              lang="ar"
+              className="font-mono text-[11px] uppercase tracking-widest text-ink-300 transition-colors hover:text-signal-500"
+            >
+              AR
+            </a>
+          </div>
         </div>
 
-        {/* Col 2 — Platform */}
-        <div>
-          <p style={colHead}>Platform</p>
-          {PLATFORM_LINKS.map((l) => (
-            <FooterLink key={l.href} href={l.href}>
-              {l.label}
-            </FooterLink>
-          ))}
+        {/* Bottom row */}
+        <div className="mt-12 flex flex-col gap-3 border-t border-ink-700 pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="font-mono text-[11px] text-ink-500">© {year} BaytyAI · Amman, Jordan</p>
+          <div className="flex flex-wrap gap-6">
+            <a
+              href="/privacy"
+              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+            >
+              Privacy
+            </a>
+            <a
+              href="/terms"
+              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+            >
+              Terms
+            </a>
+            <a
+              href="mailto:founder@baytyai.com"
+              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+            >
+              founder@baytyai.com
+            </a>
+          </div>
         </div>
-
-        {/* Col 3 — Legal */}
-        <div>
-          <p style={colHead}>Legal</p>
-          {LEGAL_LINKS.map((l) => (
-            <FooterLink key={l.href} href={l.href}>
-              {l.label}
-            </FooterLink>
-          ))}
-        </div>
-
-        {/* Col 4 — Contact */}
-        <div>
-          <p style={colHead}>Contact</p>
-          <FooterLink href="mailto:info@baytyai.com">info@baytyai.com</FooterLink>
-          <FooterLink href="https://linkedin.com/company/bayty">
-            LinkedIn <span style={{ fontFamily: 'monospace', fontSize: '11px' }}>↗</span>
-          </FooterLink>
-          <p style={{ ...muted, marginTop: '4px' }}>Dubai, UAE</p>
-        </div>
-
-        {/* Col 5 — Investors */}
-        <div>
-          <p style={colHead}>Investors</p>
-          <FooterLink href="mailto:investor@baytyai.com">Investor Relations</FooterLink>
-          <FooterLink href="mailto:press@baytyai.com">Press Enquiries</FooterLink>
-          <p
-            style={{
-              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-              fontSize: '10px',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              color: 'rgba(201,168,76,0.55)',
-              marginTop: '4px',
-            }}
-          >
-            Seed Round 2026
-          </p>
-        </div>
-      </div>
-
-      {/* Bottom rule */}
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '48px auto 0',
-          borderTop: '0.5px solid rgba(201,168,76,0.1)',
-          paddingTop: '24px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '12px',
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: '10px',
-            letterSpacing: '0.1em',
-            color: 'rgba(248,246,241,0.2)',
-          }}
-        >
-          Built for the GCC construction industry
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: '10px',
-            letterSpacing: '0.1em',
-            color: 'rgba(248,246,241,0.2)',
-          }}
-        >
-          baytyai.com
-        </p>
       </div>
     </footer>
   );
