@@ -12,6 +12,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
+    "verify:deploy": "bash scripts/verify-deploy.sh",
     "prepare": "husky",
     "test": "vitest run",
     "test:watch": "vitest",
