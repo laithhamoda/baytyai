@@ -44,17 +44,20 @@ export default function LpFooter() {
 
           {/* Locale toggle */}
           <div className="flex items-start gap-3 md:ml-auto">
-            <span className="font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <span
+              aria-current="true"
+              className="font-mono text-[11px] uppercase tracking-widest text-signal-500"
+            >
               EN
             </span>
             <span className="font-mono text-[11px] text-ink-700">|</span>
-            <button
-              aria-disabled="true"
-              disabled
-              className="cursor-not-allowed font-mono text-[11px] uppercase tracking-widest text-ink-700"
+            <a
+              href="/ar"
+              lang="ar"
+              className="font-mono text-[11px] uppercase tracking-widest text-ink-300 transition-colors hover:text-signal-500"
             >
               AR
-            </button>
+            </a>
           </div>
         </div>
 
