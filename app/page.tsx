@@ -1,6 +1,5 @@
 import Faq from '@/components/sections/lp-faq';
 import FinalCta from '@/components/sections/lp-final-cta';
-import LpFooter from '@/components/sections/lp-footer';
 import Founder from '@/components/sections/lp-founder';
 import Hero from '@/components/sections/lp-hero';
 import Pricing from '@/components/sections/lp-pricing';
@@ -40,7 +39,6 @@ export default function Home() {
       <Pricing />
       <Faq />
       <FinalCta />
-      <LpFooter />
     </>
   );
 }
