@@ -1,7 +1,6 @@
 import { createServerClient } from '@supabase/ssr';
 import { NextRequest, NextResponse } from 'next/server';
 
-import { auth } from '@/auth';
 import { checkRouteRbac } from '@/lib/auth/rbac';
 
 import type { OrgRole } from '@/lib/types/tenancy';
@@ -100,12 +99,9 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // ---- NextAuth (LinkedIn) auth pages ----
+  // Legacy auth aliases — canonical auth is the Supabase OTP flow at /login.
   if (pathname === '/sign-in' || pathname === '/sign-up') {
-    const session = await auth();
-    if (session) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
+    return NextResponse.redirect(new URL('/login', request.url));
   }
 
   return NextResponse.next();

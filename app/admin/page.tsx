@@ -8,41 +8,13 @@ export default async function AdminContentPage() {
 
   return (
     <div>
-      <h1
-        style={{
-          fontFamily: "var(--font-display, 'Cormorant Garamond', Georgia, serif)",
-          fontWeight: 300,
-          fontSize: '40px',
-          color: '#F8F6F1',
-          marginBottom: '8px',
-        }}
-      >
-        Site content
-      </h1>
-      <p
-        style={{
-          fontFamily: "var(--font-body, 'DM Sans', system-ui, sans-serif)",
-          fontWeight: 300,
-          fontSize: '14px',
-          color: 'rgba(248,246,241,0.55)',
-          marginBottom: '40px',
-        }}
-      >
+      <h1 className="mb-2 font-sans text-3xl font-semibold text-ink-100">Site content</h1>
+      <p className="mb-10 font-sans text-sm text-ink-300">
         Edit the text and images shown on the public site. Changes publish immediately.
       </p>
 
       {!configured && (
-        <p
-          style={{
-            fontFamily: "var(--font-mono, 'DM Mono', monospace)",
-            fontSize: '11px',
-            letterSpacing: '0.08em',
-            color: '#C9A84C',
-            border: '0.5px solid rgba(201,168,76,0.4)',
-            padding: '14px 18px',
-            marginBottom: '32px',
-          }}
-        >
+        <p className="mb-8 border border-signal-500/40 px-4 py-3.5 font-mono text-[11px] tracking-[0.08em] text-signal-500">
           Backend not connected. Add your Supabase keys in the environment to enable saving.
         </p>
       )}
