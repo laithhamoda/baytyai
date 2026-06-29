@@ -9,12 +9,27 @@ type AuditAction =
   | 'project.status_changed'
   | 'org.created'
   | 'member.invited'
-  | 'member.accepted';
+  | 'member.accepted'
+  // RBAC / marketplace / approval engine
+  | 'inquiry.created'
+  | 'inquiry.published'
+  | 'quotation.submitted'
+  | 'quotation.award_requested'
+  | 'approval.requested'
+  | 'approval.approved'
+  | 'approval.rejected';
 
 interface AuditParams {
   userId: string;
   action: AuditAction;
-  entityType: 'project' | 'organization' | 'document' | 'invitation' | 'membership';
+  entityType:
+    | 'project'
+    | 'organization'
+    | 'document'
+    | 'invitation'
+    | 'membership'
+    | 'inquiry'
+    | 'quotation';
   entityId: string;
   metadata?: Record<string, unknown>;
 }
