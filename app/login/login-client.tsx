@@ -56,10 +56,26 @@ export default function LoginClient() {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.auth.verifyOtp({ email, token: code, type: 'email' });
+    const trimmed = code.trim();
+    // Try the email-OTP type first; fall back to magiclink token type, since
+    // signInWithOtp under the PKCE flow can issue either depending on config.
+    let { error } = await supabase.auth.verifyOtp({
+      email,
+      token: trimmed,
+      type: 'email',
+    });
+    if (error) {
+      const retry = await supabase.auth.verifyOtp({
+        email,
+        token: trimmed,
+        type: 'magiclink',
+      });
+      error = retry.error;
+    }
     setBusy(false);
     if (error) {
-      setError('That code is invalid or expired. Request a new one.');
+      // Surface the real reason so failures are diagnosable, not generic.
+      setError(`${error.message} (code ${error.status ?? '?'})`);
       return;
     }
     router.push(next);
