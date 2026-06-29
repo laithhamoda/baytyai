@@ -1,11 +1,14 @@
+import Reveal from '@/components/motion/Reveal';
+import ScrollRail from '@/components/motion/ScrollRail';
 import Faq from '@/components/sections/lp-faq';
 import FinalCta from '@/components/sections/lp-final-cta';
 import Founder from '@/components/sections/lp-founder';
-import Hero from '@/components/sections/lp-hero';
+import HeroAnimated from '@/components/sections/lp-hero-animated';
 import Pricing from '@/components/sections/lp-pricing';
 import Problem from '@/components/sections/lp-problem';
 import Process from '@/components/sections/lp-process';
 import Proof from '@/components/sections/lp-proof';
+import Stakeholders from '@/components/sections/lp-stakeholders';
 import System from '@/components/sections/lp-system';
 
 import type { Metadata } from 'next';
@@ -30,14 +33,30 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Problem />
-      <System />
-      <Proof />
-      <Founder />
-      <Process />
-      <Pricing />
-      <Faq />
+      <ScrollRail />
+      <HeroAnimated />
+      <Reveal>
+        <Problem />
+      </Reveal>
+      <Reveal>
+        <System />
+      </Reveal>
+      <Stakeholders />
+      <Reveal>
+        <Proof />
+      </Reveal>
+      <Reveal>
+        <Founder />
+      </Reveal>
+      <Reveal>
+        <Process />
+      </Reveal>
+      <Reveal>
+        <Pricing />
+      </Reveal>
+      <Reveal>
+        <Faq />
+      </Reveal>
       <FinalCta />
     </>
   );
