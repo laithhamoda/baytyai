@@ -31,6 +31,8 @@ export default function Navigation() {
 
   useEffect(() => setMenuOpen(false), [pathname]);
 
+  // The homepage ('/') ships its own light A1 chrome.
+  if (pathname === '/') return null;
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
 
   return (

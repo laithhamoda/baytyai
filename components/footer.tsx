@@ -20,6 +20,7 @@ const HIDDEN_PREFIXES = ['/dashboard', '/admin', '/account', '/login', '/sign-in
 
 export default function Footer() {
   const pathname = usePathname();
+  if (pathname === '/') return null;
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
 
   const year = new Date().getFullYear();
