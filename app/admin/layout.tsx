@@ -49,9 +49,26 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             >
               Bayty<span className="text-signal-500">AI</span> Admin
             </Link>
-            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500">
-              Content
-            </span>
+            <nav className="flex items-center gap-4">
+              <Link
+                href="/admin"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+              >
+                Content
+              </Link>
+              <Link
+                href="/admin/approvals"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+              >
+                Approvals
+              </Link>
+              <Link
+                href="/admin/verifications"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+              >
+                Verifications
+              </Link>
+            </nav>
           </div>
           <div className="flex items-center gap-5">
             <span className="hidden font-sans text-sm text-ink-300 sm:inline">{user.email}</span>

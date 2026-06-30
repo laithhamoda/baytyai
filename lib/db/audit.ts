@@ -17,7 +17,11 @@ type AuditAction =
   | 'quotation.award_requested'
   | 'approval.requested'
   | 'approval.approved'
-  | 'approval.rejected';
+  | 'approval.rejected'
+  // Organization verification (manual, admin-granted)
+  | 'verification.requested'
+  | 'verification.approved'
+  | 'verification.rejected';
 
 interface AuditParams {
   userId: string;
