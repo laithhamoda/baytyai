@@ -8,13 +8,13 @@ export default async function AdminContentPage() {
 
   return (
     <div>
-      <h1 className="mb-2 font-sans text-3xl font-semibold text-ink-100">Site content</h1>
-      <p className="mb-10 font-sans text-sm text-ink-300">
+      <h1 className="mb-2 font-sans text-3xl font-semibold text-steel-900">Site content</h1>
+      <p className="mb-10 font-sans text-sm text-steel-600">
         Edit the text and images shown on the public site. Changes publish immediately.
       </p>
 
       {!configured && (
-        <p className="mb-8 border border-signal-500/40 px-4 py-3.5 font-mono text-[11px] tracking-[0.08em] text-signal-500">
+        <p className="mb-8 border border-bayty-500/40 px-4 py-3.5 font-mono text-[11px] tracking-[0.08em] text-bayty-600">
           Backend not connected. Add your Supabase keys in the environment to enable saving.
         </p>
       )}

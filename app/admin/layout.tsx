@@ -21,15 +21,15 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   // Signed in but not an admin → explicit refusal, not a redirect loop.
   if (user.role !== 'admin') {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-ink-950 px-6 text-center">
+      <div className="flex min-h-screen items-center justify-center bg-steel-50 px-6 text-center">
         <div className="max-w-[420px]">
-          <h1 className="mb-4 font-sans text-3xl font-semibold text-ink-100">Not authorised</h1>
-          <p className="mb-7 font-sans text-sm leading-relaxed text-ink-300">
+          <h1 className="mb-4 font-sans text-3xl font-semibold text-steel-900">Not authorised</h1>
+          <p className="mb-7 font-sans text-sm leading-relaxed text-steel-600">
             Your account ({user.email}) does not have admin access.
           </p>
           <Link
             href="/"
-            className="font-sans text-sm text-signal-500 transition-colors hover:text-ink-100"
+            className="font-sans text-sm text-bayty-600 transition-colors hover:text-steel-900"
           >
             Return to site →
           </Link>
@@ -39,49 +39,49 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="min-h-screen bg-ink-950 text-ink-100">
-      <header className="border-b border-ink-700 px-6 py-5 md:px-8">
+    <div className="min-h-screen bg-steel-50 text-steel-900">
+      <header className="border-b border-steel-200 px-6 py-5 md:px-8">
         <div className="mx-auto flex max-w-container items-center justify-between">
           <div className="flex items-center gap-5">
             <Link
               href="/admin"
-              className="font-sans text-lg font-semibold tracking-tight text-ink-100"
+              className="font-sans text-lg font-semibold tracking-tight text-steel-900"
             >
-              Bayty<span className="text-signal-500">AI</span> Admin
+              Bayty<span className="text-bayty-600">AI</span> Admin
             </Link>
             <nav className="flex items-center gap-4">
               <Link
                 href="/admin"
-                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-steel-500 transition-colors hover:text-bayty-600"
               >
                 Content
               </Link>
               <Link
                 href="/admin/approvals"
-                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-steel-500 transition-colors hover:text-bayty-600"
               >
                 Approvals
               </Link>
               <Link
                 href="/admin/verifications"
-                className="font-mono text-[10px] uppercase tracking-[0.15em] text-ink-500 transition-colors hover:text-signal-500"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-steel-500 transition-colors hover:text-bayty-600"
               >
                 Verifications
               </Link>
             </nav>
           </div>
           <div className="flex items-center gap-5">
-            <span className="hidden font-sans text-sm text-ink-300 sm:inline">{user.email}</span>
+            <span className="hidden font-sans text-sm text-steel-600 sm:inline">{user.email}</span>
             <Link
               href="/"
-              className="font-sans text-xs text-ink-500 transition-colors hover:text-signal-500"
+              className="font-sans text-xs text-steel-500 transition-colors hover:text-bayty-600"
             >
               View site ↗
             </Link>
             <form action={signOutUser}>
               <button
                 type="submit"
-                className="border border-signal-500 px-4 py-2 font-sans text-xs uppercase tracking-[0.08em] text-signal-500 transition-colors hover:bg-signal-500 hover:text-ink-950"
+                className="border border-bayty-500 px-4 py-2 font-sans text-xs uppercase tracking-[0.08em] text-bayty-600 transition-colors hover:bg-bayty-600 hover:text-white"
               >
                 Sign out
               </button>

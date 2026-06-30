@@ -13,8 +13,8 @@ export default async function AdminVerificationsPage() {
 
   return (
     <div>
-      <h1 className="mb-2 font-sans text-3xl font-semibold text-ink-100">Verification queue</h1>
-      <p className="mb-10 font-sans text-sm text-ink-300">
+      <h1 className="mb-2 font-sans text-3xl font-semibold text-steel-900">Verification queue</h1>
+      <p className="mb-10 font-sans text-sm text-steel-600">
         Organizations awaiting manual verification. Only verified organizations can transact in the
         marketplace — approval is granted here, by an admin, and never automatically.
       </p>

@@ -32,7 +32,7 @@ export default function ApprovalsClient({ initial }: { initial: ApprovalRow[] })
   }
 
   if (rows.length === 0) {
-    return <p className="font-sans text-sm text-ink-500">No pending approvals.</p>;
+    return <p className="font-sans text-sm text-steel-500">No pending approvals.</p>;
   }
 
   return (
@@ -41,20 +41,20 @@ export default function ApprovalsClient({ initial }: { initial: ApprovalRow[] })
       {rows.map((row) => (
         <div
           key={row.id}
-          className="flex items-center justify-between border border-ink-700 bg-ink-900 p-4"
+          className="flex items-center justify-between border border-steel-200 bg-white p-4"
         >
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               {row.entity_type}
             </p>
-            <p className="font-sans text-sm text-ink-300">{row.entity_id}</p>
+            <p className="font-sans text-sm text-steel-600">{row.entity_id}</p>
           </div>
           <div className="flex gap-2">
             <button
               type="button"
               disabled={pending}
               onClick={() => decide(row.id, 'approved')}
-              className="bg-success-500 px-4 py-2 font-sans text-xs font-medium text-ink-950 disabled:opacity-50"
+              className="bg-success-500 px-4 py-2 font-sans text-xs font-medium text-white disabled:opacity-50"
             >
               Approve
             </button>

@@ -31,7 +31,7 @@ export default function VerificationsClient({ initial }: { initial: PendingVerif
 
   if (rows.length === 0) {
     return (
-      <p className="font-sans text-sm text-ink-500">No organizations awaiting verification.</p>
+      <p className="font-sans text-sm text-steel-500">No organizations awaiting verification.</p>
     );
   }
 
@@ -41,18 +41,18 @@ export default function VerificationsClient({ initial }: { initial: PendingVerif
       {rows.map((row) => (
         <div
           key={row.orgId}
-          className="flex flex-col gap-3 border border-ink-700 bg-ink-900 p-5 sm:flex-row sm:items-center sm:justify-between"
+          className="flex flex-col gap-3 border border-steel-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between"
         >
           <div>
-            <p className="font-sans text-sm font-medium text-ink-100">{row.name}</p>
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-ink-500">
+            <p className="font-sans text-sm font-medium text-steel-900">{row.name}</p>
+            <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-steel-500">
               {row.stakeholderType}
               {row.requestedAt
                 ? ` · requested ${new Date(row.requestedAt).toLocaleDateString()}`
                 : ''}
             </p>
             {row.notes && (
-              <p className="mt-2 max-w-xl font-sans text-xs leading-relaxed text-ink-300">
+              <p className="mt-2 max-w-xl font-sans text-xs leading-relaxed text-steel-600">
                 “{row.notes}”
               </p>
             )}
@@ -62,7 +62,7 @@ export default function VerificationsClient({ initial }: { initial: PendingVerif
               type="button"
               disabled={pending}
               onClick={() => decide(row.orgId, 'verified')}
-              className="bg-success-500 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+              className="bg-success-500 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-white disabled:opacity-40"
             >
               Verify
             </button>
