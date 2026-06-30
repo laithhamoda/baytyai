@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
+import { saveAwardRecommendation } from '@/app/actions/selection/award';
 import { saveEvaluation } from '@/app/actions/selection/manage';
 import {
   explainRanking,
@@ -86,6 +87,7 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
   const [scores, setScores] = useState<ScoreMap>(seedScores);
   const [locked, setLocked] = useState(process?.criteriaLocked ?? false);
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+  const [awardState, setAwardState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
 
   const consultants = seedConsultants;
 
@@ -130,6 +132,27 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
   const explanation = useMemo(() => explainRanking(ranked), [ranked]);
   const winnerName = ranked[0]?.name;
   const runnerName = ranked.find((r) => r.consultantId === explanation?.runnerUpId)?.name;
+
+  async function saveAward() {
+    if (!process) return;
+    const winner = ranked[0];
+    if (!winner) return;
+    setAwardState('saving');
+    try {
+      const rationale = explanation
+        ? `${winner.name} leads by ${explanation.marginPoints} weighted points. ${explanation.reasons.join(' ')}`
+        : `${winner.name} is the highest-ranked consultant with ${winner.weightedTotal} weighted points.`;
+      const result = await saveAwardRecommendation({
+        processId: process.processId,
+        recommendedConsultantId: winner.consultantId,
+        rationale,
+        rankingSnapshot: ranked,
+      });
+      setAwardState(result.success ? 'saved' : 'error');
+    } catch {
+      setAwardState('error');
+    }
+  }
 
   const [exporting, setExporting] = useState(false);
 
@@ -303,6 +326,32 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
               'Persists each consultant’s scores to the selection process (criteria set v' +
                 process.criteriaSetVersion +
                 ').'}
+          </span>
+        </div>
+      )}
+
+      {/* Award recommendation (real process only) */}
+      {process && (
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={saveAward}
+            disabled={awardState === 'saving' || ranked.length === 0}
+            className="border border-success-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-success-500 disabled:opacity-40"
+          >
+            {awardState === 'saving' ? 'Recording…' : 'Record award recommendation'}
+          </button>
+          <span className="font-sans text-xs text-ink-500">
+            {awardState === 'saved' && (
+              <span className="text-success-500">
+                Award recommendation saved with the current ranking snapshot.
+              </span>
+            )}
+            {awardState === 'error' && (
+              <span className="text-alert-500">Could not record the award recommendation.</span>
+            )}
+            {awardState === 'idle' &&
+              `Records ${winnerName ?? 'the top consultant'} as the recommended award with a frozen ranking snapshot.`}
           </span>
         </div>
       )}
