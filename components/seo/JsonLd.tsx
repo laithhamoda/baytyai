@@ -1,24 +1,45 @@
 import { siteConfig } from '@/lib/siteConfig';
 
-const GCC_COUNTRIES = [
-  'Saudi Arabia',
-  'United Arab Emirates',
-  'Qatar',
-  'Kuwait',
-  'Bahrain',
-  'Oman',
-];
+// Global service area — schema.org accepts a Place named "Worldwide".
+const WORLDWIDE = { '@type': 'Place', name: 'Worldwide' };
+
+// Search engines + AI engines use WebSite + SearchAction for sitelinks/answers.
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteConfig.siteUrl}/#website`,
+  name: 'BaytyAI',
+  url: siteConfig.siteUrl,
+  inLanguage: ['en', 'ar'],
+  publisher: { '@id': `${siteConfig.siteUrl}/#organization` },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${siteConfig.siteUrl}/marketplace?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
 
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': `${siteConfig.siteUrl}/#organization`,
   name: 'BaytyAI',
+  alternateName: 'Bayty AI',
   url: siteConfig.siteUrl,
   logo: `${siteConfig.siteUrl}/logo.png`,
+  description: siteConfig.description,
   sameAs: [siteConfig.founder.linkedin],
   founder: { '@type': 'Person', name: 'Laith Hamoda' },
-  areaServed: GCC_COUNTRIES,
+  areaServed: WORLDWIDE,
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'sales',
+    email: siteConfig.contactEmail,
+    availableLanguage: ['en', 'ar'],
+  },
 };
 
 const personSchema = {
@@ -44,7 +65,7 @@ const serviceSchema = {
   '@id': `${siteConfig.siteUrl}/#service`,
   serviceType: 'AI Operations Infrastructure for Facilities Management and Construction',
   provider: { '@id': `${siteConfig.siteUrl}/#organization` },
-  areaServed: GCC_COUNTRIES,
+  areaServed: WORLDWIDE,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'BaytyAI Engagement Tiers',
@@ -161,7 +182,14 @@ const breadcrumbSchema = {
   ],
 };
 
-const ALL_SCHEMAS = [organizationSchema, personSchema, serviceSchema, faqSchema, breadcrumbSchema];
+const ALL_SCHEMAS = [
+  websiteSchema,
+  organizationSchema,
+  personSchema,
+  serviceSchema,
+  faqSchema,
+  breadcrumbSchema,
+];
 
 export default function JsonLd() {
   return (
