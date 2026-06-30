@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
+import { saveEvaluation } from '@/app/actions/selection/manage';
 import {
   explainRanking,
   rankConsultants,
@@ -9,6 +10,21 @@ import {
 } from '@/lib/consultant-selection/scoring';
 
 import type { Criterion, Evaluation } from '@/lib/consultant-selection/types';
+
+/**
+ * When `process` is supplied the studio is wired to a real DB-backed process:
+ * criteria, consultants and scores come from Supabase and the "Save scores"
+ * button persists each consultant's scores via the saveEvaluation server action.
+ * Without it, the studio runs in interactive demo mode (no persistence).
+ */
+export interface StudioProcess {
+  processId: string;
+  criteriaSetVersion: number;
+  criteriaLocked: boolean;
+  criteria: Criterion[];
+  consultants: { id: string; name: string }[];
+  scores: ScoreMap;
+}
 
 // Seed criteria (editable weights) — a real process loads these from the locked
 // criteria set. maxScore fixed at 10 for the demo.
@@ -61,25 +77,55 @@ const initialScores: ScoreMap = {
   C: { c1: 6, c2: 9, c3: 7, c4: 8 },
 };
 
-export default function EvaluationStudio() {
-  const [criteria, setCriteria] = useState(SEED);
-  const [scores, setScores] = useState<ScoreMap>(initialScores);
-  const [locked, setLocked] = useState(false);
+export default function EvaluationStudio({ process }: { process?: StudioProcess }) {
+  const seedCriteria = process?.criteria.length ? process.criteria : SEED;
+  const seedConsultants = process?.consultants.length ? process.consultants : CONSULTANTS;
+  const seedScores = process?.scores ?? initialScores;
+
+  const [criteria, setCriteria] = useState(seedCriteria);
+  const [scores, setScores] = useState<ScoreMap>(seedScores);
+  const [locked, setLocked] = useState(process?.criteriaLocked ?? false);
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+
+  const consultants = seedConsultants;
+
+  async function saveScores() {
+    if (!process) return;
+    setSaveState('saving');
+    try {
+      for (const c of process.consultants) {
+        const result = await saveEvaluation({
+          processId: process.processId,
+          consultantId: c.id,
+          criteriaSetVersion: process.criteriaSetVersion,
+          scores: criteria.map((cr) => ({ criterionId: cr.id, raw: scores[c.id]?.[cr.id] ?? 0 })),
+          submit: true,
+        });
+        if (!result.success) {
+          setSaveState('error');
+          return;
+        }
+      }
+      setSaveState('saved');
+    } catch {
+      setSaveState('error');
+    }
+  }
 
   const weights = validateWeights(criteria);
 
   const ranked = useMemo(() => {
-    const evaluations: Evaluation[] = CONSULTANTS.map((c) => ({
+    const evaluations: Evaluation[] = consultants.map((c) => ({
       id: `e-${c.id}`,
-      processId: 'demo',
+      processId: process?.processId ?? 'demo',
       consultantId: c.id,
       evaluatorId: 'demo',
-      criteriaSetVersion: 1,
+      criteriaSetVersion: process?.criteriaSetVersion ?? 1,
       submittedAt: '2026-01-01T00:00:00Z',
       scores: criteria.map((cr) => ({ criterionId: cr.id, raw: scores[c.id]?.[cr.id] ?? 0 })),
     }));
-    return rankConsultants(criteria, CONSULTANTS, evaluations);
-  }, [criteria, scores]);
+    return rankConsultants(criteria, consultants, evaluations);
+  }, [criteria, scores, consultants, process]);
 
   const explanation = useMemo(() => explainRanking(ranked), [ranked]);
   const winnerName = ranked[0]?.name;
@@ -230,6 +276,34 @@ export default function EvaluationStudio() {
               </li>
             ))}
           </ul>
+        </div>
+      )}
+
+      {/* Persistence (real process only) */}
+      {process && (
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={saveScores}
+            disabled={saveState === 'saving'}
+            className="bg-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+          >
+            {saveState === 'saving' ? 'Saving…' : 'Save scores'}
+          </button>
+          <span className="font-sans text-xs text-ink-500">
+            {saveState === 'saved' && (
+              <span className="text-success-500">Scores saved to this process.</span>
+            )}
+            {saveState === 'error' && (
+              <span className="text-alert-500">
+                Could not save — check your access and try again.
+              </span>
+            )}
+            {saveState === 'idle' &&
+              'Persists each consultant’s scores to the selection process (criteria set v' +
+                process.criteriaSetVersion +
+                ').'}
+          </span>
         </div>
       )}
 

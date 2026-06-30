@@ -71,6 +71,20 @@ const EXPECTED: Record<Action, Record<StakeholderType, Decision>> = {
     subcontractor: 'allow',
     supplier: 'allow',
   },
+  'selection.manage': {
+    client: 'allow',
+    consultant: 'deny',
+    contractor: 'requires_approval',
+    subcontractor: 'deny',
+    supplier: 'deny',
+  },
+  'selection.evaluate': {
+    client: 'allow',
+    consultant: 'deny',
+    contractor: 'requires_approval',
+    subcontractor: 'deny',
+    supplier: 'deny',
+  },
 };
 
 describe('can() — 6-role permission matrix', () => {
