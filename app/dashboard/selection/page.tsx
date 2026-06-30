@@ -1,4 +1,5 @@
 import EvaluationStudio from './evaluation-studio';
+import TorStudio from './tor-studio';
 
 export const metadata = {
   title: { absolute: 'Consultant Selection — BaytyAI' },
@@ -97,6 +98,18 @@ export default function SelectionPage() {
           </li>
         ))}
       </ol>
+
+      <section aria-labelledby="tor-heading" className="mb-14">
+        <h2 id="tor-heading" className="mb-2 font-sans text-xl font-semibold text-ink-100">
+          Terms of Reference (AI-assisted)
+        </h2>
+        <p className="mb-6 font-sans text-sm text-ink-300">
+          Provide the project details and draft a structured TOR. When an Anthropic API key is
+          configured the draft is tailored by Claude; otherwise a professional template is used — no
+          paid service required. Every draft is reviewed and approved before it is version-locked.
+        </p>
+        <TorStudio />
+      </section>
 
       <section aria-labelledby="eval-heading">
         <h2 id="eval-heading" className="mb-2 font-sans text-xl font-semibold text-ink-100">
