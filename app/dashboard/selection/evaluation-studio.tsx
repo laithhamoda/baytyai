@@ -85,6 +85,33 @@ export default function EvaluationStudio() {
   const winnerName = ranked[0]?.name;
   const runnerName = ranked.find((r) => r.consultantId === explanation?.runnerUpId)?.name;
 
+  const [exporting, setExporting] = useState(false);
+
+  async function exportAwardReport() {
+    setExporting(true);
+    try {
+      const res = await fetch('/api/selection/award-report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          projectTitle: 'Consultant Selection',
+          selectionMethod: 'QCBS',
+          generatedAt: new Date().toISOString(),
+          ranked,
+          explanation,
+        }),
+      });
+      if (!res.ok) return;
+      const html = await res.text();
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } finally {
+      setExporting(false);
+    }
+  }
+
   function setWeight(id: string, w: number) {
     if (locked) return;
     setCriteria((cs) => cs.map((c) => (c.id === id ? { ...c, weight: w } : c)));
@@ -205,6 +232,23 @@ export default function EvaluationStudio() {
           </ul>
         </div>
       )}
+
+      {/* Export */}
+      <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={exportAwardReport}
+          disabled={exporting || ranked.length === 0}
+          className="border border-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-signal-500 disabled:opacity-40"
+          title="Opens a print-ready award recommendation; use your browser's Save as PDF."
+        >
+          {exporting ? 'Preparing…' : 'Export award report (PDF)'}
+        </button>
+        <span className="font-sans text-xs text-ink-500">
+          Generates a printable award recommendation with the current ranking snapshot and
+          explanation.
+        </span>
+      </div>
     </div>
   );
 }
