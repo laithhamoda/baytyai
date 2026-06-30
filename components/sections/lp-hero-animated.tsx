@@ -26,10 +26,10 @@ export default function HeroAnimated() {
           <div className="flex flex-col gap-8 lg:max-w-screen-sm">
             <Reveal>
               <div className="flex flex-wrap gap-2">
-                <Badge>GCC</Badge>
-                <Badge>FM</Badge>
+                <Badge>Global</Badge>
+                <Badge>Verified</Badge>
                 <Badge>Construction</Badge>
-                <Badge>Mega Project</Badge>
+                <Badge>Facilities Management</Badge>
               </div>
             </Reveal>
 
@@ -38,15 +38,15 @@ export default function HeroAnimated() {
                 id="hero-heading"
                 className="font-sans text-[clamp(2.25rem,5.5vw,3.75rem)] font-semibold leading-[1.08] text-ink-100 [text-wrap:balance]"
               >
-                The operating system for the GCC&rsquo;s most ambitious projects.
+                The verified marketplace for construction &amp; facilities management.
               </h1>
             </Reveal>
 
             <Reveal delay={0.16}>
               <p className="font-sans text-base leading-relaxed text-ink-300 md:text-lg">
-                BaytyAI gives every party to a contract — owner, consultant, contractor,
-                subcontractor, and supplier — one verifiable source of truth. Protect margin,
-                accelerate mobilization, and defend every SLA on contracts above $5M.
+                BaytyAI connects verified clients, consultants, contractors, subcontractors, and
+                suppliers worldwide — with structured inquiries, quotations, approvals, and document
+                control on a single trusted platform.
               </p>
             </Reveal>
 
@@ -72,35 +72,28 @@ export default function HeroAnimated() {
           <Reveal delay={0.3} className="w-full lg:max-w-[320px]">
             <div className="border border-ink-700 bg-ink-900/80 p-8 backdrop-blur">
               <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.2em] text-signal-500">
-                Operator Snapshot
+                Platform Snapshot
               </p>
               <div className="flex flex-col divide-y divide-ink-700">
                 <div className="py-4">
                   <p className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-500">
-                    Contracts in scope
+                    Verified stakeholder roles
                   </p>
                   <p className="font-mono text-2xl font-medium text-ink-100">
-                    &gt;&nbsp;
-                    <Counter to={5} suffix="M" prefix="$" />
+                    <Counter to={5} />
                   </p>
                 </div>
                 <div className="py-4">
                   <p className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-500">
-                    Margin recovery range
+                    Service area
                   </p>
-                  <p className="font-mono text-2xl font-medium text-signal-500">
-                    <Counter to={1.8} decimals={1} suffix="%" />
-                    &nbsp;–&nbsp;
-                    <Counter to={4.6} decimals={1} suffix="%" />
-                  </p>
+                  <p className="font-mono text-2xl font-medium text-signal-500">Worldwide</p>
                 </div>
                 <div className="py-4">
                   <p className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-500">
-                    Mobilization window
+                    Languages
                   </p>
-                  <p className="font-mono text-2xl font-medium text-ink-100">
-                    <Counter to={90} suffix=" days" />
-                  </p>
+                  <p className="font-mono text-2xl font-medium text-ink-100">EN&nbsp;/&nbsp;AR</p>
                 </div>
               </div>
             </div>

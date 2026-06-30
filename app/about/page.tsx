@@ -9,25 +9,25 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About — BaytyAI',
   description:
-    'BaytyAI builds AI-native operations infrastructure for Facilities Management and Construction mega-projects across the GCC. Founded by Laith Hamoda, Senior AI Prompt Engineer.',
+    'BaytyAI is the global verified marketplace and operations platform connecting clients, consultants, contractors, subcontractors, and suppliers in construction and facilities management. Founded by Laith Hamoda.',
   alternates: { canonical: 'https://baytyai.com/about' },
 };
 
 const VALUES = [
   {
-    label: 'Operator-grade',
-    title: 'Built against live contracts',
-    body: 'Every prompt and workflow is forged against a real FM or Construction contract — not a generic template. If it does not survive a live operation, it does not ship.',
+    label: 'Verified',
+    title: 'Trust before transactions',
+    body: 'Every stakeholder is checked before they transact. Identity and business verification is the foundation of every connection on the platform.',
   },
   {
-    label: 'Margin-first',
-    title: 'Measured in recovered margin',
-    body: 'We anchor every engagement to the money at stake: recovered contract margin, defended SLAs, and a faster mobilization. Outcomes, not decks.',
+    label: 'Structured',
+    title: 'A record for every decision',
+    body: 'Inquiries, quotations, approvals, and documents follow a controlled workflow with a full audit trail — nothing lives in a lost inbox or chat thread.',
   },
   {
-    label: 'GCC-native',
-    title: 'Bilingual, in-region',
-    body: 'Deliverables in Arabic and English, data residency configured for Saudi and UAE, and an understanding of how the region actually delivers mega-projects.',
+    label: 'Global',
+    title: 'Worldwide, bilingual',
+    body: 'Built for construction and facilities-management projects anywhere in the world, operating natively in English and Arabic.',
   },
 ];
 
@@ -40,8 +40,8 @@ export default function AboutPage() {
           <div className="mx-auto max-w-3xl text-center">
             <div className="mx-auto mb-10 h-px w-14 bg-signal-500/60" />
             <h1 className="font-sans text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-tight text-ink-100 [text-wrap:balance]">
-              GCC operators run the most ambitious projects on earth. They deserve operations
-              infrastructure built to match.
+              The world builds together. It deserves a platform where every party is verified and
+              every decision is recorded.
             </h1>
           </div>
         </Container>
@@ -55,10 +55,10 @@ export default function AboutPage() {
               Our Mission
             </p>
             <p className="font-sans text-2xl font-normal leading-relaxed text-ink-100">
-              BaytyAI exists to protect the margin, mobilization, and SLA performance of Facilities
-              Management and Construction contracts in the GCC — by deploying AI-native operations
-              infrastructure against the specific failure modes that quietly erode every multi-year
-              contract above $5M.
+              BaytyAI exists to make the global construction and facilities-management supply chain
+              verifiable, structured, and trusted — connecting clients, consultants, contractors,
+              subcontractors, and suppliers on one platform where identity is proven and every
+              inquiry, quotation, approval, and document is on the record.
             </p>
           </div>
         </Container>
@@ -92,15 +92,14 @@ export default function AboutPage() {
           />
           <div className="max-w-2xl border-l-2 border-signal-500 bg-ink-900 p-8">
             <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-signal-500">
-              Senior AI Prompt Engineer for Mega Projects
+              Founder &amp; CEO
             </p>
             <p className="mt-5 font-sans text-base leading-relaxed text-ink-300">
-              Laith Hamoda founded BaytyAI to bring operator-grade AI into GCC Facilities Management
-              and Construction. His background spans mechanical and HVAC delivery on prominent UAE
-              sites and a certified BTEC evaluator role in Jordan. He publishes the GCC FM Prompt
-              Series on LinkedIn — one operator-grade prompt at a time — and builds the workflows
-              BaytyAI deploys into live contracts, operating in Arabic, English, and French from
-              Amman.
+              Laith Hamoda founded BaytyAI to bring verification, structure, and trust to how the
+              world&rsquo;s construction and facilities-management projects connect and transact.
+              His background spans mechanical and HVAC engineering on major sites and a certified
+              BTEC evaluator role, and he builds the workflows that power the platform — operating
+              in English, Arabic, and French.
             </p>
             <a
               href={siteConfig.founder.linkedin}
