@@ -35,9 +35,9 @@ export default function MarketplaceClient({
   return (
     <div className="flex flex-col gap-6">
       {/* Filters */}
-      <div className="flex flex-wrap items-end gap-3 border border-ink-700 bg-ink-900 p-4">
+      <div className="flex flex-wrap items-end gap-3 rounded-card border border-steel-200 bg-white p-4 shadow-a1-sm">
         <label className="flex min-w-[200px] flex-1 flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Search
           </span>
           <input
@@ -45,17 +45,17 @@ export default function MarketplaceClient({
             onChange={(e) => setQ(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
             placeholder="Title or description…"
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Region
           </span>
           <select
             value={region}
             onChange={(e) => setRegion(e.target.value)}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {REGIONS.map((r) => (
               <option key={r} value={r}>
@@ -65,13 +65,13 @@ export default function MarketplaceClient({
           </select>
         </label>
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Budget
           </span>
           <select
             value={budgetBand}
             onChange={(e) => setBudgetBand(e.target.value)}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {BUDGETS.map((b) => (
               <option key={b} value={b}>
@@ -84,7 +84,7 @@ export default function MarketplaceClient({
           type="button"
           onClick={applyFilters}
           disabled={pending}
-          className="border border-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-signal-500 disabled:opacity-40"
+          className="border border-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-bayty-600 disabled:opacity-40"
         >
           {pending ? 'Filtering…' : 'Apply'}
         </button>
@@ -92,32 +92,32 @@ export default function MarketplaceClient({
 
       {/* Results */}
       {items.length === 0 ? (
-        <p className="font-sans text-sm text-ink-500">No inquiries match your filters.</p>
+        <p className="font-sans text-sm text-steel-500">No inquiries match your filters.</p>
       ) : (
         <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {items.map((it) => (
             <li key={it.id}>
               <Link
                 href={`/dashboard/marketplace/${it.id}`}
-                className="flex h-full flex-col gap-2 border border-ink-700 bg-ink-950 p-5 transition-colors hover:border-signal-500/50"
+                className="flex h-full flex-col gap-2 rounded-card border border-steel-200 bg-white p-5 shadow-a1-sm transition-colors hover:border-bayty-300"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <h3 className="font-sans text-base font-medium text-ink-100">{it.title}</h3>
+                  <h3 className="font-sans text-base font-medium text-steel-900">{it.title}</h3>
                   {it.isOwn && (
-                    <span className="shrink-0 font-mono text-[9px] uppercase tracking-widest text-signal-500">
+                    <span className="shrink-0 font-mono text-[9px] uppercase tracking-widest text-bayty-600">
                       Yours
                     </span>
                   )}
                 </div>
-                <p className="text-ink-400 line-clamp-2 font-sans text-sm">{it.description}</p>
+                <p className="line-clamp-2 font-sans text-sm text-steel-500">{it.description}</p>
                 <div className="mt-auto flex flex-wrap gap-2 pt-2">
                   {it.region && (
-                    <span className="text-ink-400 border border-ink-700 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+                    <span className="border border-steel-200 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-steel-500">
                       {it.region}
                     </span>
                   )}
                   {it.budgetBand && (
-                    <span className="text-ink-400 border border-ink-700 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+                    <span className="border border-steel-200 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-steel-500">
                       {it.budgetBand}
                     </span>
                   )}
@@ -128,7 +128,7 @@ export default function MarketplaceClient({
         </ul>
       )}
       {!canQuote && (
-        <p className="font-sans text-xs text-ink-500">
+        <p className="font-sans text-xs text-steel-500">
           Verification is required to submit a quotation on any inquiry.
         </p>
       )}

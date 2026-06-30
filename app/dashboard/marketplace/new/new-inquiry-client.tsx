@@ -41,16 +41,18 @@ export default function NewInquiryClient() {
   return (
     <div className="flex flex-col gap-4">
       <label className="flex flex-col gap-1">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">Title</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
+          Title
+        </span>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="e.g. MEP design consultant for a mixed-use tower"
-          className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+          className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
         />
       </label>
       <label className="flex flex-col gap-1">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
           Description
         </span>
         <textarea
@@ -58,18 +60,18 @@ export default function NewInquiryClient() {
           onChange={(e) => setDescription(e.target.value)}
           rows={5}
           placeholder="Scope, deliverables, timeline, location…"
-          className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+          className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
         />
       </label>
       <div className="flex gap-3">
         <label className="flex flex-1 flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Region
           </span>
           <select
             value={region}
             onChange={(e) => setRegion(e.target.value)}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {REGIONS.map((r) => (
               <option key={r} value={r}>
@@ -79,13 +81,13 @@ export default function NewInquiryClient() {
           </select>
         </label>
         <label className="flex flex-1 flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Budget band
           </span>
           <select
             value={budgetBand}
             onChange={(e) => setBudgetBand(e.target.value)}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="rounded-card border border-steel-300 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {BUDGETS.map((b) => (
               <option key={b} value={b}>
@@ -100,7 +102,7 @@ export default function NewInquiryClient() {
           type="button"
           onClick={submit}
           disabled={pending}
-          className="bg-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+          className="rounded-pill bg-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-white disabled:opacity-40"
         >
           {pending ? 'Posting…' : 'Post inquiry'}
         </button>

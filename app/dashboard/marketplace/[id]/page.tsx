@@ -22,7 +22,7 @@ export default async function InquiryPage({ params }: { params: Promise<{ id: st
     <div className="mx-auto max-w-3xl p-2">
       <Link
         href="/dashboard/marketplace"
-        className="mb-6 inline-block font-mono text-[11px] uppercase tracking-widest text-ink-500 transition-colors hover:text-signal-500"
+        className="mb-6 inline-block font-mono text-[11px] uppercase tracking-widest text-steel-500 transition-colors hover:text-bayty-600"
       >
         ← Back to marketplace
       </Link>
@@ -30,18 +30,18 @@ export default async function InquiryPage({ params }: { params: Promise<{ id: st
       <header className="mb-6">
         <div className="mb-2 flex flex-wrap gap-2">
           {inquiry.region && (
-            <span className="text-ink-400 border border-ink-700 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+            <span className="border border-steel-200 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-steel-500">
               {inquiry.region}
             </span>
           )}
           {inquiry.budgetBand && (
-            <span className="text-ink-400 border border-ink-700 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+            <span className="border border-steel-200 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-steel-500">
               {inquiry.budgetBand}
             </span>
           )}
         </div>
-        <h1 className="font-sans text-2xl font-semibold text-ink-100">{inquiry.title}</h1>
-        <p className="mt-3 whitespace-pre-line font-sans text-sm leading-relaxed text-ink-300">
+        <h1 className="font-sans text-2xl font-semibold text-steel-900">{inquiry.title}</h1>
+        <p className="mt-3 whitespace-pre-line font-sans text-sm leading-relaxed text-steel-600">
           {inquiry.description || 'No description provided.'}
         </p>
       </header>
