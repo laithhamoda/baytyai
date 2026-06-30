@@ -9,11 +9,15 @@ import {
   Menu,
   X,
   ChevronRight,
+  ShieldCheck,
+  ClipboardCheck,
+  Store,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+import Logo from '@/components/brand/logo';
 import { cn } from '@/lib/utils';
 
 import type { User } from '@supabase/supabase-js';
@@ -22,6 +26,9 @@ const NAV = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard, exact: true },
   { href: '/dashboard/projects/new', label: 'New Project', icon: FolderPlus },
   { href: '/dashboard/projects', label: 'My Projects', icon: FileText },
+  { href: '/dashboard/marketplace', label: 'Marketplace', icon: Store },
+  { href: '/dashboard/selection', label: 'Consultant Selection', icon: ClipboardCheck },
+  { href: '/dashboard/verification', label: 'Verification', icon: ShieldCheck },
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -40,15 +47,15 @@ function NavItem({
       href={href}
       onClick={onClick}
       className={cn(
-        'flex items-center gap-3 rounded-sm px-3 py-2.5 text-sm transition-colors',
+        'flex items-center gap-3 rounded-card px-3 py-2.5 text-sm transition-colors',
         active
-          ? 'bg-primary/10 text-primary font-medium'
-          : 'text-muted-foreground hover:bg-muted/40 hover:text-foreground',
+          ? 'bg-bayty-50 font-medium text-bayty-600'
+          : 'text-steel-500 hover:bg-steel-50 hover:text-steel-900',
       )}
     >
       <Icon size={16} className="shrink-0" />
       {label}
-      {active && <ChevronRight size={14} className="text-primary ms-auto" />}
+      {active && <ChevronRight size={14} className="ms-auto text-bayty-500" />}
     </Link>
   );
 }
@@ -63,19 +70,17 @@ export default function DashboardShell({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const sidebar = (
-    <aside className="border-border bg-card flex h-full flex-col border-e">
+    <aside className="flex h-full flex-col border-e border-steel-200 bg-white">
       {/* Logo */}
-      <div className="border-border flex h-16 items-center border-b px-5">
+      <div className="flex h-16 items-center border-b border-steel-200 px-5">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <span className="font-display text-primary text-xl font-semibold tracking-wide">
-            Bayty
-          </span>
-          <span className="bg-primary/10 text-primary rounded-sm px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest">
+          <Logo size={26} />
+          <span className="rounded-pill bg-bayty-50 px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-bayty-600">
             Pro
           </span>
         </Link>
         <button
-          className="text-muted-foreground hover:text-foreground ms-auto rounded p-1 lg:hidden"
+          className="ms-auto rounded p-1 text-steel-400 hover:text-steel-900 lg:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-label="Close sidebar"
         >
@@ -91,12 +96,12 @@ export default function DashboardShell({
       </nav>
 
       {/* User footer */}
-      <div className="border-border border-t p-4">
-        <div className="text-muted-foreground mb-2 truncate text-xs">{user.email}</div>
+      <div className="border-t border-steel-200 p-4">
+        <div className="mb-2 truncate text-xs text-steel-500">{user.email}</div>
         <form action="/api/auth/signout" method="POST">
           <button
             type="submit"
-            className="text-muted-foreground hover:bg-muted/40 hover:text-foreground flex w-full items-center gap-2 rounded-sm p-2 text-sm transition-colors"
+            className="flex w-full items-center gap-2 rounded-card p-2 text-sm text-steel-500 transition-colors hover:bg-steel-50 hover:text-steel-900"
           >
             <LogOut size={14} />
             Sign out
@@ -107,7 +112,7 @@ export default function DashboardShell({
   );
 
   return (
-    <div className="bg-background text-foreground flex h-screen overflow-hidden">
+    <div className="flex h-screen overflow-hidden bg-steel-50 text-steel-900">
       {/* Desktop sidebar */}
       <div className="hidden w-60 shrink-0 lg:block">{sidebar}</div>
 
@@ -131,16 +136,16 @@ export default function DashboardShell({
       {/* Main content */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top bar */}
-        <header className="border-border bg-card flex h-16 shrink-0 items-center border-b px-4 lg:px-6">
+        <header className="flex h-16 shrink-0 items-center border-b border-steel-200 bg-white px-4 lg:px-6">
           <button
-            className="text-muted-foreground hover:text-foreground me-4 rounded p-1.5 lg:hidden"
+            className="me-4 rounded p-1.5 text-steel-400 hover:text-steel-900 lg:hidden"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open sidebar"
           >
             <Menu size={20} />
           </button>
           <div className="flex-1" />
-          <div className="text-muted-foreground hidden text-xs sm:block">{user.email}</div>
+          <div className="hidden text-xs text-steel-500 sm:block">{user.email}</div>
         </header>
 
         <main className="flex-1 overflow-y-auto p-4 lg:p-8">{children}</main>

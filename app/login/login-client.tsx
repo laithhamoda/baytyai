@@ -8,10 +8,10 @@ import { createClient } from '@/lib/supabase/client';
 type Step = 'email' | 'code';
 
 const fieldCls =
-  'w-full border-b border-signal-500/40 bg-transparent px-1 py-3 text-base text-ink-100 placeholder:text-ink-500 focus:border-signal-500 focus:outline-none';
-const labelCls = 'mb-1.5 block font-mono text-[10px] uppercase tracking-[0.16em] text-ink-500';
+  'w-full border-b border-bayty-500/40 bg-transparent px-1 py-3 text-base text-steel-900 placeholder:text-steel-500 focus:border-bayty-500 focus:outline-none';
+const labelCls = 'mb-1.5 block font-mono text-[10px] uppercase tracking-[0.16em] text-steel-500';
 const btnCls =
-  'h-14 w-full bg-signal-500 font-sans text-sm font-medium uppercase tracking-[0.14em] text-ink-950 transition-colors hover:bg-signal-600 disabled:cursor-wait disabled:opacity-70';
+  'h-14 w-full bg-bayty-500 font-sans text-sm font-medium uppercase tracking-[0.14em] text-white transition-colors hover:bg-bayty-600 disabled:cursor-wait disabled:opacity-70';
 
 export default function LoginClient() {
   const router = useRouter();
@@ -83,19 +83,19 @@ export default function LoginClient() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-ink-950 px-6 pb-16 pt-32">
+    <div className="flex min-h-screen items-center justify-center bg-steel-50 px-6 pb-16 pt-32">
       <div className="w-full max-w-[420px]">
-        <div className="mx-auto mb-8 h-px w-10 bg-signal-500" />
-        <h1 className="mb-3 text-center font-sans text-3xl font-semibold text-ink-100">
+        <div className="mx-auto mb-8 h-px w-10 bg-bayty-500" />
+        <h1 className="mb-3 text-center font-sans text-3xl font-semibold text-steel-900">
           {step === 'email' ? (
             <>
-              Sign in to Bayty<span className="text-signal-500">AI</span>
+              Sign in to Bayty<span className="text-bayty-600">AI</span>
             </>
           ) : (
             'Enter your code'
           )}
         </h1>
-        <p className="mb-12 text-center font-sans text-sm leading-relaxed text-ink-300">
+        <p className="mb-12 text-center font-sans text-sm leading-relaxed text-steel-600">
           {step === 'email' ? "Enter your email and we'll send a one-time code." : notice}
         </p>
 
@@ -158,7 +158,7 @@ export default function LoginClient() {
                 setCode('');
                 setError('');
               }}
-              className="font-sans text-sm text-ink-300 underline transition-colors hover:text-signal-500"
+              className="font-sans text-sm text-steel-600 underline transition-colors hover:text-bayty-600"
             >
               Use a different email
             </button>

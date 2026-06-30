@@ -4,6 +4,7 @@ import { z } from 'zod';
 
 import { ok, err } from '@/lib/actions/types';
 import { can } from '@/lib/auth/permissions';
+import { isOrgVerified } from '@/lib/auth/require-verified';
 import { resolveActor } from '@/lib/auth/resolve-actor';
 import { writeAuditLog } from '@/lib/db/audit';
 import { createClient } from '@/lib/supabase/server';
@@ -30,6 +31,11 @@ export async function submitQuotation(
 
   if (can(actor.platformRole, actor.stakeholderType, 'quotation.submit') !== 'allow') {
     return err('Forbidden');
+  }
+
+  // Marketplace access gate: only verified orgs may transact.
+  if (!(await isOrgVerified(actor))) {
+    return err('Your organization must be verified before submitting quotations.');
   }
 
   const supabase = await createClient();

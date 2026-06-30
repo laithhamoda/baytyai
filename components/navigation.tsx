@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import Logo from '@/components/brand/logo';
+
 const NAV_LINKS = [
   { label: 'System', href: '/#system' },
   { label: 'Proof', href: '/#proof' },
@@ -29,6 +31,8 @@ export default function Navigation() {
 
   useEffect(() => setMenuOpen(false), [pathname]);
 
+  // The homepage ('/') ships its own light A1 chrome.
+  if (pathname === '/') return null;
   if (HIDDEN_PREFIXES.some((p) => pathname.startsWith(p))) return null;
 
   return (
@@ -43,11 +47,8 @@ export default function Navigation() {
         aria-label="Primary"
         className="mx-auto flex h-full max-w-container items-center justify-between px-6 md:px-12"
       >
-        <Link
-          href="/"
-          className="font-sans text-lg font-semibold tracking-tight text-ink-100 transition-colors hover:text-signal-500"
-        >
-          Bayty<span className="text-signal-500">AI</span>
+        <Link href="/" aria-label="BaytyAI home" className="transition-opacity hover:opacity-80">
+          <Logo tone="light" size={30} />
         </Link>
 
         {/* Desktop links */}

@@ -102,7 +102,7 @@ create table if not exists public.award_recommendations (
 
 -- ---- Version lock: a LOCKED criteria set (and its criteria) is immutable ----
 create or replace function public.enforce_criteria_lock() returns trigger
-language plpgsql as $$
+language plpgsql set search_path = public, pg_catalog as $$
 declare set_status text;
 begin
   if tg_table_name = 'criteria_sets' then
@@ -151,7 +151,7 @@ create policy sp_org on public.selection_processes for all
 
 -- Child tables inherit access via their process's org.
 create or replace function public.process_in_my_org(pid uuid) returns boolean
-language sql stable security definer as $$
+language sql stable security definer set search_path = public, pg_catalog as $$
   select exists (
     select 1 from public.selection_processes sp
     where sp.id = pid and sp.organization_id = public.current_org_id()
@@ -167,6 +167,31 @@ begin
     execute format('create policy child_org on public.%I for all using (public.process_in_my_org(process_id)) with check (public.process_in_my_org(process_id))', t);
   end loop;
 end $$;
+
+-- criteria and evaluation_scores link via a parent row (not process_id), so they
+-- are scoped through their parent's process. Without these, org users with RLS
+-- enabled could only reach these tables as platform admin.
+drop policy if exists criteria_org on public.criteria;
+create policy criteria_org on public.criteria for all
+  using (exists (
+    select 1 from public.criteria_sets cs
+    where cs.id = criteria_set_id and public.process_in_my_org(cs.process_id)
+  ))
+  with check (exists (
+    select 1 from public.criteria_sets cs
+    where cs.id = criteria_set_id and public.process_in_my_org(cs.process_id)
+  ));
+
+drop policy if exists evaluation_scores_org on public.evaluation_scores;
+create policy evaluation_scores_org on public.evaluation_scores for all
+  using (exists (
+    select 1 from public.evaluations e
+    where e.id = evaluation_id and public.process_in_my_org(e.process_id)
+  ))
+  with check (exists (
+    select 1 from public.evaluations e
+    where e.id = evaluation_id and public.process_in_my_org(e.process_id)
+  ));
 
 create index if not exists sp_org_idx on public.selection_processes(organization_id);
 create index if not exists criteria_set_idx on public.criteria(criteria_set_id);

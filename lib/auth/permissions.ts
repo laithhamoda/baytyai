@@ -28,7 +28,9 @@ export type Action =
   | 'document.upload'
   | 'document.approve'
   | 'marketplace.browse'
-  | 'marketplace.appear';
+  | 'marketplace.appear'
+  | 'selection.manage'
+  | 'selection.evaluate';
 
 export type Decision = 'allow' | 'requires_approval' | 'deny';
 
@@ -99,6 +101,23 @@ const MATRIX: Record<Action, Record<StakeholderType, Decision>> = {
     contractor: 'allow',
     subcontractor: 'allow',
     supplier: 'allow',
+  },
+  // Running a consultant-selection process (intake, criteria, award) is a
+  // client/owner activity; consultants taking part cannot manage it.
+  'selection.manage': {
+    client: 'allow',
+    consultant: 'deny',
+    contractor: 'requires_approval',
+    subcontractor: 'deny',
+    supplier: 'deny',
+  },
+  // Submitting evaluation scores — done by client-side panel members.
+  'selection.evaluate': {
+    client: 'allow',
+    consultant: 'deny',
+    contractor: 'requires_approval',
+    subcontractor: 'deny',
+    supplier: 'deny',
   },
 };
 

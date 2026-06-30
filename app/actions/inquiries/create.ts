@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { requestApproval } from '@/app/actions/approvals/request';
 import { ok, err } from '@/lib/actions/types';
 import { can } from '@/lib/auth/permissions';
+import { isOrgVerified } from '@/lib/auth/require-verified';
 import { resolveActor } from '@/lib/auth/resolve-actor';
 import { writeAuditLog } from '@/lib/db/audit';
 import { createClient } from '@/lib/supabase/server';
@@ -36,6 +37,11 @@ export async function createInquiry(
 
   const decision = can(actor.platformRole, actor.stakeholderType, 'inquiry.post');
   if (decision === 'deny') return err('Forbidden');
+
+  // Marketplace access gate: only verified orgs may post inquiries.
+  if (!(await isOrgVerified(actor))) {
+    return err('Your organization must be verified before posting inquiries.');
+  }
 
   const status = decision === 'requires_approval' ? 'pending_approval' : 'published';
 

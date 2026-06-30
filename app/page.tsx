@@ -1,15 +1,4 @@
-import Reveal from '@/components/motion/Reveal';
-import ScrollRail from '@/components/motion/ScrollRail';
-import Faq from '@/components/sections/lp-faq';
-import FinalCta from '@/components/sections/lp-final-cta';
-import Founder from '@/components/sections/lp-founder';
-import HeroAnimated from '@/components/sections/lp-hero-animated';
-import Pricing from '@/components/sections/lp-pricing';
-import Problem from '@/components/sections/lp-problem';
-import Process from '@/components/sections/lp-process';
-import Proof from '@/components/sections/lp-proof';
-import Stakeholders from '@/components/sections/lp-stakeholders';
-import System from '@/components/sections/lp-system';
+import A1Landing from '@/components/sections/a1-landing';
 
 import type { Metadata } from 'next';
 
@@ -18,7 +7,7 @@ export const metadata: Metadata = {
     absolute: 'BaytyAI — Global Verified Marketplace for Construction & Facilities Management',
   },
   description:
-    'BaytyAI connects verified clients, consultants, contractors, subcontractors, and suppliers worldwide. Post inquiries, receive quotations, route approvals, and control documents on one trusted construction & FM platform.',
+    'BaytyAI connects verified clients, consultants, contractors, subcontractors, and suppliers worldwide. Post inquiries, receive quotations, route approvals, and run transparent, weighted consultant selection on one trusted construction & FM platform.',
   alternates: {
     canonical: 'https://baytyai.com',
     languages: {
@@ -27,36 +16,76 @@ export const metadata: Metadata = {
       'x-default': 'https://baytyai.com',
     },
   },
+  openGraph: {
+    type: 'website',
+    url: 'https://baytyai.com',
+    title: 'BaytyAI — Global Verified Construction & FM Marketplace',
+    description:
+      'The verified network for construction & facilities management — structured inquiries, transparent quotations, weighted consultant selection, approvals and document control.',
+    siteName: 'BaytyAI',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BaytyAI — Global Verified Construction & FM Marketplace',
+    description:
+      'The verified network for construction & facilities management. Verified stakeholders, transparent procurement, explainable selection.',
+  },
+};
+
+// SEO/GEO: rich, answer-engine-friendly structured data describing the product.
+const JSONLD = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://baytyai.com/#org',
+      name: 'BaytyAI',
+      url: 'https://baytyai.com',
+      description:
+        'Global verified marketplace and operations platform for construction and facilities management.',
+      areaServed: 'Worldwide',
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'BaytyAI',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      description:
+        'Verified marketplace connecting clients, consultants, contractors, subcontractors and suppliers, with structured inquiries, quotations, approvals, weighted consultant selection and document control.',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is BaytyAI?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'BaytyAI is a global, verified marketplace and operations platform for construction and facilities management that connects clients, consultants, contractors, subcontractors and suppliers with structured inquiries, transparent quotations, approvals and explainable consultant selection.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How does BaytyAI build trust?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Every organization is manually verified before it can transact, every decision is auditable, and consultant selection uses weighted, version-locked criteria with a plain-language explanation of why one party ranks higher.',
+          },
+        },
+      ],
+    },
+  ],
 };
 
 export default function Home() {
   return (
     <>
-      <ScrollRail />
-      <HeroAnimated />
-      <Reveal>
-        <Problem />
-      </Reveal>
-      <Reveal>
-        <System />
-      </Reveal>
-      <Stakeholders />
-      <Reveal>
-        <Proof />
-      </Reveal>
-      <Reveal>
-        <Founder />
-      </Reveal>
-      <Reveal>
-        <Process />
-      </Reveal>
-      <Reveal>
-        <Pricing />
-      </Reveal>
-      <Reveal>
-        <Faq />
-      </Reveal>
-      <FinalCta />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }}
+      />
+      <A1Landing />
     </>
   );
 }

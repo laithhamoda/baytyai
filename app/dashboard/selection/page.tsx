@@ -1,4 +1,5 @@
 import EvaluationStudio from './evaluation-studio';
+import TorStudio from './tor-studio';
 
 export const metadata = {
   title: { absolute: 'Consultant Selection — BaytyAI' },
@@ -64,13 +65,13 @@ export default function SelectionPage() {
   return (
     <div className="mx-auto max-w-5xl p-2">
       <header className="mb-10">
-        <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-signal-500">
+        <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-bayty-600">
           Consultant Selection
         </p>
-        <h1 className="font-sans text-3xl font-semibold text-ink-100">
+        <h1 className="font-sans text-3xl font-semibold text-steel-900">
           Guided consultant selection &amp; evaluation
         </h1>
-        <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-ink-300">
+        <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-steel-600">
           A transparent, auditable workflow from project intake to award recommendation. Criteria
           and weights are version-controlled and locked before scoring — and the system always
           explains why one consultant ranks higher.
@@ -84,25 +85,37 @@ export default function SelectionPage() {
             key={s.key}
             title={s.tip}
             className={`flex items-start gap-3 border p-4 ${
-              s.done ? 'border-signal-500/40 bg-ink-900' : 'border-ink-700 bg-ink-950'
+              s.done ? 'border-bayty-500/40 bg-steel-50' : 'border-steel-200 bg-white'
             }`}
           >
-            <span className={`font-mono text-xs ${s.done ? 'text-signal-500' : 'text-ink-500'}`}>
+            <span className={`font-mono text-xs ${s.done ? 'text-bayty-600' : 'text-steel-500'}`}>
               {String(i + 1).padStart(2, '0')}
             </span>
             <div>
-              <p className="font-sans text-sm font-medium text-ink-100">{s.label}</p>
-              <p className="mt-1 font-sans text-xs leading-relaxed text-ink-500">{s.tip}</p>
+              <p className="font-sans text-sm font-medium text-steel-900">{s.label}</p>
+              <p className="mt-1 font-sans text-xs leading-relaxed text-steel-500">{s.tip}</p>
             </div>
           </li>
         ))}
       </ol>
 
+      <section aria-labelledby="tor-heading" className="mb-14">
+        <h2 id="tor-heading" className="mb-2 font-sans text-xl font-semibold text-steel-900">
+          Terms of Reference (AI-assisted)
+        </h2>
+        <p className="mb-6 font-sans text-sm text-steel-600">
+          Provide the project details and draft a structured TOR. When an Anthropic API key is
+          configured the draft is tailored by Claude; otherwise a professional template is used — no
+          paid service required. Every draft is reviewed and approved before it is version-locked.
+        </p>
+        <TorStudio />
+      </section>
+
       <section aria-labelledby="eval-heading">
-        <h2 id="eval-heading" className="mb-2 font-sans text-xl font-semibold text-ink-100">
+        <h2 id="eval-heading" className="mb-2 font-sans text-xl font-semibold text-steel-900">
           Technical &amp; financial evaluation
         </h2>
-        <p className="mb-6 font-sans text-sm text-ink-300">
+        <p className="mb-6 font-sans text-sm text-steel-600">
           Adjust weights (must total 100% before locking), score each consultant 0–10 per criterion,
           and the weighted ranking and explanation update live. No hidden logic — every number is
           shown.
