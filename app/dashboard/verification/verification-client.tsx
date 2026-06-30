@@ -10,12 +10,12 @@ const STATUS_META: Record<
 > = {
   unverified: {
     label: 'Unverified',
-    cls: 'text-ink-400 border-ink-700',
+    cls: 'text-steel-500 border-steel-200',
     blurb: 'Your organization is not yet verified. Request verification to unlock the marketplace.',
   },
   pending: {
     label: 'Pending review',
-    cls: 'text-signal-500 border-signal-500/40',
+    cls: 'text-bayty-600 border-bayty-500/40',
     blurb: 'Your request is in the queue. The BaytyAI team will review it manually.',
   },
   verified: {
@@ -54,30 +54,30 @@ export default function VerificationClient({ initial }: { initial: VerificationS
 
   return (
     <div className="flex flex-col gap-6">
-      <div className={`border ${meta.cls} bg-ink-900 p-6`}>
+      <div className={`border ${meta.cls} bg-steel-50 p-6`}>
         <div className="flex items-center justify-between">
           <span className="font-mono text-[11px] uppercase tracking-widest">Status</span>
           <span className={`font-mono text-sm uppercase tracking-widest ${meta.cls.split(' ')[0]}`}>
             ● {meta.label}
           </span>
         </div>
-        <p className="mt-3 font-sans text-sm leading-relaxed text-ink-300">{meta.blurb}</p>
+        <p className="mt-3 font-sans text-sm leading-relaxed text-steel-600">{meta.blurb}</p>
         {state.verifiedAt && (
-          <p className="mt-2 font-mono text-[11px] text-ink-500">
+          <p className="mt-2 font-mono text-[11px] text-steel-500">
             Verified {new Date(state.verifiedAt).toLocaleDateString()}
           </p>
         )}
         {state.status === 'rejected' && state.notes && (
-          <p className="mt-3 border-l-2 border-alert-500 pl-3 font-sans text-sm text-ink-300">
+          <p className="mt-3 border-l-2 border-alert-500 pl-3 font-sans text-sm text-steel-600">
             Reviewer note: {state.notes}
           </p>
         )}
       </div>
 
       {canRequest && (
-        <div className="border border-ink-700 bg-ink-950 p-6">
+        <div className="border border-steel-200 bg-white p-6">
           <label className="flex flex-col gap-2">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
               Anything the reviewer should know (optional)
             </span>
             <textarea
@@ -85,7 +85,7 @@ export default function VerificationClient({ initial }: { initial: VerificationS
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
               placeholder="Company registration no., trade license, website, references…"
-              className="border border-ink-700 bg-ink-900 px-3 py-2 font-sans text-sm text-ink-100"
+              className="border border-steel-200 bg-steel-50 px-3 py-2 font-sans text-sm text-steel-900"
             />
           </label>
           <div className="mt-4 flex items-center gap-4">
@@ -93,7 +93,7 @@ export default function VerificationClient({ initial }: { initial: VerificationS
               type="button"
               onClick={submit}
               disabled={pending}
-              className="bg-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+              className="bg-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-white disabled:opacity-40"
             >
               {pending ? 'Submitting…' : 'Request verification'}
             </button>

@@ -56,27 +56,27 @@ export default function TorStudio() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="grid grid-cols-1 gap-4 border border-ink-700 bg-ink-900 p-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 border border-steel-200 bg-steel-50 p-6 sm:grid-cols-2">
         <label className="flex flex-col gap-1 sm:col-span-2">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Project title
           </span>
           <input
             value={projectTitle}
             onChange={(e) => setProjectTitle(e.target.value)}
             placeholder="e.g. Riverside Commercial Tower — Design & Supervision"
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           />
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Complexity
           </span>
           <select
             value={complexity}
             onChange={(e) => setComplexity(e.target.value as 'commercial' | 'mega')}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {COMPLEXITIES.map((c) => (
               <option key={c.value} value={c.value}>
@@ -87,13 +87,13 @@ export default function TorStudio() {
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Selection method
           </span>
           <select
             value={selectionMethod}
             onChange={(e) => setSelectionMethod(e.target.value)}
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           >
             {METHODS.map((m) => (
               <option key={m} value={m}>
@@ -104,31 +104,31 @@ export default function TorStudio() {
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Country (optional)
           </span>
           <input
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             placeholder="e.g. United Arab Emirates"
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           />
         </label>
 
         <label className="flex flex-col gap-1">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Objectives (one per line, optional)
           </span>
           <input
             value={objectives}
             onChange={(e) => setObjectives(e.target.value)}
             placeholder="Deliver detailed design; Supervise construction"
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           />
         </label>
 
         <label className="flex flex-col gap-1 sm:col-span-2">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
             Scope / background
           </span>
           <textarea
@@ -136,7 +136,7 @@ export default function TorStudio() {
             onChange={(e) => setScope(e.target.value)}
             rows={4}
             placeholder="Describe the project, its drivers, and the services required from the consultant."
-            className="border border-ink-700 bg-ink-950 px-3 py-2 font-sans text-sm text-ink-100"
+            className="border border-steel-200 bg-white px-3 py-2 font-sans text-sm text-steel-900"
           />
         </label>
 
@@ -145,7 +145,7 @@ export default function TorStudio() {
             type="button"
             onClick={draftTor}
             disabled={!canDraft}
-            className="bg-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+            className="bg-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-white disabled:opacity-40"
           >
             {loading ? 'Drafting…' : 'Draft TOR (AI)'}
           </button>
@@ -154,11 +154,11 @@ export default function TorStudio() {
       </div>
 
       {draft && (
-        <article className="border border-ink-700 bg-ink-950 p-6">
+        <article className="border border-steel-200 bg-white p-6">
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="font-sans text-lg font-semibold text-ink-100">{draft.title}</h3>
+            <h3 className="font-sans text-lg font-semibold text-steel-900">{draft.title}</h3>
             <span
-              className="font-mono text-[10px] uppercase tracking-widest text-ink-500"
+              className="font-mono text-[10px] uppercase tracking-widest text-steel-500"
               title={
                 draft.source === 'ai'
                   ? 'Generated by Claude (claude-opus-4-8).'
@@ -171,16 +171,14 @@ export default function TorStudio() {
           <div className="flex flex-col gap-5">
             {draft.sections.map((s) => (
               <section key={s.heading}>
-                <h4 className="mb-1 font-sans text-sm font-semibold text-signal-500">
-                  {s.heading}
-                </h4>
-                <p className="whitespace-pre-line font-sans text-sm leading-relaxed text-ink-300">
+                <h4 className="mb-1 font-sans text-sm font-semibold text-bayty-600">{s.heading}</h4>
+                <p className="whitespace-pre-line font-sans text-sm leading-relaxed text-steel-600">
                   {s.body}
                 </p>
               </section>
             ))}
           </div>
-          <p className="mt-5 font-sans text-xs text-ink-500">
+          <p className="mt-5 font-sans text-xs text-steel-500">
             This is a draft. Review, edit, and approve it before it is version-locked and released
             to consultants.
           </p>

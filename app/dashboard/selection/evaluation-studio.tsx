@@ -192,15 +192,15 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
   return (
     <div className="flex flex-col gap-8">
       {/* Criteria weights */}
-      <div className="border border-ink-700 bg-ink-900 p-6">
+      <div className="border border-steel-200 bg-steel-50 p-6">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="font-sans text-sm font-semibold text-ink-100">
+          <h3 className="font-sans text-sm font-semibold text-steel-900">
             Evaluation criteria &amp; weights
           </h3>
           <button
             type="button"
             onClick={() => setLocked((l) => !l)}
-            className={`font-mono text-[11px] uppercase tracking-widest ${locked ? 'text-alert-500' : 'text-signal-500'}`}
+            className={`font-mono text-[11px] uppercase tracking-widest ${locked ? 'text-alert-500' : 'text-bayty-600'}`}
             title="Once locked, weights cannot change unless a new approved version is created."
           >
             {locked ? '● Locked' : '○ Lock & approve'}
@@ -209,8 +209,8 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
         <div className="flex flex-col gap-2">
           {criteria.map((c) => (
             <div key={c.id} className="flex items-center gap-4">
-              <span className="w-56 font-sans text-sm text-ink-300">{c.label}</span>
-              <span className="font-mono text-[10px] uppercase text-ink-500">{c.dimension}</span>
+              <span className="w-56 font-sans text-sm text-steel-600">{c.label}</span>
+              <span className="font-mono text-[10px] uppercase text-steel-500">{c.dimension}</span>
               <input
                 type="number"
                 value={c.weight}
@@ -218,9 +218,9 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
                 max={100}
                 disabled={locked}
                 onChange={(e) => setWeight(c.id, Number(e.target.value))}
-                className="w-20 border border-ink-700 bg-ink-950 px-2 py-1 text-right font-mono text-sm text-ink-100 disabled:opacity-60"
+                className="w-20 border border-steel-200 bg-white px-2 py-1 text-right font-mono text-sm text-steel-900 disabled:opacity-60"
               />
-              <span className="font-mono text-xs text-ink-500">%</span>
+              <span className="font-mono text-xs text-steel-500">%</span>
             </div>
           ))}
         </div>
@@ -233,33 +233,33 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
       </div>
 
       {/* Comparison table */}
-      <div className="overflow-x-auto border border-ink-700">
+      <div className="overflow-x-auto border border-steel-200">
         <table className="w-full border-collapse text-left">
           <thead>
-            <tr className="bg-ink-900">
-              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-ink-500">
+            <tr className="bg-steel-50">
+              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-steel-500">
                 Consultant
               </th>
               {criteria.map((c) => (
                 <th
                   key={c.id}
-                  className="p-3 font-mono text-[10px] uppercase tracking-widest text-ink-500"
+                  className="p-3 font-mono text-[10px] uppercase tracking-widest text-steel-500"
                 >
                   {c.label} ({c.weight}%)
                 </th>
               ))}
-              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-signal-500">
+              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-bayty-600">
                 Weighted
               </th>
-              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-ink-500">
+              <th className="p-3 font-mono text-[10px] uppercase tracking-widest text-steel-500">
                 Rank
               </th>
             </tr>
           </thead>
           <tbody>
             {ranked.map((r) => (
-              <tr key={r.consultantId} className="border-t border-ink-700">
-                <td className="p-3 font-sans text-sm font-medium text-ink-100">{r.name}</td>
+              <tr key={r.consultantId} className="border-t border-steel-200">
+                <td className="p-3 font-sans text-sm font-medium text-steel-900">{r.name}</td>
                 {criteria.map((c) => (
                   <td key={c.id} className="p-3">
                     <input
@@ -268,14 +268,14 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
                       max={10}
                       value={scores[r.consultantId]?.[c.id] ?? 0}
                       onChange={(e) => setScore(r.consultantId, c.id, Number(e.target.value))}
-                      className="w-16 border border-ink-700 bg-ink-950 px-2 py-1 text-right font-mono text-sm text-ink-100"
+                      className="w-16 border border-steel-200 bg-white px-2 py-1 text-right font-mono text-sm text-steel-900"
                     />
                   </td>
                 ))}
-                <td className="p-3 font-mono text-sm font-medium text-signal-500">
+                <td className="p-3 font-mono text-sm font-medium text-bayty-600">
                   {r.weightedTotal}
                 </td>
-                <td className="p-3 font-mono text-sm text-ink-100">#{r.rank}</td>
+                <td className="p-3 font-mono text-sm text-steel-900">#{r.rank}</td>
               </tr>
             ))}
           </tbody>
@@ -284,18 +284,18 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
 
       {/* Explanation layer */}
       {explanation && (
-        <div className="border-l-2 border-signal-500 bg-ink-900 p-6">
-          <p className="mb-2 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+        <div className="border-l-2 border-bayty-500 bg-steel-50 p-6">
+          <p className="mb-2 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
             Why {winnerName} ranks #1
           </p>
-          <p className="mb-3 font-sans text-sm text-ink-100">
+          <p className="mb-3 font-sans text-sm text-steel-900">
             {winnerName} leads {runnerName} by {explanation.marginPoints} weighted points.
           </p>
           <ul className="flex flex-col gap-2">
             {explanation.reasons.map((reason, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 bg-signal-500" />
-                <span className="font-sans text-sm text-ink-300">{reason}</span>
+                <span aria-hidden="true" className="mt-1.5 size-1.5 shrink-0 bg-bayty-500" />
+                <span className="font-sans text-sm text-steel-600">{reason}</span>
               </li>
             ))}
           </ul>
@@ -309,11 +309,11 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
             type="button"
             onClick={saveScores}
             disabled={saveState === 'saving'}
-            className="bg-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-950 disabled:opacity-40"
+            className="bg-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-white disabled:opacity-40"
           >
             {saveState === 'saving' ? 'Saving…' : 'Save scores'}
           </button>
-          <span className="font-sans text-xs text-ink-500">
+          <span className="font-sans text-xs text-steel-500">
             {saveState === 'saved' && (
               <span className="text-success-500">Scores saved to this process.</span>
             )}
@@ -341,7 +341,7 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
           >
             {awardState === 'saving' ? 'Recording…' : 'Record award recommendation'}
           </button>
-          <span className="font-sans text-xs text-ink-500">
+          <span className="font-sans text-xs text-steel-500">
             {awardState === 'saved' && (
               <span className="text-success-500">
                 Award recommendation saved with the current ranking snapshot.
@@ -362,12 +362,12 @@ export default function EvaluationStudio({ process }: { process?: StudioProcess 
           type="button"
           onClick={exportAwardReport}
           disabled={exporting || ranked.length === 0}
-          className="border border-signal-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-signal-500 disabled:opacity-40"
+          className="border border-bayty-500 px-5 py-2 font-mono text-[11px] uppercase tracking-widest text-bayty-600 disabled:opacity-40"
           title="Opens a print-ready award recommendation; use your browser's Save as PDF."
         >
           {exporting ? 'Preparing…' : 'Export award report (PDF)'}
         </button>
-        <span className="font-sans text-xs text-ink-500">
+        <span className="font-sans text-xs text-steel-500">
           Generates a printable award recommendation with the current ranking snapshot and
           explanation.
         </span>
