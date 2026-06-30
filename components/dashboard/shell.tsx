@@ -11,6 +11,7 @@ import {
   ChevronRight,
   ShieldCheck,
   ClipboardCheck,
+  Store,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -24,6 +25,7 @@ const NAV = [
   { href: '/dashboard', label: 'Overview', icon: LayoutDashboard, exact: true },
   { href: '/dashboard/projects/new', label: 'New Project', icon: FolderPlus },
   { href: '/dashboard/projects', label: 'My Projects', icon: FileText },
+  { href: '/dashboard/marketplace', label: 'Marketplace', icon: Store },
   { href: '/dashboard/selection', label: 'Consultant Selection', icon: ClipboardCheck },
   { href: '/dashboard/verification', label: 'Verification', icon: ShieldCheck },
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
