@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 
+import Logo from '@/components/brand/logo';
 import { siteConfig } from '@/lib/siteConfig';
 
 type NavLink = { label: string; href: string; external?: boolean };
@@ -29,9 +30,7 @@ export default function Footer() {
         <div className="flex flex-col gap-12 md:flex-row md:gap-24">
           {/* Brand */}
           <div className="flex flex-col gap-4 md:max-w-[240px]">
-            <p className="font-sans text-lg font-semibold text-ink-100">
-              Bayty<span className="text-signal-500">AI</span>
-            </p>
+            <Logo tone="light" size={28} />
             <p className="font-sans text-sm leading-relaxed text-ink-500">{siteConfig.tagline}</p>
           </div>
 
