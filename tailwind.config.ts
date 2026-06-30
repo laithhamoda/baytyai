@@ -65,6 +65,15 @@ const config: Config = {
         forest: { 50: '#f0fdf4', 400: '#2e7d32', 600: '#15803d' },
         sky: { 50: '#ecf7ff', 400: '#0891b2', 600: '#0369a1' },
         crimson: { 50: '#fef2f2', 400: '#dc2626', 600: '#b91c1c' },
+        // Semantic aliases (A1 light) — back the shadcn-style tokens used across
+        // the dashboard so those surfaces render as light by default.
+        background: '#fafafa',
+        foreground: '#111827',
+        card: { DEFAULT: '#ffffff', foreground: '#111827' },
+        primary: { DEFAULT: '#0052cc', foreground: '#ffffff' },
+        muted: { DEFAULT: '#f3f4f6', foreground: '#6b7280' },
+        destructive: { DEFAULT: '#dc2626', foreground: '#ffffff' },
+        border: '#e5e7eb',
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
