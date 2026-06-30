@@ -15,11 +15,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      'BaytyAI — AI-Native Operations Infrastructure for GCC FM & Construction | Strategy Consultation',
+    absolute: 'BaytyAI — Global Verified Marketplace for Construction & Facilities Management',
   },
   description:
-    'Operator-grade AI prompt libraries and workflows that protect contract margin, accelerate mobilization, and harden SLA performance on FM and Construction contracts above $5M in the GCC.',
+    'BaytyAI connects verified clients, consultants, contractors, subcontractors, and suppliers worldwide. Post inquiries, receive quotations, route approvals, and control documents on one trusted construction & FM platform.',
   alternates: {
     canonical: 'https://baytyai.com',
     languages: {

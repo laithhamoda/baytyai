@@ -35,9 +35,9 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 
 // title.default: 49 chars  ✓ (<60)
 // description:  142 chars  ✓ (<155)
-const SITE_TITLE = 'BaytyAI — AI for Facilities Management in the GCC';
+const SITE_TITLE = 'BaytyAI — Global Verified Construction & FM Marketplace';
 const SITE_DESCRIPTION =
-  'AI-native operations for GCC FM and Construction mega-projects. Protect margin, accelerate mobilization, defend SLAs on contracts above $5M.';
+  'BaytyAI is the global platform connecting verified clients, consultants, contractors, subcontractors, and suppliers — with structured inquiries, quotations, approvals, and document control for construction and facilities-management projects.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl),
@@ -48,13 +48,17 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   authors: [{ name: 'Laith Hamoda', url: siteConfig.founder.linkedin }],
   keywords: [
-    'AI for facilities management GCC',
-    'construction mega project AI',
-    'FM contract margin',
-    'GCC FM software',
-    'AI prompt engineer construction',
-    'facilities management Saudi Arabia',
-    'facilities management UAE',
+    'construction marketplace',
+    'verified contractors',
+    'construction RFQ platform',
+    'request for quotation construction',
+    'facilities management marketplace',
+    'subcontractor marketplace',
+    'construction supplier directory',
+    'construction procurement platform',
+    'contractor verification',
+    'construction document approval software',
+    'global construction platform',
   ],
   alternates: {
     canonical: '/',
