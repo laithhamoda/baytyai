@@ -29,7 +29,7 @@ export default function robots(): MetadataRoute.Robots {
       // ambiguity and we are eligible for AI citations worldwide.
       ...AI_CRAWLERS.map((ua) => ({ userAgent: ua, allow: '/', disallow: PRIVATE })),
     ],
-    sitemap: 'https://baytyai.com/sitemap.xml',
-    host: 'https://baytyai.com',
+    sitemap: 'https://www.baytyai.com/sitemap.xml',
+    host: 'https://www.baytyai.com',
   };
 }

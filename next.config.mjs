@@ -48,15 +48,10 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      // Canonical host is the apex baytyai.com (the live Vercel project serves
-      // it). Redirect any www traffic to the apex. Temporary (307) so the host
-      // policy can be changed later without fighting hard browser caches.
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.baytyai.com' }],
-        destination: 'https://baytyai.com/:path*',
-        permanent: false,
-      },
+      // NOTE: host canonicalization is handled by Vercel (apex baytyai.com
+      // redirects to www.baytyai.com — the primary domain). We deliberately do
+      // NOT add a www→apex redirect here: doing so fought Vercel's apex→www
+      // redirect and caused an ERR_TOO_MANY_REDIRECTS loop. www is canonical.
       // Retired old-product marketing routes → the single-page landing.
       // Temporary (307) so they can be reinstated as real pages later.
       { source: '/product', destination: '/', permanent: false },
