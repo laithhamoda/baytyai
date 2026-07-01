@@ -1,23 +1,37 @@
 import { cn } from '@/lib/utils';
 
 /**
- * BaytyAI brand mark — a hexagonal node graph (a "home" formed from a connected
- * network), expressing a verified, interconnected construction marketplace.
+ * BaytyAI brand mark — a capital "B" formed from a connected node graph
+ * (a home/organization built from a verified network). Navy mark + wordmark,
+ * with "AI" in brand green. Matches the official brand identity.
  *
  * Usage:
- *   <Logo />                         full logo (mark + wordmark), brand blue
- *   <Logo variant="mark" />          just the mark (favicons, app icons)
- *   <Logo tone="light" />            white version for dark/photo backgrounds
+ *   <Logo />                 full logo (mark + wordmark) on light backgrounds
+ *   <Logo variant="mark" />  just the mark (favicons, app icons)
+ *   <Logo tone="light" />    white version for dark/photo backgrounds
  */
 
 type LogoTone = 'brand' | 'light' | 'dark';
 type LogoVariant = 'full' | 'mark';
 
 const TONES: Record<LogoTone, { mark: string; node: string; word: string; ai: string }> = {
-  brand: { mark: '#0052cc', node: '#3377db', word: '#111827', ai: '#0052cc' },
-  light: { mark: '#ffffff', node: '#b9d6fb', word: '#ffffff', ai: '#7db0f3' },
-  dark: { mark: '#111827', node: '#374151', word: '#111827', ai: '#0052cc' },
+  brand: { mark: '#17284a', node: '#17284a', word: '#17284a', ai: '#2f7d64' },
+  light: { mark: '#ffffff', node: '#bcd0f0', word: '#ffffff', ai: '#6fe0c2' },
+  dark: { mark: '#17284a', node: '#17284a', word: '#17284a', ai: '#2f7d64' },
 };
+
+// Node coordinates that trace a capital "B" (48×48 viewBox).
+const NODES: [number, number][] = [
+  [14, 9], // n1 top-left
+  [14, 24], // n2 waist-left
+  [14, 39], // n3 bottom-left
+  [30, 10], // n4 top bump
+  [39, 17], // n5 upper-right
+  [29, 24], // n6 waist-right
+  [39, 31], // n7 lower-right
+  [30, 38], // n8 bottom bump
+  [22, 24], // hub (center)
+];
 
 export function LogoMark({
   size = 32,
@@ -39,23 +53,31 @@ export function LogoMark({
       aria-label="BaytyAI"
       className={className}
     >
-      {/* edges */}
-      <g stroke={c.mark} strokeWidth="2" strokeLinecap="round" opacity="0.9">
-        <path d="M24 7 L39 15.5 M39 15.5 L39 32.5 M39 32.5 L24 41 M24 41 L9 32.5 M9 32.5 L9 15.5 M9 15.5 L24 7" />
-        <path d="M24 7 L24 24 M39 15.5 L24 24 M39 32.5 L24 24 M24 41 L24 24 M9 32.5 L24 24 M9 15.5 L24 24" />
-      </g>
-      {/* outer nodes */}
+      {/* Network fill (subtle diagonals) */}
+      <path
+        d="M14 9 L29 24 M30 10 L22 24 M22 24 L29 24 M22 24 L14 24 M14 24 L39 31 M22 24 L30 38"
+        stroke={c.mark}
+        strokeWidth="1.4"
+        strokeLinecap="round"
+        opacity="0.45"
+      />
+      {/* B outline (spine + two loops) */}
+      <path
+        d="M14 9 L14 24 L14 39 M14 9 L30 10 L39 17 L29 24 L14 24 M29 24 L39 31 L30 38 L14 39"
+        stroke={c.mark}
+        strokeWidth="2.1"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Nodes */}
       <g fill={c.node}>
-        <circle cx="24" cy="7" r="3" />
-        <circle cx="39" cy="15.5" r="3" />
-        <circle cx="39" cy="32.5" r="3" />
-        <circle cx="24" cy="41" r="3" />
-        <circle cx="9" cy="32.5" r="3" />
-        <circle cx="9" cy="15.5" r="3" />
+        {NODES.slice(0, 8).map(([x, y], i) => (
+          <circle key={i} cx={x} cy={y} r="2.4" />
+        ))}
       </g>
-      {/* center node */}
-      <circle cx="24" cy="24" r="4.5" fill={c.mark} />
-      <circle cx="24" cy="24" r="2" fill="#ffffff" opacity="0.95" />
+      {/* Center hub */}
+      <circle cx="22" cy="24" r="3" fill={c.mark} />
+      <circle cx="22" cy="24" r="1.3" fill="#ffffff" opacity="0.9" />
     </svg>
   );
 }
@@ -75,10 +97,10 @@ export default function Logo({
   if (variant === 'mark') return <LogoMark size={size} tone={tone} className={className} />;
 
   return (
-    <span className={cn('inline-flex items-center gap-2.5', className)}>
+    <span className={cn('inline-flex items-center gap-2', className)}>
       <LogoMark size={size} tone={tone} />
       <span
-        className="font-display text-[1.35rem] font-bold leading-none tracking-tight"
+        className="font-sans text-[1.4rem] font-bold leading-none tracking-tight"
         style={{ color: c.word }}
       >
         Bayty<span style={{ color: c.ai }}>AI</span>
