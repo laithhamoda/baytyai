@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Construction Compliance and Governance Platform',
+  title: 'Global Construction Compliance and Governance Platform',
   description:
-    'BaytyAI supports mega-project compliance with verified stakeholders, approval history, document governance, authority matrices, bilingual workflows, and audit-ready decision records.',
+    'BaytyAI supports global mega-project compliance with verified stakeholders, approval history, document governance, authority matrices, multilingual workflows, and audit-ready decision records.',
   alternates: { canonical: 'https://www.baytyai.com/compliance' },
 };
 
 const areas = [
-  'UAE and Saudi PDPL readiness planning for enterprise deployments',
-  'GDPR-aware privacy and consent practices for global project teams',
+  'Global privacy and data-protection readiness planning for enterprise deployments',
+  'Regional compliance configuration for GDPR, PDPL-style laws, public-sector procurement, and client-specific governance',
   'Document version control for contracts, drawings, RFIs, submittals, and approval packs',
-  'Authority matrix governance for owner, consultant, contractor, and supplier actions',
+  'Authority matrix governance for owner, consultant, contractor, subcontractor, and supplier actions',
   'Audit trails for awards, approvals, access requests, verification decisions, and project records',
-  'Bilingual English and Arabic operating model for GCC project governance',
+  'Multilingual operating model for international project teams and cross-border delivery partners',
 ];
 
 export default function CompliancePage() {
@@ -24,7 +24,7 @@ export default function CompliancePage() {
           Compliance and governance
         </p>
         <h1 className="mt-5 max-w-4xl font-display text-5xl font-bold leading-tight md:text-6xl">
-          Governance infrastructure for accountable mega-project delivery.
+          Governance infrastructure for accountable mega-project delivery worldwide.
         </h1>
         <p className="mt-6 max-w-3xl font-sans text-lg leading-relaxed text-steel-600">
           BaytyAI helps project owners and delivery partners create a reliable compliance layer:

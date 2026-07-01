@@ -61,12 +61,12 @@ function StatusBanner({ status }: { status: string }) {
       cls: 'border-yellow-500/30 bg-yellow-500/10 text-yellow-300',
     },
     approved: {
-      icon: <CheckCircle2 size={18} className="text-primary shrink-0" />,
+      icon: <CheckCircle2 size={18} className="shrink-0 text-primary" />,
       text: 'Your identity has been verified. You have full access to the dashboard.',
       cls: 'border-primary/30 bg-primary/10 text-primary',
     },
     rejected: {
-      icon: <XCircle size={18} className="text-destructive shrink-0" />,
+      icon: <XCircle size={18} className="shrink-0 text-destructive" />,
       text: 'Your verification was not approved. Please re-submit with clear, valid documents.',
       cls: 'border-destructive/30 bg-destructive/10 text-destructive',
     },
@@ -171,7 +171,7 @@ export default function KycClient({ existingStatus }: Props) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             {/* Personal info */}
             <section>
-              <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+              <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                 Personal Information
               </h2>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -232,10 +232,10 @@ export default function KycClient({ existingStatus }: Props) {
 
             {/* Document uploads */}
             <section>
-              <h2 className="text-muted-foreground mb-1 text-sm font-semibold uppercase tracking-wider">
+              <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                 Identity Documents
               </h2>
-              <p className="text-muted-foreground mb-4 text-xs">
+              <p className="mb-4 text-xs text-muted-foreground">
                 Upload clear photos. JPG, PNG, WEBP, or HEIC — max 10 MB each.
               </p>
               <div className="grid gap-4 sm:grid-cols-3">
@@ -263,15 +263,15 @@ export default function KycClient({ existingStatus }: Props) {
                             )}
                           >
                             {isUploading ? (
-                              <Loader2 size={22} className="text-muted-foreground animate-spin" />
+                              <Loader2 size={22} className="animate-spin text-muted-foreground" />
                             ) : uploaded ? (
                               <CheckCircle2 size={22} className="text-primary" />
                             ) : (
                               <Camera size={22} className="text-muted-foreground/60" />
                             )}
-                            <span className="text-muted-foreground text-xs">{hint}</span>
+                            <span className="text-xs text-muted-foreground">{hint}</span>
                             {uploaded && (
-                              <span className="text-primary text-[10px] font-medium">Uploaded</span>
+                              <span className="text-[10px] font-medium text-primary">Uploaded</span>
                             )}
                             <input
                               type="file"
@@ -296,7 +296,7 @@ export default function KycClient({ existingStatus }: Props) {
 
             {/* Consent */}
             <section>
-              <div className="border-border bg-card rounded-sm border p-4">
+              <div className="rounded-sm border border-border bg-card p-4">
                 <FormField
                   control={form.control}
                   name="consent_identity_verification"
@@ -312,8 +312,7 @@ export default function KycClient({ existingStatus }: Props) {
                         <FormLabel className="text-sm font-normal leading-snug">
                           I consent to Bayty Technologies collecting and processing the above
                           personal data and identity documents for the purpose of identity
-                          verification, in accordance with the UAE Federal Decree-Law No. 45 of 2021
-                          on Personal Data Protection and Saudi PDPL.
+                          verification, in accordance with applicable data protection laws.
                         </FormLabel>
                         <FormMessage />
                       </div>

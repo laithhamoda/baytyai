@@ -101,30 +101,25 @@ export default function A1Landing() {
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/5 px-3 py-1 font-sans text-xs font-medium text-bayty-100">
-                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> Enterprise AI for global
-                mega projects
+                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> Enterprise Construction ERP
+                for Mega Projects
               </span>
               <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] text-white md:text-[3.6rem]">
-                AI project control for the world&apos;s{' '}
-                <span className="text-[#6fe0c2]">mega projects</span>.
+                The AI Command Center for Global{' '}
+                <span className="text-[#6fe0c2]">Mega-Project Management</span>.
               </h1>
               <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-white/75">
-                BaytyAI gives governments, mega-developers, consultants, contractors, and suppliers
-                one verified command center for approvals, documents, claims, variations, risks,
-                compliance, and audit-ready decisions.
+                BaytyAI gives enterprise construction brands, developers, contractors, consultants,
+                and public-sector project owners one verified construction ERP layer to control
+                approvals, documents, stakeholders, risks, claims, variations, and delivery
+                intelligence across complex mega projects worldwide.
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
+              <div className="mt-9 flex flex-wrap items-center">
                 <Link
                   href="/access"
-                  className="rounded-pill bg-orange-400 px-7 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-colors hover:bg-orange-600"
+                  className="rounded-pill bg-orange-400 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-a1-glow transition-colors hover:bg-orange-600"
                 >
-                  Request enterprise access
-                </Link>
-                <Link
-                  href="/mega-projects"
-                  className="rounded-pill border border-white/25 bg-white/5 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
-                >
-                  Explore mega-project control
+                  Request Enterprise Access
                 </Link>
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm text-white/60">
@@ -141,29 +136,41 @@ export default function A1Landing() {
             </div>
 
             <Reveal className="relative">
-              <div className="relative mx-auto max-w-md border border-white/10 bg-white/5 p-8 shadow-a1-lg backdrop-blur">
-                <div className="flex items-center justify-between">
-                  <Logo tone="light" size={30} />
-                  <span className="rounded-pill bg-[#2f7d64]/20 px-2.5 py-1 font-sans text-[11px] font-semibold text-[#6fe0c2]">
-                    Verified control
-                  </span>
+              <div
+                className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden"
+                aria-label="liquid titanium infrastructure grid"
+              >
+                <div className="absolute inset-10 rotate-[-10deg] border border-white/10 bg-white/[0.03] shadow-a1-lg [transform-style:preserve-3d]" />
+                <div className="absolute inset-16 rotate-[9deg] border border-[#6fe0c2]/25 bg-[#6fe0c2]/[0.03] [transform-style:preserve-3d]" />
+                <div
+                  aria-hidden
+                  className="absolute inset-x-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#c9d4df]/80 to-transparent"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-y-8 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#c9d4df]/80 to-transparent"
+                />
+                <div className="absolute left-[18%] top-[22%] size-4 bg-[#6fe0c2] shadow-[0_0_32px_rgba(111,224,194,0.55)]" />
+                <div className="absolute right-[22%] top-[30%] size-3 bg-white/80 shadow-[0_0_26px_rgba(255,255,255,0.35)]" />
+                <div className="absolute bottom-[24%] left-[28%] size-3 bg-orange-300 shadow-[0_0_28px_rgba(251,191,36,0.45)]" />
+                <div className="absolute bottom-[18%] right-[18%] size-5 border border-[#6fe0c2]/70 bg-[#17284a] shadow-[0_0_34px_rgba(111,224,194,0.35)]" />
+                <div className="absolute inset-0 grid grid-cols-5 grid-rows-5 opacity-25">
+                  {Array.from({ length: 25 }).map((_, i) => (
+                    <span key={i} className="border border-white/10" />
+                  ))}
                 </div>
-                <div className="my-8 flex justify-center">
-                  <div className="flex size-40 items-center justify-center rounded-full bg-white/5">
-                    <LogoMark size={92} tone="light" />
+                <div className="absolute inset-x-12 bottom-12 border border-white/10 bg-[#071323]/80 p-5 backdrop-blur">
+                  <div className="flex items-center justify-between gap-4">
+                    <LogoMark size={34} tone="light" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#6fe0c2]">
+                      Verified ERP Layer
+                    </span>
                   </div>
-                </div>
-                <div className="grid grid-cols-2 gap-3 text-center sm:grid-cols-3">
-                  {['Owner', 'Authority', 'Consultant', 'Contractor', 'Supplier', 'Platform'].map(
-                    (r) => (
-                      <span
-                        key={r}
-                        className="bg-white/5 p-2 font-sans text-[11px] font-medium text-white/70"
-                      >
-                        {r}
-                      </span>
-                    ),
-                  )}
+                  <div className="mt-5 grid grid-cols-3 gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">
+                    <span>Risk</span>
+                    <span>Claims</span>
+                    <span>Approvals</span>
+                  </div>
                 </div>
               </div>
             </Reveal>

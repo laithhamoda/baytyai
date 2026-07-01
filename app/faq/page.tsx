@@ -4,9 +4,9 @@ import { GEO_FAQ_ITEMS } from '@/components/sections/geo-faq-data';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Bayty FAQ — Construction Management Platform UAE & GCC',
+  title: 'BaytyAI FAQ - Global Construction Project Control Platform',
   description:
-    'Answers about Bayty: what it is, who uses it, how verification works, pricing, security, and the verified professional marketplace for GCC construction.',
+    'Answers about BaytyAI: global mega-project control, verified stakeholders, approvals, document governance, pricing, security, and enterprise implementation.',
   alternates: { canonical: 'https://baytyai.com/faq' },
 };
 
@@ -23,28 +23,28 @@ const faqSchema = {
 const howToSchema = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
-  name: 'How Bayty professional verification works',
+  name: 'How BaytyAI professional verification works',
   description:
-    'How a construction professional gets verified on Bayty and receives the Bayty Verified badge.',
+    'How a construction professional or organization gets verified on BaytyAI and receives verified access.',
   totalTime: 'PT24H',
   step: [
     {
       '@type': 'HowToStep',
       position: 1,
       name: 'Upload documents',
-      text: 'Upload your Emirates ID, trade licence, and professional certificates to your Bayty profile.',
+      text: 'Upload identity, company registration, trade licence, insurance, project history, and professional certificates to your BaytyAI profile.',
     },
     {
       '@type': 'HowToStep',
       position: 2,
-      name: 'Government-linked check',
-      text: 'Bayty runs a government-linked credential check, typically completed within 24 hours.',
+      name: 'Credential review',
+      text: 'BaytyAI reviews submitted credentials and organization records before enabling verified project workflows.',
     },
     {
       '@type': 'HowToStep',
       position: 3,
-      name: 'Receive verified badge',
-      text: 'Once cleared, you receive the Bayty Verified badge and appear in marketplace searches matching your specialism and GCC location.',
+      name: 'Receive verified access',
+      text: 'Once cleared, you receive verified access and appear in project searches matching your specialism, region, and delivery experience.',
     },
   ],
 };
@@ -85,7 +85,7 @@ export default function FaqPage() {
             maxWidth: '640px',
           }}
         >
-          Everything you need to know about Bayty
+          Everything you need to know about BaytyAI
         </h1>
         <FaqAccordion items={GEO_FAQ_ITEMS} />
       </section>

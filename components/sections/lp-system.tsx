@@ -8,19 +8,19 @@ const MODULES = [
     definition:
       'An AI-driven diagnostic that maps every clause, KPI, and cost assumption in a live FM or Construction contract to its margin exposure.',
     deliverables: ['clause-level margin map', 'cost leakage heat list', '30-day recovery actions'],
-    outcome: 'Identify 1.8–4.6% recoverable margin per contract.',
+    outcome: 'Identify 1.8-4.6% recoverable margin per contract.',
   },
   {
     name: '90-Day Mobilization Schedule',
     definition:
-      'An AI-assembled mobilization plan covering staffing, CAFM setup, asset tagging, SLA baselining, supplier readiness, and HSE compliance — sequenced day by day across the contractual mobilization window.',
+      'An AI-assembled mobilization plan covering staffing, CAFM setup, asset tagging, SLA baselining, supplier readiness, and HSE compliance, sequenced day by day across the contractual mobilization window.',
     deliverables: ['daily mobilization gantt', 'risk register', 'readiness gates'],
     outcome: 'Hit week-13 go-live with zero LD exposure.',
   },
   {
     name: 'SLA Defense Architecture',
     definition:
-      'An AI-monitored framework that converts SLA performance from reactive reporting into pre-emptive defense — surfacing KPI risk before the breach, with a defensible audit trail.',
+      'An AI-monitored framework that converts SLA performance from reactive reporting into pre-emptive defense, surfacing KPI risk before the breach with a defensible audit trail.',
     deliverables: [
       'KPI risk dashboard logic',
       'breach pre-warning prompts',
@@ -38,7 +38,7 @@ export default function System() {
           eyebrow="THE BAYTYAI SYSTEM"
           id="system-heading"
           h2="Three operator-grade AI modules. Built for the contracts that matter."
-          sub="BaytyAI is an AI-native operations layer — a library of production prompts, workflows, and decision frameworks deployed against the specific failure modes of GCC FM and Construction delivery."
+          sub="BaytyAI is an AI-native operations layer - a library of production prompts, workflows, and decision frameworks deployed against the specific failure modes of global FM, Construction, and infrastructure delivery."
           className="mb-16"
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

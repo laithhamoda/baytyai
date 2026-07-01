@@ -12,7 +12,18 @@ const TRUST_POINTS = [
   'Full platform access from day one — no feature gating',
 ];
 
-const COUNTRIES = ['UAE', 'Saudi Arabia', 'Qatar', 'Kuwait', 'Bahrain', 'Oman', 'Other'];
+const COUNTRIES = [
+  'United States',
+  'United Kingdom',
+  'European Union',
+  'UAE',
+  'Saudi Arabia',
+  'Qatar',
+  'India',
+  'Singapore',
+  'Australia',
+  'Other',
+];
 
 const COMPANY_SIZES = [
   'I am a freelance professional',
@@ -182,8 +193,9 @@ export default function DemoClient() {
               marginBottom: '40px',
             }}
           >
-            Bayty is currently onboarding select construction professionals and developers across
-            the UAE and GCC. Every account is individually reviewed before activation.
+            BaytyAI is currently onboarding select construction professionals, developers,
+            contractors, consultants, and suppliers worldwide. Every account is individually
+            reviewed before activation.
           </motion.p>
 
           {/* Trust points */}
@@ -241,7 +253,7 @@ export default function DemoClient() {
               lineHeight: 1.9,
             }}
           >
-            Al Wasl Development · Gulf Projects Co. · Emirates Build Group
+            Global developers - public authorities - infrastructure delivery teams
           </motion.p>
         </div>
 
@@ -404,7 +416,7 @@ export default function DemoClient() {
                     type="text"
                     value={values.fullName}
                     onChange={handleChange}
-                    placeholder="Khalid Al Rashid"
+                    placeholder="Alex Morgan"
                   />
                   <Field
                     label="Company Name"
@@ -440,7 +452,7 @@ export default function DemoClient() {
                     type="email"
                     value={values.workEmail}
                     onChange={handleChange}
-                    placeholder="khalid@company.ae"
+                    placeholder="alex@company.com"
                   />
                 </div>
 
@@ -459,7 +471,7 @@ export default function DemoClient() {
                     type="tel"
                     value={values.mobileNumber}
                     onChange={handleChange}
-                    placeholder="+971 50 000 0000"
+                    placeholder="+1 555 000 0000"
                   />
                   <SelectField
                     label="Country"

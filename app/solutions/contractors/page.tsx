@@ -46,7 +46,7 @@ export default function ContractorsPage() {
           },
           {
             name: 'Get Discovered',
-            body: 'Get discovered in every project search that matches your specialism and GCC location.',
+            body: 'Get discovered in every project search that matches your specialism, region, and delivery experience.',
           },
           {
             name: 'Escrow Payments',

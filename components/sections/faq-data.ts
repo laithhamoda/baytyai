@@ -22,7 +22,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: 'Where is my data stored?',
-    a: 'Data is currently stored in EU (Frankfurt). UAE-region data centre (AWS Bahrain) is targeted for Month 12 of operations.',
+    a: 'Data is currently stored in EU (Frankfurt). Enterprise deployments can be planned around regional data residency, backup, and compliance requirements.',
   },
   {
     q: 'What is the Corporate tier?',

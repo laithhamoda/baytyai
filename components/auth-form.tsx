@@ -119,7 +119,7 @@ export default function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
             lineHeight: 1.7,
           }}
         >
-          Access is granted to verified construction professionals across the GCC.
+          Access is granted to verified construction professionals worldwide.
         </p>
 
         <div

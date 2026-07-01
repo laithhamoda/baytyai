@@ -50,7 +50,7 @@ export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: C
         </p>
         <p className="max-w-md font-sans text-sm leading-relaxed text-steel-600">
           To request your Strategy Consultation now, send a brief using the form below and Laith
-          will reply within one business day from Amman.
+          will reply within one business day.
         </p>
       </div>
     );

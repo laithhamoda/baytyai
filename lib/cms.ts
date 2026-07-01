@@ -23,7 +23,7 @@ export const CONTENT_FIELDS: ContentField[] = [
     label: 'Hero overline',
     type: 'text',
     group: 'Homepage hero',
-    default: 'GCC Construction Management',
+    default: 'Global Construction Management',
   },
   {
     key: 'hero.headline',

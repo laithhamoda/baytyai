@@ -31,7 +31,7 @@ const ROLES = [
   {
     name: 'Supplier',
     description:
-      'List your catalogue, receive itemised material requests, quote, and supply verified GCC projects with confidence.',
+      'List your catalogue, receive itemised material requests, quote, and supply verified global projects with confidence.',
     href: '/solutions/suppliers',
   },
 ];

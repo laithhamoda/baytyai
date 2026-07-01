@@ -9,7 +9,7 @@ const STATS = [
   },
   {
     value: '20–30%',
-    body: 'Industry-benchmark reduction in construction rework when approval workflows are properly documented. Rework costs 5–15% of total GCC project value annually.',
+    body: 'Industry-benchmark reduction in construction rework when approval workflows are properly documented. Rework can consume a meaningful share of total project value annually.',
   },
   {
     value: 'AED 23,988',

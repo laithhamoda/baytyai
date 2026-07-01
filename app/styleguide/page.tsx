@@ -102,7 +102,7 @@ export default function StyleguidePage() {
               Badges
             </p>
             <div className="flex flex-wrap gap-3">
-              <Badge>GCC</Badge>
+              <Badge>Global</Badge>
               <Badge>FM</Badge>
               <Badge>Construction</Badge>
               <Badge>Mega Project</Badge>

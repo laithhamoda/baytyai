@@ -55,7 +55,7 @@ const personSchema = {
     'Contractor Verification',
     'Construction Compliance',
     'AI Prompt Engineering',
-    'GCC Operations',
+    'Global Construction Operations',
   ],
 };
 
@@ -153,7 +153,7 @@ const faqSchema = {
       name: 'Does BaytyAI support Arabic and English workflows?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. BaytyAI is designed for bilingual English and Arabic project environments, including GCC project teams, authorities, contractors, consultants, and suppliers.',
+        text: 'Yes. BaytyAI is designed for multilingual project environments, starting with English and Arabic workflows for international project teams, authorities, contractors, consultants, and suppliers.',
       },
     },
     {

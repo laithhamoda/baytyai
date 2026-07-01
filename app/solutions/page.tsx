@@ -4,10 +4,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Verified Construction Platform for Developers, Engineers & Contractors UAE — Bayty',
+    absolute: 'Verified Project Control Platform for Global Mega Project Teams - BaytyAI',
   },
   description:
-    'Bayty gives each construction stakeholder exactly the access and tools their role requires. Role-specific solutions for developers, GMs, engineers, consultants, and contractors.',
+    'BaytyAI gives each mega-project stakeholder exactly the access and tools their role requires. Role-specific solutions for owners, developers, engineers, consultants, contractors, suppliers, and authorities.',
 };
 
 export default function SolutionsPage() {

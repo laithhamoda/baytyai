@@ -15,7 +15,7 @@ const capabilities = [
   'Authority matrix workflows for approvals, awards, payment certificates, and variations',
   'Document control with version history, decision records, and audit-ready evidence',
   'AI risk intelligence for delayed approvals, missing documents, claims exposure, and scope drift',
-  'Bilingual English and Arabic workflows for GCC and international delivery teams',
+  'Multilingual workflows for international delivery teams and regional project environments',
 ];
 
 const useCases = [

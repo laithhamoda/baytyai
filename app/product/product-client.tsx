@@ -467,15 +467,15 @@ function DocumentMockup() {
 /* ─────────── 5. Marketplace ─────────── */
 
 const PROS = [
-  { initial: 'A', role: 'MEP Engineer', loc: 'Dubai, UAE', projects: 34, rating: '4.9' },
+  { initial: 'A', role: 'MEP Engineer', loc: 'London, UK', projects: 34, rating: '4.9' },
   {
     initial: 'S',
     role: 'Structural Consultant',
-    loc: 'Abu Dhabi, UAE',
+    loc: 'Singapore',
     projects: 27,
     rating: '4.8',
   },
-  { initial: 'H', role: 'QA / Inspection Lead', loc: 'Doha, QA', projects: 19, rating: '5.0' },
+  { initial: 'H', role: 'QA / Inspection Lead', loc: 'New York, US', projects: 19, rating: '5.0' },
 ];
 
 function MarketplaceMockup() {
@@ -607,8 +607,8 @@ export default function ProductClient() {
             maxWidth: '560px',
           }}
         >
-          From verified onboarding to structured approvals and a trusted marketplace — see exactly
-          how Bayty runs a GCC construction project end to end.
+          From verified onboarding to structured approvals and a trusted marketplace, see exactly
+          how BaytyAI runs a global construction project end to end.
         </motion.p>
       </section>
 
@@ -624,7 +624,7 @@ export default function ProductClient() {
         index={2}
         reverse
         annotation="Verification Profile"
-        caption="Stakeholders submit Emirates ID, trade licence, and professional certificates for a government-linked check. Once cleared, the Bayty Verified badge unlocks platform access."
+        caption="Stakeholders submit identity, company registration, licence, insurance, and professional certificates for credential review. Once cleared, the Bayty Verified badge unlocks platform access."
       >
         <VerificationMockup />
       </Screen>

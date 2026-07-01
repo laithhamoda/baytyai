@@ -145,9 +145,9 @@ export default function ContactClient() {
               marginBottom: '40px',
             }}
           >
-            Corporate, white-label, and government accounts for GCC construction and real estate
-            portfolios. Tell us about your requirements and our team will respond within one
-            business day.
+            Corporate, white-label, developer, contractor, and government accounts for global
+            construction, infrastructure, and real estate portfolios. Tell us about your
+            requirements and our team will respond within one business day.
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -255,7 +255,7 @@ export default function ContactClient() {
                     required
                     value={values.fullName}
                     onChange={handleChange}
-                    placeholder="Khalid Al Rashid"
+                    placeholder="Alex Morgan"
                     style={fieldBase}
                   />
                 </div>
@@ -287,7 +287,7 @@ export default function ContactClient() {
                     required
                     value={values.workEmail}
                     onChange={handleChange}
-                    placeholder="khalid@organisation.ae"
+                    placeholder="alex@organisation.com"
                     style={fieldBase}
                   />
                 </div>

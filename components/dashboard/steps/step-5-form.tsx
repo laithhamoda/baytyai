@@ -34,9 +34,9 @@ const STATUS_LABEL: Record<string, string> = {
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="border-border flex justify-between border-b py-2 text-sm">
+    <div className="flex justify-between border-b border-border py-2 text-sm">
       <span className="text-muted-foreground">{label}</span>
-      <span className="text-foreground font-medium">{value}</span>
+      <span className="font-medium text-foreground">{value}</span>
     </div>
   );
 }
@@ -91,22 +91,22 @@ export default function Step5Form({ projectId, draft, onSubmitted, onBack }: Pro
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* Readiness checklist */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Submission Readiness
           </h2>
           <ul className="space-y-2">
             {readiness.map((item) => (
               <li key={item.label} className="flex items-center gap-3 text-sm">
                 {item.ok ? (
-                  <CheckCircle2 size={16} className="text-primary shrink-0" />
+                  <CheckCircle2 size={16} className="shrink-0 text-primary" />
                 ) : (
-                  <AlertCircle size={16} className="text-destructive shrink-0" />
+                  <AlertCircle size={16} className="shrink-0 text-destructive" />
                 )}
                 <span className={item.ok ? 'text-foreground' : 'text-destructive'}>
                   {item.label}
                 </span>
                 {!item.ok && (
-                  <span className="text-destructive ms-auto text-xs">Incomplete — go back</span>
+                  <span className="ms-auto text-xs text-destructive">Incomplete — go back</span>
                 )}
               </li>
             ))}
@@ -116,10 +116,10 @@ export default function Step5Form({ projectId, draft, onSubmitted, onBack }: Pro
         {/* Summary */}
         {p2 && (
           <section>
-            <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
               Project Summary
             </h2>
-            <div className="border-border bg-card rounded-sm border px-4">
+            <div className="rounded-sm border border-border bg-card px-4">
               {p2.name_en && <SummaryRow label="Project Name" value={p2.name_en} />}
               {p2.country && (
                 <SummaryRow label="Location" value={`${p2.city ?? ''}, ${p2.country}`} />
@@ -166,10 +166,10 @@ export default function Step5Form({ projectId, draft, onSubmitted, onBack }: Pro
 
         {/* Declarations */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Declarations & Consent
           </h2>
-          <div className="border-border bg-card space-y-4 rounded-sm border p-4">
+          <div className="space-y-4 rounded-sm border border-border bg-card p-4">
             <FormField
               control={form.control}
               name="confirm_data_accuracy"
@@ -249,13 +249,9 @@ export default function Step5Form({ projectId, draft, onSubmitted, onBack }: Pro
                   </FormControl>
                   <div>
                     <FormLabel className="text-sm font-normal leading-snug">
-                      I acknowledge that this submission is subject to the{' '}
-                      <span className="text-primary">
-                        Saudi Personal Data Protection Law (PDPL)
-                      </span>{' '}
-                      and{' '}
-                      <span className="text-primary">UAE Federal Decree-Law No. 45 of 2021</span>,
-                      and that my organization accepts the applicable data protection obligations.
+                      I acknowledge that this submission is subject to applicable data protection
+                      laws and that my organization accepts the relevant data protection
+                      obligations.
                     </FormLabel>
                     <FormMessage />
                   </div>
@@ -266,7 +262,7 @@ export default function Step5Form({ projectId, draft, onSubmitted, onBack }: Pro
         </section>
 
         {!allReady && (
-          <div className="border-destructive/40 bg-destructive/10 text-destructive flex items-center gap-2 rounded-sm border px-4 py-3 text-sm">
+          <div className="flex items-center gap-2 rounded-sm border border-destructive/40 bg-destructive/10 px-4 py-3 text-sm text-destructive">
             <AlertCircle size={15} className="shrink-0" />
             Please complete all required steps before submitting.
           </div>

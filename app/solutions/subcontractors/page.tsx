@@ -3,9 +3,9 @@ import RoleDetail from '@/components/sections/role-detail';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'For Subcontractors — Bayty Construction Platform UAE' },
+  title: { absolute: 'For Subcontractors - BaytyAI Global Project Control Platform' },
   description:
-    'Bayty gives subcontractors structured installation briefs, supply editing, document access, and milestone-based escrow payments across GCC construction projects.',
+    'BaytyAI gives subcontractors structured installation briefs, supply editing, document access, approval tracking, and payment records across global construction projects.',
   alternates: { canonical: 'https://baytyai.com/solutions/subcontractors' },
 };
 
@@ -39,7 +39,7 @@ export default function SubcontractorsPage() {
       <RoleDetail
         overline="For Subcontractors"
         title="Clear scope, fair payment, on record"
-        intro="Subcontractors receive precise installation briefs, edit and submit supply lists, and access exactly the documents their scope requires — with milestone payments protected by escrow."
+        intro="Subcontractors receive precise installation briefs, edit and submit supply lists, and access exactly the documents their scope requires - with milestone decisions, payment records, and approval history kept on record."
         capabilities={[
           {
             name: 'Installation Briefs',
@@ -50,8 +50,8 @@ export default function SubcontractorsPage() {
             body: 'Edit and submit supply lists with version control and approval tracking.',
           },
           {
-            name: 'Escrow Payments',
-            body: 'Receive milestone-based payments through Stripe escrow — no more chasing invoices.',
+            name: 'Payment Records',
+            body: 'Keep milestone payment status, supporting documents, and approval evidence in one place.',
           },
           {
             name: 'Document Access',

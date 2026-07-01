@@ -69,11 +69,11 @@ export default function TermsPage() {
 
         <Section title="2. Eligibility and Accounts">
           <p style={body}>
-            The platform is intended for verified construction professionals, firms, and developers
-            operating in the GCC region. You must provide accurate registration information and
-            complete any required verification before your account is activated. You are responsible
-            for maintaining the confidentiality of your account credentials and for all activity
-            under your account.
+            The platform is intended for verified construction professionals, firms, developers,
+            public authorities, contractors, consultants, suppliers, and project owners operating
+            worldwide. You must provide accurate registration information and complete any required
+            verification before your account is activated. You are responsible for maintaining the
+            confidentiality of your account credentials and for all activity under your account.
           </p>
         </Section>
 
@@ -124,8 +124,9 @@ export default function TermsPage() {
 
         <Section title="8. Governing Law">
           <p style={body}>
-            These Terms are governed by the laws of the United Arab Emirates. Any disputes shall be
-            subject to the exclusive jurisdiction of the competent courts of the UAE.
+            These Terms are governed by the laws applicable to the Bayty contracting entity and the
+            relevant customer agreement. Enterprise, government, and white-label agreements may
+            include separate governing law, venue, and data-processing terms.
           </p>
         </Section>
 

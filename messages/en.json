@@ -141,7 +141,7 @@
     "confirmAccuracy": "I confirm that all information provided in this submission is accurate and complete to the best of my knowledge.",
     "confirmAuthority": "I am authorized by my organization to submit this project intake request on their behalf.",
     "consentProcessing": "I consent to Bayty Technologies processing the submitted data for the purpose of evaluating and delivering the requested services.",
-    "consentPdpl": "I acknowledge that this submission is subject to the Saudi Personal Data Protection Law (PDPL) and UAE Federal Decree-Law No. 45 of 2021, and that my organization accepts the applicable data protection obligations.",
+    "consentPdpl": "I acknowledge that this submission is subject to applicable data protection laws and that my organization accepts the relevant data protection obligations.",
     "incompleteWarning": "Please complete all required steps before submitting.",
     "incompleteStep": "Incomplete — go back",
     "readinessItems": {
@@ -177,7 +177,7 @@
     "selfie": "Selfie Holding ID",
     "selfieHint": "A clear photo of your face while holding your Emirates ID",
     "uploaded": "Uploaded",
-    "consentText": "I consent to Bayty Technologies collecting and processing the above personal data and identity documents for the purpose of identity verification, in accordance with the UAE Federal Decree-Law No. 45 of 2021 on Personal Data Protection and Saudi PDPL.",
+    "consentText": "I consent to Bayty Technologies collecting and processing the above personal data and identity documents for the purpose of identity verification, in accordance with applicable data protection laws.",
     "submit": "Submit for Verification",
     "submitting": "Submitting…",
     "continueToDashboard": "Continue to Dashboard",

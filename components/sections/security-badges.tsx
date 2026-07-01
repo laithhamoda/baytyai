@@ -9,7 +9,7 @@ interface TrustBadge {
 }
 
 const BADGES: TrustBadge[] = [
-  { Icon: Shield, label: 'UAE PDPL Compliant' },
+  { Icon: Shield, label: 'Global Privacy Ready' },
   { Icon: Lock, label: 'AES-256 Encrypted' },
   { Icon: Award, label: 'SOC 2 Roadmap' },
   { Icon: Key, label: '2FA Mandatory' },

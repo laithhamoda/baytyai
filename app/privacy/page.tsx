@@ -37,7 +37,7 @@ export default function PrivacyPage() {
             </a>{' '}
             (the "Platform"). We are a technology company incorporated under the laws of the United
             Arab Emirates, providing a verified construction project management and marketplace
-            platform for professionals and organisations operating across the GCC region.
+            platform for professionals and organisations operating worldwide.
           </p>
           <p style={body}>
             This Privacy Policy explains how we collect, use, store, disclose, and protect personal
@@ -75,9 +75,10 @@ export default function PrivacyPage() {
             To maintain the integrity of the Platform, Bayty requires certain users — including
             engineers, consultants, contractors, and other licensed professionals — to submit
             verification documents. These may include government-issued identity documents,
-            professional licences, trade licences, and certificates of registration issued by GCC
-            regulatory bodies. These documents are processed solely for identity and credential
-            verification purposes and are handled with heightened security measures.
+            professional licences, trade licences, insurance records, and certificates of
+            registration issued by relevant regulatory bodies. These documents are processed solely
+            for identity and credential verification purposes and are handled with heightened
+            security measures.
           </p>
 
           <SubHeading>Project and Transactional Data</SubHeading>
@@ -147,8 +148,9 @@ export default function PrivacyPage() {
           <SubHeading>Legal Compliance and Enforcement</SubHeading>
           <p style={body}>
             We may process personal information where necessary to comply with applicable laws and
-            regulations in the UAE and other GCC jurisdictions, to respond to lawful requests from
-            government authorities, or to establish, exercise, or defend legal claims.
+            regulations in the jurisdictions where we and our customers operate, to respond to
+            lawful requests from government authorities, or to establish, exercise, or defend legal
+            claims.
           </p>
         </Section>
 
@@ -163,11 +165,11 @@ export default function PrivacyPage() {
             availability, and confidentiality of stored data.
           </p>
           <p style={body}>
-            We configure our Supabase deployment to use data centres located within the UAE or
-            regional GCC infrastructure where operationally available, in order to support data
-            localisation requirements under the UAE PDPL. Where data is processed outside the UAE,
-            we rely on appropriate transfer mechanisms including standard contractual clauses or
-            adequacy determinations as applicable.
+            We configure our infrastructure and enterprise deployment plans to support applicable
+            data localisation, privacy, and security requirements where operationally available.
+            Where data is processed across borders, we rely on appropriate transfer mechanisms
+            including standard contractual clauses, data-processing agreements, or adequacy
+            determinations as applicable.
           </p>
           <p style={body}>
             Access to personal data within Bayty is restricted to personnel who require it to
@@ -199,9 +201,9 @@ export default function PrivacyPage() {
             securely deleted unless a longer retention period is required by applicable law.
           </p>
           <p style={body}>
-            Transactional data related to Stripe payment processing is retained in accordance with
-            UAE commercial and tax record-keeping requirements, which may require retention for up
-            to 5 years.
+            Transactional data related to payment processing is retained in accordance with
+            applicable commercial, tax, accounting, and legal record-keeping requirements, which may
+            vary by jurisdiction.
           </p>
           <p style={body}>
             Aggregated and anonymised analytics data, which cannot be used to identify individual
@@ -209,12 +211,12 @@ export default function PrivacyPage() {
           </p>
         </Section>
 
-        {/* ── 6. UAE PDPL Rights ── */}
-        <Section title="6. Your Rights Under the UAE PDPL">
+        {/* ── 6. Privacy Rights ── */}
+        <Section title="6. Your Privacy Rights">
           <p style={body}>
-            Federal Decree-Law No. 45 of 2021 on the Protection of Personal Data (the "UAE PDPL")
-            grants individuals whose data is processed in connection with activities taking place in
-            the UAE the following rights:
+            Depending on where you are located and how your data is processed, applicable privacy
+            laws such as the UAE PDPL, GDPR, UK GDPR, or other regional data protection frameworks
+            may grant you the following rights:
           </p>
 
           <SubHeading>Right of Access</SubHeading>
@@ -251,8 +253,8 @@ export default function PrivacyPage() {
             <a href="mailto:info@baytyai.com" style={link}>
               info@baytyai.com
             </a>
-            . We will respond to verified requests within the timeframes prescribed by the UAE PDPL.
-            We may need to verify your identity before processing a rights request.
+            . We will respond to verified requests within the timeframes required by applicable
+            privacy law. We may need to verify your identity before processing a rights request.
           </p>
         </Section>
 

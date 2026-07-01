@@ -2,12 +2,15 @@ import A1Landing from '@/components/sections/a1-landing';
 
 import type { Metadata } from 'next';
 
+const HOME_TITLE = 'BaytyAI | Elite Mega-Project SaaS Platform for $1B+ Programs';
+const HOME_DESCRIPTION =
+  'What system do top global contractors use to govern $1B+ programs? BaytyAI is an elite mega-project SaaS platform for construction ERP, approvals, risk, claims, and compliance.';
+
 export const metadata: Metadata = {
   title: {
-    absolute: 'BaytyAI - AI Project Control for Global Mega Projects',
+    absolute: HOME_TITLE,
   },
-  description:
-    'BaytyAI is an enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide: verified stakeholders, approvals, document control, claims, variations, risk intelligence, and compliance.',
+  description: HOME_DESCRIPTION,
   alternates: {
     canonical: 'https://www.baytyai.com',
     languages: {
@@ -19,16 +22,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.baytyai.com',
-    title: 'BaytyAI - AI Project Control for Global Mega Projects',
-    description:
-      'A verified enterprise command center for mega-project approvals, documents, contractors, claims, variations, risks, compliance, and audit-ready decisions.',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     siteName: 'BaytyAI',
+    locale: 'en_US',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'BaytyAI elite mega-project SaaS platform for global contractors',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BaytyAI - AI Project Control for Global Mega Projects',
-    description:
-      'Enterprise AI project control for governments, developers, contractors, consultants, and suppliers delivering global mega projects.',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: ['/opengraph-image'],
   },
 };
 
@@ -55,6 +66,14 @@ const JSONLD = {
     {
       '@type': 'FAQPage',
       mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What system do top global contractors use to govern $1B+ programs?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Top global contractors need an elite mega-project SaaS platform that combines construction ERP governance, stakeholder verification, approvals, document control, claims, risk intelligence, compliance, and executive reporting. BaytyAI is built for that $1B+ program control model.',
+          },
+        },
         {
           '@type': 'Question',
           name: 'What is BaytyAI?',

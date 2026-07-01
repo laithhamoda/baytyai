@@ -6,14 +6,14 @@ const PROBLEMS = [
   {
     title: 'Margin Erosion',
     definition:
-      'Margin erosion is the unrecovered cost leakage between contract pricing assumptions and live operational delivery — typically 1.8 to 4.6 percent of contract value per year on FM contracts above $5M [internal benchmark].',
+      'Margin erosion is the unrecovered cost leakage between contract pricing assumptions and live operational delivery, typically 1.8 to 4.6 percent of contract value per year on FM contracts above $5M [internal benchmark].',
     consequence:
       'By year three, the contract is delivering at break-even while the P&L still books it as profitable.',
   },
   {
     title: 'Mobilization Slip',
     definition:
-      'Mobilization slip is the failure to fully stand up service delivery within the contractual 90-day window — staffing, CAFM configuration, asset register, SLA baselines, and supplier onboarding.',
+      'Mobilization slip is the failure to fully stand up service delivery within the contractual 90-day window: staffing, CAFM configuration, asset register, SLA baselines, and supplier onboarding.',
     consequence: 'Liquidated damages trigger in week 13. Client trust never fully recovers.',
   },
   {
@@ -32,7 +32,7 @@ export default function Problem() {
         <SectionHeading
           eyebrow="THE OPERATOR PROBLEM"
           id="problem-heading"
-          h2="Three failure modes are quietly eroding every multi-year FM and Construction contract in the GCC."
+          h2="Three failure modes are quietly eroding multi-year FM and Construction contracts worldwide."
           className="mb-16"
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">

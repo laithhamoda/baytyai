@@ -64,7 +64,7 @@ export default function MarketplaceJoin() {
             marginBottom: '72px',
           }}
         >
-          Already working in GCC construction? Get verified. Get found. Get paid.
+          Already working in construction? Get verified. Get found. Get selected.
         </motion.h2>
 
         <div

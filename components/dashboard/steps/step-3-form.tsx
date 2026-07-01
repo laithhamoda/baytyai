@@ -69,8 +69,8 @@ const INTEGRATION_LABELS: Record<string, string> = {
 
 const DATA_RESIDENCY_LABELS: Record<string, string> = {
   ksa_only: 'KSA only (in-country)',
-  uae_only: 'UAE only (in-country)',
-  gcc_region: 'GCC region',
+  uae_only: 'Single country only',
+  gcc_region: 'Regional / multi-country',
   no_preference: 'No preference',
 };
 
@@ -113,10 +113,10 @@ export default function Step3Form({ projectId, defaultValues, onSaved, onBack }:
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* Service modules */}
         <section>
-          <h2 className="text-muted-foreground mb-1 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-1 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Service Modules Required
           </h2>
-          <p className="text-muted-foreground mb-4 text-xs">
+          <p className="mb-4 text-xs text-muted-foreground">
             Select all modules your project needs.
           </p>
           <FormField
@@ -159,7 +159,7 @@ export default function Step3Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Users & volumes */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Scale & Volumes
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -215,7 +215,7 @@ export default function Step3Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Integrations */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Existing Systems / Integrations
           </h2>
           <FormField
@@ -258,7 +258,7 @@ export default function Step3Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Preferences */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Platform Preferences
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

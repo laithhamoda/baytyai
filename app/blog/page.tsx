@@ -5,16 +5,16 @@ import { POSTS } from '@/content/posts';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Bayty Insights — GCC Construction Technology & Compliance' },
+  title: { absolute: 'BaytyAI Insights - Global Construction Technology & Compliance' },
   description:
-    'Guides and analysis on construction management, contractor verification, approval workflows, and compliance across the UAE and GCC.',
+    'Guides and analysis on global construction management, contractor verification, approval workflows, document control, and enterprise compliance.',
   alternates: { canonical: 'https://baytyai.com/blog' },
 };
 
 const blogSchema = {
   '@context': 'https://schema.org',
   '@type': 'Blog',
-  name: 'Bayty Insights',
+  name: 'BaytyAI Insights',
   url: 'https://baytyai.com/blog',
   blogPost: POSTS.map((p) => ({
     '@type': 'BlogPosting',
@@ -57,7 +57,7 @@ export default function BlogIndex() {
             maxWidth: '680px',
           }}
         >
-          On construction technology, verification, and the GCC built environment
+          On global construction technology, verification, and project control
         </h1>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -86,7 +86,7 @@ export default function BlogIndex() {
                   month: 'long',
                   year: 'numeric',
                 })}{' '}
-                · {p.readingMinutes} min read
+                - {p.readingMinutes} min read
               </p>
               <h2
                 style={{
