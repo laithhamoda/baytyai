@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import Logo from '@/components/brand/logo';
 
+import AccessForm from './access-form';
+
 export const metadata = {
   title: { absolute: 'Request Access — BaytyAI' },
   description:
@@ -11,33 +13,35 @@ export const metadata = {
 
 export default function AccessPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-steel-50 px-6 py-24 text-center">
-      <Link href="/" aria-label="BaytyAI home" className="mb-10">
-        <Logo size={34} />
-      </Link>
-      <span className="rounded-pill border border-bayty-200 bg-white px-3 py-1 font-sans text-xs font-medium text-bayty-600 shadow-a1-sm">
-        By invitation · Verified organizations only
-      </span>
-      <h1 className="mt-6 max-w-2xl font-display text-4xl font-bold leading-tight text-steel-900 md:text-5xl">
-        Request access for your organization
-      </h1>
-      <p className="mt-5 max-w-xl font-sans text-lg leading-relaxed text-steel-600">
-        BaytyAI is the operating system for the world’s mega projects. Access is granted to verified
-        governments, mega-developers, lead consultants, tier-1 contractors and strategic suppliers.
-      </p>
-      <div className="mt-9 flex flex-wrap justify-center gap-4">
-        <Link
-          href="/login"
-          className="rounded-pill bg-orange-400 px-7 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-colors hover:bg-orange-600"
-        >
-          Continue
-        </Link>
-        <Link
-          href="/"
-          className="rounded-pill border border-steel-200 bg-white px-7 py-3.5 font-sans text-sm font-semibold text-steel-800 transition-colors hover:border-bayty-300 hover:text-bayty-600"
-        >
-          Back to home
-        </Link>
+    <main className="min-h-screen bg-steel-50 px-6 py-16">
+      <div className="mx-auto max-w-2xl">
+        <div className="mb-10 flex flex-col items-center text-center">
+          <Link href="/" aria-label="BaytyAI home" className="mb-8">
+            <Logo size={34} />
+          </Link>
+          <span className="rounded-pill border border-bayty-200 bg-white px-3 py-1 font-sans text-xs font-medium text-bayty-600 shadow-a1-sm">
+            By invitation · Verified organizations only
+          </span>
+          <h1 className="mt-6 font-display text-4xl font-bold leading-tight text-steel-900">
+            Request access for your organization
+          </h1>
+          <p className="mt-4 max-w-xl font-sans text-base leading-relaxed text-steel-600">
+            BaytyAI is the operating system for the world’s mega projects. Tell us about your
+            organization — our team reviews every application manually and invites qualifying
+            governments, developers, consultants, contractors and suppliers.
+          </p>
+        </div>
+
+        <div className="rounded-card border border-steel-200 bg-white p-6 shadow-a1-sm md:p-8">
+          <AccessForm />
+        </div>
+
+        <p className="mt-6 text-center font-sans text-sm text-steel-500">
+          Already invited?{' '}
+          <Link href="/login" className="text-bayty-600 underline">
+            Sign in
+          </Link>
+        </p>
       </div>
     </main>
   );

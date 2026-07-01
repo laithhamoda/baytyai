@@ -95,3 +95,6 @@ export const limitVerificationRequest = (key: string) =>
 
 /** 120 consultant-selection writes per 10 minutes per user (scoring is frequent). */
 export const limitSelectionWrite = (key: string) => checkLimit('bayty:sel_write', 120, '10 m', key);
+
+/** 3 access-request applications per hour per email (public, unauthenticated). */
+export const limitAccessRequest = (key: string) => checkLimit('bayty:access_req', 3, '1 h', key);
