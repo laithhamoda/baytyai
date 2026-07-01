@@ -16,7 +16,16 @@ const NAV_LINKS = [
 
 // Routes that render their own chrome (dashboard shell, admin shell, auth
 // screens) — the marketing nav must not appear on top of them.
-const HIDDEN_PREFIXES = ['/dashboard', '/admin', '/account', '/login', '/sign-in', '/sign-up'];
+const HIDDEN_PREFIXES = [
+  '/dashboard',
+  '/admin',
+  '/account',
+  '/login',
+  '/sign-in',
+  '/sign-up',
+  '/access',
+  '/onboarding',
+];
 
 export default function Navigation() {
   const pathname = usePathname();

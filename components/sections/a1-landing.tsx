@@ -50,9 +50,9 @@ const STEPS = [
 ];
 
 const METRICS = [
-  { v: '6', l: 'Verified stakeholder roles' },
+  { v: '6', l: 'Verified roles, one program' },
   { v: '100%', l: 'Auditable decisions' },
-  { v: '∞', l: 'Global reach — every market' },
+  { v: '∞', l: 'Every market, one system' },
   { v: '0', l: 'Black-box outcomes' },
 ];
 
@@ -82,10 +82,10 @@ export default function A1Landing() {
               </Link>
             ))}
             <Link
-              href="/sign-up"
+              href="/access"
               className="rounded-pill bg-bayty-500 px-5 py-2.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-bayty-600"
             >
-              Get started
+              Request access
             </Link>
           </nav>
         </div>
@@ -101,23 +101,25 @@ export default function A1Landing() {
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-2 rounded-pill border border-bayty-200 bg-white px-3 py-1 font-sans text-xs font-medium text-bayty-600 shadow-a1-sm">
-                <span className="size-1.5 rounded-full bg-forest-400" /> Global verified marketplace
+                <span className="size-1.5 rounded-full bg-forest-400" /> By invitation · For the
+                world’s mega projects
               </span>
               <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] tracking-tight text-steel-900 md:text-[3.6rem]">
-                The verified network for{' '}
-                <span className="text-bayty-500">construction & facilities</span> management.
+                The operating system for the world’s{' '}
+                <span className="text-bayty-500">mega projects</span>.
               </h1>
               <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-steel-600">
-                BaytyAI connects verified clients, consultants, contractors, subcontractors and
-                suppliers worldwide — with structured inquiries, transparent quotations, weighted
-                consultant selection, approvals and document control on one trusted platform.
+                A verified, enterprise-grade command center where governments, mega-developers, lead
+                consultants, tier-1 contractors and strategic suppliers run a single program
+                together — unifying project governance, CRM, approvals and audit-ready document
+                control with total traceability.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
-                  href="/sign-up"
+                  href="/access"
                   className="rounded-pill bg-orange-400 px-7 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-colors hover:bg-orange-600"
                 >
-                  Request early access
+                  Request access
                 </Link>
                 <Link
                   href="#how"
@@ -128,13 +130,13 @@ export default function A1Landing() {
               </div>
               <div className="mt-10 flex items-center gap-6 font-sans text-sm text-steel-500">
                 <span className="flex items-center gap-2">
-                  <CheckIcon /> Manual verification
+                  <CheckIcon /> Verified organizations only
                 </span>
                 <span className="flex items-center gap-2">
                   <CheckIcon /> Full audit trail
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckIcon /> Worldwide
+                  <CheckIcon /> Government-grade governance
                 </span>
               </div>
             </div>
@@ -196,14 +198,14 @@ export default function A1Landing() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-sans text-sm font-semibold uppercase tracking-widest text-bayty-500">
-              One platform · six roles
+              One program · every party
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold text-steel-900">
-              Built for every party in the project
+              Built for every party on the program
             </h2>
             <p className="mt-4 font-sans text-lg text-steel-600">
-              Each stakeholder gets a purpose-built, permissioned experience — verified, structured
-              and fair.
+              Each stakeholder gets a purpose-built, permissioned command center — verified,
+              governed and accountable.
             </p>
           </div>
         </Reveal>
@@ -263,15 +265,15 @@ export default function A1Landing() {
             The trust layer for a fragmented, trillion-dollar industry.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-sans text-lg text-bayty-100">
-            Verification, structured procurement and explainable selection — the rails global
-            construction & facilities management has been missing. Join us early.
+            Verification, program governance and explainable selection — the operating layer the
+            world’s mega projects have been missing. Access is by invitation.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-4">
             <Link
-              href="/sign-up"
+              href="/access"
               className="rounded-pill bg-white px-7 py-3.5 font-sans text-sm font-semibold text-bayty-600 shadow-a1-md transition-transform hover:-translate-y-0.5"
             >
-              Request early access
+              Request access
             </Link>
             <Link
               href="/about"
