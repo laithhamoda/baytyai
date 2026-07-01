@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import Logo, { LogoMark } from '@/components/brand/logo';
 import Reveal from '@/components/motion/Reveal';
+import A1RoleJourneys from '@/components/sections/a1-role-journeys';
 
 /**
  * A1 — premium, investor-grade light landing page for BaytyAI.
@@ -186,6 +187,9 @@ export default function A1Landing() {
           ))}
         </div>
       </section>
+
+      {/* ───────────── Role journeys (animated "is this for me?") ───────────── */}
+      <A1RoleJourneys />
 
       {/* ───────────── Stakeholders ───────────── */}
       <section className="mx-auto max-w-container px-6 py-24 md:px-12">
