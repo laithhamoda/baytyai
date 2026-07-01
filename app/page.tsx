@@ -4,10 +4,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'BaytyAI — The Operating System for the World’s Mega Projects',
+    absolute: 'BaytyAI - AI Project Control for Global Mega Projects',
   },
   description:
-    'BaytyAI is a verified, enterprise-grade operating system for mega projects — where governments, mega-developers, lead consultants, tier-1 contractors and strategic suppliers run a single program together with project governance, CRM, approvals and audit-ready document control. By invitation.',
+    'BaytyAI is an enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide: verified stakeholders, approvals, document control, claims, variations, risk intelligence, and compliance.',
   alternates: {
     canonical: 'https://www.baytyai.com',
     languages: {
@@ -19,20 +19,19 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://www.baytyai.com',
-    title: 'BaytyAI — The Operating System for the World’s Mega Projects',
+    title: 'BaytyAI - AI Project Control for Global Mega Projects',
     description:
-      'A verified, enterprise-grade command center where the world’s leading construction & infrastructure brands run a single program — governance, CRM, approvals and document control. By invitation.',
+      'A verified enterprise command center for mega-project approvals, documents, contractors, claims, variations, risks, compliance, and audit-ready decisions.',
     siteName: 'BaytyAI',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BaytyAI — The Operating System for the World’s Mega Projects',
+    title: 'BaytyAI - AI Project Control for Global Mega Projects',
     description:
-      'The verified network for construction & facilities management. Verified stakeholders, transparent procurement, explainable selection.',
+      'Enterprise AI project control for governments, developers, contractors, consultants, and suppliers delivering global mega projects.',
   },
 };
 
-// SEO/GEO: rich, answer-engine-friendly structured data describing the product.
 const JSONLD = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -42,7 +41,7 @@ const JSONLD = {
       name: 'BaytyAI',
       url: 'https://www.baytyai.com',
       description:
-        'Verified, enterprise-grade operating system for the world’s mega projects — program governance, CRM, approvals and audit-ready document control for governments, mega-developers, consultants, contractors and suppliers.',
+        'Enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide.',
       areaServed: 'Worldwide',
     },
     {
@@ -51,7 +50,7 @@ const JSONLD = {
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       description:
-        'A verified command center where mega-project stakeholders run one program together — project governance, enterprise CRM, controlled approvals, weighted consultant selection and audit-ready document control. Access is by verification/invitation.',
+        'Verified project command center for approvals, document control, contractor verification, claims, variations, risk intelligence, compliance, and audit-ready decisions.',
     },
     {
       '@type': 'FAQPage',
@@ -61,23 +60,23 @@ const JSONLD = {
           name: 'What is BaytyAI?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'BaytyAI is a verified, enterprise-grade operating system for mega projects. It gives governments, mega-developers, lead consultants, tier-1 contractors and strategic suppliers one secure command center to run a single program — unifying project governance, CRM, approvals, weighted consultant selection and audit-ready document control.',
+            text: 'BaytyAI is an enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs. It unifies verified stakeholders, approvals, document control, claims, variations, risk intelligence, compliance, and audit-ready decisions.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Who is BaytyAI for?',
+          name: 'Who uses BaytyAI?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'BaytyAI is built for the leading organizations on major construction and infrastructure programs — public authorities, mega-project owners and developers, lead consultants, tier-1 contractors and strategic suppliers. Access is granted by verification/invitation only.',
+            text: 'BaytyAI is built for governments, public authorities, mega-developers, owners, main contractors, engineering consultants, project management consultants, subcontractors, and strategic suppliers.',
           },
         },
         {
           '@type': 'Question',
-          name: 'How does BaytyAI ensure trust and governance?',
+          name: 'Why is BaytyAI relevant for mega projects?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Every organization is manually verified before it can transact, every inquiry, quotation, approval and decision is captured as a timestamped, audit-ready record, and consultant selection uses weighted, version-locked criteria with a plain-language explanation of the ranking.',
+            text: 'Mega projects require verified stakeholders, controlled approvals, document governance, claims evidence, variation tracking, authority matrices, risk escalation, and executive visibility. BaytyAI brings these controls into one secure platform.',
           },
         },
       ],

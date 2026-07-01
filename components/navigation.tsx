@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 import Logo from '@/components/brand/logo';
 
 const NAV_LINKS = [
-  { label: 'System', href: '/#system' },
-  { label: 'Proof', href: '/#proof' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Mega Projects', href: '/mega-projects' },
+  { label: 'Product', href: '/product' },
+  { label: 'Security', href: '/security' },
+  { label: 'Resources', href: '/resources' },
   { label: 'About', href: '/about' },
 ];
 
@@ -72,10 +72,10 @@ export default function Navigation() {
             </Link>
           ))}
           <Link
-            href="/#book"
+            href="/access"
             className="bg-bayty-500 px-5 py-2.5 font-sans text-sm font-medium text-white transition-colors hover:bg-bayty-600"
           >
-            Book a Consultation
+            Request Access
           </Link>
         </div>
 
@@ -105,10 +105,10 @@ export default function Navigation() {
               </Link>
             ))}
             <Link
-              href="/#book"
+              href="/access"
               className="mt-2 bg-bayty-500 px-5 py-3 text-center font-sans text-sm font-medium text-white"
             >
-              Book a Consultation
+              Request Access
             </Link>
           </div>
         </div>

@@ -4,73 +4,73 @@ import Logo, { LogoMark } from '@/components/brand/logo';
 import Reveal from '@/components/motion/Reveal';
 import A1RoleJourneys from '@/components/sections/a1-role-journeys';
 
-/**
- * A1 — premium, investor-grade NAVY landing page for BaytyAI.
- * Deep navy brand background (#17284a), light text, green + blue accents.
- */
-
 const NAVY = '#17284a';
 
 const STAKEHOLDERS = [
   {
-    role: 'Clients & Owners',
-    gain: 'Post inquiries, compare verified quotations, award with a full audit trail.',
+    role: 'Governments & Authorities',
+    gain: 'Control verified participation, approvals, audit records, and governance across public capital programs.',
   },
   {
-    role: 'Consultants',
-    gain: 'Win mandates through a transparent, weighted selection — not who-you-know.',
+    role: 'Owners & Mega-Developers',
+    gain: 'See project risk, delayed approvals, document status, claims exposure, and contractor accountability in one place.',
   },
-  { role: 'Contractors', gain: 'Bid on structured scopes and manage approvals in one place.' },
   {
-    role: 'Subcontractors',
-    gain: 'Get discovered by verified main contractors, gated by approval.',
+    role: 'Lead Consultants',
+    gain: 'Manage reviews, submittals, RFIs, decisions, and evidence trails with clear authority and version control.',
   },
-  { role: 'Suppliers', gain: 'Quote against real demand from verified buyers worldwide.' },
+  {
+    role: 'Tier-1 Contractors',
+    gain: 'Coordinate packages, suppliers, subcontractors, variations, quotations, and approval dependencies.',
+  },
+  {
+    role: 'Strategic Suppliers',
+    gain: 'Quote against structured demand and participate in verified, transparent procurement workflows.',
+  },
 ];
 
 const STEPS = [
   {
     n: '01',
-    t: 'Get verified',
-    d: 'Every organization is manually verified before it can transact — trust by default.',
+    t: 'Verify every party',
+    d: 'Organizations are verified before sensitive project workflows are enabled.',
   },
   {
     n: '02',
-    t: 'Post or discover',
-    d: 'Publish an inquiry or browse open demand, filtered by region, budget and scope.',
+    t: 'Map authority',
+    d: 'Owners define roles, permissions, approval paths, and decision rights.',
   },
   {
     n: '03',
-    t: 'Quote & evaluate',
-    d: 'Receive quotations and score them on weighted, version-locked criteria.',
+    t: 'Control the workflow',
+    d: 'Approvals, documents, RFQs, awards, claims, and variations move through one governed system.',
   },
   {
     n: '04',
-    t: 'Award & track',
-    d: 'Award with an explainable recommendation and an exportable record.',
+    t: 'Escalate risk',
+    d: 'Leadership sees delayed approvals, missing evidence, claims exposure, and package-level project health.',
   },
 ];
 
 const METRICS = [
-  { v: '6', l: 'Verified roles, one program' },
-  { v: '100%', l: 'Auditable decisions' },
-  { v: '∞', l: 'Every market, one system' },
-  { v: '0', l: 'Black-box outcomes' },
+  { v: '1', l: 'Verified project command center' },
+  { v: '6', l: 'Core stakeholder groups' },
+  { v: '100%', l: 'Audit-ready decisions' },
+  { v: '24/7', l: 'Enterprise visibility' },
 ];
 
 const NAV = [
-  { label: 'How it works', href: '#how' },
-  { label: 'About', href: '/about' },
-  { label: 'Sign in', href: '/login' },
+  { label: 'Mega Projects', href: '/mega-projects' },
+  { label: 'Security', href: '/security' },
+  { label: 'Resources', href: '/resources' },
 ];
 
 export default function A1Landing() {
   return (
     <main className="text-white" style={{ backgroundColor: NAVY }}>
-      {/* ───────────── Header ───────────── */}
       <header
         className="sticky top-0 z-50 border-b border-white/10 backdrop-blur"
-        style={{ backgroundColor: 'rgba(23,40,74,0.85)' }}
+        style={{ backgroundColor: 'rgba(23,40,74,0.92)' }}
       >
         <div className="mx-auto flex h-16 max-w-container items-center justify-between px-6 md:px-12">
           <Link href="/" aria-label="BaytyAI home">
@@ -96,45 +96,35 @@ export default function A1Landing() {
         </div>
       </header>
 
-      {/* ───────────── Hero ───────────── */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 h-[460px] w-[460px] rounded-full bg-bayty-500/25 blur-3xl"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-24 -left-24 h-[380px] w-[380px] rounded-full bg-[#2f7d64]/20 blur-3xl"
-        />
+      <section className="relative overflow-hidden border-b border-white/10">
         <div className="mx-auto max-w-container px-6 py-24 md:px-12 md:pt-32">
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
               <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/5 px-3 py-1 font-sans text-xs font-medium text-bayty-100">
-                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> By invitation · For the
-                world’s mega projects
+                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> Enterprise AI for global
+                mega projects
               </span>
-              <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] tracking-tight text-white md:text-[3.6rem]">
-                The operating system for the world’s{' '}
+              <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] text-white md:text-[3.6rem]">
+                AI project control for the world&apos;s{' '}
                 <span className="text-[#6fe0c2]">mega projects</span>.
               </h1>
               <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-white/75">
-                A verified, enterprise-grade command center where governments, mega-developers, lead
-                consultants, tier-1 contractors and strategic suppliers run a single program
-                together — unifying project governance, CRM, approvals and audit-ready document
-                control.
+                BaytyAI gives governments, mega-developers, consultants, contractors, and suppliers
+                one verified command center for approvals, documents, claims, variations, risks,
+                compliance, and audit-ready decisions.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
                   href="/access"
                   className="rounded-pill bg-orange-400 px-7 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-colors hover:bg-orange-600"
                 >
-                  Request access
+                  Request enterprise access
                 </Link>
                 <Link
-                  href="#how"
+                  href="/mega-projects"
                   className="rounded-pill border border-white/25 bg-white/5 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
-                  See how it works
+                  Explore mega-project control
                 </Link>
               </div>
               <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm text-white/60">
@@ -142,21 +132,20 @@ export default function A1Landing() {
                   <Dot /> Verified organizations only
                 </span>
                 <span className="flex items-center gap-2">
-                  <Dot /> Full audit trail
+                  <Dot /> Full decision audit trail
                 </span>
                 <span className="flex items-center gap-2">
-                  <Dot /> Government-grade governance
+                  <Dot /> Bilingual English and Arabic workflows
                 </span>
               </div>
             </div>
 
-            {/* Hero visual — verified network card */}
             <Reveal className="relative">
-              <div className="relative mx-auto max-w-md rounded-card border border-white/10 bg-white/5 p-8 shadow-a1-lg backdrop-blur">
+              <div className="relative mx-auto max-w-md border border-white/10 bg-white/5 p-8 shadow-a1-lg backdrop-blur">
                 <div className="flex items-center justify-between">
                   <Logo tone="light" size={30} />
                   <span className="rounded-pill bg-[#2f7d64]/20 px-2.5 py-1 font-sans text-[11px] font-semibold text-[#6fe0c2]">
-                    Verified
+                    Verified control
                   </span>
                 </div>
                 <div className="my-8 flex justify-center">
@@ -164,22 +153,17 @@ export default function A1Landing() {
                     <LogoMark size={92} tone="light" />
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  {[
-                    'Client',
-                    'Consultant',
-                    'Contractor',
-                    'Subcontractor',
-                    'Supplier',
-                    'Platform',
-                  ].map((r) => (
-                    <span
-                      key={r}
-                      className="rounded-card bg-white/5 p-2 font-sans text-[11px] font-medium text-white/70"
-                    >
-                      {r}
-                    </span>
-                  ))}
+                <div className="grid grid-cols-2 gap-3 text-center sm:grid-cols-3">
+                  {['Owner', 'Authority', 'Consultant', 'Contractor', 'Supplier', 'Platform'].map(
+                    (r) => (
+                      <span
+                        key={r}
+                        className="bg-white/5 p-2 font-sans text-[11px] font-medium text-white/70"
+                      >
+                        {r}
+                      </span>
+                    ),
+                  )}
                 </div>
               </div>
             </Reveal>
@@ -187,8 +171,7 @@ export default function A1Landing() {
         </div>
       </section>
 
-      {/* ───────────── Metrics band ───────────── */}
-      <section className="border-y border-white/10 bg-white/[0.03]">
+      <section className="border-b border-white/10 bg-white/[0.03]">
         <div className="mx-auto grid max-w-container grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 md:px-12">
           {METRICS.map((m) => (
             <div key={m.l} className="text-center">
@@ -199,30 +182,28 @@ export default function A1Landing() {
         </div>
       </section>
 
-      {/* ───────────── Role journeys (animated) ───────────── */}
       <A1RoleJourneys />
 
-      {/* ───────────── Stakeholders ───────────── */}
       <section className="mx-auto max-w-container px-6 py-24 md:px-12">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <p className="font-sans text-sm font-semibold uppercase tracking-widest text-[#6fe0c2]">
-              One program · every party
+              One command center
             </p>
             <h2 className="mt-3 font-display text-4xl font-bold text-white">
               Built for every party on the program
             </h2>
             <p className="mt-4 font-sans text-lg text-white/70">
-              Each stakeholder gets a purpose-built, permissioned command center — verified,
-              governed and accountable.
+              Each stakeholder gets a permissioned workspace while leadership keeps one trusted
+              source of project-control truth.
             </p>
           </div>
         </Reveal>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {STAKEHOLDERS.map((s) => (
             <Reveal key={s.role}>
-              <div className="group h-full rounded-card border border-white/10 bg-white/5 p-7 transition-colors hover:border-white/20">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-card bg-white/10">
+              <div className="group h-full border border-white/10 bg-white/5 p-7 transition-colors hover:border-white/20">
+                <div className="mb-4 flex size-11 items-center justify-center bg-white/10">
                   <LogoMark size={24} tone="light" />
                 </div>
                 <h3 className="font-sans text-lg font-semibold text-white">{s.role}</h3>
@@ -233,7 +214,6 @@ export default function A1Landing() {
         </div>
       </section>
 
-      {/* ───────────── How it works ───────────── */}
       <section id="how" className="border-y border-white/10 bg-white/[0.03] py-24">
         <div className="mx-auto max-w-container px-6 md:px-12">
           <Reveal>
@@ -242,14 +222,14 @@ export default function A1Landing() {
                 How it works
               </p>
               <h2 className="mt-3 font-display text-4xl font-bold text-white">
-                From inquiry to award — transparently
+                From fragmented delivery to controlled execution
               </h2>
             </div>
           </Reveal>
           <div className="mt-14 grid gap-5 md:grid-cols-4">
             {STEPS.map((s) => (
               <Reveal key={s.n}>
-                <div className="h-full rounded-card border border-white/10 bg-white/5 p-7">
+                <div className="h-full border border-white/10 bg-white/5 p-7">
                   <span className="font-display text-3xl font-bold text-white/25">{s.n}</span>
                   <h3 className="mt-3 font-sans text-base font-semibold text-white">{s.t}</h3>
                   <p className="mt-2 font-sans text-sm leading-relaxed text-white/65">{s.d}</p>
@@ -260,22 +240,17 @@ export default function A1Landing() {
         </div>
       </section>
 
-      {/* ───────────── Investor CTA ───────────── */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-24 bottom-0 size-80 rounded-full bg-[#2f7d64]/20 blur-3xl"
-        />
+      <section className="relative">
         <div className="relative mx-auto max-w-container px-6 py-24 text-center md:px-12">
           <div className="mx-auto mb-6 flex justify-center">
             <Logo tone="light" size={40} />
           </div>
           <h2 className="mx-auto max-w-3xl font-display text-4xl font-bold leading-tight text-white md:text-5xl">
-            The trust layer for a fragmented, trillion-dollar industry.
+            The verified trust layer for global construction and infrastructure delivery.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl font-sans text-lg text-white/70">
-            Verification, program governance and explainable selection — the operating layer the
-            world’s mega projects have been missing. Access is by invitation.
+            Project control, compliance, stakeholder verification, and AI risk intelligence for the
+            programs where delays, claims, and undocumented decisions are too expensive to ignore.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-4">
             <Link
@@ -285,28 +260,27 @@ export default function A1Landing() {
               Request access
             </Link>
             <Link
-              href="/about"
+              href="/implementation"
               className="rounded-pill border border-white/25 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Learn about the brand
+              See implementation model
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ───────────── Footer ───────────── */}
       <footer className="border-t border-white/10">
         <div className="mx-auto flex max-w-container flex-col items-center justify-between gap-6 px-6 py-12 md:flex-row md:px-12">
           <Logo tone="light" size={26} />
           <p className="font-sans text-sm text-white/55">
-            Global verified operating system for the world’s mega projects.
+            AI project control infrastructure for global mega projects.
           </p>
           <nav className="flex gap-6 font-sans text-sm text-white/55" aria-label="Footer">
-            <Link href="/about" className="hover:text-white">
-              About
+            <Link href="/mega-projects" className="hover:text-white">
+              Mega Projects
             </Link>
-            <Link href="/terms" className="hover:text-white">
-              Terms
+            <Link href="/security" className="hover:text-white">
+              Security
             </Link>
             <Link href="/privacy" className="hover:text-white">
               Privacy

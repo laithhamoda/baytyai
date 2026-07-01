@@ -1,9 +1,7 @@
 import { siteConfig } from '@/lib/siteConfig';
 
-// Global service area — schema.org accepts a Place named "Worldwide".
 const WORLDWIDE = { '@type': 'Place', name: 'Worldwide' };
 
-// Search engines + AI engines use WebSite + SearchAction for sitelinks/answers.
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -16,7 +14,7 @@ const websiteSchema = {
     '@type': 'SearchAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: `${siteConfig.siteUrl}/marketplace?q={search_term_string}`,
+      urlTemplate: `${siteConfig.siteUrl}/resources?q={search_term_string}`,
     },
     'query-input': 'required name=search_term_string',
   },
@@ -36,7 +34,7 @@ const organizationSchema = {
   areaServed: WORLDWIDE,
   contactPoint: {
     '@type': 'ContactPoint',
-    contactType: 'sales',
+    contactType: 'enterprise sales',
     email: siteConfig.contactEmail,
     availableLanguage: ['en', 'ar'],
   },
@@ -51,48 +49,72 @@ const personSchema = {
   worksFor: { '@type': 'Organization', name: 'BaytyAI', url: siteConfig.siteUrl },
   url: siteConfig.founder.linkedin,
   knowsAbout: [
-    'Facilities Management',
+    'AI Project Control',
     'Construction Mega Projects',
+    'Infrastructure Programs',
+    'Contractor Verification',
+    'Construction Compliance',
     'AI Prompt Engineering',
     'GCC Operations',
-    'HVAC Engineering',
   ],
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': `${siteConfig.siteUrl}/#software`,
+  name: 'BaytyAI',
+  applicationCategory: 'BusinessApplication',
+  operatingSystem: 'Web',
+  url: siteConfig.siteUrl,
+  description: siteConfig.description,
+  featureList: [
+    'AI project control center',
+    'Stakeholder verification',
+    'Contractor prequalification',
+    'Approval workflow management',
+    'Document control and version history',
+    'Claims and variation tracking',
+    'Risk intelligence and escalation',
+    'Audit-ready decision records',
+    'English and Arabic project workflows',
+  ],
+  audience: {
+    '@type': 'BusinessAudience',
+    audienceType:
+      'Governments, developers, contractors, consultants, subcontractors, and suppliers on mega projects',
+  },
+  areaServed: WORLDWIDE,
 };
 
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${siteConfig.siteUrl}/#service`,
-  serviceType: 'AI Operations Infrastructure for Facilities Management and Construction',
+  serviceType: 'AI Project Control Platform for Mega Construction and Infrastructure Projects',
   provider: { '@id': `${siteConfig.siteUrl}/#organization` },
   areaServed: WORLDWIDE,
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'BaytyAI Engagement Tiers',
+    name: 'BaytyAI Enterprise Platform',
     itemListElement: [
       {
         '@type': 'Offer',
-        name: 'Strategy Consultation',
+        name: 'Enterprise Project Control',
         description:
-          'Mapped against your contract portfolio. Output: prioritized intervention list. Credited toward the Diagnostic Engagement.',
-        price: '750',
-        priceCurrency: 'USD',
+          'Secure project control platform for owners, developers, contractors, consultants, and suppliers managing approvals, document control, claims, variations, and stakeholder governance.',
       },
       {
         '@type': 'Offer',
-        name: 'Diagnostic Engagement',
+        name: 'Mega Project Command Center',
         description:
-          'One live contract. One module deployed end to end. Full output pack delivered.',
-        price: '12000',
-        priceCurrency: 'USD',
+          'Custom enterprise deployment for multi-package mega projects, government-backed programs, and global infrastructure portfolios.',
       },
       {
         '@type': 'Offer',
-        name: 'Embedded Engagement',
+        name: 'Verified Network and Marketplace',
         description:
-          'Portfolio-wide deployment, weekly cadence, operator handover at end of quarter.',
-        price: '45000',
-        priceCurrency: 'USD',
+          'Verified contractor, consultant, subcontractor, and supplier network for structured inquiries, quotation workflows, approvals, and auditable awards.',
       },
     ],
   },
@@ -107,63 +129,39 @@ const faqSchema = {
       name: 'What is BaytyAI?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'BaytyAI is an AI-native operations layer for Facilities Management and Construction mega-projects in the GCC. It is a productized library of operator-grade prompts and workflows, not a consulting retainer.',
+        text: 'BaytyAI is an enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs. It unifies verified stakeholders, approval workflows, document control, claims, variations, risk intelligence, and compliance in one secure command center.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How is this different from hiring McKinsey, Accenture, or a Big 4 advisory?',
+      name: 'Who is BaytyAI built for?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Traditional consulting delivers a deck. BaytyAI deploys a working AI operations layer against a live contract, with measurable margin recovery and SLA outcomes — at roughly 5 to 10 percent of the cost of a comparable advisory engagement.',
+        text: 'BaytyAI is built for governments, mega-developers, public authorities, main contractors, engineering consultants, project management consultants, subcontractors, and strategic suppliers working on complex capital projects worldwide.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Do you work in Arabic?',
+      name: 'What makes BaytyAI useful for mega projects?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Yes. All deliverables can be produced bilingually in Arabic and English. The founder operates natively in both.',
+        text: 'Mega projects need verified stakeholders, controlled approvals, versioned documents, decision audit trails, authority matrices, claims evidence, variation tracking, risk escalation, and executive visibility. BaytyAI brings these workflows into one enterprise platform.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What contract sizes do you work with?',
+      name: 'Does BaytyAI support Arabic and English workflows?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'BaytyAI is built for FM and Construction contracts above $5M in annual value. Smaller contracts are typically better served by adjacent BaytyAI training products.',
+        text: 'Yes. BaytyAI is designed for bilingual English and Arabic project environments, including GCC project teams, authorities, contractors, consultants, and suppliers.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How do you handle data residency for Saudi and UAE clients?',
+      name: 'How does BaytyAI support compliance and governance?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'All sensitive contract data can be processed against models and storage configured for in-region residency. NDA-first engagement is standard.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Can you integrate with our existing CAFM platform — Maximo, Archibus, Planon, or FSI Concept?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. The BaytyAI workflows are CAFM-agnostic and have been designed to layer on top of existing platforms, not replace them.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What is the typical ROI timeline?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'On the Contract Margin X-Ray, recovered margin is typically identified within the 2-week Diagnostic window. Realized margin recovery follows in the next operational quarter.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Are NDAs and IP assignment standard?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Yes. BaytyAI signs mutual NDAs as standard, and all client-specific IP generated during an engagement is assigned to the client at handover.',
+        text: 'BaytyAI supports role-based access, verification-gated participation, approval history, document version control, audit-ready decision logs, and enterprise compliance workflows for capital project governance.',
       },
     },
   ],
@@ -186,6 +184,7 @@ const ALL_SCHEMAS = [
   websiteSchema,
   organizationSchema,
   personSchema,
+  softwareSchema,
   serviceSchema,
   faqSchema,
   breadcrumbSchema,
