@@ -19,8 +19,14 @@ const securityHeaders = [
   },
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=()',
+    value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()',
   },
+  // Isolate the origin: prevent this page from being grouped with cross-origin
+  // popups/embeds and block cross-origin resource sharing of our documents.
+  { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+  { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
+  { key: 'X-Permitted-Cross-Domain-Policies', value: 'none' },
+  { key: 'X-DNS-Prefetch-Control', value: 'off' },
   {
     // Report-only first to avoid breaking Vercel/Google Fonts/GA; promote to
     // "Content-Security-Policy" (enforcing) after a clean reporting period.
@@ -36,6 +42,8 @@ const securityHeaders = [
       "frame-ancestors 'none'",
       "base-uri 'self'",
       "form-action 'self'",
+      "object-src 'none'",
+      'upgrade-insecure-requests',
     ].join('; '),
   },
 ];

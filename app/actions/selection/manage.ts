@@ -6,6 +6,7 @@ import { ok, err } from '@/lib/actions/types';
 import { can } from '@/lib/auth/permissions';
 import { resolveActor } from '@/lib/auth/resolve-actor';
 import { validateWeights } from '@/lib/consultant-selection/scoring';
+import { limitSelectionWrite } from '@/lib/rate-limit';
 import { createClient } from '@/lib/supabase/server';
 
 import type { ActionResult } from '@/lib/actions/types';
@@ -36,6 +37,9 @@ export async function createProcess(
   if (!actor.orgId) return err('No organization');
   if (can(actor.platformRole, actor.stakeholderType, 'selection.manage') === 'deny')
     return err('Forbidden');
+
+  if (!(await limitSelectionWrite(actor.userId)))
+    return err('Rate limit reached. Please try again later.');
 
   const supabase = await createClient();
   if (!supabase) return err('Service unavailable');
@@ -103,6 +107,9 @@ export async function saveCriteriaSet(
     if (!weights.ok)
       return err(`Weights total ${weights.sum}% — they must equal 100% before locking.`);
   }
+
+  if (!(await limitSelectionWrite(actor.userId)))
+    return err('Rate limit reached. Please try again later.');
 
   const supabase = await createClient();
   if (!supabase) return err('Service unavailable');
@@ -191,6 +198,9 @@ export async function saveEvaluation(
   if (!actor.orgId) return err('No organization');
   if (can(actor.platformRole, actor.stakeholderType, 'selection.evaluate') === 'deny')
     return err('Forbidden');
+
+  if (!(await limitSelectionWrite(actor.userId)))
+    return err('Rate limit reached. Please try again later.');
 
   const supabase = await createClient();
   if (!supabase) return err('Service unavailable');

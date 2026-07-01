@@ -3,6 +3,7 @@
 import { ok, err } from '@/lib/actions/types';
 import { resolveActor } from '@/lib/auth/resolve-actor';
 import { writeAuditLog } from '@/lib/db/audit';
+import { limitVerificationRequest } from '@/lib/rate-limit';
 import { createClient } from '@/lib/supabase/server';
 
 import type { ActionResult } from '@/lib/actions/types';
@@ -45,6 +46,9 @@ export async function requestVerification(
   const actor = await resolveActor();
   if (!actor) return err('Unauthorized');
   if (!actor.orgId) return err('No organization');
+
+  if (!(await limitVerificationRequest(actor.userId)))
+    return err('Too many verification requests. Please try again later.');
 
   const supabase = await createClient();
   if (!supabase) return err('Service unavailable');

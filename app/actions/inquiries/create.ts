@@ -8,6 +8,7 @@ import { can } from '@/lib/auth/permissions';
 import { isOrgVerified } from '@/lib/auth/require-verified';
 import { resolveActor } from '@/lib/auth/resolve-actor';
 import { writeAuditLog } from '@/lib/db/audit';
+import { limitMarketplaceWrite } from '@/lib/rate-limit';
 import { createClient } from '@/lib/supabase/server';
 
 import type { ActionResult } from '@/lib/actions/types';
@@ -37,6 +38,9 @@ export async function createInquiry(
 
   const decision = can(actor.platformRole, actor.stakeholderType, 'inquiry.post');
   if (decision === 'deny') return err('Forbidden');
+
+  if (!(await limitMarketplaceWrite(actor.userId)))
+    return err('Rate limit reached. Please try again later.');
 
   // Marketplace access gate: only verified orgs may post inquiries.
   if (!(await isOrgVerified(actor))) {
