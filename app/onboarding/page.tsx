@@ -28,13 +28,13 @@ export default async function OnboardingPage() {
   if (membership) redirect('/dashboard');
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-ink-950 px-6 py-24">
+    <div className="flex min-h-screen items-center justify-center bg-steel-50 px-6 py-24">
       <div className="w-full max-w-xl">
-        <div className="mx-auto mb-8 h-px w-10 bg-signal-500" />
-        <h1 className="mb-3 text-center font-sans text-3xl font-semibold text-ink-100">
+        <div className="mx-auto mb-8 h-px w-10 bg-bayty-500" />
+        <h1 className="mb-3 text-center font-sans text-3xl font-semibold text-steel-900">
           Set up your organization
         </h1>
-        <p className="mb-12 text-center font-sans text-sm leading-relaxed text-ink-300">
+        <p className="mb-12 text-center font-sans text-sm leading-relaxed text-steel-600">
           Tell us who you are on the platform. This sets your permissions and how you appear in the
           marketplace.
         </p>

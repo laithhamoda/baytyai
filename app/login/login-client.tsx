@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { createClient } from '@/lib/supabase/client';
 
@@ -25,9 +25,29 @@ export default function LoginClient() {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
 
+  // Lightweight, free human check (no third-party CAPTCHA needed):
+  //  - honeypot field that only bots fill,
+  //  - an explicit "I'm human" confirmation,
+  //  - a minimum time-on-form so scripted instant submits are rejected.
+  const [human, setHuman] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
+  const startedAt = useRef(Date.now());
+
   async function sendCode(e: React.FormEvent) {
     e.preventDefault();
     setError('');
+
+    // Human verification (runs BEFORE any sign-in request).
+    if (honeypot) return; // bot filled the hidden field — silently drop
+    if (!human) {
+      setError('Please confirm you are human first.');
+      return;
+    }
+    if (Date.now() - startedAt.current < 1500) {
+      setError('That was a little too fast — please try again.');
+      return;
+    }
+
     const supabase = createClient();
     if (!supabase) {
       setError('Sign-in is not yet enabled. Please try again later.');
@@ -116,12 +136,36 @@ export default function LoginClient() {
                 className={fieldCls}
               />
             </div>
+
+            {/* Honeypot — hidden from humans, catches bots. */}
+            <input
+              type="text"
+              name="company_url"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="absolute left-[-9999px] size-0 opacity-0"
+            />
+
+            {/* Human confirmation */}
+            <label className="flex cursor-pointer items-center gap-3 rounded-card border border-steel-200 bg-white px-4 py-3">
+              <input
+                type="checkbox"
+                checked={human}
+                onChange={(e) => setHuman(e.target.checked)}
+                className="size-4 accent-bayty-500"
+              />
+              <span className="font-sans text-sm text-steel-700">I’m a human, not a robot</span>
+            </label>
+
             {error && (
               <p role="alert" className="font-sans text-sm leading-snug text-alert-500">
                 {error}
               </p>
             )}
-            <button type="submit" disabled={busy} className={btnCls}>
+            <button type="submit" disabled={busy || !human} className={btnCls}>
               {busy ? 'Sending…' : 'Send code'}
             </button>
           </form>

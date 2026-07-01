@@ -20,6 +20,12 @@ const STAKEHOLDER_TYPES: StakeholderType[] = [
 const schema = z.object({
   name: z.string().min(2, 'Organization name is required'),
   stakeholderType: z.enum(['client', 'consultant', 'contractor', 'subcontractor', 'supplier']),
+  // Professional details captured up-front so an admin can verify the entry.
+  country: z.string().min(2, 'Country is required'),
+  registrationNumber: z.string().min(2, 'Company registration / trade-license number is required'),
+  website: z.string().max(200).optional().or(z.literal('')),
+  phone: z.string().max(40).optional().or(z.literal('')),
+  contactName: z.string().max(120).optional().or(z.literal('')),
 });
 
 function slugify(name: string): string {
@@ -40,6 +46,11 @@ function slugify(name: string): string {
 export async function completeOnboarding(input: {
   name: string;
   stakeholderType: string;
+  country: string;
+  registrationNumber: string;
+  website?: string;
+  phone?: string;
+  contactName?: string;
 }): Promise<ActionResult<{ organizationId: string }>> {
   const parsed = schema.safeParse(input);
   if (!parsed.success) {
@@ -66,6 +77,19 @@ export async function completeOnboarding(input: {
   // Unique-ish slug.
   const slug = `${slugify(parsed.data.name)}-${user.id.slice(0, 6)}`;
 
+  // Compose the professional details into the verification notes the admin
+  // review queue displays, and submit the org for manual verification up-front.
+  const details = [
+    `Registration/License: ${parsed.data.registrationNumber}`,
+    `Country: ${parsed.data.country}`,
+    parsed.data.website ? `Website: ${parsed.data.website}` : null,
+    parsed.data.contactName ? `Contact: ${parsed.data.contactName}` : null,
+    parsed.data.phone ? `Phone: ${parsed.data.phone}` : null,
+    `Signup email: ${user.email ?? '—'}`,
+  ]
+    .filter(Boolean)
+    .join(' · ');
+
   const { data: org, error: orgErr } = await supabase
     .from('organizations')
     .insert({
@@ -73,6 +97,9 @@ export async function completeOnboarding(input: {
       slug,
       stakeholder_type: parsed.data.stakeholderType,
       created_by: user.id,
+      verification_status: 'pending',
+      verification_requested_at: new Date().toISOString(),
+      verification_notes: details,
     })
     .select('id')
     .single();
