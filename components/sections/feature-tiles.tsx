@@ -44,13 +44,13 @@ const FEATURE_TILES: FeatureTile[] = [
     Icon: Briefcase,
     name: 'Freelancer Marketplace',
     description:
-      'Source and engage vetted independent professionals within the GCC construction ecosystem.',
+      'Source and engage vetted independent professionals across global construction markets.',
   },
   {
     Icon: Building2,
     name: 'Property Marketplace',
     description:
-      'Transact and list verified GCC real estate assets within the same authorised workspace.',
+      'Transact and list verified real estate assets within the same authorised workspace.',
   },
 ];
 

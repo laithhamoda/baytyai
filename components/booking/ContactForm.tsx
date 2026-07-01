@@ -148,7 +148,7 @@ export default function ContactForm() {
 
       {status === 'success' && (
         <p className="text-center text-sm text-[#0052cc]">
-          Received. Laith will reply within one business day from Amman.
+          Received. The BaytyAI team will reply within one business day.
         </p>
       )}
       {status === 'error' && (

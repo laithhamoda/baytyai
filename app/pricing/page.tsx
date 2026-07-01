@@ -7,9 +7,9 @@ import SecurityBadges from '@/components/sections/security-badges';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Construction Management Software Pricing UAE | From AED 159/mo — Bayty' },
+  title: { absolute: 'Enterprise Project Control Software Pricing - BaytyAI' },
   description:
-    'Transparent membership pricing for UAE and GCC construction firms. Starter from AED 159/month. No setup fees. No hidden charges. Cancel anytime.',
+    'Transparent platform and enterprise pricing for verified construction, infrastructure, real estate, and government-backed project teams worldwide.',
 };
 
 const faqSchema = {

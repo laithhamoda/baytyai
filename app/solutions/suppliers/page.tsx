@@ -3,9 +3,9 @@ import RoleDetail from '@/components/sections/role-detail';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'For Suppliers — Bayty Construction Marketplace UAE' },
+  title: { absolute: 'For Suppliers - BaytyAI Global Construction Marketplace' },
   description:
-    'Bayty connects verified material and equipment suppliers to active GCC construction projects, with structured requests, quoting, and protected payments.',
+    'BaytyAI connects verified material and equipment suppliers to active global construction and infrastructure projects, with structured requests, quoting, and protected records.',
   alternates: { canonical: 'https://baytyai.com/solutions/suppliers' },
 };
 
@@ -39,7 +39,7 @@ export default function SuppliersPage() {
       <RoleDetail
         overline="For Suppliers"
         title="Reach verified projects, supply with confidence"
-        intro="Material and equipment suppliers connect directly to active GCC developments — receiving structured requests, submitting quotes, and getting paid through a trusted, recorded process."
+        intro="Material and equipment suppliers connect directly to active developments worldwide - receiving structured requests, submitting quotes, and participating through a trusted, recorded process."
         capabilities={[
           {
             name: 'Verified Listing',
@@ -54,12 +54,12 @@ export default function SuppliersPage() {
             body: 'Submit and track quotes with a clear, recorded approval status.',
           },
           {
-            name: 'Protected Payments',
-            body: 'Settle through milestone-based payments with a complete transaction record.',
+            name: 'Protected Records',
+            body: 'Keep award, quotation, payment, and delivery records linked to the project trail.',
           },
           {
             name: 'Project Discovery',
-            body: 'Get matched to active GCC projects that need your product categories.',
+            body: 'Get matched to active projects worldwide that need your product categories.',
           },
           {
             name: 'Document Access',

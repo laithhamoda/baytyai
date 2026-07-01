@@ -147,7 +147,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* Name */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Project Name
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -182,7 +182,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Classification */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Classification
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -194,7 +194,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Location */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Location
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -205,7 +205,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
                 <FormItem>
                   <FormLabel>Country</FormLabel>
                   <FormControl>
-                    <Input placeholder="Saudi Arabia" {...field} />
+                    <Input placeholder="United States" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -259,7 +259,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Size & scale */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Size & Scale
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -333,7 +333,7 @@ export default function Step2Form({ projectId, defaultValues, onSaved, onBack }:
 
         {/* Timeline & Funding */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Timeline & Funding
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

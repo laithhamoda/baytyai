@@ -4,11 +4,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      'Construction Project Management Platform | Approval Workflows & Document Hub — Bayty',
+    absolute: 'Global Mega Project Control Platform | Approvals, Documents & Risk - BaytyAI',
   },
   description:
-    'See the Bayty platform — verified stakeholders, approval workflows, document management, and professional marketplace for GCC construction.',
+    'See BaytyAI for global mega projects: verified stakeholders, approval workflows, document control, claims, variations, risk intelligence, and enterprise governance.',
 };
 
 export default function ProductPage() {

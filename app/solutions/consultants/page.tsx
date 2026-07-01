@@ -3,9 +3,9 @@ import RoleDetail from '@/components/sections/role-detail';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'For Consultants & Engineers — Bayty Platform UAE' },
+  title: { absolute: 'For Consultants & Engineers - BaytyAI Global Project Platform' },
   description:
-    'Bayty gives consultants and engineers contract execution, supervision, design revision management, and technical scope tools on one platform.',
+    'BaytyAI gives consultants and engineers contract execution, supervision, design revision management, and technical scope tools on one global project-control platform.',
   alternates: { canonical: 'https://baytyai.com/solutions/consultants' },
 };
 
@@ -39,7 +39,7 @@ export default function ConsultantsPage() {
       <RoleDetail
         overline="For Consultants & Engineers"
         title="Execute, supervise, and manage revisions"
-        intro="Consultants, design engineers, and MEP specialists manage contract execution, supervision, technical scope, and revisions — with every decision recorded and verifiable."
+        intro="Consultants, design engineers, and technical specialists manage contract execution, supervision, technical scope, and revisions - with every decision recorded and verifiable."
         capabilities={[
           {
             name: 'Contract Execution',
@@ -55,7 +55,7 @@ export default function ConsultantsPage() {
           },
           {
             name: 'Technical Scope',
-            body: 'Define and manage MEP, HVAC, and fit-out specifications end to end.',
+            body: 'Define and manage MEP, HVAC, fit-out, civil, and specialist specifications end to end.',
           },
           {
             name: 'Revision Sign-off',

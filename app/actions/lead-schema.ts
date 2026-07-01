@@ -24,13 +24,14 @@ export const ROLES = [
 ] as const;
 
 export const REGIONS = [
+  'Global',
+  'North America',
+  'Europe',
+  'Asia-Pacific',
+  'Middle East',
+  'Africa',
   'KSA',
   'UAE',
-  'Qatar',
-  'Kuwait',
-  'Bahrain',
-  'Oman',
-  'Jordan',
   'Other',
 ] as const;
 

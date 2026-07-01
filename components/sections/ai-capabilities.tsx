@@ -23,7 +23,7 @@ const CAPABILITIES: Capability[] = [
   {
     Icon: Users,
     title: 'Smart Matching',
-    body: 'Ranks verified professionals by credentials, GCC proximity, project type relevance, and platform ratings for each specific project requirement. Shortlist justification generated automatically.',
+    body: 'Ranks verified professionals by credentials, regional proximity, project type relevance, and platform ratings for each specific project requirement. Shortlist justification generated automatically.',
   },
   {
     Icon: MessageSquare,

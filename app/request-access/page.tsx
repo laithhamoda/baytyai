@@ -3,9 +3,9 @@ import DemoClient from '../demo/demo-client';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: { absolute: 'Request Access — Bayty Construction Platform | UAE & GCC' },
+  title: { absolute: 'Request Access - BaytyAI Global Project Control Platform' },
   description:
-    'Request access to the Bayty platform. Available to verified construction professionals and developers across the UAE and GCC.',
+    'Request access to BaytyAI. Available to verified owners, developers, consultants, contractors, subcontractors, and suppliers on global mega projects.',
 };
 
 export default function RequestAccessPage() {

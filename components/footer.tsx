@@ -85,7 +85,9 @@ export default function Footer() {
 
         {/* Bottom row */}
         <div className="mt-12 flex flex-col gap-3 border-t border-steel-200 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-[11px] text-steel-500">© {year} BaytyAI · Amman, Jordan</p>
+          <p className="font-mono text-[11px] text-steel-500">
+            © {year} BaytyAI · Global project control platform
+          </p>
           <div className="flex flex-wrap gap-6">
             <a
               href="/privacy"

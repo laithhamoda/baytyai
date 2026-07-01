@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'BaytyAI — AI for GCC Facilities Management and Construction';
+export const alt = 'BaytyAI - AI project control for global mega projects';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -19,7 +19,6 @@ export default function OgImage() {
         fontFamily: 'system-ui, sans-serif',
       }}
     >
-      {/* Top-left wordmark */}
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <span
           style={{
@@ -34,7 +33,6 @@ export default function OgImage() {
         </span>
       </div>
 
-      {/* Center heading */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <p
           style={{
@@ -45,7 +43,7 @@ export default function OgImage() {
             margin: 0,
           }}
         >
-          AI-NATIVE OPERATIONS INFRASTRUCTURE
+          AI PROJECT CONTROL INFRASTRUCTURE
         </p>
         <h1
           style={{
@@ -57,14 +55,13 @@ export default function OgImage() {
             maxWidth: '900px',
           }}
         >
-          AI for GCC Facilities Management &amp; Construction Mega Projects
+          AI Project Control for Global Mega Projects
         </h1>
       </div>
 
-      {/* Bottom row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <span style={{ color: '#6E7681', fontSize: '14px' }}>
-          Laith Hamoda · Senior AI Prompt Engineer · GCC
+          Verified stakeholders - approvals - documents - risk
         </span>
         <span style={{ color: '#C5A572', fontSize: '14px', letterSpacing: '0.05em' }}>
           baytyai.com

@@ -12,7 +12,7 @@ export const step5Schema = z.object({
     error: 'Consent to data processing is required',
   }),
   consent_pdpl: z.literal(true, {
-    error: 'Acknowledgement of Saudi PDPL / UAE PDPL compliance is required',
+    error: 'Acknowledgement of applicable data protection obligations is required',
   }),
 
   // Optional message to the Bayty team

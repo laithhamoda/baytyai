@@ -6,7 +6,7 @@ import { useLeadCapture } from '@/components/forms/lead-capture-provider';
 
 const TRUST_ITEMS = [
   'Verified Stakeholders Only',
-  'GCC-Regulated Compliance',
+  'Global Compliance Ready',
   'Enterprise-Grade Security',
 ];
 
@@ -25,7 +25,7 @@ interface HeroProps {
 }
 
 export default function Hero({
-  overline = 'GCC Construction Management',
+  overline = 'Global Construction Management',
   headline = 'Where Every Project Decision Lives',
   subhead = 'Bayty unifies your entire construction project lifecycle — verified stakeholders, structured approvals, and a trusted marketplace — on one authorised platform.',
 }: HeroProps = {}) {

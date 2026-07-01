@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Mega Project Control Resources',
+  title: 'Global Mega Project Control Resources',
   description:
-    'BaytyAI resources for AI construction management, mega project control, approvals, contractor verification, document control, claims, variations, and compliance.',
+    'BaytyAI resources for AI construction management, global mega project control, approvals, contractor verification, document control, claims, variations, and compliance.',
   alternates: { canonical: 'https://www.baytyai.com/resources' },
 };
 
@@ -26,11 +26,11 @@ const resources = [
   },
   {
     title: 'AI Construction Management Buyer Guide',
-    copy: 'A buyer guide for evaluating AI project control, document intelligence, risk detection, bilingual workflows, integrations, and enterprise security.',
+    copy: 'A buyer guide for evaluating AI project control, document intelligence, risk detection, multilingual workflows, integrations, and enterprise security.',
   },
   {
-    title: 'GCC Project Governance Brief',
-    copy: 'A briefing for developers, government entities, contractors, and consultants operating across UAE, Saudi Arabia, Qatar, Kuwait, Oman, and Bahrain.',
+    title: 'Global Project Governance Brief',
+    copy: 'A briefing for developers, government entities, contractors, consultants, and suppliers operating across international construction and infrastructure markets.',
   },
 ];
 
@@ -42,12 +42,12 @@ export default function ResourcesPage() {
           Resources
         </p>
         <h1 className="mt-5 max-w-4xl font-display text-5xl font-bold leading-tight md:text-6xl">
-          Guides for AI construction management and mega-project control.
+          Guides for AI construction management and global mega-project control.
         </h1>
         <p className="mt-6 max-w-3xl font-sans text-lg leading-relaxed text-steel-600">
           These resource hubs are designed for search engines, answer engines, and enterprise buyers
           researching project-control software for high-value construction, infrastructure, real
-          estate, and government-backed programs.
+          estate, and government-backed programs worldwide.
         </p>
       </section>
       <section className="mx-auto grid max-w-container gap-5 px-6 pb-20 md:grid-cols-2 md:px-12">

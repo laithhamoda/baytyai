@@ -13,7 +13,7 @@ export const siteConfig = {
     title: 'Senior AI Prompt Engineer for Mega Projects',
     linkedin: 'https://www.linkedin.com/in/laithhamoda',
     email: 'laithrhamoda@gmail.com',
-    location: 'Amman, Jordan',
+    location: 'Global',
   },
   calBookingUrl: process.env.NEXT_PUBLIC_CAL_BOOKING_URL,
   contactEmail: 'enterprise@baytyai.com',

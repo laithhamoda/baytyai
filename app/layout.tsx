@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     'contractor prequalification software',
     'contractor verification',
     'capital project management software',
-    'GCC construction SaaS',
+    'global construction SaaS',
     'government construction project software',
   ],
   alternates: {

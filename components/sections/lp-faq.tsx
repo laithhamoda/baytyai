@@ -5,7 +5,7 @@ import SectionHeading from '@/components/ds/SectionHeading';
 const FAQS = [
   {
     q: 'What is BaytyAI?',
-    a: 'BaytyAI is an AI-native operations layer for Facilities Management and Construction mega-projects in the GCC. It is a productized library of operator-grade prompts and workflows, not a consulting retainer.',
+    a: 'BaytyAI is an AI-native project control layer for global Facilities Management, Construction, and infrastructure mega-projects. It is a productized library of operator-grade prompts, workflows, and governance systems, not a consulting retainer.',
   },
   {
     q: 'How is this different from hiring McKinsey, Accenture, or a Big 4 advisory?',
@@ -20,8 +20,8 @@ const FAQS = [
     a: 'BaytyAI is built for FM and Construction contracts above $5M in annual value. Smaller contracts are typically better served by adjacent BaytyAI training products.',
   },
   {
-    q: 'How do you handle data residency for Saudi and UAE clients?',
-    a: 'All sensitive contract data can be processed against models and storage configured for in-region residency. NDA-first engagement is standard.',
+    q: 'How do you handle data residency for enterprise clients?',
+    a: 'Sensitive project data can be handled through enterprise deployment planning that accounts for regional data residency, privacy, and procurement requirements. NDA-first engagement is standard.',
   },
   {
     q: 'Can you integrate with our existing CAFM platform — Maximo, Archibus, Planon, or FSI Concept?',
@@ -44,7 +44,7 @@ export default function Faq() {
         <SectionHeading
           eyebrow="FAQ"
           id="faq-heading"
-          h2="What GCC operators ask before they book."
+          h2="What global operators ask before they book."
           className="mb-16"
         />
         <div className="flex flex-col divide-y divide-ink-700">

@@ -79,7 +79,7 @@ export default function Step1Form({ projectId, defaultValues, onSaved }: Props) 
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         {/* Legal identity */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Organization — Legal Identity
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -144,7 +144,7 @@ export default function Step1Form({ projectId, defaultValues, onSaved }: Props) 
                 <FormItem>
                   <FormLabel>Country</FormLabel>
                   <FormControl>
-                    <Input placeholder="Saudi Arabia" {...field} />
+                    <Input placeholder="United States" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -192,7 +192,7 @@ export default function Step1Form({ projectId, defaultValues, onSaved }: Props) 
 
         {/* Point of contact */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Primary Point of Contact
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -253,7 +253,7 @@ export default function Step1Form({ projectId, defaultValues, onSaved }: Props) 
 
         {/* Authorized signatory */}
         <section>
-          <h2 className="text-muted-foreground mb-4 text-sm font-semibold uppercase tracking-wider">
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
             Authorized Signatory
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
