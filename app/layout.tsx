@@ -1,5 +1,3 @@
-import { siteConfig } from '@/lib/siteConfig';
-
 import {
   Inter_Tight,
   JetBrains_Mono,
@@ -14,6 +12,7 @@ import Footer from '@/components/footer';
 import LeadCaptureProvider from '@/components/forms/lead-capture-provider';
 import Navigation from '@/components/navigation';
 import JsonLd from '@/components/seo/JsonLd';
+import { siteConfig } from '@/lib/siteConfig';
 
 import type { Metadata } from 'next';
 
@@ -45,11 +44,9 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   display: 'swap',
 });
 
-// title.default: 49 chars  ✓ (<60)
-// description:  142 chars  ✓ (<155)
-const SITE_TITLE = 'BaytyAI — Global Verified Construction & FM Marketplace';
+const SITE_TITLE = 'BaytyAI - AI Project Control for Global Mega Projects';
 const SITE_DESCRIPTION =
-  'BaytyAI is the global platform connecting verified clients, consultants, contractors, subcontractors, and suppliers — with structured inquiries, quotations, approvals, and document control for construction and facilities-management projects.';
+  'Enterprise AI project control for mega construction, infrastructure, real estate, and government programs: verified stakeholders, approvals, documents, claims, risk, and compliance.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl),
@@ -60,17 +57,19 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   authors: [{ name: 'Laith Hamoda', url: siteConfig.founder.linkedin }],
   keywords: [
-    'construction marketplace',
-    'verified contractors',
-    'construction RFQ platform',
-    'request for quotation construction',
-    'facilities management marketplace',
-    'subcontractor marketplace',
-    'construction supplier directory',
-    'construction procurement platform',
+    'AI construction management software',
+    'mega project management software',
+    'construction project control software',
+    'infrastructure project control platform',
+    'construction approval workflow software',
+    'construction document control software',
+    'construction claims management software',
+    'construction variation order software',
+    'contractor prequalification software',
     'contractor verification',
-    'construction document approval software',
-    'global construction platform',
+    'capital project management software',
+    'GCC construction SaaS',
+    'government construction project software',
   ],
   alternates: {
     canonical: '/',
@@ -90,7 +89,7 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'BaytyAI — AI for GCC Facilities Management and Construction',
+        alt: 'BaytyAI - AI project control for global mega projects',
       },
     ],
   },

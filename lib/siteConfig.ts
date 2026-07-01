@@ -2,9 +2,9 @@ export const siteConfig = {
   siteUrl: 'https://www.baytyai.com',
   siteName: 'BaytyAI',
   tagline:
-    'The global verified marketplace and operations platform for construction and facilities-management projects',
+    'AI project control, verification, and compliance infrastructure for global mega projects',
   description:
-    'BaytyAI connects verified clients, consultants, contractors, subcontractors, and suppliers worldwide — with structured inquiries, quotations, approvals, and document control on a single trusted platform.',
+    'BaytyAI is an enterprise-grade AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide. It unifies verified stakeholders, approvals, document control, claims, variations, risk intelligence, and compliance in one secure command center.',
   defaultLocale: 'en',
   supportedLocales: ['en', 'ar'],
   areaServed: 'Worldwide',
@@ -16,5 +16,5 @@ export const siteConfig = {
     location: 'Amman, Jordan',
   },
   calBookingUrl: process.env.NEXT_PUBLIC_CAL_BOOKING_URL,
-  contactEmail: 'founder@baytyai.com',
+  contactEmail: 'enterprise@baytyai.com',
 } as const;

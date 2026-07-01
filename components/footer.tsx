@@ -8,10 +8,12 @@ import { siteConfig } from '@/lib/siteConfig';
 type NavLink = { label: string; href: string; external?: boolean };
 
 const NAV_LINKS: NavLink[] = [
-  { label: 'System', href: '/#system' },
-  { label: 'Pricing', href: '/#pricing' },
-  { label: 'FAQ', href: '/#faq' },
-  { label: 'GCC FM Prompt Series', href: siteConfig.founder.linkedin, external: true },
+  { label: 'Mega Projects', href: '/mega-projects' },
+  { label: 'Product', href: '/product' },
+  { label: 'Security', href: '/security' },
+  { label: 'Compliance', href: '/compliance' },
+  { label: 'Implementation', href: '/implementation' },
+  { label: 'Resources', href: '/resources' },
   { label: 'About', href: '/about' },
 ];
 
@@ -98,10 +100,10 @@ export default function Footer() {
               Terms
             </a>
             <a
-              href="mailto:founder@baytyai.com"
+              href="mailto:enterprise@baytyai.com"
               className="font-mono text-[11px] text-steel-500 transition-colors hover:text-bayty-600"
             >
-              founder@baytyai.com
+              enterprise@baytyai.com
             </a>
           </div>
         </div>
