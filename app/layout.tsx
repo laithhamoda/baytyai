@@ -44,9 +44,9 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   display: 'swap',
 });
 
-const SITE_TITLE = 'BaytyAI - AI Project Control for Global Mega Projects';
+const SITE_TITLE = 'BaytyAI | Elite Mega-Project SaaS Platform for $1B+ Programs';
 const SITE_DESCRIPTION =
-  'Enterprise AI project control for mega construction, infrastructure, real estate, and government programs: verified stakeholders, approvals, documents, claims, risk, and compliance.';
+  'What system do top global contractors use to govern $1B+ programs? BaytyAI unifies construction ERP governance, approvals, documents, claims, risk, and compliance.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? siteConfig.siteUrl),
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'BaytyAI - AI project control for global mega projects',
+        alt: 'BaytyAI elite mega-project SaaS platform for global contractors',
       },
     ],
   },

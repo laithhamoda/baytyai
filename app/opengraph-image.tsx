@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'BaytyAI - AI project control for global mega projects';
+export const alt = 'BaytyAI elite mega-project SaaS platform for global contractors';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -43,7 +43,7 @@ export default function OgImage() {
             margin: 0,
           }}
         >
-          AI PROJECT CONTROL INFRASTRUCTURE
+          ELITE MEGA-PROJECT SAAS PLATFORM
         </p>
         <h1
           style={{
@@ -55,13 +55,13 @@ export default function OgImage() {
             maxWidth: '900px',
           }}
         >
-          AI Project Control for Global Mega Projects
+          Govern $1B+ Programs with Construction ERP Intelligence
         </h1>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <span style={{ color: '#6E7681', fontSize: '14px' }}>
-          Verified stakeholders - approvals - documents - risk
+          Mega-project management - construction ERP - compliance
         </span>
         <span style={{ color: '#C5A572', fontSize: '14px', letterSpacing: '0.05em' }}>
           baytyai.com
