@@ -26,18 +26,16 @@ export default function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-signal-500">
-          {eyebrow}
-        </p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-bayty-600">{eyebrow}</p>
       )}
       <h2
         id={id}
-        className="font-sans text-display-lg font-semibold text-ink-100 [text-wrap:balance]"
+        className="font-sans text-display-lg font-semibold text-steel-900 [text-wrap:balance]"
       >
         {h2}
       </h2>
       {sub && (
-        <p className="max-w-2xl font-sans text-base font-normal leading-relaxed text-ink-300">
+        <p className="max-w-2xl font-sans text-base font-normal leading-relaxed text-steel-600">
           {sub}
         </p>
       )}

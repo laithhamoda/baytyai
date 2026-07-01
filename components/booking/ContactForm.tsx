@@ -24,7 +24,7 @@ const ROLES = ['CEO', 'COO', 'Operations Director', 'Commercial Director', 'Othe
 const CONTRACT_SIZES = ['< $5M', '$5–25M', '$25–100M', '> $100M'] as const;
 
 const inputCls =
-  'w-full border border-[#21262d] bg-[#0e1116] px-4 py-3 text-sm text-[#e6e9ee] placeholder:text-[#6e7681] focus:border-[#c5a572]/60 focus:outline-none';
+  'w-full border border-[#21262d] bg-[#0e1116] px-4 py-3 text-sm text-[#e6e9ee] placeholder:text-[#6e7681] focus:border-[#0052cc]/60 focus:outline-none';
 const errorCls = 'mt-1 text-xs text-red-400';
 
 export default function ContactForm() {
@@ -141,13 +141,13 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="mt-2 border border-[#c5a572] bg-[#c5a572] px-8 py-4 text-sm font-medium uppercase tracking-widest text-[#07090c] transition-opacity hover:opacity-90 disabled:opacity-50"
+        className="mt-2 border border-[#0052cc] bg-[#0052cc] px-8 py-4 text-sm font-medium uppercase tracking-widest text-[#ffffff] transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === 'loading' ? 'Sending…' : 'Request Strategy Call'}
       </button>
 
       {status === 'success' && (
-        <p className="text-center text-sm text-[#c5a572]">
+        <p className="text-center text-sm text-[#0052cc]">
           Received. Laith will reply within one business day from Amman.
         </p>
       )}

@@ -5,9 +5,11 @@ import Reveal from '@/components/motion/Reveal';
 import A1RoleJourneys from '@/components/sections/a1-role-journeys';
 
 /**
- * A1 — premium, investor-grade light landing page for BaytyAI.
- * Bayty-Blue brand palette, Playfair display headings, soft elevation.
+ * A1 — premium, investor-grade NAVY landing page for BaytyAI.
+ * Deep navy brand background (#17284a), light text, green + blue accents.
  */
+
+const NAVY = '#17284a';
 
 const STAKEHOLDERS = [
   {
@@ -64,26 +66,29 @@ const NAV = [
 
 export default function A1Landing() {
   return (
-    <main className="bg-white text-steel-900">
-      {/* ───────────── Light header ───────────── */}
-      <header className="sticky top-0 z-50 border-b border-steel-200/70 bg-white/85 backdrop-blur">
+    <main className="text-white" style={{ backgroundColor: NAVY }}>
+      {/* ───────────── Header ───────────── */}
+      <header
+        className="sticky top-0 z-50 border-b border-white/10 backdrop-blur"
+        style={{ backgroundColor: 'rgba(23,40,74,0.85)' }}
+      >
         <div className="mx-auto flex h-16 max-w-container items-center justify-between px-6 md:px-12">
           <Link href="/" aria-label="BaytyAI home">
-            <Logo size={30} />
+            <Logo tone="light" size={30} />
           </Link>
           <nav className="flex items-center gap-7" aria-label="Primary">
             {NAV.map((l) => (
               <Link
                 key={l.label}
                 href={l.href}
-                className="hidden font-sans text-sm font-medium text-steel-600 transition-colors hover:text-bayty-600 sm:inline"
+                className="hidden font-sans text-sm font-medium text-white/70 transition-colors hover:text-white sm:inline"
               >
                 {l.label}
               </Link>
             ))}
             <Link
               href="/access"
-              className="rounded-pill bg-bayty-500 px-5 py-2.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-bayty-600"
+              className="rounded-pill bg-orange-400 px-5 py-2.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-orange-600"
             >
               Request access
             </Link>
@@ -92,27 +97,31 @@ export default function A1Landing() {
       </header>
 
       {/* ───────────── Hero ───────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-bayty-50 to-white">
+      <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 h-[460px] w-[460px] rounded-full bg-bayty-100/60 blur-3xl"
+          className="pointer-events-none absolute -right-32 -top-32 h-[460px] w-[460px] rounded-full bg-bayty-500/25 blur-3xl"
         />
-        <div className="mx-auto max-w-container px-6 pb-24 pt-28 md:px-12 md:pt-36">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 -left-24 h-[380px] w-[380px] rounded-full bg-[#2f7d64]/20 blur-3xl"
+        />
+        <div className="mx-auto max-w-container px-6 py-24 md:px-12 md:pt-32">
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-pill border border-bayty-200 bg-white px-3 py-1 font-sans text-xs font-medium text-bayty-600 shadow-a1-sm">
-                <span className="size-1.5 rounded-full bg-forest-400" /> By invitation · For the
+              <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/5 px-3 py-1 font-sans text-xs font-medium text-bayty-100">
+                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> By invitation · For the
                 world’s mega projects
               </span>
-              <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] tracking-tight text-steel-900 md:text-[3.6rem]">
+              <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] tracking-tight text-white md:text-[3.6rem]">
                 The operating system for the world’s{' '}
-                <span className="text-bayty-500">mega projects</span>.
+                <span className="text-[#6fe0c2]">mega projects</span>.
               </h1>
-              <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-steel-600">
+              <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-white/75">
                 A verified, enterprise-grade command center where governments, mega-developers, lead
                 consultants, tier-1 contractors and strategic suppliers run a single program
                 together — unifying project governance, CRM, approvals and audit-ready document
-                control with total traceability.
+                control.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
@@ -123,36 +132,36 @@ export default function A1Landing() {
                 </Link>
                 <Link
                   href="#how"
-                  className="rounded-pill border border-steel-200 bg-white px-7 py-3.5 font-sans text-sm font-semibold text-steel-800 transition-colors hover:border-bayty-300 hover:text-bayty-600"
+                  className="rounded-pill border border-white/25 bg-white/5 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   See how it works
                 </Link>
               </div>
-              <div className="mt-10 flex items-center gap-6 font-sans text-sm text-steel-500">
+              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm text-white/60">
                 <span className="flex items-center gap-2">
-                  <CheckIcon /> Verified organizations only
+                  <Dot /> Verified organizations only
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckIcon /> Full audit trail
+                  <Dot /> Full audit trail
                 </span>
                 <span className="flex items-center gap-2">
-                  <CheckIcon /> Government-grade governance
+                  <Dot /> Government-grade governance
                 </span>
               </div>
             </div>
 
             {/* Hero visual — verified network card */}
             <Reveal className="relative">
-              <div className="relative mx-auto max-w-md rounded-card border border-steel-200 bg-white p-8 shadow-a1-lg">
+              <div className="relative mx-auto max-w-md rounded-card border border-white/10 bg-white/5 p-8 shadow-a1-lg backdrop-blur">
                 <div className="flex items-center justify-between">
-                  <Logo size={30} />
-                  <span className="rounded-pill bg-forest-50 px-2.5 py-1 font-sans text-[11px] font-semibold text-forest-600">
+                  <Logo tone="light" size={30} />
+                  <span className="rounded-pill bg-[#2f7d64]/20 px-2.5 py-1 font-sans text-[11px] font-semibold text-[#6fe0c2]">
                     Verified
                   </span>
                 </div>
                 <div className="my-8 flex justify-center">
-                  <div className="flex size-40 items-center justify-center rounded-full bg-gradient-to-br from-bayty-50 to-bayty-100 shadow-inner">
-                    <LogoMark size={92} />
+                  <div className="flex size-40 items-center justify-center rounded-full bg-white/5">
+                    <LogoMark size={92} tone="light" />
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-3 text-center">
@@ -166,7 +175,7 @@ export default function A1Landing() {
                   ].map((r) => (
                     <span
                       key={r}
-                      className="rounded-card bg-steel-50 p-2 font-sans text-[11px] font-medium text-steel-600"
+                      className="rounded-card bg-white/5 p-2 font-sans text-[11px] font-medium text-white/70"
                     >
                       {r}
                     </span>
@@ -179,31 +188,31 @@ export default function A1Landing() {
       </section>
 
       {/* ───────────── Metrics band ───────────── */}
-      <section className="border-y border-steel-200 bg-steel-50">
+      <section className="border-y border-white/10 bg-white/[0.03]">
         <div className="mx-auto grid max-w-container grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 md:px-12">
           {METRICS.map((m) => (
             <div key={m.l} className="text-center">
-              <p className="font-display text-4xl font-bold text-bayty-500">{m.v}</p>
-              <p className="mt-2 font-sans text-sm text-steel-500">{m.l}</p>
+              <p className="font-display text-4xl font-bold text-[#6fe0c2]">{m.v}</p>
+              <p className="mt-2 font-sans text-sm text-white/60">{m.l}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ───────────── Role journeys (animated "is this for me?") ───────────── */}
+      {/* ───────────── Role journeys (animated) ───────────── */}
       <A1RoleJourneys />
 
       {/* ───────────── Stakeholders ───────────── */}
       <section className="mx-auto max-w-container px-6 py-24 md:px-12">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="font-sans text-sm font-semibold uppercase tracking-widest text-bayty-500">
+            <p className="font-sans text-sm font-semibold uppercase tracking-widest text-[#6fe0c2]">
               One program · every party
             </p>
-            <h2 className="mt-3 font-display text-4xl font-bold text-steel-900">
+            <h2 className="mt-3 font-display text-4xl font-bold text-white">
               Built for every party on the program
             </h2>
-            <p className="mt-4 font-sans text-lg text-steel-600">
+            <p className="mt-4 font-sans text-lg text-white/70">
               Each stakeholder gets a purpose-built, permissioned command center — verified,
               governed and accountable.
             </p>
@@ -212,12 +221,12 @@ export default function A1Landing() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {STAKEHOLDERS.map((s) => (
             <Reveal key={s.role}>
-              <div className="group h-full rounded-card border border-steel-200 bg-white p-7 shadow-a1-sm transition-shadow hover:shadow-a1-md">
-                <div className="mb-4 flex size-11 items-center justify-center rounded-card bg-bayty-50 text-bayty-500">
-                  <LogoMark size={24} />
+              <div className="group h-full rounded-card border border-white/10 bg-white/5 p-7 transition-colors hover:border-white/20">
+                <div className="mb-4 flex size-11 items-center justify-center rounded-card bg-white/10">
+                  <LogoMark size={24} tone="light" />
                 </div>
-                <h3 className="font-sans text-lg font-semibold text-steel-900">{s.role}</h3>
-                <p className="mt-2 font-sans text-sm leading-relaxed text-steel-600">{s.gain}</p>
+                <h3 className="font-sans text-lg font-semibold text-white">{s.role}</h3>
+                <p className="mt-2 font-sans text-sm leading-relaxed text-white/65">{s.gain}</p>
               </div>
             </Reveal>
           ))}
@@ -225,14 +234,14 @@ export default function A1Landing() {
       </section>
 
       {/* ───────────── How it works ───────────── */}
-      <section id="how" className="bg-steel-50 py-24">
+      <section id="how" className="border-y border-white/10 bg-white/[0.03] py-24">
         <div className="mx-auto max-w-container px-6 md:px-12">
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
-              <p className="font-sans text-sm font-semibold uppercase tracking-widest text-bayty-500">
+              <p className="font-sans text-sm font-semibold uppercase tracking-widest text-[#6fe0c2]">
                 How it works
               </p>
-              <h2 className="mt-3 font-display text-4xl font-bold text-steel-900">
+              <h2 className="mt-3 font-display text-4xl font-bold text-white">
                 From inquiry to award — transparently
               </h2>
             </div>
@@ -240,10 +249,10 @@ export default function A1Landing() {
           <div className="mt-14 grid gap-5 md:grid-cols-4">
             {STEPS.map((s) => (
               <Reveal key={s.n}>
-                <div className="h-full rounded-card border border-steel-200 bg-white p-7 shadow-a1-sm">
-                  <span className="font-display text-3xl font-bold text-bayty-200">{s.n}</span>
-                  <h3 className="mt-3 font-sans text-base font-semibold text-steel-900">{s.t}</h3>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-steel-600">{s.d}</p>
+                <div className="h-full rounded-card border border-white/10 bg-white/5 p-7">
+                  <span className="font-display text-3xl font-bold text-white/25">{s.n}</span>
+                  <h3 className="mt-3 font-sans text-base font-semibold text-white">{s.t}</h3>
+                  <p className="mt-2 font-sans text-sm leading-relaxed text-white/65">{s.d}</p>
                 </div>
               </Reveal>
             ))}
@@ -252,10 +261,10 @@ export default function A1Landing() {
       </section>
 
       {/* ───────────── Investor CTA ───────────── */}
-      <section className="relative overflow-hidden bg-bayty-500">
+      <section className="relative overflow-hidden">
         <div
           aria-hidden
-          className="pointer-events-none absolute -left-24 bottom-0 size-80 rounded-full bg-bayty-400/40 blur-3xl"
+          className="pointer-events-none absolute -left-24 bottom-0 size-80 rounded-full bg-[#2f7d64]/20 blur-3xl"
         />
         <div className="relative mx-auto max-w-container px-6 py-24 text-center md:px-12">
           <div className="mx-auto mb-6 flex justify-center">
@@ -264,20 +273,20 @@ export default function A1Landing() {
           <h2 className="mx-auto max-w-3xl font-display text-4xl font-bold leading-tight text-white md:text-5xl">
             The trust layer for a fragmented, trillion-dollar industry.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl font-sans text-lg text-bayty-100">
+          <p className="mx-auto mt-5 max-w-2xl font-sans text-lg text-white/70">
             Verification, program governance and explainable selection — the operating layer the
             world’s mega projects have been missing. Access is by invitation.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-4">
             <Link
               href="/access"
-              className="rounded-pill bg-white px-7 py-3.5 font-sans text-sm font-semibold text-bayty-600 shadow-a1-md transition-transform hover:-translate-y-0.5"
+              className="rounded-pill bg-orange-400 px-7 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-transform hover:-translate-y-0.5"
             >
               Request access
             </Link>
             <Link
               href="/about"
-              className="rounded-pill border border-white/30 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              className="rounded-pill border border-white/25 px-7 py-3.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
               Learn about the brand
             </Link>
@@ -285,21 +294,21 @@ export default function A1Landing() {
         </div>
       </section>
 
-      {/* ───────────── Light footer ───────────── */}
-      <footer className="border-t border-steel-200 bg-white">
+      {/* ───────────── Footer ───────────── */}
+      <footer className="border-t border-white/10">
         <div className="mx-auto flex max-w-container flex-col items-center justify-between gap-6 px-6 py-12 md:flex-row md:px-12">
-          <Logo size={26} />
-          <p className="font-sans text-sm text-steel-500">
-            Global verified marketplace for construction &amp; facilities management.
+          <Logo tone="light" size={26} />
+          <p className="font-sans text-sm text-white/55">
+            Global verified operating system for the world’s mega projects.
           </p>
-          <nav className="flex gap-6 font-sans text-sm text-steel-500" aria-label="Footer">
-            <Link href="/about" className="hover:text-bayty-600">
+          <nav className="flex gap-6 font-sans text-sm text-white/55" aria-label="Footer">
+            <Link href="/about" className="hover:text-white">
               About
             </Link>
-            <Link href="/terms" className="hover:text-bayty-600">
+            <Link href="/terms" className="hover:text-white">
               Terms
             </Link>
-            <Link href="/privacy" className="hover:text-bayty-600">
+            <Link href="/privacy" className="hover:text-white">
               Privacy
             </Link>
           </nav>
@@ -309,17 +318,6 @@ export default function A1Landing() {
   );
 }
 
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-      <circle cx="8" cy="8" r="8" fill="#f0fdf4" />
-      <path
-        d="M4.5 8.2 7 10.5 11.5 5.5"
-        stroke="#2e7d32"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+function Dot() {
+  return <span className="size-1.5 rounded-full bg-[#6fe0c2]" aria-hidden />;
 }
