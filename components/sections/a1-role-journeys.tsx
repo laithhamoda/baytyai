@@ -197,13 +197,13 @@ export default function A1RoleJourneys() {
 
           <div className="mt-10 flex flex-col items-center gap-3">
             <Link
-              href="/sign-up"
+              href="/access"
               className="rounded-pill bg-orange-400 px-8 py-3.5 font-sans text-sm font-semibold text-white shadow-a1-glow transition-colors hover:bg-orange-600"
             >
-              Join free as {role.label} →
+              Request access as {role.label} →
             </Link>
             <span className="font-sans text-xs text-steel-500">
-              Free to join · verified in review · no credit card
+              By invitation · verified organizations only
             </span>
           </div>
         </div>

@@ -16,7 +16,16 @@ const NAV_LINKS: NavLink[] = [
 ];
 
 // Routes with their own chrome — no marketing footer.
-const HIDDEN_PREFIXES = ['/dashboard', '/admin', '/account', '/login', '/sign-in', '/sign-up'];
+const HIDDEN_PREFIXES = [
+  '/dashboard',
+  '/admin',
+  '/account',
+  '/login',
+  '/sign-in',
+  '/sign-up',
+  '/access',
+  '/onboarding',
+];
 
 export default function Footer() {
   const pathname = usePathname();
