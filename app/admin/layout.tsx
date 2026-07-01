@@ -69,6 +69,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 Verifications
               </Link>
               <Link
+                href="/admin/access-requests"
+                className="font-mono text-[10px] uppercase tracking-[0.15em] text-steel-500 transition-colors hover:text-bayty-600"
+              >
+                Access
+              </Link>
+              <Link
                 href="/dashboard"
                 className="font-mono text-[10px] uppercase tracking-[0.15em] text-bayty-600 transition-colors hover:text-bayty-700"
               >
