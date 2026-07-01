@@ -99,16 +99,16 @@ export default function A1RoleJourneys() {
   const role = ROLES[active];
 
   return (
-    <section className="bg-white py-24">
+    <section className="py-24">
       <div className="mx-auto max-w-container px-6 md:px-12">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-sans text-sm font-semibold uppercase tracking-widest text-bayty-500">
+          <p className="font-sans text-sm font-semibold uppercase tracking-widest text-[#6fe0c2]">
             Is BaytyAI for you?
           </p>
-          <h2 className="mt-3 font-display text-4xl font-bold text-steel-900">
+          <h2 className="mt-3 font-display text-4xl font-bold text-white">
             Pick your role — see what you’d do
           </h2>
-          <p className="mt-4 font-sans text-lg text-steel-600">
+          <p className="mt-4 font-sans text-lg text-white/70">
             Three steps. That’s it. Tap the role that sounds like you.
           </p>
         </div>
@@ -133,7 +133,7 @@ export default function A1RoleJourneys() {
                 className={`flex items-center gap-2 rounded-pill border px-4 py-2 font-sans text-sm font-medium transition-colors ${
                   on
                     ? 'border-bayty-500 bg-bayty-500 text-white shadow-a1-glow'
-                    : 'border-steel-200 bg-white text-steel-600 hover:border-bayty-300'
+                    : 'border-white/15 bg-white/5 text-white/70 hover:border-white/30'
                 }`}
               >
                 <Icon size={16} />
@@ -145,7 +145,7 @@ export default function A1RoleJourneys() {
 
         {/* Animated journey */}
         <div
-          className="mx-auto mt-12 max-w-4xl rounded-card border border-steel-200 bg-steel-50 p-8 shadow-a1-sm md:p-12"
+          className="mx-auto mt-12 max-w-4xl rounded-card border border-white/10 bg-white/5 p-8 md:p-12"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
@@ -157,7 +157,7 @@ export default function A1RoleJourneys() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35 }}
             >
-              <p className="mb-8 text-center font-sans text-base text-steel-600">{role.blurb}</p>
+              <p className="mb-8 text-center font-sans text-base text-white/70">{role.blurb}</p>
               <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-center md:justify-center">
                 {role.steps.map((s, idx) => {
                   const Icon = s.icon;
@@ -167,22 +167,22 @@ export default function A1RoleJourneys() {
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         transition={{ delay: 0.15 + idx * 0.25, type: 'spring', stiffness: 200 }}
-                        className="flex size-16 shrink-0 items-center justify-center rounded-card bg-white text-bayty-500 shadow-a1-sm md:size-20"
+                        className="flex size-16 shrink-0 items-center justify-center rounded-card bg-white/10 text-[#6fe0c2] md:size-20"
                       >
                         <Icon size={30} />
                       </motion.div>
                       <div className="md:mt-1 md:w-32 md:text-center">
-                        <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-bayty-500">
+                        <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-[#6fe0c2]">
                           Step {idx + 1}
                         </span>
-                        <p className="font-sans text-sm font-medium text-steel-900">{s.label}</p>
+                        <p className="font-sans text-sm font-medium text-white">{s.label}</p>
                       </div>
                       {idx < role.steps.length - 1 && (
                         <motion.div
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.3 + idx * 0.25 }}
-                          className="text-bayty-300 md:mx-1"
+                          className="text-white/25 md:mx-1"
                         >
                           <ArrowRight size={22} className="hidden md:block" />
                           <ArrowRight size={18} className="rotate-90 md:hidden" />
@@ -202,7 +202,7 @@ export default function A1RoleJourneys() {
             >
               Request access as {role.label} →
             </Link>
-            <span className="font-sans text-xs text-steel-500">
+            <span className="font-sans text-xs text-white/55">
               By invitation · verified organizations only
             </span>
           </div>

@@ -44,11 +44,11 @@ export default function CalEmbed({ calLink = siteConfig.calBookingUrl ?? '' }: C
 
   if (!calLink) {
     return (
-      <div className="flex min-h-[260px] flex-col items-center justify-center gap-3 border border-ink-700 bg-ink-900 p-10 text-center">
-        <p className="font-sans text-base font-medium text-ink-100">
+      <div className="flex min-h-[260px] flex-col items-center justify-center gap-3 border border-steel-200 bg-white p-10 text-center">
+        <p className="font-sans text-base font-medium text-steel-900">
           Online booking is opening shortly.
         </p>
-        <p className="max-w-md font-sans text-sm leading-relaxed text-ink-300">
+        <p className="max-w-md font-sans text-sm leading-relaxed text-steel-600">
           To request your Strategy Consultation now, send a brief using the form below and Laith
           will reply within one business day from Amman.
         </p>

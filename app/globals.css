@@ -29,12 +29,13 @@ button {
 @tailwind utilities;
 
 :root {
-  --color-bg: #07090c;
-  --color-surface: #0e1116;
-  --color-border: #21262d;
-  --color-accent: #c5a572;
-  --color-text: #e6e9ee;
-  --color-muted: #767e8a;
+  /* A1 light theme (BaytyAI brand) */
+  --color-bg: #ffffff;
+  --color-surface: #fafafa;
+  --color-border: #e5e7eb;
+  --color-accent: #0052cc;
+  --color-text: #111827;
+  --color-muted: #6b7280;
 }
 
 body {
@@ -45,14 +46,14 @@ body {
 
 /* ─── Focus visible ──────────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #c5a572;
+  outline: 2px solid #0052cc;
   outline-offset: 3px;
 }
 
 /* ─── Selection ──────────────────────────────────────────────── */
 ::selection {
-  background-color: #c5a572;
-  color: #07090c;
+  background-color: #0052cc;
+  color: #ffffff;
 }
 
 /* ─── Reduced motion ─────────────────────────────────────────── */

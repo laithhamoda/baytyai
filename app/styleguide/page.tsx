@@ -5,12 +5,12 @@ import SectionHeading from '@/components/ds/SectionHeading';
 
 export default function StyleguidePage() {
   return (
-    <div className="min-h-screen bg-ink-950 py-24">
+    <div className="min-h-screen bg-white py-24">
       <Container>
         <div className="flex flex-col gap-24">
           {/* Colors */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Color tokens
             </p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -30,11 +30,11 @@ export default function StyleguidePage() {
               ].map(([name, hex]) => (
                 <div key={name} className="flex flex-col gap-2">
                   <div
-                    className="h-12 w-full border border-ink-700"
+                    className="h-12 w-full border border-steel-200"
                     style={{ backgroundColor: hex }}
                   />
-                  <p className="font-mono text-[10px] text-ink-300">{name}</p>
-                  <p className="font-mono text-[10px] text-ink-500">{hex}</p>
+                  <p className="font-mono text-[10px] text-steel-600">{name}</p>
+                  <p className="font-mono text-[10px] text-steel-500">{hex}</p>
                 </div>
               ))}
             </div>
@@ -42,28 +42,28 @@ export default function StyleguidePage() {
 
           {/* Typography */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Typography
             </p>
-            <div className="flex flex-col gap-6 border-l border-ink-700 pl-8">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+            <div className="flex flex-col gap-6 border-l border-steel-200 pl-8">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
                 Inter Tight — display heading
               </p>
-              <h1 className="font-sans text-display-lg font-semibold text-ink-100">
+              <h1 className="font-sans text-display-lg font-semibold text-steel-900">
                 Protect Contract Margin.
               </h1>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
                 Inter Tight 500 — body
               </p>
-              <p className="max-w-prose font-sans text-base font-medium leading-relaxed text-ink-300">
+              <p className="max-w-prose font-sans text-base font-medium leading-relaxed text-steel-600">
                 BaytyAI delivers operator-grade prompt libraries and AI workflows that protect
                 margin, accelerate mobilization, and harden SLA performance on FM and construction
                 contracts above $5M.
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-500">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-steel-500">
                 JetBrains Mono — KPIs / contract figures
               </p>
-              <p className="font-mono text-2xl font-medium text-signal-500">
+              <p className="font-mono text-2xl font-medium text-bayty-600">
                 $47.3M · 94.2% SLA · 23-day mobilization
               </p>
             </div>
@@ -71,7 +71,7 @@ export default function StyleguidePage() {
 
           {/* Buttons */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Buttons
             </p>
             <div className="flex flex-wrap items-center gap-4">
@@ -98,7 +98,7 @@ export default function StyleguidePage() {
 
           {/* Badges */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Badges
             </p>
             <div className="flex flex-wrap gap-3">
@@ -112,7 +112,7 @@ export default function StyleguidePage() {
 
           {/* Section Headings */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Section headings
             </p>
             <div className="flex flex-col gap-16">
@@ -132,7 +132,7 @@ export default function StyleguidePage() {
 
           {/* Spacing */}
           <section>
-            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-signal-500">
+            <p className="mb-8 font-mono text-[11px] uppercase tracking-widest text-bayty-600">
               Spacing scale (custom)
             </p>
             <div className="flex flex-col gap-2">
@@ -142,8 +142,8 @@ export default function StyleguidePage() {
                 ['30', '7.5rem / 120px'],
               ].map(([token, val]) => (
                 <div key={token} className="flex items-center gap-4">
-                  <p className="w-12 font-mono text-[10px] text-ink-300">{token}</p>
-                  <p className="font-mono text-[10px] text-ink-500">{val}</p>
+                  <p className="w-12 font-mono text-[10px] text-steel-600">{token}</p>
+                  <p className="font-mono text-[10px] text-steel-500">{val}</p>
                 </div>
               ))}
             </div>

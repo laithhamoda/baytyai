@@ -35,13 +35,13 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-ink-700 bg-ink-950 py-16">
+    <footer className="border-t border-steel-200 bg-white py-16">
       <div className="mx-auto w-full max-w-container px-6 md:px-12">
         <div className="flex flex-col gap-12 md:flex-row md:gap-24">
           {/* Brand */}
           <div className="flex flex-col gap-4 md:max-w-[240px]">
-            <Logo tone="light" size={28} />
-            <p className="font-sans text-sm leading-relaxed text-ink-500">{siteConfig.tagline}</p>
+            <Logo size={28} />
+            <p className="font-sans text-sm leading-relaxed text-steel-500">{siteConfig.tagline}</p>
           </div>
 
           {/* Nav */}
@@ -52,7 +52,7 @@ export default function Footer() {
                   <a
                     href={l.href}
                     {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                    className="font-sans text-sm text-ink-300 transition-colors hover:text-signal-500"
+                    className="font-sans text-sm text-steel-600 transition-colors hover:text-bayty-600"
                   >
                     {l.label}
                     {l.external && <span className="sr-only"> (opens in a new tab)</span>}
@@ -66,15 +66,15 @@ export default function Footer() {
           <div className="flex items-start gap-3 md:ml-auto">
             <span
               aria-current="true"
-              className="font-mono text-[11px] uppercase tracking-widest text-signal-500"
+              className="font-mono text-[11px] uppercase tracking-widest text-bayty-600"
             >
               EN
             </span>
-            <span className="font-mono text-[11px] text-ink-700">|</span>
+            <span className="font-mono text-[11px] text-steel-300">|</span>
             <a
               href="/ar"
               lang="ar"
-              className="font-mono text-[11px] uppercase tracking-widest text-ink-300 transition-colors hover:text-signal-500"
+              className="font-mono text-[11px] uppercase tracking-widest text-steel-600 transition-colors hover:text-bayty-600"
             >
               AR
             </a>
@@ -82,24 +82,24 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="mt-12 flex flex-col gap-3 border-t border-ink-700 pt-8 md:flex-row md:items-center md:justify-between">
-          <p className="font-mono text-[11px] text-ink-500">© {year} BaytyAI · Amman, Jordan</p>
+        <div className="mt-12 flex flex-col gap-3 border-t border-steel-200 pt-8 md:flex-row md:items-center md:justify-between">
+          <p className="font-mono text-[11px] text-steel-500">© {year} BaytyAI · Amman, Jordan</p>
           <div className="flex flex-wrap gap-6">
             <a
               href="/privacy"
-              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+              className="font-mono text-[11px] text-steel-500 transition-colors hover:text-bayty-600"
             >
               Privacy
             </a>
             <a
               href="/terms"
-              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+              className="font-mono text-[11px] text-steel-500 transition-colors hover:text-bayty-600"
             >
               Terms
             </a>
             <a
               href="mailto:founder@baytyai.com"
-              className="font-mono text-[11px] text-ink-500 transition-colors hover:text-signal-500"
+              className="font-mono text-[11px] text-steel-500 transition-colors hover:text-bayty-600"
             >
               founder@baytyai.com
             </a>
