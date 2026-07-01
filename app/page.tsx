@@ -9,16 +9,16 @@ export const metadata: Metadata = {
   description:
     'BaytyAI connects verified clients, consultants, contractors, subcontractors, and suppliers worldwide. Post inquiries, receive quotations, route approvals, and run transparent, weighted consultant selection on one trusted construction & FM platform.',
   alternates: {
-    canonical: 'https://baytyai.com',
+    canonical: 'https://www.baytyai.com',
     languages: {
-      en: 'https://baytyai.com',
-      ar: 'https://baytyai.com/ar',
-      'x-default': 'https://baytyai.com',
+      en: 'https://www.baytyai.com',
+      ar: 'https://www.baytyai.com/ar',
+      'x-default': 'https://www.baytyai.com',
     },
   },
   openGraph: {
     type: 'website',
-    url: 'https://baytyai.com',
+    url: 'https://www.baytyai.com',
     title: 'BaytyAI — Global Verified Construction & FM Marketplace',
     description:
       'The verified network for construction & facilities management — structured inquiries, transparent quotations, weighted consultant selection, approvals and document control.',
@@ -38,9 +38,9 @@ const JSONLD = {
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://baytyai.com/#org',
+      '@id': 'https://www.baytyai.com/#org',
       name: 'BaytyAI',
-      url: 'https://baytyai.com',
+      url: 'https://www.baytyai.com',
       description:
         'Global verified marketplace and operations platform for construction and facilities management.',
       areaServed: 'Worldwide',
