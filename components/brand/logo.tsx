@@ -1,25 +1,29 @@
 import { cn } from '@/lib/utils';
 
 /**
- * BaytyAI brand mark — a typographic wordmark: "Bayty" + an elegant serif "ai"
- * in brand green. No separate graphic mark; the wordmark is the identity.
+ * BaytyAI brand mark — the ornate serif "ai" monogram in brand green, used on
+ * its own as the sole identity. The "Bayty" wordmark has been retired: both the
+ * `full` and `mark` variants now render the same "ai" mark.
+ *
+ * To drop in the exact artwork file later, place it at
+ * `public/brand/logo-ai.svg` and switch LogoMark to render an <img>; no call
+ * site needs to change.
  *
  * Usage:
- *   <Logo />                 full wordmark on light surfaces (navy + green)
- *   <Logo tone="light" />    white "Bayty" + bright green "ai" for dark/navy
- *   <Logo variant="mark" />  compact "ai" monogram (favicons, tight spaces)
+ *   <Logo />                 "ai" mark (deep green) for light surfaces
+ *   <Logo tone="light" />    "ai" mark (bright green) for dark / navy surfaces
  */
 
 type LogoTone = 'brand' | 'light' | 'dark';
 type LogoVariant = 'full' | 'mark';
 
-const TONES: Record<LogoTone, { word: string; ai: string }> = {
-  brand: { word: '#17284a', ai: '#2f7d64' }, // on white surfaces
-  light: { word: '#ffffff', ai: '#6fe0c2' }, // on navy / photos
-  dark: { word: '#17284a', ai: '#2f7d64' },
+const TONES: Record<LogoTone, { ai: string }> = {
+  brand: { ai: '#2f7d64' }, // on white surfaces
+  light: { ai: '#6fe0c2' }, // on navy / photos
+  dark: { ai: '#2f7d64' },
 };
 
-/** Compact "ai" monogram — the distinctive serif element on its own. */
+/** The ornate serif "ai" monogram — the brand identity. */
 export function LogoMark({
   size = 32,
   tone = 'brand',
@@ -43,7 +47,6 @@ export function LogoMark({
 }
 
 export default function Logo({
-  variant = 'full',
   tone = 'brand',
   size = 30,
   className,
@@ -53,23 +56,5 @@ export default function Logo({
   size?: number;
   className?: string;
 }) {
-  const c = TONES[tone];
-  if (variant === 'mark') return <LogoMark size={size} tone={tone} className={className} />;
-
-  return (
-    <span className={cn('inline-flex items-baseline', className)} aria-label="BaytyAI">
-      <span
-        className="font-sans font-bold leading-none tracking-tight"
-        style={{ color: c.word, fontSize: size * 0.92 }}
-      >
-        Bayty
-      </span>
-      <span
-        className="font-display font-semibold italic leading-none"
-        style={{ color: c.ai, fontSize: size * 1.02, marginLeft: size * 0.02 }}
-      >
-        ai
-      </span>
-    </span>
-  );
+  return <LogoMark size={size} tone={tone} className={className} />;
 }
