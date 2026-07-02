@@ -1,15 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
   <rect width="48" height="48" rx="11" fill="#17284a"/>
-  <g transform="translate(1,1) scale(0.96)">
-    <path d="M14 9 L29 24 M30 10 L22 24 M22 24 L29 24 M22 24 L14 24 M14 24 L39 31 M22 24 L30 38"
-      stroke="#6fe0c2" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
-    <path d="M14 9 L14 24 L14 39 M14 9 L30 10 L39 17 L29 24 L14 24 M29 24 L39 31 L30 38 L14 39"
-      stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-    <g fill="#bcd0f0">
-      <circle cx="14" cy="9" r="2.4"/><circle cx="14" cy="24" r="2.4"/><circle cx="14" cy="39" r="2.4"/>
-      <circle cx="30" cy="10" r="2.4"/><circle cx="39" cy="17" r="2.4"/><circle cx="29" cy="24" r="2.4"/>
-      <circle cx="39" cy="31" r="2.4"/><circle cx="30" cy="38" r="2.4"/>
-    </g>
-    <circle cx="22" cy="24" r="3" fill="#ffffff"/>
-  </g>
+  <text x="24" y="34" text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif" font-size="30"
+    font-style="italic" font-weight="600" fill="#6fe0c2">ai</text>
 </svg>
