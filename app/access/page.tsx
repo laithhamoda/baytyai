@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import Logo from '@/components/brand/logo';
 
@@ -33,7 +34,9 @@ export default function AccessPage() {
         </div>
 
         <div className="rounded-card border border-steel-200 bg-white p-6 shadow-a1-sm md:p-8">
-          <AccessForm />
+          <Suspense fallback={null}>
+            <AccessForm />
+          </Suspense>
         </div>
 
         <p className="mt-6 text-center font-sans text-sm text-steel-500">
