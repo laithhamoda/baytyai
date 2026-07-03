@@ -27,6 +27,7 @@ const HIDDEN_PREFIXES = [
   '/sign-up',
   '/access',
   '/onboarding',
+  '/audiences',
 ];
 
 export default function Footer() {

@@ -74,6 +74,17 @@ const config: Config = {
         muted: { DEFAULT: '#f3f4f6', foreground: '#6b7280' },
         destructive: { DEFAULT: '#dc2626', foreground: '#ffffff' },
         border: '#e5e7eb',
+        // ─── Lux brand system (navy + gold) — marketing rebuild ───
+        navy: {
+          DEFAULT: '#0A1628', // primary background
+          card: '#0F1E35', // dark card surface
+        },
+        gold: {
+          DEFAULT: '#C9A84C', // accent, borders, CTAs
+          soft: '#D9BE6E',
+        },
+        offwhite: '#F8F6F1', // body text on dark
+        slateink: '#2C3E50', // secondary text
       },
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
@@ -81,11 +92,16 @@ const config: Config = {
         arabic: ['var(--font-arabic)', 'system-ui', 'sans-serif'],
         // Playfair Display — premium serif for display headings (A1 design)
         display: ['var(--font-display)', 'Georgia', 'serif'],
+        // ─── Lux brand system ───
+        cormorant: ['var(--font-cormorant)', 'Cormorant Garamond', 'Georgia', 'serif'],
+        dmsans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        dmmono: ['var(--font-dm-mono)', 'ui-monospace', 'monospace'],
       },
       spacing: {
         18: '4.5rem',
         22: '5.5rem',
         30: '7.5rem',
+        section: '120px', // lux vertical section padding
       },
       fontSize: {
         // clamp for h2
