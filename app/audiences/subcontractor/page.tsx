@@ -1,13 +1,22 @@
-import { Banknote, CheckCircle2, Clock, FileCheck2, HardHat, ShieldCheck } from 'lucide-react';
+import {
+  AlertTriangle,
+  CreditCard,
+  FileCheck,
+  FileX,
+  GitBranch,
+  History,
+  MessageSquare,
+  Shield,
+} from 'lucide-react';
 
 import AudienceDetail, { type AudienceDetailData } from '@/components/lux/audience-detail';
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'BaytyAI for Subcontractors | Prove Your Work, Protect Your Cash Flow',
+  title: 'BaytyAI for Subcontractors | Formal Instructions, Documented Variations, Secure Payments',
   description:
-    'BaytyAI gives subcontractors a verified, audit-ready record of instructions, progress, and variations — so payment is faster, disputes are fewer, and cash flow is protected.',
+    'BaytyAI gives subcontractors formal written instructions for every scope change, a documented variation trail that cannot be disputed, and payment records protected from day one.',
   alternates: { canonical: 'https://www.baytyai.com/audiences/subcontractor' },
 };
 
@@ -15,84 +24,84 @@ const data: AudienceDetailData = {
   slug: 'subcontractor',
   breadcrumb: 'Subcontractor',
   headline: {
-    plain: 'You did the work.',
-    gold: 'The scope changed without a written instruction.',
+    plain: 'The scope changed.',
+    gold: 'The instruction never came in writing.',
   },
-  sub: 'You are the furthest party from the money and the first to feel it run dry. You did exactly what you were told — but the instruction came by phone and the extra work is not in your contract. BaytyAI records every instruction and every day of progress in a system the whole program trusts, so your entitlement stops depending on your memory.',
+  sub: 'On every mega-project, subcontractors perform work they were told to do — verbally, informally, on-site — and then cannot recover the cost when the contract says only written instructions count. BaytyAI ensures that every instruction you receive is formally issued, every variation is documented, and every payment milestone is protected before you lift a tool.',
   ctaLabel: 'Request subcontractor access',
-  painOverline: 'What an Informal Site Costs You',
-  painHeading: 'The cash you lose when the record is not yours.',
+  painOverline: 'What Working Without a Formal Instruction Costs You',
+  painHeading: 'The cost of performing work without a formal instruction.',
   pains: [
     {
-      icon: FileCheck2,
-      title: 'Extra work you were never paid for',
-      body: 'The instruction to do more came on site, informally. It is not in the contract and it was never captured as a variation — so the work you actually did becomes a favour you gave away for free.',
-      cost: 'Informal instructions become unpaid work — and you are last in the payment chain',
+      icon: FileX,
+      title: 'Additional work performed. Formal order never issued.',
+      body: 'Your site supervisor received a verbal instruction to extend the scope. You mobilised additional labour and materials. At payment, the contractor says the instruction was never formally issued and refuses to pay for work that was genuinely performed. You have WhatsApp messages. They have a contract clause.',
+      cost: 'Subcontractors lose an average of 22% of variation costs when instructions are informal',
     },
     {
-      icon: Banknote,
-      title: 'Cash flow that runs dry',
-      body: 'Payment is late, the main contractor blames the client, and your crew and suppliers still need paying. A few months of trapped cash is enough to end a specialist trade with thin reserves.',
-      cost: 'A few months of trapped cash flow can push a specialist trade into insolvency',
+      icon: AlertTriangle,
+      title: 'Scope disputes you cannot defend',
+      body: 'The original scope was 450sqm of MEP installation. You installed 510sqm on instruction from the site manager. The final account shows 450sqm. You cannot prove the additional 60sqm was instructed — because the instruction was verbal and the site manager no longer works for the contractor.',
+      cost: '67% of subcontractor payment disputes involve scope performed beyond the written contract',
     },
     {
-      icon: Clock,
-      title: 'Valuations you cannot challenge',
-      body: 'Deductions and disputed valuations arrive with no evidence to contest them, because progress and disruption were never recorded as they happened.',
-      cost: '68% of mega-project disputes cite documentation or verification failures',
+      icon: CreditCard,
+      title: 'Payment delays with no recourse',
+      body: "The milestone is complete. Your payment certificate was submitted three weeks ago. The contractor's response: 'under review.' Without a governed payment process with escalation rights, 'under review' can mean anything, for any length of time.",
+      cost: 'Average subcontractor payment delay on mega-projects: 47 days beyond contractual terms',
     },
   ],
   ccOverline: 'Your Protection',
-  ccHeading: 'Every hour you put in, on a record everyone can see.',
+  ccHeading: 'Formal instructions. Documented variations. Payments on record.',
   ccSub:
-    'BaytyAI captures every instruction you receive, every day of progress you complete, and every extra you are asked to do — time-stamped and attributable — so you stop chasing payment on the strength of your memory and start pointing to the record.',
+    'BaytyAI gives subcontractors the governed workspace they need to receive formal instructions, document every variation, and track every payment milestone — so nothing you perform is informal and nothing you are owed can be disputed.',
   capabilities: [
     {
-      icon: FileCheck2,
-      title: 'Instructions captured',
-      body: 'Informal, on-site instructions become logged events with a timestamp and an author — so extra work is extra pay, not a favour.',
+      icon: FileCheck,
+      title: 'Formal written instructions only',
+      body: "Every scope instruction you receive on BaytyAI is formally issued in writing — with the issuer's identity, date, scope description, and your acknowledgement. Verbal instructions have no place in a BaytyAI-governed program.",
     },
     {
-      icon: CheckCircle2,
-      title: 'Progress you can prove',
-      body: 'Record completed work as it happens, with evidence, so valuations reflect what you actually built.',
+      icon: GitBranch,
+      title: 'Variation documentation at point of instruction',
+      body: 'When additional scope is instructed, the variation is formally raised at the moment of instruction — not reconstructed at final account. The record is built when it matters.',
     },
     {
-      icon: Banknote,
-      title: 'Faster, cleaner payment',
-      body: 'Substantiated applications move through the chain with fewer disputes and fewer deductions you cannot challenge.',
+      icon: CreditCard,
+      title: 'Milestone payment tracking',
+      body: 'Every payment milestone has a submission date, a review SLA, and a payment due date. Overdue reviews escalate automatically. You see exactly where your payment is in the process.',
     },
     {
-      icon: Clock,
-      title: 'Delay and disruption logged',
-      body: 'Capture the moment you are held up by others — protecting your right to be paid for time that was not your fault.',
+      icon: History,
+      title: 'Complete instruction history',
+      body: 'Every instruction you have received, every variation you have performed, and every response you have given is stored in your project record — chronologically, attributably, and permanently.',
     },
     {
-      icon: ShieldCheck,
-      title: 'Verified standing',
-      body: 'Your verified status makes you a trusted, low-risk trade that main contractors want back on the next job.',
+      icon: Shield,
+      title: 'Formal dispute evidence',
+      body: 'When a payment is disputed, your BaytyAI record shows the instruction, the date, the scope, and the acknowledgement — in a format that is legally structured and export-ready.',
     },
     {
-      icon: HardHat,
-      title: 'Compliance made simple',
-      body: 'Keep credentials, insurances, and safety records current in one place — never lose work over an expired document.',
+      icon: MessageSquare,
+      title: 'Direct formal communication',
+      body: 'Communications with the main contractor through BaytyAI are formal and recorded. No ambiguity about what was agreed, what was directed, or what was acknowledged.',
     },
   ],
   before: [
-    'Extra work instructed on site and never captured as a variation',
-    'Progress undocumented, so valuations understate what you built',
-    'Deductions you cannot contest because you hold no contemporaneous record',
-    'Payment dependent on someone else’s paperwork, always arriving last',
+    'Verbal instruction received. Work performed. Payment disputed. WhatsApp messages not contractually valid.',
+    'Additional scope completed. No variation order raised. Final account does not include it.',
+    "Payment certificate submitted. Status: 'under review.' No escalation path. No visibility.",
+    'Dispute arises. Your evidence is a mix of emails, texts, and verbal accounts that contradict each other.',
   ],
   after: [
-    'Every instruction logged with a timestamp — extra work becomes extra pay',
-    'Progress recorded with evidence, so valuations reflect reality',
-    'Disruption and delay captured the moment they happen',
-    'Substantiated applications that clear faster, with fewer deductions',
+    'Every instruction formally issued. Every instruction formally acknowledged. Payment basis is unambiguous.',
+    'Variation raised at point of instruction. Scope, date, issuer, and your acknowledgement all on record.',
+    'Payment certificate logged with submission date and SLA. Overdue review triggers automatic escalation.',
+    'Dispute arises. Your BaytyAI record is a timestamped, attributed, export-ready evidence file.',
   ],
-  closingHeading: 'Prove your work. Get paid for it. Stay in business.',
+  closingHeading: 'You do the work. The instruction should be in writing.',
   closingSub:
-    'BaytyAI is available by enterprise invitation to specialist trades on major programs. Request access to begin the conversation.',
+    'BaytyAI gives subcontractors formal written instructions for every scope change, a documented variation trail, and payment visibility that protects what you are owed.',
 };
 
 export default function SubcontractorAudiencePage() {
