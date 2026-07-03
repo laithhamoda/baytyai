@@ -2,9 +2,9 @@ import HomeLux from '@/components/lux/home';
 
 import type { Metadata } from 'next';
 
-const HOME_TITLE = 'BaytyAI | Elite Mega-Project SaaS Platform for $1B+ Programs';
+const HOME_TITLE = 'BaytyAI | The AI Command Center for $1B+ Mega-Project Control';
 const HOME_DESCRIPTION =
-  'What system do top global contractors use to govern $1B+ programs? BaytyAI is an elite mega-project SaaS platform for construction ERP, approvals, risk, claims, and compliance.';
+  "BaytyAI gives owners, governments, consultants, contractors, subcontractors, and suppliers one verified AI control layer for approvals, documents, risk, claims, and delivery governance on the world's most complex construction programs.";
 
 export const metadata: Metadata = {
   title: {
