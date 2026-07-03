@@ -1,54 +1,53 @@
-import { ShieldCheck, FileClock, PenLine, GitBranch, Radar, BadgeCheck } from 'lucide-react';
+import { FileClock, GitBranch, PenLine, Radar, ScrollText, ShieldOff, Users } from 'lucide-react';
 
-import AudiencePage, { type AudienceContent } from '@/components/lux/audience-page';
+import AudienceDetail, { type AudienceDetailData } from '@/components/lux/audience-detail';
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'For Consultants | Protect Your Liability with Defensible Decisions',
+  title: 'BaytyAI for Consultants | Defensible Decisions, Protected Liability',
   description:
-    'BaytyAI gives engineering and PM consultants an audit-ready record of every instruction, approval, and recommendation — so your professional judgment is always defensible.',
+    'BaytyAI gives engineering and PM consultants an audit-ready record of every instruction, review, and approval — so professional judgment is always attributable, defensible, and protected.',
   alternates: { canonical: 'https://www.baytyai.com/audiences/consultant' },
 };
 
-const content: AudienceContent = {
-  eyebrow: 'For the Consultant',
-  headline: (
-    <>
-      Your professional judgment is only as safe as
-      <span className="text-gold"> your ability to prove it.</span>
-    </>
-  ),
-  lede: 'Two years after you issued the instruction, a claim lands and everyone remembers it differently. The email is buried, the markup is unsigned, the approval is verbal. Your seal is on the drawing — and the exposure is on you.',
-  costs: [
+const data: AudienceDetailData = {
+  slug: 'consultant',
+  breadcrumb: 'Consultant',
+  headline: { plain: 'Your judgment is on the record.', gold: 'The decision it triggered is not.' },
+  sub: 'You issue instructions, review submittals, and certify progress every day — and years later a claim asks you to prove exactly what you decided and why. When the record is scattered across emails and verbal calls, your seal carries the exposure. BaytyAI makes every decision you make attributable the moment it happens.',
+  ctaLabel: 'Request consultant access',
+  painOverline: 'What an Informal Record Costs You',
+  painHeading: 'The liability you carry when the paper trail is thin.',
+  pains: [
     {
-      figure: 'Years',
-      label:
-        'How long after a decision a claim can surface — long after the paper trail has scattered.',
+      icon: ShieldOff,
+      title: 'Professional indemnity exposure',
+      body: 'A claim surfaces two years after the instruction. The email is buried, the markup is unsigned, the approval was verbal. Professional indemnity attaches to your firm and your name — not to the project — and you are asked to defend a decision you can no longer fully evidence.',
+      cost: 'PI claims routinely run $2M–$5M and attach to your firm, not the program',
     },
     {
-      figure: 'Personal',
-      label: 'Professional indemnity attaches to your name and your firm, not to the project.',
+      icon: PenLine,
+      title: 'Verbal approvals you cannot produce',
+      body: 'The instruction was given on a call. The change went ahead. When the dispute comes, the single message that decides who is liable cannot be found — and an undocumented approval is indistinguishable from no approval at all.',
+      cost: 'One unrecoverable email can decide a seven-figure dispute',
     },
-    {
-      figure: 'One email',
-      label:
-        'The single unrecoverable message that decides who is liable for a seven-figure dispute.',
-    },
-  ],
-  shift: {
-    heading: 'From defending your memory to presenting the record.',
-    paragraphs: [
-      'Every instruction you issue, every submittal you review, every recommendation you make becomes a versioned, timestamped, attributable record the moment it happens — not something to reconstruct under pressure years later.',
-      'When a dispute comes, you do not argue about what was said. You produce exactly what was decided, by whom, on what date, on what basis. Your judgment stops being a liability you defend and becomes a record that defends you.',
-    ],
-  },
-  outcomesHeading: 'Advise with authority. Sleep at night.',
-  outcomes: [
     {
       icon: FileClock,
-      title: 'Every instruction, on the record',
-      body: 'Instructions, RFIs, and approvals are captured with author, timestamp, and version — a complete chain, not scattered emails.',
+      title: 'Work built from superseded drawings',
+      body: 'A contractor builds from a revision you had already superseded. Without governed transmittals and version control, the error traces back to the party responsible for issuing the current information — you.',
+      cost: '68% of mega-project disputes cite documentation or version failures',
+    },
+  ],
+  ccOverline: 'Your Workspace',
+  ccHeading: 'Every decision, captured the moment you make it.',
+  ccSub:
+    'BaytyAI turns your professional judgment from a liability you defend into a record that defends you — attributable, timestamped, and version-controlled across every instruction, review, and approval.',
+  capabilities: [
+    {
+      icon: FileClock,
+      title: 'Every instruction on the record',
+      body: 'Instructions, RFIs, and approvals are captured with author, timestamp, and version — a complete chain, not scattered emails to reconstruct under pressure.',
     },
     {
       icon: PenLine,
@@ -56,14 +55,14 @@ const content: AudienceContent = {
       body: 'Decisions route through a controlled workflow. Nothing of consequence happens on a phone call no one can produce later.',
     },
     {
-      icon: ShieldCheck,
-      title: 'Liability you can evidence',
-      body: 'When PI is on the line, show precisely what you recommended and when — the difference between exposure and vindication.',
-    },
-    {
       icon: GitBranch,
       title: 'Controlled document flow',
       body: 'Transmittals, revisions, and superseded issues are governed automatically, so no party builds from the wrong drawing on your watch.',
+    },
+    {
+      icon: ScrollText,
+      title: 'Audit-ready evidence',
+      body: 'When professional indemnity is on the line, show precisely what you recommended and when — the difference between exposure and vindication.',
     },
     {
       icon: Radar,
@@ -71,14 +70,28 @@ const content: AudienceContent = {
       body: 'AI flags the contradictions, delays, and claim patterns forming across the correspondence you supervise — before they become your problem.',
     },
     {
-      icon: BadgeCheck,
+      icon: Users,
       title: 'Verified counterparties',
-      body: 'You advise on a program where every contractor and supplier is verified, so your recommendations rest on parties who are who they claim to be.',
+      body: 'Every contractor and supplier you advise on is verified, so your recommendations rest on parties who are who they claim to be.',
     },
   ],
-  closing: 'Make every decision one you can defend.',
+  before: [
+    'Instructions issued by email, phone, and site conversation — no single record',
+    'Approvals given verbally, impossible to produce when a claim arrives',
+    'Contractors building from whichever revision they happened to hold',
+    'PI defence assembled reactively, years later, from fragmented evidence',
+  ],
+  after: [
+    'Every instruction attributable, timestamped, and versioned as it is issued',
+    'Approvals captured through a controlled workflow — always producible',
+    'Governed transmittals ensure every party holds the current information',
+    'A complete evidence trail already assembled the day a dispute begins',
+  ],
+  closingHeading: 'Advise with authority. Defend with evidence.',
+  closingSub:
+    'BaytyAI is available by enterprise invitation to consultants on major programs. Request access to begin the conversation.',
 };
 
 export default function ConsultantAudiencePage() {
-  return <AudiencePage slug="consultant" content={content} />;
+  return <AudienceDetail data={data} />;
 }

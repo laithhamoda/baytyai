@@ -1,54 +1,52 @@
-import { Banknote, FileCheck2, Gavel, Clock, TrendingUp, ShieldCheck } from 'lucide-react';
+import { Banknote, Clock, FileCheck2, Gavel, ShieldCheck, TrendingUp } from 'lucide-react';
 
-import AudiencePage, { type AudienceContent } from '@/components/lux/audience-page';
+import AudienceDetail, { type AudienceDetailData } from '@/components/lux/audience-detail';
 
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'For Contractors | Get Paid Faster and Win Every Claim You Are Owed',
+  title: 'BaytyAI for Contractors | Get Paid Faster, Win Every Claim You Are Owed',
   description:
-    'BaytyAI arms main contractors with audit-ready evidence for every variation, delay, and payment application — so claims are approved, not argued, and cash flow stays protected.',
+    'BaytyAI arms main contractors with audit-ready evidence for every variation, delay, and payment application — so claims are approved on the facts, not argued, and cash flow stays protected.',
   alternates: { canonical: 'https://www.baytyai.com/audiences/contractor' },
 };
 
-const content: AudienceContent = {
-  eyebrow: 'For the Contractor',
-  headline: (
-    <>
-      You did the work. Now prove it — or
-      <span className="text-gold"> watch the payment disappear.</span>
-    </>
-  ),
-  lede: 'The variation was verbal. The delay was the client’s, but the record is thin. Your payment application stalls in review while your subcontractors and suppliers wait to be paid. Every weak paper trail is money you earned and will never see.',
-  costs: [
-    {
-      figure: '90+ days',
-      label:
-        'How long a disputed payment application can sit unresolved while your cash is tied up.',
-    },
-    {
-      figure: 'Millions',
-      label:
-        'The value of legitimate claims written off every year because the evidence was not clean.',
-    },
-    {
-      figure: 'Your margin',
-      label:
-        'What a single unrecoverable variation quietly erases from an already thin project margin.',
-    },
-  ],
-  shift: {
-    heading: 'From arguing for your money to presenting the proof.',
-    paragraphs: [
-      'Every instruction, delay event, and variation is captured as it happens — attributed, timestamped, and linked to the drawing, the notice, and the approval. Your claim is not a story you assemble later; it is a record that already exists.',
-      'When you submit, you submit with evidence the other side cannot dismiss. Applications move faster, claims are approved on the facts, and the cash that keeps your program alive stops getting trapped in dispute.',
-    ],
-  },
-  outcomesHeading: 'Protect your margin. Accelerate your cash.',
-  outcomes: [
+const data: AudienceDetailData = {
+  slug: 'contractor',
+  breadcrumb: 'Contractor',
+  headline: { plain: 'You did the work.', gold: 'Now prove it — or watch the payment disappear.' },
+  sub: 'The variation was verbal, the delay was the client’s, and your payment application is stalled in review while your subcontractors and suppliers wait to be paid. Every thin paper trail is money you earned and will never see. BaytyAI turns the work you have done into evidence the other side cannot dismiss.',
+  ctaLabel: 'Request contractor access',
+  painOverline: 'What a Weak Record Costs You',
+  painHeading: 'The margin you lose when the evidence is not clean.',
+  pains: [
     {
       icon: FileCheck2,
-      title: 'Every variation, documented',
+      title: 'Variations you cannot recover',
+      body: 'The instruction came by phone and the extra work is not in the contract. Without a documented, notified variation, your commercial team cannot substantiate the claim — and legitimate work is quietly written off.',
+      cost: 'Undocumented variations average $45M disputed per $1B program',
+    },
+    {
+      icon: Clock,
+      title: 'Delay entitlement you cannot prove',
+      body: 'You were held up by others, but the record is thin. Extension-of-time entitlement lives or dies on contemporaneous evidence captured the moment the delay occurred — not reconstructed months later.',
+      cost: '1 day of delay = $50K–$500K, recoverable only with contemporaneous records',
+    },
+    {
+      icon: Banknote,
+      title: 'Cash trapped in dispute',
+      body: 'Your payment application sits in review, unsubstantiated line by line, while your cash is tied up and your supply chain waits. A disputed application does not just delay payment — it starves the program.',
+      cost: '90+ days average to resolve a disputed application ties up your cash',
+    },
+  ],
+  ccOverline: 'Your Control Layer',
+  ccHeading: 'Every entitlement, evidenced before you claim it.',
+  ccSub:
+    'BaytyAI captures every instruction, delay event, and variation as it happens — attributed, timestamped, and linked to the drawing, the notice, and the approval — so your claim is a record that already exists, not a story you assemble later.',
+  capabilities: [
+    {
+      icon: FileCheck2,
+      title: 'Every variation documented',
       body: 'Verbal instructions become logged, notified events with a full evidence chain — no more unpaid work you cannot prove.',
     },
     {
@@ -63,13 +61,13 @@ const content: AudienceContent = {
     },
     {
       icon: Clock,
-      title: 'Delay, on the record',
+      title: 'Delay on the record',
       body: 'Capture and notify delay events the moment they occur — protecting your entitlement to time and money.',
     },
     {
       icon: ShieldCheck,
       title: 'Verified supply chain',
-      body: 'Onboard verified subcontractors and suppliers, so your downstream risk and compliance exposure is controlled, not inherited.',
+      body: 'Onboard verified subcontractors and suppliers so your downstream risk and compliance exposure is controlled, not inherited.',
     },
     {
       icon: TrendingUp,
@@ -77,9 +75,23 @@ const content: AudienceContent = {
       body: 'Show the client a controlled, transparent program — the reputation that wins you the next award.',
     },
   ],
-  closing: 'Turn the work you have done into the money you are owed.',
+  before: [
+    'Verbal variations that never become a documented, notified claim',
+    'Delay events captured after the fact, if at all — entitlement lost',
+    'Payment applications parked in review with nothing to substantiate them',
+    'Downstream risk inherited from unverified subcontractors and suppliers',
+  ],
+  after: [
+    'Every instruction logged and notified with a complete evidence chain',
+    'Delay events captured contemporaneously — entitlement to time protected',
+    'Applications substantiated line by line and cleared faster',
+    'A verified supply chain with controlled compliance and risk',
+  ],
+  closingHeading: 'Turn the work you have done into the money you are owed.',
+  closingSub:
+    'BaytyAI is available by enterprise invitation to contractors on major programs. Request access to begin the conversation.',
 };
 
 export default function ContractorAudiencePage() {
-  return <AudiencePage slug="contractor" content={content} />;
+  return <AudienceDetail data={data} />;
 }
