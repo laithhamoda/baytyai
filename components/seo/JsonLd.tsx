@@ -50,6 +50,13 @@ const personSchema = {
   url: siteConfig.founder.linkedin,
   knowsAbout: [
     'AI Project Control',
+    'AI Construction ERP',
+    'AI Facilities Management',
+    'CMMS',
+    'IWMS',
+    'Predictive Maintenance',
+    'Asset Lifecycle Management',
+    'Digital Twin Facilities Management',
     'Construction Mega Projects',
     'Infrastructure Programs',
     'Contractor Verification',
@@ -69,9 +76,14 @@ const softwareSchema = {
   url: siteConfig.siteUrl,
   description: siteConfig.description,
   featureList: [
+    'AI construction ERP',
+    'AI facilities management',
     'AI project control center',
     'Stakeholder verification',
     'Contractor prequalification',
+    'Asset lifecycle governance',
+    'Work order and inspection workflows',
+    'Predictive maintenance intelligence',
     'Approval workflow management',
     'Document control and version history',
     'Claims and variation tracking',
@@ -91,7 +103,8 @@ const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   '@id': `${siteConfig.siteUrl}/#service`,
-  serviceType: 'AI Project Control Platform for Mega Construction and Infrastructure Projects',
+  serviceType:
+    'AI Construction ERP and Facilities Management Platform for Mega Construction and Infrastructure Projects',
   provider: { '@id': `${siteConfig.siteUrl}/#organization` },
   areaServed: WORLDWIDE,
   hasOfferCatalog: {
@@ -100,9 +113,15 @@ const serviceSchema = {
     itemListElement: [
       {
         '@type': 'Offer',
-        name: 'Enterprise Project Control',
+        name: 'Enterprise Construction ERP',
         description:
-          'Secure project control platform for owners, developers, contractors, consultants, and suppliers managing approvals, document control, claims, variations, and stakeholder governance.',
+          'Secure AI construction ERP for owners, developers, contractors, consultants, and suppliers managing approvals, document control, claims, variations, procurement decisions, and stakeholder governance.',
+      },
+      {
+        '@type': 'Offer',
+        name: 'AI Facilities Management',
+        description:
+          'Facilities management and asset lifecycle workflows for FM operators, asset managers, and infrastructure owners managing work orders, inspections, preventive maintenance, compliance, and handover evidence.',
       },
       {
         '@type': 'Offer',
@@ -129,7 +148,15 @@ const faqSchema = {
       name: 'What is BaytyAI?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'BaytyAI is an enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs. It unifies verified stakeholders, approval workflows, document control, claims, variations, risk intelligence, and compliance in one secure command center.',
+        text: 'BaytyAI is an enterprise AI construction ERP and facilities management platform for mega construction, infrastructure, real estate, and government-backed programs. It unifies verified stakeholders, approval workflows, document control, asset governance, work orders, claims, variations, predictive maintenance, risk intelligence, and compliance in one secure command center.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Does BaytyAI support facilities management and asset operations?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Yes. BaytyAI is designed to connect project delivery with facilities management, asset lifecycle governance, work orders, inspections, preventive maintenance, compliance evidence, and operational risk intelligence.',
       },
     },
     {
