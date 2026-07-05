@@ -238,7 +238,7 @@ export default function ComplianceContent() {
             <Overline>BaytyAI → Compliance</Overline>
           </FadeUp>
           <FadeUp delay={0.08} className="mt-8 max-w-[820px]">
-            <h1 className="font-cormorant text-[44px] font-light leading-[1.06] tracking-[-0.01em] text-offwhite md:text-[72px]">
+            <h1 className="font-cormorant text-[clamp(2rem,7vw,4.5rem)] font-light leading-[1.06] tracking-[-0.01em] text-offwhite">
               When your program spans five countries, six regulators, and three data protection laws
               —<span className="text-gold"> compliance cannot be generic.</span>
             </h1>

@@ -51,7 +51,7 @@ export default function AudienceDetail({ data }: { data: AudienceDetailData }) {
               </p>
             </StaggerItem>
             <StaggerItem>
-              <h1 className="mt-8 max-w-4xl font-cormorant text-[44px] font-light leading-[1.06] tracking-[-0.01em] text-offwhite md:text-[72px]">
+              <h1 className="mt-8 max-w-4xl font-cormorant text-[clamp(2rem,7vw,4.5rem)] font-light leading-[1.06] tracking-[-0.01em] text-offwhite">
                 {data.headline.plain}
                 <span className="text-gold"> {data.headline.gold}</span>
               </h1>

@@ -300,7 +300,7 @@ export default function SecurityContent() {
             <Overline>BaytyAI → Security</Overline>
           </FadeUp>
           <FadeUp delay={0.08} className="mt-8 max-w-[780px]">
-            <h1 className="font-cormorant text-[44px] font-light leading-[1.06] tracking-[-0.01em] text-offwhite md:text-[72px]">
+            <h1 className="font-cormorant text-[clamp(2rem,7vw,4.5rem)] font-light leading-[1.06] tracking-[-0.01em] text-offwhite">
               When the data includes claims evidence, contractor identity, and government approvals
               —<span className="text-gold"> security is not optional.</span>
             </h1>
