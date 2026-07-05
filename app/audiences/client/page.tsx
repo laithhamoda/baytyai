@@ -111,7 +111,7 @@ export default function ClientAudiencePage() {
               </p>
             </StaggerItem>
             <StaggerItem>
-              <h1 className="mt-8 max-w-4xl font-cormorant text-[44px] font-light leading-[1.06] tracking-[-0.01em] text-offwhite md:text-[72px]">
+              <h1 className="mt-8 max-w-4xl font-cormorant text-[clamp(2rem,7vw,4.5rem)] font-light leading-[1.06] tracking-[-0.01em] text-offwhite">
                 You funded the program.
                 <span className="text-gold"> Someone else is making the decisions.</span>
               </h1>

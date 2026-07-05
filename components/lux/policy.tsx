@@ -31,7 +31,7 @@ export function PolicyHero({
           </p>
         </FadeUp>
         <FadeUp delay={0.08} className="mt-8 max-w-4xl">
-          <h1 className="font-cormorant text-[44px] font-light leading-[1.06] tracking-[-0.01em] text-offwhite md:text-[68px]">
+          <h1 className="font-cormorant text-[clamp(2rem,6.5vw,4.25rem)] font-light leading-[1.06] tracking-[-0.01em] text-offwhite">
             {headline.plain} <span className="text-gold">{headline.gold}</span>
           </h1>
         </FadeUp>

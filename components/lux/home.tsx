@@ -186,7 +186,7 @@ export default function HomeLux() {
               <Overline>Verified Project Control</Overline>
             </StaggerItem>
             <StaggerItem>
-              <h1 className="mt-8 max-w-[820px] font-cormorant text-[48px] font-light leading-[1.05] tracking-[-0.01em] text-offwhite md:text-[80px]">
+              <h1 className="mt-8 max-w-[820px] font-cormorant text-[clamp(2.1rem,8vw,5rem)] font-light leading-[1.05] tracking-[-0.01em] text-offwhite">
                 Mega-projects don&apos;t fail because of bad plans. They fail because nobody
                 controls
                 <span className="text-gold"> what happens after the plan.</span>
