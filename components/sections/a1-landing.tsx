@@ -3,8 +3,9 @@ import Link from 'next/link';
 import Logo, { LogoMark } from '@/components/brand/logo';
 import Reveal from '@/components/motion/Reveal';
 import A1RoleJourneys from '@/components/sections/a1-role-journeys';
+import StitchHighRiseShader from '@/components/sections/stitch-high-rise-shader';
 
-const NAVY = '#17284a';
+const OBSIDIAN = '#020305';
 
 const STAKEHOLDERS = [
   {
@@ -67,10 +68,10 @@ const NAV = [
 
 export default function A1Landing() {
   return (
-    <main className="text-white" style={{ backgroundColor: NAVY }}>
+    <main className="text-white" style={{ backgroundColor: OBSIDIAN }}>
       <header
-        className="sticky top-0 z-50 border-b border-white/10 backdrop-blur"
-        style={{ backgroundColor: 'rgba(23,40,74,0.92)' }}
+        className="sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl"
+        style={{ backgroundColor: 'rgba(2,3,5,0.82)' }}
       >
         <div className="mx-auto flex h-16 max-w-container items-center justify-between px-6 md:px-12">
           <Link href="/" aria-label="BaytyAI home">
@@ -88,7 +89,7 @@ export default function A1Landing() {
             ))}
             <Link
               href="/access"
-              className="rounded-pill bg-orange-400 px-5 py-2.5 font-sans text-sm font-semibold text-white transition-colors hover:bg-orange-600"
+              className="rounded-sm bg-[#e9c176] px-5 py-2.5 font-sans text-sm font-semibold text-[#261900] shadow-[0_0_24px_rgba(233,193,118,0.18)] transition-colors hover:bg-[#ffdea5]"
             >
               Request access
             </Link>
@@ -96,93 +97,68 @@ export default function A1Landing() {
         </div>
       </header>
 
-      <section className="relative overflow-hidden border-b border-white/10">
-        <div className="mx-auto max-w-container px-6 py-24 md:px-12 md:pt-32">
-          <div className="grid items-center gap-14 lg:grid-cols-2">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-pill border border-white/20 bg-white/5 px-3 py-1 font-sans text-xs font-medium text-bayty-100">
-                <span className="size-1.5 rounded-full bg-[#6fe0c2]" /> Enterprise Construction ERP
-                for Mega Projects
+      <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden border-b border-white/10">
+        <StitchHighRiseShader className="absolute inset-0 size-full opacity-80" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(45,212,191,0.16),transparent_34%),linear-gradient(90deg,rgba(2,3,5,0.98)_0%,rgba(2,3,5,0.72)_48%,rgba(2,3,5,0.12)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#020305] to-transparent" />
+
+        <div className="relative mx-auto flex min-h-[calc(100vh-4rem)] max-w-container items-center px-6 py-24 md:px-12 md:py-28">
+          <div className="max-w-3xl">
+            <Reveal>
+              <span className="inline-flex items-center gap-2 rounded-sm border border-[#e9c176]/20 bg-[#0b0f1a]/60 px-3 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-[#e9c176] backdrop-blur-xl">
+                <span className="size-1.5 rounded-full bg-[#3cddc7] shadow-[0_0_14px_rgba(60,221,199,0.75)]" />
+                Elite AI Construction + FM Operating System
               </span>
-              <h1 className="mt-6 font-display text-[2.7rem] font-bold leading-[1.07] text-white md:text-[3.6rem]">
-                The AI Command Center for Global{' '}
-                <span className="text-[#6fe0c2]">Mega-Project Management</span>.
+              <h1 className="mt-7 max-w-3xl font-display text-[3rem] font-semibold leading-[1.03] text-white md:text-[5.4rem]">
+                The enterprise command center for{' '}
+                <span className="bg-gradient-to-b from-white to-[#aeb3c4] bg-clip-text text-transparent">
+                  global construction intelligence.
+                </span>
               </h1>
-              <p className="mt-6 max-w-xl font-sans text-lg leading-relaxed text-white/75">
-                BaytyAI gives enterprise construction brands, developers, contractors, consultants,
-                and public-sector project owners one verified construction ERP layer to control
-                approvals, documents, stakeholders, risks, claims, variations, and delivery
-                intelligence across complex mega projects worldwide.
+              <p className="mt-6 max-w-2xl font-sans text-lg leading-relaxed text-[#c6c6cb] md:text-xl">
+                BaytyAI unifies mega-project management, construction ERP, facilities management,
+                asset governance, claims, approvals, compliance, and AI risk intelligence for
+                owners, contractors, consultants, and FM operators delivering high-value programs
+                worldwide.
               </p>
-              <div className="mt-9 flex flex-wrap items-center">
+              <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Link
                   href="/access"
-                  className="rounded-pill bg-orange-400 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-a1-glow transition-colors hover:bg-orange-600"
+                  className="rounded-sm bg-[#e9c176] px-8 py-4 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-[#261900] shadow-[0_0_32px_rgba(233,193,118,0.22)] transition-colors hover:bg-[#ffdea5]"
                 >
                   Request Enterprise Access
                 </Link>
+                <Link
+                  href="/mega-projects"
+                  className="rounded-sm border border-white/20 bg-white/5 px-8 py-4 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-white backdrop-blur transition-colors hover:bg-white/10"
+                >
+                  Explore Platform
+                </Link>
               </div>
-              <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-sm text-white/60">
-                <span className="flex items-center gap-2">
-                  <Dot /> Verified organizations only
-                </span>
-                <span className="flex items-center gap-2">
-                  <Dot /> Full decision audit trail
-                </span>
-                <span className="flex items-center gap-2">
-                  <Dot /> Bilingual English and Arabic workflows
-                </span>
-              </div>
-            </div>
-
-            <Reveal className="relative">
-              <div
-                className="relative mx-auto aspect-square w-full max-w-[520px] overflow-hidden"
-                aria-label="liquid titanium infrastructure grid"
-              >
-                <div className="absolute inset-10 rotate-[-10deg] border border-white/10 bg-white/[0.03] shadow-a1-lg [transform-style:preserve-3d]" />
-                <div className="absolute inset-16 rotate-[9deg] border border-[#6fe0c2]/25 bg-[#6fe0c2]/[0.03] [transform-style:preserve-3d]" />
-                <div
-                  aria-hidden
-                  className="absolute inset-x-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-transparent via-[#c9d4df]/80 to-transparent"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-y-8 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#c9d4df]/80 to-transparent"
-                />
-                <div className="absolute left-[18%] top-[22%] size-4 bg-[#6fe0c2] shadow-[0_0_32px_rgba(111,224,194,0.55)]" />
-                <div className="absolute right-[22%] top-[30%] size-3 bg-white/80 shadow-[0_0_26px_rgba(255,255,255,0.35)]" />
-                <div className="absolute bottom-[24%] left-[28%] size-3 bg-orange-300 shadow-[0_0_28px_rgba(251,191,36,0.45)]" />
-                <div className="absolute bottom-[18%] right-[18%] size-5 border border-[#6fe0c2]/70 bg-[#17284a] shadow-[0_0_34px_rgba(111,224,194,0.35)]" />
-                <div className="absolute inset-0 grid grid-cols-5 grid-rows-5 opacity-25">
-                  {Array.from({ length: 25 }).map((_, i) => (
-                    <span key={i} className="border border-white/10" />
-                  ))}
-                </div>
-                <div className="absolute inset-x-12 bottom-12 border border-white/10 bg-[#071323]/80 p-5 backdrop-blur">
-                  <div className="flex items-center justify-between gap-4">
-                    <LogoMark size={34} tone="light" />
-                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#6fe0c2]">
-                      Verified ERP Layer
-                    </span>
+              <div className="mt-12 grid max-w-2xl grid-cols-1 border border-white/10 bg-[#0b0f1a]/55 backdrop-blur-xl sm:grid-cols-3">
+                {[
+                  ['AI ERP', 'Project control'],
+                  ['FM OS', 'Asset operations'],
+                  ['Audit', 'Governance layer'],
+                ].map(([label, value]) => (
+                  <div key={label} className="border-white/10 p-5 sm:border-r sm:last:border-r-0">
+                    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#3cddc7]">
+                      {label}
+                    </p>
+                    <p className="mt-2 font-sans text-sm text-white/70">{value}</p>
                   </div>
-                  <div className="mt-5 grid grid-cols-3 gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-white/55">
-                    <span>Risk</span>
-                    <span>Claims</span>
-                    <span>Approvals</span>
-                  </div>
-                </div>
+                ))}
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      <section className="border-b border-white/10 bg-white/[0.03]">
+      <section className="border-b border-white/10 bg-[#0b0f1a]">
         <div className="mx-auto grid max-w-container grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 md:px-12">
           {METRICS.map((m) => (
             <div key={m.l} className="text-center">
-              <p className="font-display text-4xl font-bold text-[#6fe0c2]">{m.v}</p>
+              <p className="font-display text-4xl font-bold text-[#e9c176]">{m.v}</p>
               <p className="mt-2 font-sans text-sm text-white/60">{m.l}</p>
             </div>
           ))}
@@ -297,8 +273,4 @@ export default function A1Landing() {
       </footer>
     </main>
   );
-}
-
-function Dot() {
-  return <span className="size-1.5 rounded-full bg-[#6fe0c2]" aria-hidden />;
 }

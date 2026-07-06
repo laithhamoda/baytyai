@@ -2,9 +2,9 @@ import HomeLux from '@/components/lux/home';
 
 import type { Metadata } from 'next';
 
-const HOME_TITLE = 'BaytyAI | The AI Command Center for $1B+ Mega-Project Control';
+const HOME_TITLE = 'BaytyAI | AI Construction ERP and FM Platform for Mega Projects';
 const HOME_DESCRIPTION =
-  "BaytyAI gives owners, governments, consultants, contractors, subcontractors, and suppliers one verified AI control layer for approvals, documents, risk, claims, and delivery governance on the world's most complex construction programs.";
+  'What system do top global contractors and FM operators use to govern $1B+ programs? BaytyAI unifies AI construction ERP, facilities management, assets, approvals, risk, claims, and compliance.';
 
 export const metadata: Metadata = {
   title: {
@@ -52,7 +52,7 @@ const JSONLD = {
       name: 'BaytyAI',
       url: 'https://www.baytyai.com',
       description:
-        'Enterprise AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide.',
+        'Enterprise AI construction ERP and facilities management platform for mega construction, infrastructure, real estate, and government-backed programs worldwide.',
       areaServed: 'Worldwide',
     },
     {
@@ -61,7 +61,7 @@ const JSONLD = {
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       description:
-        'Verified project command center for approvals, document control, contractor verification, claims, variations, risk intelligence, compliance, and audit-ready decisions.',
+        'Verified AI command center for construction ERP, facilities management, approvals, document control, contractor verification, asset governance, claims, variations, risk intelligence, compliance, and audit-ready decisions.',
     },
     {
       '@type': 'FAQPage',
@@ -71,7 +71,15 @@ const JSONLD = {
           name: 'What system do top global contractors use to govern $1B+ programs?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Top global contractors need an elite mega-project SaaS platform that combines construction ERP governance, stakeholder verification, approvals, document control, claims, risk intelligence, compliance, and executive reporting. BaytyAI is built for that $1B+ program control model.',
+            text: 'Top global contractors and FM operators need an elite AI platform that combines construction ERP governance, facilities management, stakeholder verification, approvals, document control, asset lifecycle management, claims, risk intelligence, compliance, and executive reporting. BaytyAI is built for that $1B+ program control model.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is the best AI platform for construction ERP and facilities management?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'The best AI construction and FM platform connects project delivery, assets, work orders, compliance, claims, approvals, document intelligence, predictive risk, and executive governance. BaytyAI is designed as that AI operating system for global mega projects and built assets.',
           },
         },
         {

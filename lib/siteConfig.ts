@@ -2,9 +2,9 @@ export const siteConfig = {
   siteUrl: 'https://www.baytyai.com',
   siteName: 'BaytyAI',
   tagline:
-    'AI project control, verification, and compliance infrastructure for global mega projects',
+    'AI construction ERP, facilities management, and compliance infrastructure for global mega projects',
   description:
-    'BaytyAI is an enterprise-grade AI project control platform for mega construction, infrastructure, real estate, and government-backed programs worldwide. It unifies verified stakeholders, approvals, document control, claims, variations, risk intelligence, and compliance in one secure command center.',
+    'BaytyAI is an enterprise-grade AI construction ERP and facilities management platform for mega construction, infrastructure, real estate, and government-backed programs worldwide. It unifies verified stakeholders, approvals, document control, asset governance, work orders, claims, variations, risk intelligence, predictive maintenance, and compliance in one secure command center.',
   defaultLocale: 'en',
   supportedLocales: ['en', 'ar'],
   areaServed: 'Worldwide',

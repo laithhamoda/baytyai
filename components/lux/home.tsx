@@ -22,6 +22,7 @@ import Link from 'next/link';
 
 import { LuxShell } from '@/components/lux/chrome';
 import { FadeUp, Stagger, StaggerItem } from '@/components/lux/motion';
+import StitchHighRiseShader from '@/components/sections/stitch-high-rise-shader';
 
 import type { LucideIcon } from 'lucide-react';
 
@@ -179,8 +180,12 @@ export default function HomeLux() {
   return (
     <LuxShell>
       {/* ── SECTION 1 — HERO ── */}
-      <section className="flex min-h-screen items-center pt-[76px]">
-        <div className="mx-auto w-full max-w-container px-6 py-24 md:px-10">
+      <section className="relative flex min-h-screen items-center overflow-hidden pt-[76px]">
+        <StitchHighRiseShader className="absolute inset-0 size-full opacity-65" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(45,212,191,0.12),transparent_34%),linear-gradient(90deg,rgba(10,19,38,0.98)_0%,rgba(10,19,38,0.84)_48%,rgba(10,19,38,0.18)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-navy to-transparent" />
+
+        <div className="relative mx-auto w-full max-w-container px-6 py-24 md:px-10">
           <Stagger className="flex flex-col">
             <StaggerItem>
               <Overline>Verified Project Control</Overline>
