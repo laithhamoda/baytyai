@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 import { submitAccessRequest } from '@/app/actions/access/submit';
@@ -12,6 +13,19 @@ const ORG_TYPES = [
   { value: 'subcontractor', label: 'Subcontractor' },
   { value: 'supplier', label: 'Strategic supplier' },
 ] as const;
+
+type OrgType = (typeof ORG_TYPES)[number]['value'];
+
+// Maps the ?role= value carried by the audience-page CTAs to an org type.
+const ROLE_TO_ORG_TYPE: Record<string, OrgType> = {
+  client: 'owner-developer',
+  owner: 'owner-developer',
+  consultant: 'consultant',
+  contractor: 'contractor',
+  subcontractor: 'subcontractor',
+  supplier: 'supplier',
+  government: 'government',
+};
 
 const SCALES = ['', '< $100M', '$100M–$500M', '$500M–$1B', '$1B–$5B', '> $5B'];
 
@@ -42,9 +56,11 @@ function Field({
 
 export default function AccessForm() {
   const startedAt = useRef(Date.now());
+  const roleParam = useSearchParams().get('role');
+  const presetType = roleParam ? (ROLE_TO_ORG_TYPE[roleParam.toLowerCase()] ?? '') : '';
   const [f, setF] = useState({
     organizationName: '',
-    organizationType: '',
+    organizationType: presetType as OrgType | '',
     contactName: '',
     email: '',
     country: '',

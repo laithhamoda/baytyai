@@ -1,4 +1,4 @@
-import A1Landing from '@/components/sections/a1-landing';
+import HomeLux from '@/components/lux/home';
 
 import type { Metadata } from 'next';
 
@@ -118,7 +118,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }}
       />
-      <A1Landing />
+      <HomeLux />
     </>
   );
 }

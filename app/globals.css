@@ -13,6 +13,16 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Mobile safety: never allow a stray element to force sideways scroll. */
+  overflow-x: hidden;
+}
+/* Long single words in large display headings must wrap, not overflow. */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
+  -webkit-hyphens: none;
+  hyphens: none;
 }
 img,
 video {

@@ -3,6 +3,9 @@ import {
   JetBrains_Mono,
   IBM_Plex_Sans_Arabic,
   Playfair_Display,
+  Cormorant_Garamond,
+  DM_Sans,
+  DM_Mono,
 } from 'next/font/google';
 
 import './globals.css';
@@ -41,6 +44,28 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
   weight: ['400', '600'],
   variable: '--font-arabic',
+  display: 'swap',
+});
+
+// ─── Lux brand system (navy + gold) — scoped to the marketing rebuild ───
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-cormorant',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+});
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-mono',
   display: 'swap',
 });
 
@@ -105,7 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${interTight.variable} ${playfair.variable} ${jetbrainsMono.variable} ${ibmPlexSansArabic.variable}`}
+      className={`${interTight.variable} ${playfair.variable} ${jetbrainsMono.variable} ${ibmPlexSansArabic.variable} ${cormorant.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <body>
         <a
