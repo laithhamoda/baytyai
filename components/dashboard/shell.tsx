@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   ClipboardCheck,
   Store,
+  FileSignature,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -28,6 +29,7 @@ const NAV = [
   { href: '/dashboard/projects', label: 'My Projects', icon: FileText },
   { href: '/dashboard/marketplace', label: 'Marketplace', icon: Store },
   { href: '/dashboard/selection', label: 'Consultant Selection', icon: ClipboardCheck },
+  { href: '/dashboard/documents', label: 'AI Documents', icon: FileSignature },
   { href: '/dashboard/verification', label: 'Verification', icon: ShieldCheck },
   { href: '/dashboard/settings', label: 'Settings', icon: Settings },
 ];
