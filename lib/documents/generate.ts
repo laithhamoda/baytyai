@@ -12,9 +12,22 @@
 
 const MODEL = 'claude-opus-4-8';
 
-export type DocType = 'rfi' | 'engineers_instruction' | 'material_submittal';
+export type DocType =
+  | 'rfi'
+  | 'engineers_instruction'
+  | 'material_submittal'
+  | 'local_purchase_order'
+  | 'interim_payment_application'
+  | 'variation_order_request';
 
-export const DOC_TYPES: DocType[] = ['rfi', 'engineers_instruction', 'material_submittal'];
+export const DOC_TYPES: DocType[] = [
+  'rfi',
+  'engineers_instruction',
+  'material_submittal',
+  'local_purchase_order',
+  'interim_payment_application',
+  'variation_order_request',
+];
 
 export interface DocContext {
   project: { name: string; location: string };
@@ -187,6 +200,151 @@ ${ctx.language === 'ar' ? 'formal GCC construction Arabic (native register)' : '
       {
         heading: 'Approval Requested',
         body: 'The Contractor requests the Engineer’s review and approval under FIDIC 2017 Clause 7.2.',
+      },
+    ],
+  },
+
+  local_purchase_order: {
+    label: 'Local Purchase Order (LPO)',
+    originator: 'contractor',
+    recipient: 'supplier',
+    headings: [
+      'Order Details',
+      'Supplier',
+      'Scope of Supply',
+      'Commercial Terms',
+      'Delivery & Acceptance',
+    ],
+    buildPrompt: (ctx) => `You are a contractor's procurement officer issuing a Local Purchase Order
+(LPO) to a confirmed Supplier in the UAE/GCC market. Draft a clear, enforceable LPO.
+
+Project: ${ctx.project.name}, ${ctx.project.location}
+${partyLine(ctx)}
+Supplier: ${ctx.inputs.supplierName ?? 'unspecified'}
+Materials / equipment: ${ctx.inputs.items ?? 'not specified'}
+Commercial value (AED): ${ctx.inputs.totalValue ?? 'not specified'}
+
+Return sections in this order: Order Details, Supplier, Scope of Supply, Commercial Terms,
+Delivery & Acceptance. State payment terms, delivery obligations, and that supply is governed by
+UAE Commercial Transactions Law. Amounts in AED (peg US$1 = AED 3.6725). Write in
+${ctx.language === 'ar' ? 'formal GCC commercial Arabic (native register)' : 'clear formal English'}.`,
+    template: (ctx) => [
+      {
+        heading: 'Order Details',
+        body: `Local Purchase Order for ${ctx.packageRef ?? 'materials'} on ${ctx.project.name}.`,
+      },
+      {
+        heading: 'Supplier',
+        body: ctx.inputs.supplierName ?? 'As named in the accompanying award.',
+      },
+      {
+        heading: 'Scope of Supply',
+        body: ctx.inputs.items ?? 'Materials/equipment as scheduled in the attached list.',
+      },
+      {
+        heading: 'Commercial Terms',
+        body: `Total order value AED ${ctx.inputs.totalValue ?? '(to be confirmed)'}. Payment terms as agreed. Governed by UAE Commercial Transactions Law.`,
+      },
+      {
+        heading: 'Delivery & Acceptance',
+        body: 'Delivery to site against a signed delivery note; acceptance subject to inspection and conformance to specification.',
+      },
+    ],
+  },
+
+  interim_payment_application: {
+    label: 'Interim Payment Application (IPA)',
+    originator: 'contractor',
+    recipient: 'consultant',
+    fidicClause: '14.3',
+    headings: [
+      'Application Details',
+      'Valuation Summary',
+      'Retention',
+      'Net Amount Claimed',
+      'Supporting Statement',
+    ],
+    buildPrompt: (ctx) => `You are a contractor's quantity surveyor preparing an Interim Payment
+Application under FIDIC 2017 Clause 14.3. Draft a clear, substantiated application.
+
+Project: ${ctx.project.name}, ${ctx.project.location}
+${partyLine(ctx)}
+Period ending: ${ctx.inputs.periodEnd ?? 'unspecified'}
+Gross value of work done (AED): ${ctx.inputs.grossAmount ?? 'not specified'}
+Previously certified (AED): ${ctx.inputs.previousAmount ?? '0'}
+
+Return sections in this order: Application Details, Valuation Summary, Retention, Net Amount Claimed,
+Supporting Statement. Apply retention and deduct previous certificates to compute the net claimed.
+Cite FIDIC Clause 14.3. Amounts in AED (peg US$1 = AED 3.6725). Write in
+${ctx.language === 'ar' ? 'formal GCC construction Arabic (native register)' : 'clear formal English'}.`,
+    template: (ctx) => [
+      {
+        heading: 'Application Details',
+        body: `Interim Payment Application for the period ending ${ctx.inputs.periodEnd ?? '(period)'} on ${ctx.project.name}.`,
+      },
+      {
+        heading: 'Valuation Summary',
+        body: `Gross value of work executed to date: AED ${ctx.inputs.grossAmount ?? '(amount)'}.`,
+      },
+      {
+        heading: 'Retention',
+        body: 'Retention applied per the Contract (typically 5–10% of the gross value).',
+      },
+      {
+        heading: 'Net Amount Claimed',
+        body: `Net claimed = gross less retention less previously certified (AED ${ctx.inputs.previousAmount ?? '0'}).`,
+      },
+      {
+        heading: 'Supporting Statement',
+        body: 'Submitted under FIDIC 2017 Clause 14.3 with supporting measurement and documentation.',
+      },
+    ],
+  },
+
+  variation_order_request: {
+    label: 'Variation Order Request (VOR)',
+    originator: 'contractor',
+    recipient: 'consultant',
+    fidicClause: '13.3',
+    headings: [
+      'Variation Description',
+      'Contractual Basis',
+      'Cost Impact',
+      'Time Impact',
+      'Request',
+    ],
+    buildPrompt: (ctx) => `You are a contractor's contracts manager submitting a Variation Order
+Request to the Engineer under FIDIC 2017 Clause 13.3 (Variation Procedure).
+
+Project: ${ctx.project.name}, ${ctx.project.location}
+${partyLine(ctx)}
+Variation description: ${ctx.inputs.description ?? 'not specified'}
+Estimated cost impact (AED): ${ctx.inputs.valuation ?? 'not specified'}
+Estimated time impact (days): ${ctx.inputs.timeImpact ?? '0'}
+
+Return sections in this order: Variation Description, Contractual Basis, Cost Impact, Time Impact,
+Request. Cite FIDIC Clause 13.3. Amounts in AED (peg US$1 = AED 3.6725). Write in
+${ctx.language === 'ar' ? 'formal GCC construction Arabic (native register)' : 'clear formal English'}.`,
+    template: (ctx) => [
+      {
+        heading: 'Variation Description',
+        body: ctx.inputs.description ?? 'The Contractor requests a variation as described.',
+      },
+      {
+        heading: 'Contractual Basis',
+        body: 'Submitted under FIDIC 2017 Clause 13.3 (Variation Procedure).',
+      },
+      {
+        heading: 'Cost Impact',
+        body: `Estimated cost impact: AED ${ctx.inputs.valuation ?? '(to be agreed)'}.`,
+      },
+      {
+        heading: 'Time Impact',
+        body: `Estimated time impact: ${ctx.inputs.timeImpact ?? '0'} day(s), with any Extension of Time reserved under Clause 8.5.`,
+      },
+      {
+        heading: 'Request',
+        body: 'The Contractor requests the Engineer’s determination and instruction under Clause 13.',
       },
     ],
   },
