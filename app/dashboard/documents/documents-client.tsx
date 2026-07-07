@@ -1,6 +1,16 @@
 'use client';
 
-import { FileSignature, Loader2, Sparkles, ChevronDown, Printer, CheckCircle2 } from 'lucide-react';
+import {
+  FileSignature,
+  Loader2,
+  Sparkles,
+  ChevronDown,
+  Printer,
+  CheckCircle2,
+  Pencil,
+  Save,
+  X,
+} from 'lucide-react';
 import { useState } from 'react';
 
 export type ProjectOption = { id: string; label: string };
@@ -138,6 +148,40 @@ export default function DocumentsClient({
         body: JSON.stringify({ status: 'final' }),
       });
       if (res.ok) setDocs((d) => d.map((x) => (x.id === id ? { ...x, status: 'final' } : x)));
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  // ── in-place draft editing ──────────────────────────────────────────────
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editSections, setEditSections] = useState<{ heading: string; body: string }[]>([]);
+
+  function startEdit(d: GeneratedDocRow) {
+    setEditingId(d.id);
+    setEditTitle(d.title);
+    setEditSections((d.body?.sections ?? []).map((s) => ({ ...s })));
+  }
+  function editSection(i: number, value: string) {
+    setEditSections((s) => s.map((sec, idx) => (idx === i ? { ...sec, body: value } : sec)));
+  }
+  async function saveEdit(id: string) {
+    setBusyId(id);
+    try {
+      const res = await fetch(`/api/documents/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: editTitle, sections: editSections }),
+      });
+      if (res.ok) {
+        setDocs((d) =>
+          d.map((x) =>
+            x.id === id ? { ...x, title: editTitle, body: { sections: editSections } } : x,
+          ),
+        );
+        setEditingId(null);
+      }
     } finally {
       setBusyId(null);
     }
@@ -418,7 +462,7 @@ export default function DocumentsClient({
                   className={`shrink-0 text-steel-400 transition-transform ${open ? 'rotate-180' : ''}`}
                 />
               </button>
-              {open && d.body?.sections && (
+              {open && d.body?.sections && editingId !== d.id && (
                 <div className="border-t border-steel-200">
                   <div className="space-y-4 p-5" dir={d.language === 'ar' ? 'rtl' : 'ltr'}>
                     {d.body.sections.map((s, i) => (
@@ -442,20 +486,77 @@ export default function DocumentsClient({
                       <Printer size={14} /> Export PDF
                     </a>
                     {d.status !== 'final' && (
-                      <button
-                        type="button"
-                        onClick={() => finalise(d.id)}
-                        disabled={busyId === d.id}
-                        className="inline-flex items-center gap-2 bg-forest-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-forest-400 disabled:opacity-50"
-                      >
-                        {busyId === d.id ? (
-                          <Loader2 size={14} className="animate-spin" />
-                        ) : (
-                          <CheckCircle2 size={14} />
-                        )}
-                        Finalise
-                      </button>
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => startEdit(d)}
+                          className="inline-flex items-center gap-2 border border-steel-300 px-4 py-2 font-sans text-sm text-steel-700 transition-colors hover:border-steel-400"
+                        >
+                          <Pencil size={14} /> Edit
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => finalise(d.id)}
+                          disabled={busyId === d.id}
+                          className="inline-flex items-center gap-2 bg-forest-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-forest-400 disabled:opacity-50"
+                        >
+                          {busyId === d.id ? (
+                            <Loader2 size={14} className="animate-spin" />
+                          ) : (
+                            <CheckCircle2 size={14} />
+                          )}
+                          Finalise
+                        </button>
+                      </>
                     )}
+                  </div>
+                </div>
+              )}
+
+              {open && editingId === d.id && (
+                <div className="border-t border-steel-200">
+                  <div className="space-y-4 p-5" dir={d.language === 'ar' ? 'rtl' : 'ltr'}>
+                    <label className="flex flex-col gap-1">
+                      <span className={labelCls}>Title</span>
+                      <input
+                        value={editTitle}
+                        onChange={(e) => setEditTitle(e.target.value)}
+                        className={inputCls}
+                      />
+                    </label>
+                    {editSections.map((s, i) => (
+                      <label key={i} className="flex flex-col gap-1">
+                        <span className={labelCls}>{s.heading}</span>
+                        <textarea
+                          value={s.body}
+                          onChange={(e) => editSection(i, e.target.value)}
+                          rows={Math.min(8, Math.max(2, Math.ceil(s.body.length / 90)))}
+                          className={inputCls}
+                        />
+                      </label>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-3 border-t border-steel-200 px-5 py-4">
+                    <button
+                      type="button"
+                      onClick={() => saveEdit(d.id)}
+                      disabled={busyId === d.id}
+                      className="inline-flex items-center gap-2 bg-bayty-500 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-bayty-600 disabled:opacity-50"
+                    >
+                      {busyId === d.id ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : (
+                        <Save size={14} />
+                      )}
+                      Save changes
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditingId(null)}
+                      className="inline-flex items-center gap-2 border border-steel-300 px-4 py-2 font-sans text-sm text-steel-700 transition-colors hover:border-steel-400"
+                    >
+                      <X size={14} /> Cancel
+                    </button>
                   </div>
                 </div>
               )}
