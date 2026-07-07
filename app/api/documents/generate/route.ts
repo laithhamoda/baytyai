@@ -29,8 +29,17 @@ const bodySchema = z.object({
   inputs: z.record(z.string(), z.string().max(4000)).default({}),
 });
 
+const REF_PREFIX: Record<DocType, string> = {
+  rfi: 'RFI',
+  engineers_instruction: 'EI',
+  material_submittal: 'MS',
+  local_purchase_order: 'LPO',
+  interim_payment_application: 'IPA',
+  variation_order_request: 'VOR',
+};
+
 function refNo(docType: DocType): string {
-  const prefix = docType === 'rfi' ? 'RFI' : docType === 'engineers_instruction' ? 'EI' : 'MS';
+  const prefix = REF_PREFIX[docType];
   // Short, human-readable, collision-resistant enough for a reference tag.
   const rand = Math.abs(Date.now() ^ (Math.random() * 1e9))
     .toString(36)
