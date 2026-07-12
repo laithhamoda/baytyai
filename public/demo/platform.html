@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BaytyAI — Live Platform Demo</title>
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  :root {
+    --navy:      #0A1628;
+    --navy-dk:   #060E1A;
+    --navy-mid:  #0F1E35;
+    --gold:      #C9A84C;
+    --gold-dk:   #8C6D1F;
+    --gold-lt:   #FAEEDA;
+    --slate:     #2C3E50;
+    --parchment: #F0EDE5;
+    --chalk:     #F4F2ED;
+    --stone:     #E8E4DC;
+    --border:    #D6D3CC;
+    --mgray:     #9CA3AF;
+    --green:     #064E3B;
+    --green-lt:  #EAF3DE;
+    --red:       #7F1D1D;
+    --red-lt:    #FCEBEB;
+    --amber:     #92400E;
+    --amber-lt:  #FAEEDA;
+    --blue:      #1E3A5F;
+    --blue-lt:   #E6F1FB;
+    --white:     #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--navy-dk);
+    color: var(--slate);
+    min-height: 100vh;
+  }
+
+  /* ── APP SHELL ─────────────────────────────────────────── */
+  .app { display: flex; height: 100vh; overflow: hidden; }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 260px; min-width: 260px;
+    background: var(--navy-mid);
+    display: flex; flex-direction: column;
+    border-right: 1px solid rgba(201,168,76,0.15);
+  }
+  .sidebar-logo {
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .logo-text { font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .logo-text span { color: var(--gold); }
+  .logo-sub { font-size: 10px; color: var(--mgray); margin-top: 2px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  .demo-badge {
+    margin: 12px 16px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .nav { flex: 1; padding: 8px 0; overflow-y: auto; }
+  .nav-section { padding: 16px 16px 6px; font-size: 9px; color: var(--mgray); letter-spacing: 1.8px; text-transform: uppercase; font-weight: 600; }
+
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 16px; cursor: pointer;
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
+  .nav-item.active {
+    background: var(--navy); color: var(--white);
+    border-left-color: var(--gold);
+    font-weight: 600;
+  }
+  .nav-item.active .nav-icon { color: var(--gold); }
+  .nav-icon { font-size: 15px; width: 18px; text-align: center; }
+
+  .sidebar-footer {
+    padding: 16px; border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 11px; color: var(--mgray);
+  }
+  .user-pill {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+  }
+  .user-avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--gold); display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--navy);
+  }
+  .user-info { flex: 1; }
+  .user-name { color: var(--white); font-size: 12px; font-weight: 600; }
+  .user-role { font-size: 10px; color: var(--mgray); }
+
+  /* MAIN AREA */
+  .main {
+    flex: 1; display: flex; flex-direction: column;
+    background: var(--parchment); overflow: hidden;
+  }
+
+  .topbar {
+    background: var(--white); border-bottom: 1px solid var(--border);
+    padding: 0 28px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .topbar-title { font-size: 16px; font-weight: 700; color: var(--navy); }
+  .topbar-meta { font-size: 12px; color: var(--mgray); }
+  .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+  .btn {
+    padding: 7px 16px; border-radius: 6px; font-size: 12px;
+    font-weight: 600; cursor: pointer; border: none;
+    transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--navy-mid); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: var(--gold-dk); color: var(--white); }
+  .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+  .btn-outline:hover { background: var(--chalk); }
+  .btn-ghost { background: transparent; color: var(--slate); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--chalk); }
+  .btn-green { background: var(--green); color: var(--white); }
+  .btn-green:hover { opacity: 0.9; }
+  .btn-sm { padding: 5px 12px; font-size: 11px; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .content { flex: 1; overflow-y: auto; padding: 24px 28px; }
+
+  /* ── SCREENS ─────────────────────────────────────────────── */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── PROGRESS STEPPER ────────────────────────────────────── */
+  .stepper {
+    display: flex; align-items: center; gap: 0;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 24px; margin-bottom: 24px;
+  }
+  .step {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--mgray); font-weight: 500;
+  }
+  .step.active { color: var(--navy); font-weight: 700; }
+  .step.done { color: var(--green); }
+  .step-circle {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--chalk); border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--mgray); flex-shrink: 0;
+  }
+  .step.active .step-circle { background: var(--navy); border-color: var(--navy); color: var(--white); }
+  .step.done .step-circle { background: var(--green); border-color: var(--green); color: var(--white); }
+  .step-line { flex: 1; height: 2px; background: var(--border); margin: 0 8px; }
+  .step-line.done { background: var(--green); }
+
+  /* ── CARDS & PANELS ─────────────────────────────────────── */
+  .card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden; margin-bottom: 16px;
+  }
+  .card-header {
+    padding: 14px 20px; background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .card-header-title { font-size: 13px; font-weight: 700; color: var(--white); }
+  .card-header-meta { font-size: 11px; color: rgba(255,255,255,0.55); }
+  .card-body { padding: 20px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+  /* FORM */
+  .field { margin-bottom: 16px; }
+  .field-label {
+    display: block; font-size: 11px; font-weight: 700;
+    color: var(--slate); margin-bottom: 6px; letter-spacing: 0.3px;
+  }
+  .field-label .req { color: var(--red); margin-left: 2px; }
+  .field-ar { direction: rtl; text-align: right; }
+  .field-ar .field-label { font-size: 12px; }
+  input[type=text], input[type=number], select, textarea {
+    width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+    border-radius: 6px; font-size: 13px; color: var(--slate);
+    background: var(--white); transition: border 0.15s;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none; border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(10,22,40,0.08);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  .input-rtl { direction: rtl; text-align: right; font-family: 'Segoe UI', Arial, sans-serif; }
+
+  /* STATUS BADGES */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .badge-pending { background: var(--gold-lt); color: var(--amber); }
+  .badge-active  { background: var(--blue-lt); color: var(--blue); }
+  .badge-approved{ background: var(--green-lt); color: var(--green); }
+  .badge-overdue { background: var(--red-lt); color: var(--red); }
+  .badge-draft   { background: var(--chalk); color: var(--slate); }
+  .badge-verified{ background: var(--green-lt); color: var(--green); }
+
+  /* DOCUMENT OUTPUT */
+  .doc-output {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .doc-header {
+    background: var(--navy); padding: 20px 28px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .doc-org { color: var(--white); }
+  .doc-org-name { font-size: 16px; font-weight: 800; }
+  .doc-org-sub { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 2px; letter-spacing: 0.5px; }
+  .doc-type-badge {
+    background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold); font-size: 10px; font-weight: 700; padding: 5px 12px;
+    border-radius: 4px; letter-spacing: 1px;
+  }
+  .doc-gold-rule { height: 3px; background: var(--gold); }
+  .doc-body { padding: 28px; }
+  .doc-meta-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: 8px;
+    overflow: hidden; margin-bottom: 24px;
+  }
+  .doc-meta-cell { background: var(--chalk); padding: 12px 14px; }
+  .doc-meta-label { font-size: 9px; color: var(--mgray); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin-bottom: 4px; }
+  .doc-meta-value { font-size: 13px; font-weight: 700; color: var(--navy); }
+  .doc-section-title {
+    font-size: 11px; font-weight: 700; color: var(--navy);
+    text-transform: uppercase; letter-spacing: 1px;
+    border-bottom: 2px solid var(--gold); padding-bottom: 6px; margin-bottom: 14px;
+  }
+  .doc-field-row { display: flex; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+  .doc-field-key { font-weight: 600; color: var(--slate); min-width: 160px; }
+  .doc-field-val { color: var(--slate); }
+  .doc-text-block {
+    background: var(--chalk); border-left: 3px solid var(--navy);
+    padding: 12px 16px; border-radius: 0 6px 6px 0;
+    font-size: 13px; color: var(--slate); line-height: 1.6; margin-bottom: 16px;
+  }
+  .doc-fidic-box {
+    background: var(--amber-lt); border: 1px solid rgba(146,64,14,0.2);
+    border-left: 4px solid var(--amber); border-radius: 6px;
+    padding: 12px 16px; margin-bottom: 16px;
+  }
+  .doc-fidic-label { font-size: 9px; font-weight: 700; color: var(--amber); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .doc-fidic-text { font-size: 12px; color: var(--slate); }
+  .doc-signature-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-top: 24px; padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-sig-block { }
+  .doc-sig-label { font-size: 10px; color: var(--mgray); margin-bottom: 30px; }
+  .doc-sig-line { border-bottom: 1.5px solid var(--navy); margin-bottom: 4px; }
+  .doc-sig-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+  .doc-sig-title { font-size: 10px; color: var(--mgray); }
+  .doc-footer {
+    background: var(--chalk); border-top: 3px solid var(--gold);
+    padding: 10px 28px; display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--mgray);
+  }
+
+  /* ARABIC DOC */
+  .doc-ar { direction: rtl; }
+  .doc-ar .doc-text-block { border-left: none; border-right: 3px solid var(--navy); }
+  .doc-ar .doc-field-row { flex-direction: row-reverse; }
+  .doc-ar .doc-meta-label, .doc-ar .doc-section-title { text-align: right; }
+
+  /* ROUTING CHAIN */
+  .route-chain { display: flex; align-items: center; gap: 0; margin-bottom: 20px; flex-wrap: wrap; }
+  .route-node {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 8px;
+    border: 1.5px solid var(--border); background: var(--white);
+    font-size: 12px; min-width: 140px;
+  }
+  .route-node.active { border-color: var(--navy); background: var(--chalk); }
+  .route-node.done { border-color: var(--green); background: var(--green-lt); }
+  .route-node.pending { border-color: var(--border); opacity: 0.6; }
+  .route-node-icon { font-size: 16px; }
+  .route-node-info { }
+  .route-node-name { font-weight: 700; color: var(--navy); font-size: 12px; }
+  .route-node-role { font-size: 10px; color: var(--mgray); }
+  .route-arrow { color: var(--gold); font-size: 18px; margin: 0 4px; font-weight: 700; }
+
+  /* PAYMENT TABLE */
+  .pay-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .pay-table th {
+    background: var(--navy); color: var(--white);
+    padding: 10px 12px; text-align: left;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .pay-table th:last-child, .pay-table td:last-child { text-align: right; }
+  .pay-table td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    color: var(--slate);
+  }
+  .pay-table tr:nth-child(even) td { background: var(--chalk); }
+  .pay-table .total-row td { font-weight: 700; background: var(--navy); color: var(--white); }
+  .pay-table .subtotal-row td { font-weight: 600; background: var(--gold-lt); color: var(--navy); }
+
+  /* IDENTITY SCREEN */
+  .id-outer {
+    min-height: calc(100vh - 56px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px;
+  }
+  .id-card {
+    background: var(--white); border-radius: 16px;
+    border: 1px solid var(--border); width: 100%; max-width: 520px;
+    overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+  }
+  .id-card-header {
+    background: var(--navy); padding: 28px;
+    text-align: center;
+  }
+  .id-card-logo { font-size: 24px; font-weight: 800; color: var(--white); margin-bottom: 4px; }
+  .id-card-logo span { color: var(--gold); }
+  .id-card-sub { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+  .id-card-body { padding: 28px; }
+  .id-title { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .id-subtitle { font-size: 12px; color: var(--mgray); margin-bottom: 24px; line-height: 1.5; }
+  .id-step { display: none; }
+  .id-step.active { display: block; }
+
+  .upload-zone {
+    border: 2px dashed var(--border); border-radius: 10px;
+    padding: 32px; text-align: center; cursor: pointer;
+    transition: all 0.2s; background: var(--chalk);
+  }
+  .upload-zone:hover { border-color: var(--gold); background: var(--gold-lt); }
+  .upload-zone.uploaded { border-color: var(--green); background: var(--green-lt); border-style: solid; }
+  .upload-icon { font-size: 36px; margin-bottom: 10px; }
+  .upload-text { font-size: 13px; color: var(--slate); margin-bottom: 4px; font-weight: 600; }
+  .upload-sub { font-size: 11px; color: var(--mgray); }
+
+  .progress-bar-wrap {
+    background: var(--chalk); border-radius: 20px;
+    height: 8px; overflow: hidden; margin: 12px 0;
+  }
+  .progress-bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--navy), var(--gold));
+    border-radius: 20px; transition: width 0.4s ease;
+    width: 0%;
+  }
+  .verify-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  .verify-item:last-child { border-bottom: none; }
+  .verify-icon { font-size: 18px; }
+  .verify-label { flex: 1; color: var(--slate); }
+  .verify-status { font-size: 10px; font-weight: 700; }
+  .vs-check { color: var(--green); }
+  .vs-pending { color: var(--amber); }
+  .vs-spin { animation: spin 1s linear infinite; display: inline-block; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* TABS */
+  .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+  .tab {
+    padding: 10px 18px; font-size: 12px; font-weight: 600;
+    color: var(--mgray); cursor: pointer; border-bottom: 3px solid transparent;
+    transition: all 0.15s; margin-bottom: -2px;
+  }
+  .tab:hover { color: var(--navy); }
+  .tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* NOTIFICATION */
+  .notif {
+    position: fixed; top: 70px; right: 20px; z-index: 1000;
+    background: var(--navy); color: var(--white);
+    padding: 12px 20px; border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    font-size: 13px; font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transform: translateX(120%); transition: transform 0.3s ease;
+    max-width: 320px;
+  }
+  .notif.show { transform: translateX(0); }
+  .notif-sub { font-size: 11px; color: rgba(255,255,255,0.6); font-weight: 400; margin-top: 2px; }
+
+  /* TIMER COUNTDOWN */
+  .fidic-countdown {
+    background: var(--red-lt); border: 1px solid rgba(127,29,29,0.2);
+    border-left: 4px solid var(--red); border-radius: 6px;
+    padding: 10px 14px; display: flex; align-items: center; gap: 12px;
+  }
+  .fidic-days { font-size: 28px; font-weight: 800; color: var(--red); }
+  .fidic-label { font-size: 11px; color: var(--slate); line-height: 1.4; }
+  .fidic-clause { font-size: 10px; color: var(--red); font-weight: 600; letter-spacing: 0.5px; }
+
+  /* LANG TOGGLE */
+  .lang-toggle {
+    display: flex; gap: 4px; background: var(--chalk);
+    border: 1px solid var(--border); border-radius: 6px; padding: 3px;
+  }
+  .lang-btn {
+    padding: 4px 12px; border-radius: 4px; font-size: 11px;
+    font-weight: 700; cursor: pointer; border: none;
+    background: transparent; color: var(--mgray); transition: all 0.15s;
+  }
+  .lang-btn.active { background: var(--navy); color: var(--white); }
+
+  /* STAT CARDS */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+  .stat-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .stat-val { font-size: 26px; font-weight: 800; color: var(--navy); }
+  .stat-label { font-size: 11px; color: var(--mgray); margin-top: 2px; }
+  .stat-trend { font-size: 10px; color: var(--green); font-weight: 600; margin-top: 4px; }
+
+  /* RFI LIST */
+  .rfi-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.1s;
+  }
+  .rfi-row:hover { background: var(--chalk); }
+  .rfi-num { font-size: 11px; font-weight: 700; color: var(--navy); min-width: 100px; font-family: 'Courier New', monospace; }
+  .rfi-subject { flex: 1; font-size: 13px; color: var(--slate); font-weight: 500; }
+  .rfi-meta { font-size: 11px; color: var(--mgray); min-width: 100px; text-align: right; }
+
+  /* SMALL UTIL */
+  .text-gold { color: var(--gold); }
+  .text-navy { color: var(--navy); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-mgray { color: var(--mgray); }
+  .font-mono { font-family: 'Courier New', monospace; }
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
+  .flex { display: flex; }
+  .items-center { align-items: center; }
+  .justify-between { justify-content: space-between; }
+  .gap-8 { gap: 8px; }
+  .gap-12 { gap: 12px; }
+  .mb-4 { margin-bottom: 4px; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .fw-700 { font-weight: 700; }
+  .fs-12 { font-size: 12px; }
+  .fs-11 { font-size: 11px; }
+  .ai-spinner {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--gold); font-weight: 600;
+  }
+  .ai-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); animation: pulse 1.2s ease-in-out infinite;
+  }
+  .ai-dot:nth-child(2) { animation-delay: 0.2s; }
+  .ai-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes pulse { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
+</style>
+</head>
+<body>
+
+<div class="notif" id="notif">
+  <div id="notif-msg">Document submitted</div>
+  <div class="notif-sub" id="notif-sub">Routed to Consultant — 5-day SLA started</div>
+</div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-text">Bayty<span>AI</span></div>
+      <div class="logo-sub">Construction Intelligence</div>
+    </div>
+    <div class="demo-badge">🔴 LIVE DEMO — Saadiyat Island Tower</div>
+    <nav class="nav">
+      <div class="nav-section">Workflows</div>
+      <div class="nav-item" onclick="goScreen('identity')">
+        <span class="nav-icon">🔐</span> Identity Verification
+      </div>
+      <div class="nav-section">Active Demo</div>
+      <div class="nav-item active" id="nav-rfi" onclick="goScreen('rfi-list'); setNav('nav-rfi')">
+        <span class="nav-icon">📋</span> RFI Workflow
+      </div>
+      <div class="nav-item" id="nav-pay" onclick="goScreen('payment'); setNav('nav-pay')">
+        <span class="nav-icon">💰</span> Payment Applications
+      </div>
+      <div class="nav-section">Project</div>
+      <div class="nav-item" onclick="showNotif('Documents module opening…','Coming in Phase 2 build')">
+        <span class="nav-icon">📁</span> Documents
+      </div>
+      <div class="nav-item" onclick="showNotif('FIDIC Claims Engine…','Claims tracking active — 3 notices pending')">
+        <span class="nav-icon">⚖️</span> FIDIC Claims
+      </div>
+      <div class="nav-item" onclick="showNotif('Marketplace…','47 verified professionals available')">
+        <span class="nav-icon">🏪</span> Marketplace
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-pill">
+        <div class="user-avatar">AH</div>
+        <div class="user-info">
+          <div class="user-name">Ahmed Al Hamdan</div>
+          <div class="user-role">Project Manager · Contractor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="topbar-title" id="topbar-title">RFI Workflow</div>
+        <div class="topbar-meta">Saadiyat Island Tower — Package 03: Structural Works</div>
+      </div>
+      <div class="topbar-actions">
+        <div class="lang-toggle">
+          <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+          <button class="lang-btn" onclick="setLang('ar',this)">AR</button>
+        </div>
+        <button class="btn btn-primary" onclick="goScreen('rfi-create'); setNav('nav-rfi')">+ New RFI</button>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ── SCREEN: RFI LIST ─────────────────────────────── -->
+      <div class="screen active" id="screen-rfi-list">
+        <div class="stat-row">
+          <div class="stat-card">
+            <div class="stat-val">12</div>
+            <div class="stat-label">Open RFIs</div>
+            <div class="stat-trend">↑ 3 this week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val text-red">3</div>
+            <div class="stat-label">Overdue (>5 days)</div>
+            <div class="stat-trend" style="color:var(--red)">SLA breach</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val text-gold">15d</div>
+            <div class="stat-label">Avg Response (current)</div>
+            <div class="stat-trend" style="color:var(--amber)">Target: 5d</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-val text-green">6</div>
+            <div class="stat-label">Closed this month</div>
+            <div class="stat-trend">↓ avg 4.2d on BaytyAI</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <span class="card-header-title">Active RFIs — Package 03</span>
+            <span class="card-header-meta">Sorted by SLA urgency</span>
+          </div>
+          <div>
+            <div class="rfi-row" onclick="goScreen('rfi-view'); setNav('nav-rfi')">
+              <span class="font-mono" style="font-size:11px;color:var(--navy);min-width:120px">RFI-2026-0041</span>
+              <span style="flex:1;font-size:13px;color:var(--slate)">Rebar splice connection detail — Grid B-7 to B-9</span>
+              <span class="badge badge-overdue">Overdue 8d</span>
+              <span style="font-size:11px;color:var(--mgray);min-width:80px;text-align:right">Eng. Khalid</span>
+            </div>
+            <div class="rfi-row" onclick="goScreen('rfi-view'); setNav('nav-rfi')">
+              <span class="font-mono" style="font-size:11px;color:var(--navy);min-width:120px">RFI-2026-0042</span>
+              <span style="flex:1;font-size:13px;font-weight:600;color:var(--navy)">Foundation waterproofing spec — Podium level B2</span>
+              <span class="badge badge-active">Day 2 of 5</span>
+              <span style="font-size:11px;color:var(--mgray);min-width:80px;text-align:right">Eng. Sara</span>
+            </div>
+            <div class="rfi-row" onclick="goScreen('rfi-view'); setNav('nav-rfi')">
+              <span class="font-mono" style="font-size:11px;color:var(--navy);min-width:120px">RFI-2026-0043</span>
+              <span style="flex:1;font-size:13px;color:var(--slate)">MEP coordination — Level 4 ceiling void clearance</span>
+              <span class="badge badge-pending">Awaiting</span>
+              <span style="font-size:11px;color:var(--mgray);min-width:80px;text-align:right">Unassigned</span>
+            </div>
+            <div class="rfi-row" onclick="showNotif('Opening RFI-2026-0044…','Viewing closed RFI')">
+              <span class="font-mono" style="font-size:11px;color:var(--mgray);min-width:120px">RFI-2026-0040</span>
+              <span style="flex:1;font-size:13px;color:var(--mgray)">Concrete mix design approval — Grade C50 columns</span>
+              <span class="badge badge-approved">Closed 3d</span>
+              <span style="font-size:11px;color:var(--mgray);min-width:80px;text-align:right">Eng. Khalid</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align:center;padding:8px">
+          <button class="btn btn-primary" onclick="goScreen('rfi-create'); setNav('nav-rfi')">
+            + Create New RFI
+          </button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: RFI CREATE ────────────────────────────── -->
+      <div class="screen" id="screen-rfi-create">
+        <div class="stepper">
+          <div class="step active" id="step-1"><div class="step-circle">1</div> Draft RFI</div>
+          <div class="step-line" id="line-1"></div>
+          <div class="step" id="step-2"><div class="step-circle">2</div> AI Generation</div>
+          <div class="step-line" id="line-2"></div>
+          <div class="step" id="step-3"><div class="step-circle">3</div> Route & Submit</div>
+          <div class="step-line" id="line-3"></div>
+          <div class="step" id="step-4"><div class="step-circle">4</div> Response</div>
+        </div>
+
+        <!-- STEP 1: FORM -->
+        <div id="rfi-step-1">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-header-title">📋 New Request for Information</span>
+              <span class="card-header-meta">RFI-2026-0044 · Auto-assigned</span>
+            </div>
+            <div class="card-body">
+              <div class="grid-2">
+                <div class="field">
+                  <label class="field-label">RFI Subject <span class="req">*</span></label>
+                  <input type="text" id="rfi-subject" value="Post-tensioning anchor pocket dimensions — Level 5 transfer slab" />
+                </div>
+                <div class="field">
+                  <label class="field-label">Drawing Reference <span class="req">*</span></label>
+                  <input type="text" value="STR-PL-0051 Rev B" />
+                </div>
+              </div>
+              <div class="grid-3">
+                <div class="field">
+                  <label class="field-label">Discipline</label>
+                  <select><option>Structural</option><option>MEP</option><option>Architectural</option><option>Civil</option></select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Priority</label>
+                  <select><option>High — affects programme</option><option>Medium</option><option>Low</option></select>
+                </div>
+                <div class="field">
+                  <label class="field-label">Response Required By</label>
+                  <input type="text" value="16 July 2026 (5 working days)" />
+                </div>
+              </div>
+              <div class="field">
+                <label class="field-label">Question / Clarification Required <span class="req">*</span></label>
+                <textarea id="rfi-question" style="min-height:90px">Drawing STR-PL-0051 Rev B shows post-tensioning anchor pockets at 200mm x 200mm x 150mm depth. Programme requires casting Level 5 transfer slab by 20 July 2026. Please confirm: (1) Anchor pocket dimensions and tolerance, (2) Whether PT company coordination is required before casting, (3) Approved PT system supplier.</textarea>
+              </div>
+              <div class="field">
+                <label class="field-label">Programme Impact</label>
+                <input type="text" value="Level 5 transfer slab casting scheduled 20 July 2026 — delay risk if not responded by 16 July" />
+              </div>
+              <div class="field-ar" style="margin-top:4px">
+                <label class="field-label" style="text-align:right;display:block">الموضوع بالعربية (اختياري)</label>
+                <input type="text" class="input-rtl" value="أبعاد جيوب مثبتات الشد اللاحق — بلاطة التحويل في الطابق الخامس" />
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:10px">
+            <button class="btn btn-ghost" onclick="goScreen('rfi-list')">Cancel</button>
+            <button class="btn btn-primary" onclick="generateRFI()">🤖 Generate with AI →</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: AI GENERATING -->
+        <div id="rfi-step-2" style="display:none">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-header-title">🤖 AI Document Generation</span>
+              <span class="card-header-meta">Claude is drafting your RFI…</span>
+            </div>
+            <div class="card-body">
+              <div id="ai-progress">
+                <div class="ai-spinner" style="margin-bottom:16px">
+                  <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div>
+                  <span id="ai-status">Reading drawing reference STR-PL-0051 Rev B…</span>
+                </div>
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" id="ai-bar"></div></div>
+                <div style="font-size:11px;color:var(--mgray);margin-top:6px" id="ai-detail">Extracting FIDIC clause references…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: REVIEW & ROUTE -->
+        <div id="rfi-step-3" style="display:none">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab(this,'tab-en')">🇬🇧 English Version</div>
+            <div class="tab" onclick="switchTab(this,'tab-ar')">🇦🇪 Arabic Version</div>
+            <div class="tab" onclick="switchTab(this,'tab-route')">📡 Routing & Submit</div>
+          </div>
+
+          <!-- ENGLISH DOC -->
+          <div class="tab-panel active" id="tab-en">
+            <div class="doc-output">
+              <div class="doc-header">
+                <div class="doc-org">
+                  <div class="doc-org-name">Al Habtoor Construction LLC</div>
+                  <div class="doc-org-sub">BAYTYAI VERIFIED CONTRACTOR · LICENSE: CN-2024-08741</div>
+                </div>
+                <div class="doc-type-badge">REQUEST FOR INFORMATION</div>
+              </div>
+              <div class="doc-gold-rule"></div>
+              <div class="doc-body">
+                <div class="doc-meta-grid">
+                  <div class="doc-meta-cell"><div class="doc-meta-label">RFI Number</div><div class="doc-meta-value font-mono">RFI-2026-0044</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">Date Issued</div><div class="doc-meta-value">09 July 2026</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">Response Required</div><div class="doc-meta-value text-red">16 July 2026</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">SLA Status</div><div class="doc-meta-value text-gold">5 Days Remaining</div></div>
+                </div>
+                <div class="grid-2" style="margin-bottom:20px">
+                  <div>
+                    <div class="doc-section-title">From</div>
+                    <div class="doc-field-row"><span class="doc-field-key">Contractor:</span><span class="doc-field-val">Al Habtoor Construction LLC</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Submitted by:</span><span class="doc-field-val">Ahmed Al Hamdan, Project Manager</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Contact:</span><span class="doc-field-val">a.hamdan@alhabtoor.ae</span></div>
+                  </div>
+                  <div>
+                    <div class="doc-section-title">To</div>
+                    <div class="doc-field-row"><span class="doc-field-key">Consultant:</span><span class="doc-field-val">Atkins WS Atkins & Partners</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Engineer:</span><span class="doc-field-val">Eng. Sara Al Mansoori</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Drawing Ref:</span><span class="doc-field-val">STR-PL-0051 Rev B</span></div>
+                  </div>
+                </div>
+                <div class="doc-section-title">Subject</div>
+                <div class="doc-text-block" style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:16px">
+                  Post-tensioning anchor pocket dimensions — Level 5 transfer slab, Saadiyat Island Tower
+                </div>
+                <div class="doc-section-title">Clarification Required</div>
+                <div class="doc-text-block">
+                  Drawing STR-PL-0051 Rev B shows post-tensioning anchor pockets dimensioned at 200mm × 200mm × 150mm depth. The Contractor requires written clarification on the following points prior to commencing casting of the Level 5 transfer slab, currently scheduled for 20 July 2026:
+                </div>
+                <div style="margin-bottom:16px">
+                  <div class="doc-field-row"><span class="doc-field-key">Query 1:</span><span class="doc-field-val">Confirm anchor pocket dimensions including dimensional tolerance (±mm).</span></div>
+                  <div class="doc-field-row"><span class="doc-field-key">Query 2:</span><span class="doc-field-val">Confirm whether PT supplier coordination is required and approval of method statement prior to casting.</span></div>
+                  <div class="doc-field-row"><span class="doc-field-key">Query 3:</span><span class="doc-field-val">Confirm approved PT system supplier and whether VSL, DSI, or equivalent is acceptable.</span></div>
+                </div>
+                <div class="doc-fidic-box">
+                  <div class="doc-fidic-label">⚖️ FIDIC 2017 Notice — Clause 8.4 Programme Impact</div>
+                  <div class="doc-fidic-text">Failure to receive a response by 16 July 2026 will delay the Level 5 slab casting by a minimum of 5 working days. The Contractor hereby gives notice under FIDIC 2017 Clause 8.4 that a response delay beyond this date constitutes a basis for Extension of Time and associated costs under Clause 8.5.</div>
+                </div>
+                <div class="doc-signature-grid">
+                  <div class="doc-sig-block">
+                    <div class="doc-sig-label">Submitted by (Contractor)</div>
+                    <div class="doc-sig-line"></div>
+                    <div class="doc-sig-name">Ahmed Al Hamdan</div>
+                    <div class="doc-sig-title">Project Manager · Al Habtoor Construction LLC</div>
+                  </div>
+                  <div class="doc-sig-block">
+                    <div class="doc-sig-label">For response (Consultant)</div>
+                    <div class="doc-sig-line"></div>
+                    <div class="doc-sig-name">Response space reserved</div>
+                    <div class="doc-sig-title">Eng. Sara Al Mansoori · WS Atkins</div>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-footer">
+                <span>RFI-2026-0044 · Al Habtoor Construction LLC · Saadiyat Island Tower</span>
+                <span>Generated by BaytyAI · Timestamp: 09 Jul 2026 14:23:07 GST</span>
+                <span>Page 1 of 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARABIC DOC -->
+          <div class="tab-panel" id="tab-ar">
+            <div class="doc-output doc-ar">
+              <div class="doc-header" style="flex-direction:row-reverse">
+                <div class="doc-org" style="text-align:right">
+                  <div class="doc-org-name">شركة الحبتور للمقاولات ذ.م.م</div>
+                  <div class="doc-org-sub">مقاول معتمد على BaytyAI · الرخصة: CN-2024-08741</div>
+                </div>
+                <div class="doc-type-badge">طلب معلومات</div>
+              </div>
+              <div class="doc-gold-rule"></div>
+              <div class="doc-body">
+                <div class="doc-meta-grid">
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">رقم الطلب</div><div class="doc-meta-value font-mono">RFI-2026-0044</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">تاريخ الإصدار</div><div class="doc-meta-value">09 يوليو 2026</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">مطلوب الرد بحلول</div><div class="doc-meta-value text-red">16 يوليو 2026</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">حالة الوقت</div><div class="doc-meta-value text-gold">5 أيام متبقية</div></div>
+                </div>
+                <div class="doc-section-title" style="text-align:right">الموضوع</div>
+                <div class="doc-text-block" style="font-size:15px;font-weight:700;color:var(--navy);text-align:right;border-left:none;border-right:3px solid var(--navy)">
+                  أبعاد جيوب مثبتات الشد اللاحق — بلاطة التحويل في الطابق الخامس، برج جزيرة السعديات
+                </div>
+                <div class="doc-section-title" style="text-align:right">التوضيح المطلوب</div>
+                <div class="doc-text-block" style="text-align:right;border-left:none;border-right:3px solid var(--navy)">
+                  يُظهر المخطط STR-PL-0051 المراجعة B جيوب مثبتات الشد اللاحق بأبعاد 200 ملم × 200 ملم × 150 ملم عمق. يحتاج المقاول إلى توضيح خطي حول النقاط التالية قبل البدء بصب بلاطة التحويل في الطابق الخامس المقرر تنفيذه في 20 يوليو 2026:
+                </div>
+                <div style="margin-bottom:16px;direction:rtl;text-align:right">
+                  <div class="doc-field-row" style="flex-direction:row-reverse"><span class="doc-field-key" style="text-align:right">الاستفسار الأول:</span><span class="doc-field-val">تأكيد أبعاد جيب المثبت بما في ذلك التسامح الأبعادي (± ملم).</span></div>
+                  <div class="doc-field-row" style="flex-direction:row-reverse"><span class="doc-field-key">الاستفسار الثاني:</span><span class="doc-field-val">تأكيد ما إذا كانت هناك حاجة لتنسيق مورد PT وموافقة على بيان المنهجية قبل الصب.</span></div>
+                  <div class="doc-field-row" style="flex-direction:row-reverse"><span class="doc-field-key">الاستفسار الثالث:</span><span class="doc-field-val">تأكيد مورد نظام PT المعتمد وما إذا كانت VSL أو DSI أو ما يعادلها مقبولة.</span></div>
+                </div>
+                <div class="doc-fidic-box" style="direction:rtl;text-align:right">
+                  <div class="doc-fidic-label">⚖️ إشعار FIDIC 2017 — البند 8.4 التأثير على البرنامج</div>
+                  <div class="doc-fidic-text">إن عدم استلام رد بحلول 16 يوليو 2026 سيؤخر صب بلاطة الطابق الخامس لمدة لا تقل عن 5 أيام عمل. يُقدم المقاول بموجب هذا إشعاراً وفقاً للبند 8.4 من FIDIC 2017 بأن التأخير في الرد بعد هذا التاريخ يشكل أساساً لتمديد المدة والتكاليف المرتبطة وفق البند 8.5.</div>
+                </div>
+              </div>
+              <div class="doc-footer" style="direction:rtl;flex-direction:row-reverse">
+                <span>تم الإنشاء بواسطة BaytyAI · 09 يوليو 2026 الساعة 14:23:07 بتوقيت الخليج</span>
+                <span>الصفحة 1 من 1</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ROUTING TAB -->
+          <div class="tab-panel" id="tab-route">
+            <div class="card">
+              <div class="card-header"><span class="card-header-title">📡 Approval Routing Chain</span></div>
+              <div class="card-body">
+                <div class="route-chain">
+                  <div class="route-node done">
+                    <span class="route-node-icon">✅</span>
+                    <div class="route-node-info">
+                      <div class="route-node-name">Contractor PM</div>
+                      <div class="route-node-role">Ahmed Al Hamdan</div>
+                    </div>
+                  </div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node active">
+                    <span class="route-node-icon">⏳</span>
+                    <div class="route-node-info">
+                      <div class="route-node-name">Consultant Engineer</div>
+                      <div class="route-node-role">Eng. Sara Al Mansoori</div>
+                    </div>
+                  </div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node pending">
+                    <span class="route-node-icon">⬜</span>
+                    <div class="route-node-info">
+                      <div class="route-node-name">Structural Lead</div>
+                      <div class="route-node-role">Eng. Khaled Ibrahim</div>
+                    </div>
+                  </div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node pending">
+                    <span class="route-node-icon">⬜</span>
+                    <div class="route-node-info">
+                      <div class="route-node-name">Return to Contractor</div>
+                      <div class="route-node-role">Ahmed Al Hamdan</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div class="fidic-countdown">
+                  <div class="fidic-days">5</div>
+                  <div>
+                    <div class="fidic-clause">FIDIC 2017 — CLAUSE 8.4 SLA COUNTDOWN</div>
+                    <div class="fidic-label">Working days remaining for Engineer's response<br>Deadline: <strong>16 July 2026 17:00 GST</strong><br>Programme at risk if not responded: Level 5 slab casting 20 July</div>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div style="display:flex;gap:10px">
+                  <button class="btn btn-primary" style="flex:1" onclick="submitRFI()">📤 Submit RFI — Route to Consultant</button>
+                  <button class="btn btn-ghost" onclick="showNotif('Saving draft…','RFI-2026-0044 saved as draft')">Save Draft</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4: SUBMITTED -->
+        <div id="rfi-step-4" style="display:none">
+          <div class="card">
+            <div class="card-header" style="background:var(--green)">
+              <span class="card-header-title">✅ RFI Submitted — Awaiting Consultant Response</span>
+              <span class="card-header-meta">SLA clock started · 5 working days</span>
+            </div>
+            <div class="card-body">
+              <div style="text-align:center;padding:20px 0">
+                <div style="font-size:48px;margin-bottom:12px">📬</div>
+                <div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:6px">RFI-2026-0044 Submitted</div>
+                <div style="font-size:13px;color:var(--mgray);margin-bottom:20px">Routed to Eng. Sara Al Mansoori · WS Atkins · WhatsApp notification sent</div>
+                <div class="fidic-countdown" style="max-width:400px;margin:0 auto 20px">
+                  <div class="fidic-days">5</div>
+                  <div>
+                    <div class="fidic-clause">FIDIC 2017 · CLAUSE 8.4 · SLA TRACKING LIVE</div>
+                    <div class="fidic-label">Consultant has until <strong>16 July 2026</strong><br>Automatic escalation at Day 3 if no activity</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider"></div>
+              <div style="background:var(--green-lt);border:1px solid rgba(6,78,59,0.2);border-left:4px solid var(--green);border-radius:6px;padding:14px 16px;margin-bottom:16px">
+                <div style="font-size:11px;font-weight:700;color:var(--green);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:6px">CONSULTANT RESPONSE (Demo — received Day 3)</div>
+                <div style="font-size:13px;color:var(--slate);line-height:1.6">
+                  <strong>RFI-2026-0044 Response — WS Atkins:</strong><br>
+                  (1) Anchor pocket dimensions confirmed: 220mm × 220mm × 160mm depth with ±5mm tolerance. Drawing to be revised and issued as Rev C.<br>
+                  (2) PT supplier coordination required. Method statement to be submitted 5 days prior to casting for Consultant review.<br>
+                  (3) Approved PT systems: VSL International, DSI, Freyssinet. Submit technical submittal for review before procurement.
+                </div>
+                <div style="margin-top:10px;font-size:11px;color:var(--green);font-weight:600">Response received: Day 3 · <strong>60% faster than pre-BaytyAI baseline of 15 days</strong></div>
+              </div>
+              <div style="display:flex;gap:10px">
+                <button class="btn btn-primary" onclick="goScreen('rfi-list'); setNav('nav-rfi')">← Back to RFI List</button>
+                <button class="btn btn-ghost" onclick="showNotif('Closing RFI…','RFI-2026-0044 marked as Closed')">Close RFI</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: PAYMENT APPLICATION ──────────────────── -->
+      <div class="screen" id="screen-payment">
+        <div class="stepper">
+          <div class="step active" id="pay-step-1"><div class="step-circle">1</div> Review BOQ Data</div>
+          <div class="step-line" id="pay-line-1"></div>
+          <div class="step" id="pay-step-2"><div class="step-circle">2</div> AI Auto-Fill</div>
+          <div class="step-line" id="pay-line-2"></div>
+          <div class="step" id="pay-step-3"><div class="step-circle">3</div> QS Review</div>
+          <div class="step-line" id="pay-line-3"></div>
+          <div class="step" id="pay-step-4"><div class="step-circle">4</div> Submit IPA</div>
+        </div>
+
+        <!-- PAY STEP 1 -->
+        <div id="pay-step-1-content">
+          <div class="stat-row">
+            <div class="stat-card">
+              <div class="stat-val text-navy">AED 12.4M</div>
+              <div class="stat-label">Contract Value (Package 03)</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val text-gold">AED 7.8M</div>
+              <div class="stat-label">Certified to Date</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val text-green">63%</div>
+              <div class="stat-label">Overall Completion</div>
+              <div class="stat-trend">↑ 8% this period</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val text-red">AED 390K</div>
+              <div class="stat-label">Retention Held (5%)</div>
+              <div class="stat-trend">Releases at PC</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-header-title">📊 Current BOQ Progress — Auto-captured from site updates</span>
+              <span class="card-header-meta">Updated: 09 July 2026 08:00 GST · Verified by Site Inspector</span>
+            </div>
+            <div class="card-body" style="padding:0">
+              <table class="pay-table">
+                <thead>
+                  <tr>
+                    <th>BOQ Item</th><th>Description</th>
+                    <th>Unit</th><th>Qty (Contract)</th>
+                    <th>Qty (This Period)</th><th>Qty (Cumulative)</th>
+                    <th>Rate (AED)</th><th>This Period (AED)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td class="font-mono">03.01</td><td>Excavation to formation level</td><td>m³</td><td>4,200</td><td>0</td><td>4,200</td><td>45.00</td><td>0</td></tr>
+                  <tr><td class="font-mono">03.02</td><td>Lean concrete blinding 75mm</td><td>m²</td><td>1,840</td><td>0</td><td>1,840</td><td>38.50</td><td>0</td></tr>
+                  <tr><td class="font-mono">03.03</td><td>Raft foundation concrete C40/50</td><td>m³</td><td>2,100</td><td>145</td><td>2,100</td><td>580.00</td><td style="font-weight:700">84,100</td></tr>
+                  <tr><td class="font-mono">03.04</td><td>Rebar supply and fix — raft</td><td>tonne</td><td>312</td><td>18.5</td><td>312</td><td>4,200.00</td><td style="font-weight:700">77,700</td></tr>
+                  <tr><td class="font-mono">03.05</td><td>Columns L1–L4 concrete C50</td><td>m³</td><td>890</td><td>120</td><td>680</td><td>720.00</td><td style="font-weight:700">86,400</td></tr>
+                  <tr><td class="font-mono">03.06</td><td>Rebar supply and fix — columns</td><td>tonne</td><td>156</td><td>22.4</td><td>128</td><td>4,400.00</td><td style="font-weight:700">98,560</td></tr>
+                  <tr><td class="font-mono">03.07</td><td>Transfer slab L5 concrete C50</td><td>m³</td><td>480</td><td>0</td><td>0</td><td>820.00</td><td>0</td></tr>
+                  <tr><td class="font-mono">03.08</td><td>Suspended slabs L1–L4</td><td>m³</td><td>1,240</td><td>310</td><td>940</td><td>640.00</td><td style="font-weight:700">198,400</td></tr>
+                  <tr><td class="font-mono">03.09</td><td>External walls and cores</td><td>m³</td><td>680</td><td>85</td><td>510</td><td>760.00</td><td style="font-weight:700">64,600</td></tr>
+                  <tr><td class="font-mono">03.10</td><td>Post-tensioning system (supply)</td><td>tonne</td><td>48</td><td>0</td><td>0</td><td>12,500.00</td><td>0</td></tr>
+                  <tr class="subtotal-row"><td colspan="7" style="text-align:right;font-weight:700">SUBTOTAL — Structural Works This Period</td><td style="font-weight:700">AED 609,760</td></tr>
+                  <tr><td class="font-mono">PROV</td><td>Provisional sums — instructed</td><td>LS</td><td>—</td><td>—</td><td>—</td><td>—</td><td style="font-weight:700">AED 45,200</td></tr>
+                  <tr class="subtotal-row"><td colspan="7" style="text-align:right">GROSS AMOUNT THIS PERIOD</td><td style="font-weight:700">AED 654,960</td></tr>
+                  <tr><td colspan="7" style="text-align:right;color:var(--red)">Less: Retention 5% (to be held until PC)</td><td style="color:var(--red);font-weight:700">(AED 32,748)</td></tr>
+                  <tr class="total-row"><td colspan="7" style="text-align:right">NET AMOUNT DUE THIS PERIOD</td><td style="font-weight:700;color:var(--gold)">AED 622,212</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button class="btn btn-ghost" onclick="showNotif('Adjusting quantities…','Edit mode active')">Edit Quantities</button>
+            <button class="btn btn-primary" onclick="generatePaymentApp()">🤖 Generate Payment Application →</button>
+          </div>
+        </div>
+
+        <!-- PAY STEP 2 generating -->
+        <div id="pay-gen" style="display:none">
+          <div class="card">
+            <div class="card-header"><span class="card-header-title">🤖 AI Generating Interim Payment Application…</span></div>
+            <div class="card-body">
+              <div class="ai-spinner" style="margin-bottom:12px">
+                <div class="ai-dot"></div><div class="ai-dot"></div><div class="ai-dot"></div>
+                <span id="pay-ai-status">Auto-filling BOQ quantities from site progress logs…</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" id="pay-ai-bar"></div></div>
+              <div style="font-size:11px;color:var(--mgray);margin-top:6px" id="pay-ai-detail">Calculating retention and FIDIC Clause 14.3 compliance…</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAY STEP 3: IPA DOCUMENT -->
+        <div id="pay-ipa" style="display:none">
+          <div class="tabs">
+            <div class="tab active" onclick="switchTab(this,'pay-tab-en')">🇬🇧 IPA — English</div>
+            <div class="tab" onclick="switchTab(this,'pay-tab-ar')">🇦🇪 طلب الدفع — Arabic</div>
+            <div class="tab" onclick="switchTab(this,'pay-tab-cert')">📋 Certification</div>
+          </div>
+
+          <div class="tab-panel active" id="pay-tab-en">
+            <div class="doc-output">
+              <div class="doc-header">
+                <div class="doc-org">
+                  <div class="doc-org-name">Al Habtoor Construction LLC</div>
+                  <div class="doc-org-sub">BAYTYAI VERIFIED CONTRACTOR · LICENSE: CN-2024-08741</div>
+                </div>
+                <div class="doc-type-badge">INTERIM PAYMENT APPLICATION</div>
+              </div>
+              <div class="doc-gold-rule"></div>
+              <div class="doc-body">
+                <div class="doc-meta-grid" style="grid-template-columns:repeat(5,1fr)">
+                  <div class="doc-meta-cell"><div class="doc-meta-label">IPA Number</div><div class="doc-meta-value font-mono">IPA-2026-07</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">Period</div><div class="doc-meta-value">01–30 Jun 2026</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">Date Submitted</div><div class="doc-meta-value">09 Jul 2026</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">FIDIC 14.6 Deadline</div><div class="doc-meta-value text-amber">23 Jul 2026</div></div>
+                  <div class="doc-meta-cell"><div class="doc-meta-label">Net Amount Due</div><div class="doc-meta-value text-green" style="font-size:16px">AED 622,212</div></div>
+                </div>
+                <div class="grid-2" style="margin-bottom:20px">
+                  <div>
+                    <div class="doc-section-title">From</div>
+                    <div class="doc-field-row"><span class="doc-field-key">Contractor:</span><span class="doc-field-val">Al Habtoor Construction LLC</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">QS submitted by:</span><span class="doc-field-val">Mohammed Al Rashid, QS Manager</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Contract value:</span><span class="doc-field-val">AED 12,400,000</span></div>
+                  </div>
+                  <div>
+                    <div class="doc-section-title">To</div>
+                    <div class="doc-field-row"><span class="doc-field-key">Certifying Engineer:</span><span class="doc-field-val">WS Atkins & Partners</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Client:</span><span class="doc-field-val">Saadiyat Island Development Authority</span></div>
+                    <div class="doc-field-row"><span class="doc-field-key">Cumulative certified:</span><span class="doc-field-val">AED 7,800,000 (63%)</span></div>
+                  </div>
+                </div>
+                <div class="doc-section-title">Summary of Amount Due</div>
+                <table class="pay-table" style="margin-bottom:20px">
+                  <thead><tr><th>Description</th><th style="text-align:right">Amount (AED)</th></tr></thead>
+                  <tbody>
+                    <tr><td>A. Measured works this period (BOQ items 03.03–03.09)</td><td style="text-align:right;font-weight:600">654,960</td></tr>
+                    <tr><td>B. Less: Retention (5% per Contract Data)</td><td style="text-align:right;color:var(--red)">(32,748)</td></tr>
+                    <tr><td>C. VAT at 5% (UAE Federal Decree-Law No. 8/2017)</td><td style="text-align:right;font-weight:600">31,106</td></tr>
+                    <tr class="total-row"><td>NET AMOUNT DUE — IPA No. 07</td><td style="text-align:right;color:var(--gold);font-size:15px">AED 653,318</td></tr>
+                  </tbody>
+                </table>
+                <div class="doc-fidic-box">
+                  <div class="doc-fidic-label">⚖️ FIDIC 2017 — Clause 14.3 Payment Application / Clause 14.6 Certification Deadline</div>
+                  <div class="doc-fidic-text">This Interim Payment Application is submitted pursuant to FIDIC 2017 Clause 14.3. The Engineer is required to issue an Interim Payment Certificate within 28 days of this submission (Clause 14.6) — i.e., by 07 August 2026. Payment by the Employer is due within 28 days of IPC issuance (Clause 14.7). Failure to certify within the prescribed period constitutes grounds for financing charges under Clause 14.8.</div>
+                </div>
+                <div style="background:var(--chalk);border-radius:8px;padding:14px 16px;margin-bottom:20px">
+                  <div style="font-size:10px;font-weight:700;color:var(--navy);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:6px">📊 BAYTYAI PREPARATION TIME</div>
+                  <div style="font-size:13px;color:var(--slate)">This IPA was auto-generated from platform BOQ data and site progress logs. <strong>Preparation time: 47 minutes</strong> (vs 3.2 FTE days previous method — <strong>92% reduction</strong>). All quantities verified against BaytyAI site inspector photo records.</div>
+                </div>
+              </div>
+              <div class="doc-footer">
+                <span>IPA-2026-07 · Al Habtoor Construction LLC · Package 03 Structural</span>
+                <span>Generated by BaytyAI · FIDIC 2017 Compliant · Auto-filled from platform data</span>
+                <span>Page 1 of 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARABIC IPA -->
+          <div class="tab-panel" id="pay-tab-ar">
+            <div class="doc-output doc-ar">
+              <div class="doc-header" style="flex-direction:row-reverse">
+                <div class="doc-org" style="text-align:right">
+                  <div class="doc-org-name">شركة الحبتور للمقاولات ذ.م.م</div>
+                  <div class="doc-org-sub">مقاول معتمد على BaytyAI · الرخصة: CN-2024-08741</div>
+                </div>
+                <div class="doc-type-badge">طلب دفع مرحلي</div>
+              </div>
+              <div class="doc-gold-rule"></div>
+              <div class="doc-body" style="direction:rtl">
+                <div class="doc-meta-grid" style="grid-template-columns:repeat(4,1fr)">
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">رقم الطلب</div><div class="doc-meta-value font-mono">IPA-2026-07</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">الفترة</div><div class="doc-meta-value">01–30 يونيو 2026</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">موعد الإفادة (FIDIC 14.6)</div><div class="doc-meta-value text-amber">07 أغسطس 2026</div></div>
+                  <div class="doc-meta-cell" style="text-align:right"><div class="doc-meta-label">المبلغ المستحق</div><div class="doc-meta-value text-green" style="font-size:16px">653,318 درهم</div></div>
+                </div>
+                <div class="doc-section-title" style="text-align:right">ملخص المبالغ المستحقة</div>
+                <table class="pay-table" style="margin-bottom:20px;direction:rtl">
+                  <thead><tr><th style="text-align:right">البيان</th><th>المبلغ (درهم)</th></tr></thead>
+                  <tbody>
+                    <tr><td style="text-align:right">أ. الأعمال المقاسة هذه الفترة (بنود جدول الكميات 03.03–03.09)</td><td style="text-align:left;font-weight:600">654,960</td></tr>
+                    <tr><td style="text-align:right">ب. خصم: التأمين الجزئي (5% وفق بيانات العقد)</td><td style="text-align:left;color:var(--red)">(32,748)</td></tr>
+                    <tr><td style="text-align:right">ج. ضريبة القيمة المضافة 5% (المرسوم الاتحادي رقم 8 لعام 2017)</td><td style="text-align:left;font-weight:600">31,106</td></tr>
+                    <tr class="total-row"><td style="text-align:right">صافي المبلغ المستحق — طلب الدفع رقم 07</td><td style="text-align:left;color:var(--gold);font-size:15px">653,318 درهم</td></tr>
+                  </tbody>
+                </table>
+                <div class="doc-fidic-box" style="text-align:right">
+                  <div class="doc-fidic-label">⚖️ FIDIC 2017 — البند 14.3 طلب الدفع / البند 14.6 موعد الإفادة</div>
+                  <div class="doc-fidic-text">يُقدَّم طلب الدفع المرحلي هذا وفقاً للبند 14.3 من FIDIC 2017. يُلزَم المهندس بإصدار شهادة دفع مرحلية خلال 28 يوماً من تقديم هذا الطلب (البند 14.6)، أي بحلول 07 أغسطس 2026. يستحق الدفع من صاحب العمل خلال 28 يوماً من إصدار شهادة الدفع (البند 14.7). يُشكّل عدم الإفادة خلال المدة المحددة أساساً لفرض رسوم تمويلية وفق البند 14.8.</div>
+                </div>
+              </div>
+              <div class="doc-footer" style="direction:rtl;flex-direction:row-reverse">
+                <span>تم الإنشاء بواسطة BaytyAI · متوافق مع FIDIC 2017</span>
+                <span>الصفحة 1 من 3</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CERTIFICATION TAB -->
+          <div class="tab-panel" id="pay-tab-cert">
+            <div class="card">
+              <div class="card-header"><span class="card-header-title">📋 IPC Certification Workflow</span><span class="card-header-meta">FIDIC Clause 14.6 — 28-day clock running</span></div>
+              <div class="card-body">
+                <div class="route-chain" style="margin-bottom:24px">
+                  <div class="route-node done"><span class="route-node-icon">✅</span><div class="route-node-info"><div class="route-node-name">QS Submitted</div><div class="route-node-role">M. Al Rashid</div></div></div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node active"><span class="route-node-icon">⏳</span><div class="route-node-info"><div class="route-node-name">Engineer Review</div><div class="route-node-role">WS Atkins</div></div></div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node pending"><span class="route-node-icon">⬜</span><div class="route-node-info"><div class="route-node-name">IPC Issued</div><div class="route-node-role">Certifying Engineer</div></div></div>
+                  <div class="route-arrow">›</div>
+                  <div class="route-node pending"><span class="route-node-icon">⬜</span><div class="route-node-info"><div class="route-node-name">Client Payment</div><div class="route-node-role">SIDA Finance</div></div></div>
+                </div>
+                <div class="fidic-countdown" style="margin-bottom:16px">
+                  <div class="fidic-days text-amber">28</div>
+                  <div>
+                    <div class="fidic-clause">FIDIC 14.6 · IPC CERTIFICATION DEADLINE</div>
+                    <div class="fidic-label">Engineer must certify by <strong>07 August 2026</strong><br>Payment by Client due by <strong>04 September 2026</strong> (FIDIC 14.7)<br>Auto-escalation to Client CEO at Day 25 if uncertified</div>
+                  </div>
+                </div>
+                <div style="background:var(--navy);border-radius:8px;padding:16px 20px;color:var(--white)">
+                  <div style="font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px;margin-bottom:8px">📊 BAYTYAI PAYMENT CYCLE TRACKING</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                    <div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px">Previous average (pre-BaytyAI)</div><div style="font-size:18px;font-weight:700;color:rgba(255,255,255,0.7)">52 days</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">Application to payment received</div></div>
+                    <div><div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px">BaytyAI tracked average (last 3 IPAs)</div><div style="font-size:18px;font-weight:700;color:var(--gold)">31 days</div><div style="font-size:10px;color:var(--gold)">↓ 40% faster · FIDIC 14.7 compliant</div></div>
+                  </div>
+                </div>
+                <div class="divider"></div>
+                <div style="display:flex;gap:10px">
+                  <button class="btn btn-green" style="flex:1" onclick="showNotif('IPA Submitted!','IPA-2026-07 routed to WS Atkins — FIDIC 14.6 clock started')">📤 Submit IPA to Consultant</button>
+                  <button class="btn btn-ghost" onclick="showNotif('Saving…','IPA-2026-07 saved as draft')">Save Draft</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN: IDENTITY ────────────────────────────── -->
+      <div class="screen" id="screen-identity">
+        <div class="id-outer">
+          <div class="id-card">
+            <div class="id-card-header">
+              <div class="id-card-logo">Bayty<span>AI</span></div>
+              <div class="id-card-sub">PROFESSIONAL IDENTITY VERIFICATION</div>
+            </div>
+            <div class="id-card-body">
+
+              <!-- STEP 1: Party type -->
+              <div class="id-step active" id="id-s1">
+                <div class="id-title">Join BaytyAI</div>
+                <div class="id-subtitle">Select your role in the GCC construction ecosystem. Verification requirements vary by party type.</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+                  <div onclick="selectParty('client')" id="pt-client" style="padding:14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;text-align:center">
+                    <div style="font-size:24px;margin-bottom:6px">🏗️</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy)">Client / Owner</div>
+                    <div style="font-size:10px;color:var(--mgray)">Developer · PMO · Government</div>
+                  </div>
+                  <div onclick="selectParty('consultant')" id="pt-consultant" style="padding:14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;text-align:center">
+                    <div style="font-size:24px;margin-bottom:6px">📐</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy)">Consultant</div>
+                    <div style="font-size:10px;color:var(--mgray)">Architect · Engineer · PM</div>
+                  </div>
+                  <div onclick="selectParty('contractor')" id="pt-contractor" style="padding:14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;text-align:center">
+                    <div style="font-size:24px;margin-bottom:6px">🔧</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy)">Contractor</div>
+                    <div style="font-size:10px;color:var(--mgray)">Tier 1 · Tier 2 General</div>
+                  </div>
+                  <div onclick="selectParty('subcontractor')" id="pt-sub" style="padding:14px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.15s;text-align:center">
+                    <div style="font-size:24px;margin-bottom:6px">⚙️</div>
+                    <div style="font-size:13px;font-weight:700;color:var(--navy)">Subcontractor</div>
+                    <div style="font-size:10px;color:var(--mgray)">MEP · Specialist trades</div>
+                  </div>
+                </div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="idNext(2)">Continue →</button>
+              </div>
+
+              <!-- STEP 2: Upload credentials -->
+              <div class="id-step" id="id-s2">
+                <div class="id-title">Upload Credentials</div>
+                <div class="id-subtitle">All documents are encrypted with AES-256. Signed URLs expire in 60 seconds. No document is ever publicly accessible.</div>
+
+                <div class="field" style="margin-bottom:12px">
+                  <label class="field-label">Full Name (as per Emirates ID) <span class="req">*</span></label>
+                  <input type="text" value="Ahmed Mohammed Al Hamdan" />
+                </div>
+                <div class="field" style="margin-bottom:12px">
+                  <label class="field-label">Emirates ID Number <span class="req">*</span></label>
+                  <input type="text" value="784-1987-1234567-8" />
+                </div>
+
+                <div class="upload-zone" id="uz-eid" onclick="simulateUpload('uz-eid','Emirates ID uploaded ✓')">
+                  <div class="upload-icon">🪪</div>
+                  <div class="upload-text">Emirates ID — front and back</div>
+                  <div class="upload-sub">Click to upload · PDF or image · AES-256 encrypted in transit</div>
+                </div>
+                <div style="height:10px"></div>
+                <div class="upload-zone" id="uz-license" onclick="simulateUpload('uz-license','Trade License uploaded ✓')">
+                  <div class="upload-icon">📄</div>
+                  <div class="upload-text">Company Trade License (DED / Free Zone)</div>
+                  <div class="upload-sub">Click to upload · Validated against DED format</div>
+                </div>
+
+                <div style="height:14px"></div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px" onclick="idNext(3)">Submit for Verification →</button>
+              </div>
+
+              <!-- STEP 3: Verification progress -->
+              <div class="id-step" id="id-s3">
+                <div class="id-title">Verifying Credentials</div>
+                <div class="id-subtitle">BaytyAI's verification engine is checking your documents. This typically takes 2–4 hours. Critical checks happen now.</div>
+                <div class="progress-bar-wrap" style="margin-bottom:16px">
+                  <div class="progress-bar-fill" id="id-bar"></div>
+                </div>
+                <div id="verify-items">
+                  <div class="verify-item"><span class="verify-icon">🔄</span><span class="verify-label">Emirates ID format validation</span><span class="verify-status vs-pending"><span class="vs-spin">⟳</span></span></div>
+                  <div class="verify-item"><span class="verify-icon">⬜</span><span class="verify-label">Trade License — DED format check</span><span class="verify-status vs-pending">Pending</span></div>
+                  <div class="verify-item"><span class="verify-icon">⬜</span><span class="verify-label">ICA database cross-reference</span><span class="verify-status vs-pending">Pending</span></div>
+                  <div class="verify-item"><span class="verify-icon">⬜</span><span class="verify-label">Company name match — Emirates ID vs License</span><span class="verify-status vs-pending">Pending</span></div>
+                  <div class="verify-item"><span class="verify-icon">⬜</span><span class="verify-label">HaveIBeenPwned credential check</span><span class="verify-status vs-pending">Pending</span></div>
+                </div>
+              </div>
+
+              <!-- STEP 4: Verified -->
+              <div class="id-step" id="id-s4">
+                <div style="text-align:center;padding:16px 0">
+                  <div style="font-size:56px;margin-bottom:12px">🏅</div>
+                  <div style="font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px">Identity Verified</div>
+                  <div style="font-size:13px;color:var(--mgray);margin-bottom:20px">Your BaytyAI Verified Professional Badge is now active</div>
+                </div>
+                <div style="background:var(--navy);border-radius:12px;padding:20px;margin-bottom:16px">
+                  <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+                    <div style="width:50px;height:50px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:var(--navy)">AH</div>
+                    <div>
+                      <div style="font-size:15px;font-weight:700;color:var(--white)">Ahmed Mohammed Al Hamdan</div>
+                      <div style="font-size:11px;color:rgba(255,255,255,0.5)">Project Manager · Al Habtoor Construction LLC</div>
+                    </div>
+                    <div style="margin-left:auto;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);border-radius:6px;padding:4px 10px;font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1px">✓ VERIFIED</div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                    <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:10px">
+                      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px">Emirates ID</div>
+                      <div style="font-size:12px;color:var(--white);font-family:monospace">784-1987-●●●●●●●-●</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:10px">
+                      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px">Contractor Licence</div>
+                      <div style="font-size:12px;color:var(--white);font-family:monospace">CN-2024-08741</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:10px">
+                      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px">Verified Since</div>
+                      <div style="font-size:12px;color:var(--white)">09 July 2026</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:10px">
+                      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.5px">Credential Renewal</div>
+                      <div style="font-size:12px;color:var(--gold)">15 March 2027</div>
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="goScreen('rfi-list');setNav('nav-rfi')">→ Enter Platform</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+  // ── STATE ─────────────────────────────────────────────────
+  let currentLang = 'en';
+  let selectedParty = null;
+  let idStep = 1;
+
+  // ── NAVIGATION ────────────────────────────────────────────
+  function goScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+
+    const titles = {
+      'rfi-list': 'RFI Workflow', 'rfi-create': 'New Request for Information',
+      'rfi-view': 'RFI-2026-0042 — Foundation Waterproofing',
+      'payment': 'Payment Application IPA-2026-07',
+      'identity': 'Professional Identity Verification'
+    };
+    document.getElementById('topbar-title').textContent = titles[id] || 'BaytyAI';
+
+    if(id === 'rfi-view') {
+      goScreen('rfi-create');
+      showStep3();
+    }
+    if(id === 'identity') {
+      document.getElementById('topbar-title').textContent = 'Identity Verification';
+    }
+  }
+
+  function setNav(id) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const el = document.getElementById(id);
+    if(el) el.classList.add('active');
+  }
+
+  // ── NOTIFICATION ──────────────────────────────────────────
+  function showNotif(msg, sub) {
+    const n = document.getElementById('notif');
+    document.getElementById('notif-msg').textContent = msg;
+    document.getElementById('notif-sub').textContent = sub || '';
+    n.classList.add('show');
+    setTimeout(() => n.classList.remove('show'), 3500);
+  }
+
+  // ── LANGUAGE TOGGLE ───────────────────────────────────────
+  function setLang(lang, btn) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    showNotif(lang === 'ar' ? 'Arabic mode activated' : 'English mode activated',
+              lang === 'ar' ? 'Platform language set to Arabic RTL' : 'Platform language set to English LTR');
+  }
+
+  // ── TABS ─────────────────────────────────────────────────
+  function switchTab(el, panelId) {
+    const parent = el.closest('.tabs');
+    parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const panels = el.closest('.content').querySelectorAll('.tab-panel');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById(panelId).classList.add('active');
+  }
+
+  // ── RFI FLOW ──────────────────────────────────────────────
+  function generateRFI() {
+    document.getElementById('rfi-step-1').style.display = 'none';
+    document.getElementById('rfi-step-2').style.display = 'block';
+
+    // Mark step 2 active
+    document.getElementById('step-2').className = 'step active';
+    document.getElementById('line-1').classList.add('done');
+
+    const steps = [
+      [15, 'Reading drawing reference STR-PL-0051 Rev B…', 'Identifying structural elements…'],
+      [30, 'Extracting FIDIC clause references…', 'Clause 8.4 programme impact detected…'],
+      [50, 'Generating English document structure…', 'Auto-filling project metadata from platform…'],
+      [65, 'Generating Arabic translation…', 'Applying RTL formatting and Arabic terminology…'],
+      [80, 'Composing FIDIC notice language…', 'Clause 8.4 + 8.5 notice drafted…'],
+      [95, 'Finalising document and signatures…', 'Adding timestamp and audit trail…'],
+      [100, 'Document ready for review', 'Both English and Arabic versions generated'],
+    ];
+
+    let i = 0;
+    const timer = setInterval(() => {
+      if(i >= steps.length) {
+        clearInterval(timer);
+        setTimeout(() => {
+          document.getElementById('rfi-step-2').style.display = 'none';
+          showStep3();
+        }, 400);
+        return;
+      }
+      const [pct, status, detail] = steps[i];
+      document.getElementById('ai-bar').style.width = pct + '%';
+      document.getElementById('ai-status').textContent = status;
+      document.getElementById('ai-detail').textContent = detail;
+      i++;
+    }, 380);
+  }
+
+  function showStep3() {
+    document.getElementById('rfi-step-1').style.display = 'none';
+    document.getElementById('rfi-step-2').style.display = 'none';
+    document.getElementById('rfi-step-3').style.display = 'block';
+    document.getElementById('step-2').className = 'step done';
+    document.getElementById('step-3').className = 'step active';
+    document.getElementById('line-2').classList.add('done');
+  }
+
+  function submitRFI() {
+    document.getElementById('rfi-step-3').style.display = 'none';
+    document.getElementById('rfi-step-4').style.display = 'block';
+    document.getElementById('step-3').className = 'step done';
+    document.getElementById('step-4').className = 'step active';
+    document.getElementById('line-3').classList.add('done');
+    showNotif('RFI-2026-0044 Submitted!', 'Routed to Eng. Sara Al Mansoori · 5-day SLA started');
+  }
+
+  // ── PAYMENT FLOW ──────────────────────────────────────────
+  function generatePaymentApp() {
+    document.getElementById('pay-step-1-content').style.display = 'none';
+    document.getElementById('pay-gen').style.display = 'block';
+
+    document.getElementById('pay-step-2').className = 'step active';
+    document.getElementById('pay-line-1').classList.add('done');
+
+    const steps = [
+      [12, 'Auto-filling BOQ quantities from site progress logs…', 'Reading 47 site inspector updates…'],
+      [28, 'Calculating completion percentages per line item…', 'Items 03.03–03.09 quantities verified…'],
+      [45, 'Applying contract rates from signed BOQ…', 'AED 654,960 gross amount calculated…'],
+      [60, 'Calculating retention at 5%…', 'AED 32,748 deducted from gross amount…'],
+      [72, 'Applying UAE VAT at 5%…', 'Federal Decree-Law No. 8/2017 compliant…'],
+      [84, 'Generating FIDIC Clause 14.3 compliance statement…', 'Certification deadline 07 August 2026…'],
+      [93, 'Generating Arabic version…', 'RTL payment application formatted…'],
+      [100, 'IPA ready for QS review', 'AED 653,318 net amount due confirmed'],
+    ];
+
+    let i = 0;
+    const timer = setInterval(() => {
+      if(i >= steps.length) {
+        clearInterval(timer);
+        setTimeout(() => {
+          document.getElementById('pay-gen').style.display = 'none';
+          document.getElementById('pay-ipa').style.display = 'block';
+          document.getElementById('pay-step-2').className = 'step done';
+          document.getElementById('pay-step-3').className = 'step active';
+          document.getElementById('pay-line-2').classList.add('done');
+          showNotif('Payment Application Generated!', '47 min prep time vs 3.2 FTE days — 92% faster');
+        }, 300);
+        return;
+      }
+      const [pct, status, detail] = steps[i];
+      document.getElementById('pay-ai-bar').style.width = pct + '%';
+      document.getElementById('pay-ai-status').textContent = status;
+      document.getElementById('pay-ai-detail').textContent = detail;
+      i++;
+    }, 350);
+  }
+
+  // ── IDENTITY FLOW ─────────────────────────────────────────
+  function selectParty(type) {
+    selectedParty = type;
+    ['client','consultant','contractor','sub'].forEach(t => {
+      const el = document.getElementById('pt-' + t);
+      if(el) { el.style.borderColor = 'var(--border)'; el.style.background = ''; }
+    });
+    const key = type === 'subcontractor' ? 'sub' : type;
+    const el = document.getElementById('pt-' + key);
+    if(el) { el.style.borderColor = 'var(--gold)'; el.style.background = 'var(--gold-lt)'; }
+  }
+
+  function idNext(step) {
+    if(step === 1 && !selectedParty) { selectParty('contractor'); }
+    document.querySelectorAll('.id-step').forEach(s => s.classList.remove('active'));
+    document.getElementById('id-s' + step).classList.add('active');
+    idStep = step;
+    if(step === 3) runVerification();
+  }
+
+  function simulateUpload(zoneId, msg) {
+    const z = document.getElementById(zoneId);
+    z.classList.add('uploaded');
+    z.querySelector('.upload-icon').textContent = '✅';
+    z.querySelector('.upload-text').textContent = msg;
+    z.querySelector('.upload-sub').textContent = 'AES-256 encrypted · Signed URL access only';
+    showNotif('Document uploaded', 'Encrypted and stored securely');
+  }
+
+  function runVerification() {
+    const bar = document.getElementById('id-bar');
+    const items = document.querySelectorAll('#verify-items .verify-item');
+    const labels = [
+      ['✅','Emirates ID format validation','vs-check','✓'],
+      ['✅','Trade License — DED format check','vs-check','✓'],
+      ['✅','ICA database cross-reference','vs-check','✓'],
+      ['✅','Company name match confirmed','vs-check','✓'],
+      ['✅','HaveIBeenPwned — no breach found','vs-check','✓'],
+    ];
+    let i = 0;
+    const timer = setInterval(() => {
+      if(i >= labels.length) {
+        clearInterval(timer);
+        setTimeout(() => idNext(4), 600);
+        return;
+      }
+      items[i].querySelector('.verify-icon').textContent = labels[i][0];
+      items[i].querySelector('.verify-status').textContent = labels[i][3];
+      items[i].querySelector('.verify-status').className = 'verify-status ' + labels[i][2];
+      bar.style.width = ((i+1)/labels.length * 100) + '%';
+      if(i+1 < labels.length) {
+        items[i+1].querySelector('.verify-icon').textContent = '🔄';
+        items[i+1].querySelector('.verify-status').innerHTML = '<span class="vs-spin">⟳</span>';
+      }
+      i++;
+    }, 800);
+  }
+</script>
+</body>
+</html>

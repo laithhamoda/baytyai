@@ -27,6 +27,7 @@ const HIDDEN_PREFIXES = [
   '/onboarding',
   '/audiences',
   '/documents',
+  '/demo/platform',
 ];
 
 export default function Navigation() {
