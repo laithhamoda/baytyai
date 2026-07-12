@@ -162,6 +162,33 @@ export default function DemoClient() {
             Private Access
           </motion.p>
 
+          {/* Interactive demo launch */}
+          <motion.a
+            href="/demo/platform"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.04, ease: 'easeOut' }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              marginBottom: '28px',
+              padding: '10px 18px',
+              border: '1px solid rgba(201,168,76,0.5)',
+              borderRadius: '2px',
+              fontFamily: "var(--font-mono, 'DM Mono', monospace)",
+              fontSize: '11px',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#C9A84C',
+              textDecoration: 'none',
+            }}
+          >
+            ▶ Explore the interactive demo →
+          </motion.a>
+
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 16 }}
